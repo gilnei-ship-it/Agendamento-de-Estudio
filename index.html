@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estúdio | Agendamento de Gravação</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        studio: {
+                            bg: '#030303',
+                            panel: 'rgba(15, 15, 15, 0.8)',
+                            orange300: '#fdba74',
+                            orange400: '#fb923c',
+                            orange500: '#f97316',      
+                            orange600: '#ea580c',
+                            orange700: '#c2410c',
+                            orange900: '#7c2d12',
+                            neon: '#ff5e00'
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'float-1': 'float1 10s ease-in-out infinite',
+                        'float-2': 'float2 12s ease-in-out infinite',
+                        'float-3': 'float3 15s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'scanline': 'scanline 3s linear infinite',
+                        'shimmer': 'shimmer 2.5s linear infinite',
+                        'bounce-x': 'bounceX 1s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float1: {
+                            '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+                            '50%': { transform: 'translate(-30px, 40px) scale(1.1)' },
+                        },
+                        float2: {
+                            '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+                            '50%': { transform: 'translate(40px, -30px) scale(1.15)' },
+                        },
+                        float3: {
+                            '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+                            '50%': { transform: 'translate(-40px, -20px) scale(1.05)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)', boxShadow: '0 0 20px rgba(255, 94, 0, 0.5)' },
+                            '50%': { opacity: '.8', transform: 'scale(1.05)', boxShadow: '0 0 50px rgba(255, 94, 0, 0.9), 0 0 20px rgba(249, 115, 22, 0.6) inset' },
+                        },
+                        scanline: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '200% center' },
+                            '100%': { backgroundPosition: '-200% center' },
+                        },
+                        bounceX: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '50%': { transform: 'translateX(5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #030303;
+            min-height: 100vh;
+        }
+
+        /* Efeito de Vidro Aprimorado (Glassmorphism) */
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(30,30,30,0.6) 0%, rgba(10,10,10,0.8) 100%);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(255, 94, 0, 0.5);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(249, 115, 22, 0.15), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        /* Inputs Modernos */
+        .input-field {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .input-field:focus {
+            border-color: #ff5e00;
+            background: rgba(20, 20, 20, 0.9);
+            box-shadow: 0 0 20px rgba(255, 94, 0, 0.25), inset 0 2px 4px rgba(0,0,0,0.5);
+            outline: none;
+        }
+        
+        .input-field::placeholder { color: #555; }
+
+        /* Estados do Calendário */
+        .calendar-locked {
+            filter: blur(12px) grayscale(100%) brightness(0.4);
+            pointer-events: none;
+            opacity: 0.7;
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: scale(0.98);
+        }
+
+        .calendar-unlocked {
+            filter: blur(0px) grayscale(0%) brightness(1);
+            pointer-events: auto;
+            opacity: 1;
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: scale(1);
+        }
+
+        /* Sobreposição do Cadeado */
+        .lock-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(transparent, rgba(255,94,0,0.1), transparent);
+            height: 10px;
+            width: 100%;
+            animation: scanline 3s linear infinite;
+            z-index: 25;
+            pointer-events: none;
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #030303; }
+        ::-webkit-scrollbar-thumb { background: #ea580c; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff5e00; }
+    </style>
+</head>
+<body class="text-gray-200 antialiased selection:bg-studio-neon selection:text-white pb-12 overflow-x-hidden relative">
+
+    <!-- Fundo Imersivo Animado com Tons de Laranja -->
+    <div class="fixed inset-0 w-full h-full pointer-events-none z-[-1] overflow-hidden bg-[#020202]">
+        <!-- Malha subtil -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')] opacity-30"></div>
+        
+        <!-- Orbes de Laranja Animados -->
+        <div class="absolute top-[-10%] left-[-15%] w-[50%] h-[50%] bg-studio-orange700 rounded-full mix-blend-screen filter blur-[130px] opacity-20 animate-float-1"></div>
+        <div class="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-studio-neon rounded-full mix-blend-screen filter blur-[150px] opacity-15 animate-float-2" style="animation-delay: -2s;"></div>
+        <div class="absolute top-[30%] left-[40%] w-[40%] h-[40%] bg-studio-orange400 rounded-full mix-blend-screen filter blur-[140px] opacity-10 animate-float-3" style="animation-delay: -5s;"></div>
+        <div class="absolute top-[80%] left-[10%] w-[30%] h-[30%] bg-studio-orange900 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-float-1" style="animation-delay: -7s;"></div>
+    </div>
+
+    <!-- Notificação Flutuante (Toast) Super Premium -->
+    <div id="toast" class="fixed top-8 left-1/2 transform -translate-x-1/2 bg-[#111] border border-studio-neon text-white px-6 py-4 rounded-2xl shadow-[0_10px_40px_rgba(255,94,0,0.4)] z-50 flex items-center gap-4 opacity-0 translate-y-[-20px] transition-all duration-500 pointer-events-none">
+        <div class="w-12 h-12 rounded-full bg-studio-neon/20 flex items-center justify-center text-studio-neon border border-studio-neon/50">
+            <i class="fa-solid fa-check text-xl"></i>
+        </div>
+        <div>
+            <p class="font-bold text-lg text-white">Dados Copiados!</p>
+            <p class="text-sm text-gray-400">Na agenda, prima <strong class="text-studio-orange300 bg-studio-orange900/40 px-2 py-0.5 rounded">Ctrl+V</strong> na Descrição.</p>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-20">
+        
+        <!-- Cabeçalho -->
+        <header class="text-center mb-16 opacity-0 animate-fade-in-up relative z-10">
+            <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-[#0a0a0a] mb-6 text-studio-neon shadow-[0_0_50px_rgba(255,94,0,0.6)] animate-pulse-glow border-2 border-studio-neon relative group cursor-default">
+                <div class="absolute inset-0 rounded-full bg-studio-neon opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+                <i class="fa-solid fa-microphone-lines text-4xl relative z-10"></i>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tighter mb-4 drop-shadow-2xl">
+                Gravação <span class="text-transparent bg-clip-text bg-gradient-to-r from-studio-orange400 via-studio-neon to-studio-orange600">Studio</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light">
+                Insira as informações estratégicas para desbloquear o sistema integrado de reservas.
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 mb-12 items-start z-10 relative">
+            
+            <!-- COLUNA ESQUERDA: Formulário Estratégico -->
+            <div class="xl:col-span-4 opacity-0 animate-fade-in-up delay-100 sticky top-8">
+                
+                <!-- Aviso Flexibilidade com Design Elegante -->
+                <div class="glass-panel rounded-2xl p-5 mb-6 flex items-start gap-4 overflow-hidden relative group">
+                    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-studio-orange400 to-studio-orange700"></div>
+                    <div class="absolute -right-6 -top-6 text-studio-orange500/5 text-7xl transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-700">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-studio-orange500/10 flex items-center justify-center flex-shrink-0 mt-1 border border-studio-orange500/20">
+                        <i class="fa-solid fa-info text-studio-orange500 text-sm"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-semibold text-base mb-1 tracking-wide">Política do Estúdio</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            O horário reservado pode sofrer alterações consoante as prioridades operacionais do estúdio.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Formulário de Automação -->
+                <div class="glass-panel rounded-3xl p-[1px] bg-gradient-to-br from-studio-orange500/50 via-studio-orange900/20 to-transparent relative">
+                    <div class="bg-[#080808]/95 backdrop-blur-3xl rounded-[23px] p-6 h-full relative z-10">
+                        <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
+                            <div class="flex items-center gap-3">
+                                <span class="flex items-center justify-center w-8 h-8 rounded-full bg-studio-neon text-white font-bold text-sm shadow-[0_0_15px_rgba(255,94,0,0.5)]">1</span>
+                                <h3 class="text-xl font-bold text-white tracking-wide">Dados Iniciais</h3>
+                            </div>
+                        </div>
+
+                        <form id="project-form" class="space-y-6">
+                            
+                            <!-- Nome Estratégico (Ícone de Alvo) -->
+                            <div class="relative group">
+                                <label class="block text-xs font-semibold text-studio-orange300 uppercase tracking-wider mb-2 ml-1">Nome Estratégico</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-studio-neon text-gray-500">
+                                        <i class="fa-solid fa-bullseye text-lg"></i>
+                                    </div>
+                                    <input type="text" id="videoName" required placeholder="Ex: Campanha Q3..." 
+                                        class="input-field w-full pl-12 pr-4 py-3.5 rounded-xl text-white font-medium text-base">
+                                </div>
+                            </div>
+
+                            <!-- Link do Jira (Ícone Oficial) -->
+                            <div class="relative group">
+                                <label class="block text-xs font-semibold text-studio-orange300 uppercase tracking-wider mb-2 ml-1">Link do Chamado</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-blue-400 text-gray-500">
+                                        <i class="fa-brands fa-jira text-lg"></i>
+                                    </div>
+                                    <input type="url" id="jiraLink" required placeholder="https://jira.empresa.com/..." 
+                                        class="input-field w-full pl-12 pr-4 py-3.5 rounded-xl text-white font-medium text-base">
+                                </div>
+                            </div>
+
+                            <!-- Sponsor do Projeto (Ícone Utilizador/Líder) -->
+                            <div class="relative group">
+                                <label class="block text-xs font-semibold text-studio-orange300 uppercase tracking-wider mb-2 ml-1">Sponsor do Projeto</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-studio-neon text-gray-500">
+                                        <i class="fa-solid fa-user-tie text-lg"></i>
+                                    </div>
+                                    <input type="text" id="sponsorName" required placeholder="Nome do Líder..." 
+                                        class="input-field w-full pl-12 pr-4 py-3.5 rounded-xl text-white font-medium text-base">
+                                </div>
+                            </div>
+
+                            <!-- Botão Animado -->
+                            <button type="submit" class="w-full relative group overflow-hidden rounded-xl p-[2px] mt-6 shadow-[0_10px_30px_-10px_rgba(255,94,0,0.6)]">
+                                <span class="absolute inset-0 bg-gradient-to-r from-studio-orange400 via-studio-neon to-studio-orange700 bg-[length:200%_auto] animate-shimmer"></span>
+                                <div class="relative bg-[#050505] px-6 py-4 rounded-xl transition-all duration-300 group-hover:bg-opacity-0 flex items-center justify-center gap-3">
+                                    <i class="fa-solid fa-unlock text-white group-hover:text-white transition-colors"></i>
+                                    <span class="font-bold text-white text-lg tracking-wide uppercase group-hover:text-white">Desbloquear Agenda</span>
+                                    <i class="fa-solid fa-arrow-right text-white opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 group-hover:translate-x-1 transition-all duration-300"></i>
+                                </div>
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUNA DIREITA: Agenda Google Embutida -->
+            <div class="xl:col-span-8 opacity-0 animate-fade-in-up delay-200" id="calendar-section">
+                
+                <div class="relative h-full flex flex-col">
+                    
+                    <!-- Cabeçalho do Passo 2 -->
+                    <div class="flex items-center gap-4 mb-6 px-2 transition-all duration-700" id="step2-header">
+                        <span class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-gray-700 text-gray-600 font-bold text-lg bg-gray-900 transition-colors duration-700" id="step2-badge">2</span>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-600 transition-colors duration-700" id="step2-title">Escolha o Horário</h3>
+                            <p class="text-sm text-gray-700 transition-colors duration-700" id="step2-desc">A aguardar preenchimento dos dados...</p>
+                        </div>
+                    </div>
+
+                    <!-- Área da Agenda com Bloqueio -->
+                    <div class="relative flex-grow">
+                        <!-- Overlay de Bloqueio Altamente Visual -->
+                        <div id="lock-overlay" class="lock-container absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#050505]/80 backdrop-blur-md rounded-3xl border border-white/5 transition-all duration-700 overflow-hidden">
+                            
+                            <!-- Efeito de radar/brilho no fundo do overlay -->
+                            <div class="absolute w-64 h-64 bg-studio-neon rounded-full mix-blend-screen filter blur-[80px] opacity-20"></div>
+
+                            <div class="relative z-10 flex flex-col items-center">
+                                <div class="w-24 h-24 bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] rounded-full flex items-center justify-center border border-studio-neon/30 mb-6 shadow-[0_0_30px_rgba(255,94,0,0.3)] animate-pulse-glow">
+                                    <i class="fa-solid fa-lock text-4xl text-studio-neon"></i>
+                                </div>
+                                <h3 class="text-3xl font-extrabold text-white mb-3 tracking-tight">Sistema Bloqueado</h3>
+                                <p class="text-gray-400 text-center max-w-md text-lg px-4">
+                                    Preencha o <span class="text-studio-orange400 font-semibold">formulário estratégico</span> ao lado para revelar a disponibilidade do estúdio.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Container do Iframe -->
+                        <div class="glass-panel rounded-3xl p-1 md:p-2 shadow-2xl relative z-10 calendar-locked h-full" id="calendar-container">
+                            
+                            <div class="w-full bg-white rounded-[20px] overflow-hidden relative shadow-inner h-full min-h-[700px] border-[6px] border-[#0a0a0a]">
+                                
+                                <!-- Iframe com o Link real do Google Appointment fornecido pelo utilizador -->
+                                <iframe 
+                                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0ZxXo16zADmQ5cZDtfMXCUb3stCgT46ety0XOExviZh8sRXPMquIK5-EvClrxsqt4EzpRBWPcs?gv=true" 
+                                    title="Agendamento Google Calendar"
+                                    class="w-full h-full border-none absolute inset-0"
+                                    style="background-color: white;"
+                                ></iframe>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Rodapé -->
+        <footer class="mt-24 mb-8 text-center opacity-0 animate-fade-in-up delay-300 relative z-10">
+            <div class="w-40 h-1 bg-gradient-to-r from-transparent via-studio-orange500/50 to-transparent mx-auto mb-6"></div>
+            <p class="text-gray-500 text-sm font-light uppercase tracking-widest">&copy; <span id="year"></span> Estúdio Integrado</p>
+        </footer>
+
+    </main>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        document.getElementById('project-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // 1. Obter valores
+            const nomeVideo = document.getElementById('videoName').value;
+            const linkJira = document.getElementById('jiraLink').value;
+            const sponsor = document.getElementById('sponsorName').value;
+
+            // 2. Formatação Profissional para a Área de Transferência
+            const textoFormatado = `[DADOS DO PROJETO - GRAVAÇÃO]\n\n🎯 Vídeo Estratégico: ${nomeVideo}\n🔗 Chamado Jira: ${linkJira}\n👤 Sponsor: ${sponsor}\n\n*Aguardar confirmação de prioridade.*`;
+
+            // 3. Copiar (Workaround seguro para iframes)
+            copyToClipboard(textoFormatado);
+
+            // 4. Mostrar Toast Premium
+            const toast = document.getElementById('toast');
+            toast.style.opacity = '1';
+            toast.style.transform = 'translate(-50%, 20px)';
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translate(-50%, -20px)';
+            }, 8000);
+
+            // 5. Animação de Desbloqueio Dramática
+            const lockOverlay = document.getElementById('lock-overlay');
+            const calContainer = document.getElementById('calendar-container');
+            const step2Badge = document.getElementById('step2-badge');
+            const step2Title = document.getElementById('step2-title');
+            const step2Desc = document.getElementById('step2-desc');
+
+            // Fade out do bloqueio
+            lockOverlay.style.opacity = '0';
+            lockOverlay.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                lockOverlay.style.display = 'none';
+            }, 700);
+
+            // Unblur do calendário
+            calContainer.classList.remove('calendar-locked');
+            calContainer.classList.add('calendar-unlocked');
+            calContainer.style.borderColor = 'rgba(255, 94, 0, 0.6)';
+            calContainer.style.boxShadow = '0 0 40px rgba(255, 94, 0, 0.15)';
+
+            // Atualizar o Cabeçalho do Passo 2 (Verde Sucesso)
+            step2Badge.classList.remove('border-gray-700', 'text-gray-600', 'bg-gray-900');
+            step2Badge.classList.add('border-green-500', 'text-green-400', 'bg-green-500/10', 'shadow-[0_0_15px_rgba(34,197,94,0.3)]');
+            step2Title.classList.remove('text-gray-600');
+            step2Title.classList.add('text-white');
+            step2Desc.classList.remove('text-gray-700');
+            step2Desc.classList.add('text-green-400');
+            step2Desc.innerHTML = 'Agenda liberada! Selecione o horário e cole <b>(Ctrl+V)</b> os dados na descrição.';
+
+            // Efeito visual no formulário (marcar como preenchido)
+            document.querySelectorAll('.input-field').forEach(input => {
+                input.style.borderColor = 'rgba(34,197,94,0.4)';
+                input.disabled = true; // Impede edição após envio
+            });
+
+            // 6. Scroll suave
+            if(window.innerWidth < 1280) {
+                setTimeout(() => {
+                    document.getElementById('step2-header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 400);
+            }
+        });
+
+        function copyToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                console.error('Falha ao copiar texto', err);
+            }
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
