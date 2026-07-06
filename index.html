@@ -169,8 +169,8 @@
             <i class="fa-solid fa-check-circle text-xl"></i>
         </div>
         <div>
-            <p class="font-bold text-gray-800">Dados Enviados!</p>
-            <p class="text-sm text-gray-500">O projeto foi registado na planilha com sucesso.</p>
+            <p class="font-bold text-gray-800" id="toast-title">Dados Enviados!</p>
+            <p class="text-sm text-gray-500" id="toast-desc">O projeto foi registado na planilha com sucesso.</p>
         </div>
     </div>
 
@@ -346,6 +346,20 @@
             const btnText = document.getElementById('btn-text');
             const btnIcon = document.getElementById('btn-icon');
             
+            // ====================================================================================
+            // ATENÇÃO: COLE A URL GERADA NO APPS SCRIPT NA VARIÁVEL ABAIXO
+            // ====================================================================================
+            const googleSheetUrl = "https://script.google.com/macros/s/AKfycby2iv1j9G8l_1shjOBs3av17SAXudfNU0Wy8AfzBXUQ7ttM2Nc8RlgjHUyVFMpWQqJieg/exec"; 
+
+            // Verificação de segurança caso o usuário esqueça de colocar a URL
+            if(googleSheetUrl === "COLE_AQUI_A_URL_DO_SEU_WEB_APP_DO_APPS_SCRIPT") {
+                alert("⚠️ ATENÇÃO: Você esqueceu de colocar a URL do Google Sheets no código! Volte no passo a passo anterior, copie a URL gerada no Apps Script e cole na linha 348 do código.");
+                
+                btnText.textContent = "FALTA A URL";
+                btnIcon.className = "fa-solid fa-triangle-exclamation text-white";
+                return; // Bloqueia o envio para não enganar o usuário
+            }
+
             btnText.textContent = "ENVIANDO...";
             btnIcon.className = "fa-solid fa-spinner fa-spin text-white";
 
@@ -371,47 +385,57 @@
                 }
             }
 
-            // ====================================================================================
-            // 2. SALVAR NO GOOGLE SHEETS (Planilha do Cliente)
-            // IMPORTANTE: Substitua a URL abaixo pela URL gerada no seu Apps Script!
-            // ====================================================================================
-            const googleSheetUrl = "https://script.google.com/macros/s/AKfycbx75QcdME6UwKhFrTSud_3QxbAWfOGlKciEpv2G9NqqfWs-fXoUdUJZrnfu9OjsPa54bw/exec"; 
-
+            // 2. SALVAR NO GOOGLE SHEETS 
             try {
-                if(googleSheetUrl !== "https://script.google.com/macros/s/AKfycbx75QcdME6UwKhFrTSud_3QxbAWfOGlKciEpv2G9NqqfWs-fXoUdUJZrnfu9OjsPa54bw/exec") {
-                    await fetch(googleSheetUrl, {
-                        method: 'POST',
-                        mode: 'no-cors', // Evita erros de bloqueio de segurança CORS no navegador
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            videoName: nomeVideo,
-                            jiraLink: linkJira,
-                            sponsorName: sponsor,
-                            additionalInfo: infoAdicional
-                        })
-                    });
-                } else {
-                    console.warn("URL do Google Sheets não configurada. Lembre-se de colar a URL no código.");
-                }
+                await fetch(googleSheetUrl, {
+                    method: 'POST',
+                    mode: 'no-cors', // Fundamental para não bloquear por erro de CORS
+                    headers: {
+                        // O uso de text/plain impede o navegador de realizar o bloqueio de "Preflight"
+                        'Content-Type': 'text/plain;charset=utf-8',
+                    },
+                    body: JSON.stringify({
+                        videoName: nomeVideo,
+                        jiraLink: linkJira,
+                        sponsorName: sponsor,
+                        additionalInfo: infoAdicional
+                    })
+                });
+
+                // Sucesso Visual
+                btnText.textContent = "DADOS ENVIADOS";
+                btnIcon.className = "fa-solid fa-check text-white";
+
+                const toast = document.getElementById('toast');
+                toast.style.opacity = '1';
+                toast.style.transform = 'translate(-50%, 20px)';
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translate(-50%, -20px)';
+                }, 5000);
+
+                desbloquearCalendario();
+
             } catch(error) {
                 console.error("Erro ao enviar para Google Sheets:", error);
+                
+                // Mostrar erro na tela se falhar a rede
+                btnText.textContent = "ERRO DE REDE";
+                btnIcon.className = "fa-solid fa-xmark text-white";
+                
+                const toast = document.getElementById('toast');
+                toast.classList.replace('border-green-500', 'border-red-500');
+                document.getElementById('toast-title').textContent = "Erro de Conexão";
+                document.getElementById('toast-desc').textContent = "Falha ao enviar. Verifique sua internet.";
+                toast.style.opacity = '1';
+                toast.style.transform = 'translate(-50%, 20px)';
+                
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translate(-50%, -20px)';
+                    btnText.textContent = "Tentar Novamente";
+                }, 4000);
             }
-
-            // Sucesso Visual
-            btnText.textContent = "DADOS ENVIADOS";
-            btnIcon.className = "fa-solid fa-check text-white";
-
-            const toast = document.getElementById('toast');
-            toast.style.opacity = '1';
-            toast.style.transform = 'translate(-50%, 20px)';
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translate(-50%, -20px)';
-            }, 5000);
-
-            desbloquearCalendario();
         });
 
         function desbloquearCalendario() {
@@ -436,7 +460,6 @@
             step2Title.classList.replace('text-gray-600', 'text-brand-blue');
             step2Desc.classList.replace('text-gray-500', 'text-gray-700');
             
-            // Removida a instrução de Ctrl+V
             step2Desc.innerHTML = '✅ Agenda liberada! Escolha o seu horário abaixo.';
 
             document.querySelectorAll('.input-field').forEach(input => {
