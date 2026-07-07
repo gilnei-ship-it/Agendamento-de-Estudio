@@ -13,92 +13,103 @@
 
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #F8FAFC; color: #1E293B; overflow-x: hidden; }
-        #loading-screen { transition: opacity 0.3s ease, visibility 0.3s; }
+        
+        #loading-screen { transition: opacity 0.2s ease, visibility 0.2s; }
         .loader-hidden { opacity: 0; visibility: hidden; }
-        .header-bg { background-color: #0A1128; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; padding-bottom: 6.5rem; }
-        .stat-card { border-radius: 16px; padding: 24px; color: white; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; position: relative; overflow: hidden; }
+
+        .header-bg {
+            background-color: #0A1128;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            padding-bottom: 5.5rem;
+        }
+
+        .stat-card {
+            border-radius: 16px; padding: 24px; color: white;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease; position: relative; overflow: hidden;
+        }
         .stat-card:hover { transform: translateY(-5px); }
+        .stat-card::after {
+            content: ''; position: absolute; top: -50%; right: -20%; width: 100px; height: 100px;
+            background: rgba(255,255,255,0.1); border-radius: 50%;
+        }
+
         .bg-card-blue { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
         .bg-card-green { background: linear-gradient(135deg, #10B981, #059669); }
         .bg-card-yellow { background: linear-gradient(135deg, #F59E0B, #D97706); }
         .bg-card-neutral { background: linear-gradient(135deg, #64748B, #475569); }
-        .status-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+
+        .status-dot {
+            width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            color: white; font-size: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
         .bar-bg { background: #E2E8F0; border-radius: 999px; height: 12px; width: 100%; overflow: hidden; }
         .bar-fill { height: 100%; border-radius: 999px; transition: width 0.8s ease-out; }
-        .modal { opacity: 0; pointer-events: none; transition: all 0.3s ease; backdrop-filter: blur(5px); z-index: 100; }
+
+        .modal { opacity: 0; pointer-events: none; transition: all 0.2s ease; backdrop-filter: blur(5px); z-index: 100; }
         .modal.active { opacity: 1; pointer-events: auto; }
-        .modal-content { transform: scale(0.95); transition: all 0.3s ease; }
+        .modal-content { transform: scale(0.95); transition: all 0.2s ease; }
         .modal.active .modal-content { transform: scale(1); }
-        .timeline-container { position: relative; display: flex; justify-content: space-between; align-items: center; margin: 30px 0; }
-        .timeline-line { position: absolute; top: 16px; left: 0; right: 0; height: 3px; background: #E2E8F0; z-index: 0; }
-        .timeline-line-fill { position: absolute; top: 16px; left: 0; height: 3px; background: #FF5722; z-index: 1; transition: width 0.5s ease; }
-        .timeline-step { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 20%; }
-        .timeline-circle { width: 34px; height: 34px; border-radius: 50%; background: #FFF; border: 3px solid #E2E8F0; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #E2E8F0; transition: all 0.3s; }
-        .timeline-step.completed .timeline-circle { background: #FF5722; border-color: #FF5722; color: white; }
-        .timeline-step.active .timeline-circle { background: #FFF; border-color: #FF5722; color: #FF5722; box-shadow: 0 0 0 4px rgba(255, 87, 34, 0.2); }
-        .timeline-label { font-size: 12px; font-weight: 700; color: #64748B; text-align: center; text-transform: uppercase; }
-        .timeline-step.completed .timeline-label, .timeline-step.active .timeline-label { color: #1E293B; }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- TELA DE INICIALIZAÇÃO -->
     <div id="loading-screen" class="fixed inset-0 bg-[#0A1128] z-[9999] flex flex-col items-center justify-center">
-        <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-32 md:h-48 object-contain filter brightness-0 invert mb-8 animate-pulse">
+        <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-28 md:h-40 object-contain filter brightness-0 invert mb-8 animate-pulse">
         <div class="flex flex-col items-center gap-3">
             <i class="fa-solid fa-circle-notch fa-spin text-[#FF5722] text-3xl"></i>
-            <span class="text-gray-300 font-semibold tracking-widest uppercase text-sm mt-2">Conectando aos dados da Fábrica...</span>
+            <span class="text-gray-300 font-semibold tracking-widest uppercase text-sm mt-2">A carregar dados...</span>
         </div>
     </div>
 
-    <!-- CABEÇALHO -->
     <div class="header-bg pt-8 px-4 sm:px-8 relative">
-        <div class="max-w-[1300px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-4">
-                <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-20 md:h-28 object-contain filter brightness-0 invert drop-shadow-md">
-                <div class="w-px h-12 bg-gray-600/50 hidden sm:block"></div>
-                <span class="text-white text-lg font-bold tracking-wide hidden sm:block"><i class="fa-solid fa-video text-[#FF5722] mr-2"></i>Gestão de Demandas</span>
+        <div class="max-w-[1300px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col items-center md:items-start gap-2">
+                <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Fábrica de Conteúdo" class="h-24 md:h-32 object-contain filter brightness-0 invert drop-shadow-md">
+                <h1 class="text-2xl font-black text-white tracking-tight mt-2">Portal de Demandas</h1>
+                <p class="text-sm text-gray-400 font-medium hidden md:block">Gestão de prazos e fluxo de produção</p>
             </div>
-            <button onclick="abrirModal('modal-indicadores')" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm py-2.5 px-6 rounded-full transition-all flex items-center gap-2 backdrop-blur-sm shadow-lg whitespace-nowrap">
+            
+            <button onclick="abrirModal('modal-indicadores')" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm py-3 px-6 rounded-full transition-all flex items-center gap-2 backdrop-blur-sm shadow-lg whitespace-nowrap w-full md:w-auto justify-center">
                 <i class="fa-solid fa-chart-pie text-[#FF5722]"></i> Visão Geral da Fábrica
             </button>
-        </div>
-        <div class="max-w-[1300px] mx-auto mt-10 flex items-center gap-4">
-            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight">Fábrica de<br>Conteúdo</h1>
         </div>
     </div>
 
     <main class="max-w-[1300px] mx-auto px-4 sm:px-8 relative z-10">
         
-        <!-- CARTÕES FLUTUANTES -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 -mt-16 mb-12">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 -mt-10 mb-8">
             <div class="stat-card bg-card-blue flex flex-col justify-between">
                 <div class="flex justify-between items-start mb-4"><div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-folder-open"></i></div></div>
-                <div><h3 class="text-4xl font-black" id="count-total">0</h3><p class="text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Total de Demandas</p></div>
+                <div><h3 class="text-3xl md:text-4xl font-black" id="count-total">0</h3><p class="text-[11px] md:text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Total Projetos</p></div>
             </div>
+            
             <div class="stat-card bg-card-green flex flex-col justify-between">
                 <div class="flex justify-between items-start mb-4"><div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-check-double"></i></div></div>
-                <div><h3 class="text-4xl font-black" id="count-concluido">0</h3><p class="text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Concluídos</p></div>
+                <div><h3 class="text-3xl md:text-4xl font-black" id="count-concluido">0</h3><p class="text-[11px] md:text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Concluídos</p></div>
             </div>
+
             <div class="stat-card bg-card-yellow flex flex-col justify-between">
                 <div class="flex justify-between items-start mb-4"><div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-person-digging"></i></div></div>
-                <div><h3 class="text-4xl font-black" id="count-andamento">0</h3><p class="text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Em Andamento</p></div>
+                <div><h3 class="text-3xl md:text-4xl font-black" id="count-andamento">0</h3><p class="text-[11px] md:text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Em Andamento</p></div>
             </div>
+
             <div class="stat-card bg-card-neutral flex flex-col justify-between">
                 <div class="flex justify-between items-start mb-4"><div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-layer-group"></i></div></div>
-                <div><h3 class="text-4xl font-black" id="count-pendente">0</h3><p class="text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Na Fila</p></div>
+                <div><h3 class="text-3xl md:text-4xl font-black" id="count-pendente">0</h3><p class="text-[11px] md:text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Na Fila</p></div>
             </div>
         </div>
 
-        <!-- TABELA COM LUPA -->
         <div class="bg-white rounded-[20px] shadow-sm border border-gray-100 mb-12 overflow-hidden">
             <div class="p-6 border-b border-gray-100 bg-white">
-                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-                    <h2 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-clipboard-list text-blue-600 mr-2"></i> Acompanhamento de Solicitações</h2>
-                    <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-4 items-center">
+                <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
+                    <h2 class="text-lg md:text-xl font-bold text-gray-800 w-full lg:w-auto text-left"><i class="fa-solid fa-calendar-check text-blue-600 mr-2"></i> Cronograma de Projetos</h2>
+                    <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-3 items-center">
                         <div class="relative w-full sm:w-80">
                             <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                            <input type="text" id="inputPesquisa" placeholder="Buscar demanda, aprovador, responsável..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-full text-sm focus:outline-none focus:border-[#FF5722] focus:ring-1 focus:ring-[#FF5722] transition-colors bg-gray-50">
+                            <input type="text" id="inputPesquisa" placeholder="Procurar demanda..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-full text-sm focus:outline-none focus:border-[#FF5722] focus:ring-1 focus:ring-[#FF5722] transition-colors bg-gray-50">
                         </div>
                         <button onclick="abrirModal('modal-novo')" class="w-full sm:w-auto bg-[#0A1128] hover:bg-gray-800 text-white text-sm font-bold py-2.5 px-6 rounded-full transition-colors flex items-center justify-center gap-2 shadow-md whitespace-nowrap">
                             <i class="fa-solid fa-video text-[#FF5722]"></i> Agendar Gravação
@@ -110,13 +121,13 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse whitespace-nowrap">
                     <thead>
-                        <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider border-b border-gray-100">
-                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-file-signature mr-1"></i> Demanda / Projeto</th>
-                            <th class="py-4 px-6 font-semibold text-center"><i class="fa-solid fa-traffic-light mr-1"></i> Status</th>
-                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-headset mr-1"></i> Responsável</th>
-                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-stamp mr-1"></i> Aprovador</th>
+                        <tr class="bg-gray-50 text-gray-500 text-[11px] md:text-xs uppercase tracking-wider border-b border-gray-100">
+                            <th class="py-4 px-6 font-semibold">Demanda / Projeto</th>
+                            <th class="py-4 px-6 font-semibold text-center">Status</th>
+                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-video mr-1"></i> Data Gravação</th>
                             <th class="py-4 px-6 font-semibold"><i class="fa-regular fa-calendar mr-1"></i> Prazo Final</th>
-                            <th class="py-4 px-6 font-semibold text-center"><i class="fa-solid fa-link mr-1"></i> Links / Detalhes</th>
+                            <th class="py-4 px-6 font-semibold">Responsáveis</th>
+                            <th class="py-4 px-6 font-semibold text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody id="tabela-demandas" class="text-sm text-gray-700 divide-y divide-gray-50">
@@ -127,41 +138,39 @@
         </div>
     </main>
 
-    <!-- MODAL 1: RESUMO DO TRABALHO -->
     <div id="modal-indicadores" class="modal fixed inset-0 flex items-center justify-center bg-[#0A1128]/90 p-4">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-3xl shadow-2xl relative p-8">
             <button onclick="fecharModal('modal-indicadores')" class="absolute top-6 right-6 w-10 h-10 bg-gray-100 rounded-full text-gray-500 hover:bg-gray-200 transition-colors flex items-center justify-center z-10"><i class="fa-solid fa-xmark text-lg"></i></button>
             <div class="mb-8 border-b border-gray-100 pb-4">
-                <h2 class="text-3xl font-black text-[#0A1128] flex items-center gap-3"><i class="fa-solid fa-chart-line text-[#FF5722]"></i> Visão Geral da Fábrica</h2>
+                <h2 class="text-2xl md:text-3xl font-black text-[#0A1128] flex items-center gap-3"><i class="fa-solid fa-chart-line text-[#FF5722]"></i> Visão Geral da Fábrica</h2>
             </div>
             <div class="space-y-8">
                 <div>
-                    <div class="flex justify-between items-end mb-2"><span class="font-bold text-gray-700 uppercase text-sm"><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>Projetos Concluídos</span><span class="font-black text-2xl text-green-500" id="chart-percent-concluido">0%</span></div>
+                    <div class="flex justify-between items-end mb-2"><span class="font-bold text-gray-700 uppercase text-xs md:text-sm"><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>Projetos Concluídos</span><span class="font-black text-2xl text-green-500" id="chart-percent-concluido">0%</span></div>
                     <div class="bar-bg"><div class="bar-fill bg-green-500" id="chart-bar-concluido" style="width: 0%;"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between items-end mb-2"><span class="font-bold text-gray-700 uppercase text-sm"><i class="fa-solid fa-person-digging text-yellow-500 mr-2"></i>Trabalhos em Andamento</span><span class="font-black text-2xl text-yellow-500" id="chart-percent-andamento">0%</span></div>
+                    <div class="flex justify-between items-end mb-2"><span class="font-bold text-gray-700 uppercase text-xs md:text-sm"><i class="fa-solid fa-person-digging text-yellow-500 mr-2"></i>Trabalhos em Andamento</span><span class="font-black text-2xl text-yellow-500" id="chart-percent-andamento">0%</span></div>
                     <div class="bar-bg"><div class="bar-fill bg-yellow-500" id="chart-bar-andamento" style="width: 0%;"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between items-end mb-2"><span class="font-bold text-gray-700 uppercase text-sm"><i class="fa-solid fa-layer-group text-slate-500 mr-2"></i>Na Fila (Aguardando Início)</span><span class="font-black text-2xl text-slate-500" id="chart-percent-pendente">0%</span></div>
+                    <div class="flex justify-between items-end mb-2"><span class="font-bold text-gray-700 uppercase text-xs md:text-sm"><i class="fa-solid fa-layer-group text-slate-500 mr-2"></i>Na Fila (Aguardando Início)</span><span class="font-black text-2xl text-slate-500" id="chart-percent-pendente">0%</span></div>
                     <div class="bar-bg"><div class="bar-fill bg-slate-500" id="chart-bar-pendente" style="width: 0%;"></div></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 2: AGENDAMENTO -->
     <div id="modal-novo" class="modal fixed inset-0 flex items-center justify-center bg-[#0A1128]/90 p-4">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-5xl h-[85vh] shadow-2xl relative flex flex-col md:flex-row overflow-hidden">
             <button onclick="fecharModal('modal-novo')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 z-20 hover:bg-gray-200"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <div class="w-full md:w-1/3 p-8 bg-gray-50 flex flex-col overflow-y-auto border-r border-gray-200">
-                <h3 class="text-2xl font-black text-[#0A1128] mb-6 leading-tight"><i class="fa-solid fa-video text-[#FF5722] mr-2"></i> Agendar Gravação<span class="block text-sm font-medium text-gray-500 mt-1">No Estúdio ou Externa</span></h3>
+            <div class="w-full md:w-1/3 p-6 md:p-8 bg-gray-50 flex flex-col overflow-y-auto border-r border-gray-200">
+                <h3 class="text-xl md:text-2xl font-black text-[#0A1128] mb-6 leading-tight"><i class="fa-solid fa-video text-[#FF5722] mr-2"></i> Agendar Gravação<span class="block text-xs md:text-sm font-medium text-gray-500 mt-1">No Estúdio ou Externa</span></h3>
                 <form id="project-form" class="space-y-4 flex-grow">
-                    <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nome da Demanda/Projeto</label><input type="text" id="projetoName" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none"></div>
-                    <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Link do Chamado (Jira)</label><input type="url" id="jiraLink" required placeholder="https://" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none"></div>
-                    <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Quem está pedindo? (Nome/Área)</label><input type="text" id="sponsorName" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none"></div>
-                    <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Observações</label><textarea id="additionalInfo" rows="3" placeholder="Opcional..." class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none resize-none"></textarea></div>
+                    <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nome da Demanda</label><input type="text" id="projetoName" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none"></div>
+                    <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Link (Jira)</label><input type="url" id="jiraLink" required placeholder="https://" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none"></div>
+                    <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Solicitante</label><input type="text" id="sponsorName" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none"></div>
+                    <div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Observações</label><textarea id="additionalInfo" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none resize-none"></textarea></div>
                     <button type="submit" id="submit-btn" class="w-full bg-[#FF5722] hover:bg-[#E64A19] text-white font-bold py-4 rounded-xl transition-colors mt-6 shadow-lg"><i class="fa-solid fa-calendar-check mr-2"></i> <span id="btn-text">Confirmar Agendamento</span></button>
                 </form>
             </div>
@@ -169,54 +178,34 @@
         </div>
     </div>
 
-    <!-- MODAL 3: DETALHES COMPLETOS COM TIMELINE -->
     <div id="modal-detalhes" class="modal fixed inset-0 flex items-center justify-center bg-[#0A1128]/80 p-4">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-4xl shadow-2xl relative flex flex-col">
             <button onclick="fecharModal('modal-detalhes')" class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors z-10 text-xl"><i class="fa-solid fa-xmark"></i></button>
-            <div class="p-8 pb-6 border-b border-gray-100 bg-[#0A1128] rounded-t-[24px]">
-                <p class="text-[#FF5722] font-bold text-sm mb-2 uppercase tracking-widest">Detalhes da Demanda / Projeto</p>
-                <h2 class="text-3xl font-extrabold text-white tracking-tight leading-tight" id="modal-titulo">Nome do Projeto</h2>
+            <div class="p-6 md:p-8 pb-4 md:pb-6 border-b border-gray-100 bg-[#0A1128] rounded-t-[24px]">
+                <p class="text-[#FF5722] font-bold text-xs mb-2 uppercase tracking-widest">Detalhes do Projeto</p>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight" id="modal-titulo">Nome do Projeto</h2>
             </div>
-            
-            <div class="px-8 py-6 max-h-[60vh] overflow-y-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100"><p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-user-tag mr-1"></i> Solicitante</p><p class="font-bold text-gray-800" id="modal-sponsor">-</p></div>
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100"><p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-headset mr-1"></i> Responsável</p><p class="font-bold text-[#1D4ED8]" id="modal-responsavel">-</p></div>
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100"><p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-stamp mr-1"></i> Aprovador</p><p class="font-bold text-gray-800" id="modal-aprovador">-</p></div>
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100"><p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-flag-checkered mr-1"></i> Prazo Final</p><p class="font-bold text-[#FF5722]" id="modal-prazo">-</p></div>
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100"><p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-calendar-plus mr-1"></i> Recebido em</p><p class="font-bold text-gray-800" id="modal-recebimento">-</p></div>
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100"><p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-video mr-1"></i> Gravação</p><p class="font-bold text-gray-800" id="modal-gravacao">-</p></div>
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 lg:col-span-2"><p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-users mr-1"></i> Colaborador</p><p class="font-bold text-gray-800" id="modal-colaborador">-</p></div>
-                </div>
-
-                <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100 mb-6">
-                    <p class="text-[11px] font-bold text-blue-600 uppercase tracking-wider mb-2"><i class="fa-solid fa-align-left mr-1"></i> Observações da Demanda</p>
-                    <p class="text-sm text-gray-700 font-medium" id="modal-observacoes">Nenhuma observação informada.</p>
-                </div>
-
-                <h3 class="text-sm font-bold text-gray-400 mb-2 mt-4 uppercase text-center tracking-wider">Acompanhamento do Processo</h3>
-                <div class="timeline-container">
-                    <div class="timeline-line"></div>
-                    <div class="timeline-line-fill" id="timeline-progress" style="width: 0%;"></div>
-                    <div class="timeline-step step-1"><div class="timeline-circle"><i class="fa-solid fa-inbox"></i></div><p class="timeline-label mt-2">Recebido</p></div>
-                    <div class="timeline-step step-2"><div class="timeline-circle"><i class="fa-solid fa-calendar-check"></i></div><p class="timeline-label mt-2">Agendado</p></div>
-                    <div class="timeline-step step-3"><div class="timeline-circle"><i class="fa-solid fa-video"></i></div><p class="timeline-label mt-2">Gravação</p></div>
-                    <div class="timeline-step step-4"><div class="timeline-circle"><i class="fa-solid fa-laptop-file"></i></div><p class="timeline-label mt-2">Edição</p></div>
-                    <div class="timeline-step step-5"><div class="timeline-circle"><i class="fa-solid fa-check-double"></i></div><p class="timeline-label mt-2">Entregue</p></div>
+            <div class="px-6 md:px-8 py-6 max-h-[60vh] overflow-y-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center"><i class="fa-solid fa-video"></i></div>
+                        <div><p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Data Gravação</p><p class="font-bold text-gray-800" id="modal-gravacao">-</p></div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-orange-100 text-[#FF5722] flex items-center justify-center"><i class="fa-solid fa-flag-checkered"></i></div>
+                        <div><p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Prazo Final</p><p class="font-bold text-gray-800" id="modal-prazo">-</p></div>
+                    </div>
                 </div>
             </div>
-
-            <!-- Área de Botões (Jira + Vídeo) -->
-            <div class="p-6 bg-gray-50 border-t border-gray-100 rounded-b-[24px] flex flex-col md:flex-row gap-4 justify-center items-center" id="modal-area-entrega"></div>
+            <div class="p-6 md:p-8 bg-gray-50 border-t border-gray-100 rounded-b-[24px] flex flex-col sm:flex-row gap-4 justify-center items-center" id="modal-area-entrega"></div>
         </div>
     </div>
 
-    <!-- SCRIPT DE INTELIGÊNCIA BLINDADO -->
     <script>
         // ====================================================================================
-        // URL DO WEB APP DO APPS SCRIPT ATUALIZADA
+        // ATENÇÃO: COLE A URL DO APPS SCRIPT ABAIXO
         // ====================================================================================
-        const googleAppUrl = "https://script.google.com/macros/s/AKfycbyh9nCwfuvhBjzuopA6s9qzZdgoR41jQX1Ws-qKPdzsh2OW4f_PPSUt66_-3qUOTfoDEg/exec";
+        const googleAppUrl = "https://script.google.com/macros/s/AKfycbxntPEFXM6ATjyfIUHwkmBt0Ax3RvpcJYcD70N9P52BWT4-LhDP1QdxTd4s5HC5I42WJg/exec";
 
         let dadosGlobais = [];
         let textoBuscado = '';
@@ -242,19 +231,25 @@
             return { bg: 'bg-slate-500', icon: 'fa-layer-group', label: 'Na Fila', step: 1 }; 
         }
 
-        function extrairLinksEObs(linkAcessoTexto) {
+        // Função de Ordenação Estratégica (Urgentes primeiro, Concluídos no final)
+        function ordernarProjetos(dados) {
+            return dados.sort((a, b) => {
+                const statusA = obterDadosStatus(a.status, a.etapaAtual).step;
+                const statusB = obterDadosStatus(b.status, b.etapaAtual).step;
+                // Prioridade: Em Andamento(4,2) > Na Fila(1) > Concluído(5)
+                const prioridade = { 4: 1, 3: 2, 2: 3, 1: 4, 5: 5 };
+                return (prioridade[statusA] || 9) - (prioridade[statusB] || 9);
+            });
+        }
+
+        function extrairLinks(linkAcessoTexto) {
             const txt = linkAcessoTexto || '';
-            const partes = txt.split('| Obs:');
-            const linksPuros = partes[0] || '';
-            const obsPura = partes[1] ? partes[1].trim() : 'Nenhuma observação informada.';
-            
             const urlRegex = /(https?:\/\/[^\s|]+)/g;
-            const encontrados = linksPuros.match(urlRegex) || [];
-            
+            const encontrados = txt.match(urlRegex) || [];
+            const limpos = encontrados.map(l => l.replace(/\|$/, '').trim());
             return {
-                jira: encontrados.find(l => l.includes('atlassian') || l.includes('jira')),
-                video: encontrados.find(l => !l.includes('atlassian') && !l.includes('jira')),
-                obs: obsPura
+                jira: limpos.find(l => l.includes('atlassian') || l.includes('jira')),
+                video: limpos.find(l => !l.includes('atlassian') && !l.includes('jira'))
             };
         }
 
@@ -276,7 +271,7 @@
             document.getElementById('chart-percent-concluido').textContent = Math.round((contagens.concluido / total) * 100) + '%';
             document.getElementById('chart-percent-andamento').textContent = Math.round((contagens.andamento / total) * 100) + '%';
             document.getElementById('chart-percent-pendente').textContent = Math.round((contagens.pendente / total) * 100) + '%';
-
+            
             setTimeout(() => {
                 document.getElementById('chart-bar-concluido').style.width = Math.round((contagens.concluido / total) * 100) + '%';
                 document.getElementById('chart-bar-andamento').style.width = Math.round((contagens.andamento / total) * 100) + '%';
@@ -286,47 +281,26 @@
 
         function abrirDetalhes(index) {
             const p = dadosGlobais[index];
-            const infosLink = extrairLinksEObs(p.linkAcesso);
-
             document.getElementById('modal-titulo').textContent = p.demanda || '-';
             document.getElementById('modal-prazo').textContent = p.prazoFinal || '-';
             document.getElementById('modal-gravacao').textContent = p.dataGravacao || '-';
-            document.getElementById('modal-sponsor').textContent = p.sponsor || '-';
-            document.getElementById('modal-responsavel').textContent = p.responsavel || '-';
-            document.getElementById('modal-aprovador').textContent = p.aprovador || '-';
-            document.getElementById('modal-colaborador').textContent = p.colaborador || '-';
-            document.getElementById('modal-recebimento').textContent = p.dataRecebimento || '-';
-            document.getElementById('modal-observacoes').textContent = infosLink.obs;
 
+            const infosLink = extrairLinks(p.linkAcesso);
             const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
-            const stepIndex = statusInfo.step;
-            document.getElementById('timeline-progress').style.width = `${((stepIndex - 1) / 4) * 100}%`;
-
-            for(let i = 1; i <= 5; i++) {
-                const el = document.querySelector(`.step-${i}`);
-                el.classList.remove('active', 'completed');
-                if(i < stepIndex) el.classList.add('completed');
-                if(i === stepIndex) el.classList.add('active');
-            }
-
+            
             const areaEntrega = document.getElementById('modal-area-entrega');
             let botoesHtml = '';
             
-            if(infosLink.jira) {
-                botoesHtml += `<a href="${infosLink.jira}" target="_blank" class="w-full md:w-auto px-6 bg-white hover:bg-gray-100 text-[#0A1128] font-bold py-3 rounded-xl transition-colors shadow-sm border border-gray-200 flex justify-center items-center gap-2"><i class="fa-brands fa-jira text-blue-600 text-lg"></i> Abrir Jira</a>`;
-            }
+            if(infosLink.jira) botoesHtml += `<a href="${infosLink.jira}" target="_blank" class="w-full sm:w-auto px-6 bg-white hover:bg-gray-100 text-[#0A1128] font-bold py-3 rounded-xl shadow-sm border border-gray-200 flex justify-center items-center gap-2"><i class="fa-brands fa-jira text-blue-600 text-lg"></i> Jira</a>`;
 
             if(statusInfo.label === 'Concluído') {
-                if(infosLink.video) {
-                    botoesHtml += `<a href="${infosLink.video}" target="_blank" class="w-full md:w-auto px-6 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"><i class="fa-solid fa-play-circle text-xl"></i> Assistir Vídeo</a>`;
-                } else if(!infosLink.jira) {
-                    botoesHtml += `<p class="text-sm font-bold text-gray-400"><i class="fa-solid fa-check-double"></i> Concluído (Sem links)</p>`;
-                }
+                if(infosLink.video) botoesHtml += `<a href="${infosLink.video}" target="_blank" class="w-full sm:w-auto px-6 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl shadow-lg flex justify-center items-center gap-2"><i class="fa-solid fa-play-circle text-xl"></i> Assistir Vídeo</a>`;
+                else botoesHtml += `<p class="text-sm font-bold text-gray-400">Concluído (Sem vídeo)</p>`;
             } else {
-                botoesHtml += `<button disabled class="w-full md:w-auto px-6 bg-gray-200 text-gray-500 font-bold py-3 rounded-xl border border-gray-300 cursor-not-allowed flex justify-center items-center gap-2"><i class="fa-solid fa-lock"></i> Vídeo final bloqueado</button>`;
+                botoesHtml += `<button disabled class="w-full sm:w-auto px-6 bg-gray-200 text-gray-500 font-bold py-3 rounded-xl border border-gray-300 cursor-not-allowed flex justify-center items-center gap-2"><i class="fa-solid fa-lock"></i> Vídeo bloqueado</button>`;
             }
 
-            areaEntrega.innerHTML = botoesHtml || `<p class="text-sm text-gray-400">Nenhum link anexado.</p>`;
+            areaEntrega.innerHTML = botoesHtml;
             abrirModal('modal-detalhes');
         }
 
@@ -335,35 +309,47 @@
             tbody.innerHTML = '';
 
             if (dadosParaRenderizar.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500 font-medium"><i class="fa-solid fa-folder-open text-gray-300 text-3xl mb-3 block"></i> Nenhuma demanda encontrada com estes filtros.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500 font-medium">Nenhuma demanda encontrada.</td></tr>`;
                 return;
             }
 
-            dadosParaRenderizar.forEach((p) => {
+            // Ordena os dados para colocar os em andamento no topo
+            const dadosOrdenados = ordernarProjetos(dadosParaRenderizar);
+
+            dadosOrdenados.forEach((p) => {
                 const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
                 const originalIndex = dadosGlobais.indexOf(p);
-                const infosLink = extrairLinksEObs(p.linkAcesso);
+                const infosLink = extrairLinks(p.linkAcesso);
 
-                let btnJiraHtml = '';
-                if(infosLink.jira) {
-                    btnJiraHtml = `<a href="${infosLink.jira}" target="_blank" onclick="event.stopPropagation()" class="w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-600 hover:text-white text-blue-600 transition-colors shadow-sm flex justify-center items-center mr-2" title="Abrir Jira"><i class="fa-brands fa-jira text-sm"></i></a>`;
-                }
+                // Badges Estratégicos para Datas (Foco visual no Cronograma)
+                let badgeGravacao = p.dataGravacao && p.dataGravacao.toLowerCase() !== 'a combinar' && p.dataGravacao !== '-' 
+                    ? `<span class="bg-orange-50 text-[#FF5722] font-bold px-2 py-1 rounded text-[11px] whitespace-nowrap"><i class="fa-solid fa-video mr-1"></i>${p.dataGravacao}</span>` 
+                    : `<span class="text-gray-400 text-[11px]">A definir</span>`;
+                    
+                let badgePrazo = p.prazoFinal && p.prazoFinal.toLowerCase() !== 'a combinar' && p.prazoFinal !== '-' 
+                    ? `<span class="bg-blue-50 text-blue-700 font-bold px-2 py-1 rounded text-[11px] whitespace-nowrap"><i class="fa-regular fa-calendar mr-1"></i>${p.prazoFinal}</span>` 
+                    : `<span class="text-gray-400 text-[11px]">A definir</span>`;
+
+                let btnJiraHtml = infosLink.jira ? `<a href="${infosLink.jira}" target="_blank" onclick="event.stopPropagation()" class="w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-600 hover:text-white text-blue-600 transition-colors shadow-sm flex justify-center items-center mr-2" title="Abrir Jira"><i class="fa-brands fa-jira text-sm"></i></a>` : '';
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-gray-50 transition-colors cursor-pointer" onclick="abrirDetalhes(${originalIndex})">
-                        <td class="py-4 px-6 font-bold text-gray-800"><i class="fa-solid fa-angle-right text-[#FF5722] text-xs mr-2"></i> ${p.demanda || '-'}</td>
+                        <td class="py-4 px-6 font-bold text-gray-800 truncate max-w-[200px]"><i class="fa-solid fa-angle-right text-[#FF5722] text-xs mr-2"></i>${p.demanda || '-'}</td>
                         <td class="py-4 px-6 text-center">
                             <div class="flex justify-center flex-col items-center gap-1">
                                 <div class="status-dot ${statusInfo.bg}" title="${statusInfo.label}"><i class="fa-solid ${statusInfo.icon}"></i></div>
-                                <span class="text-[10px] font-bold text-gray-500 uppercase">${statusInfo.label}</span>
+                                <span class="text-[9px] font-bold text-gray-500 uppercase">${statusInfo.label}</span>
                             </div>
                         </td>
-                        <td class="py-4 px-6 text-[#1D4ED8] font-semibold">${p.responsavel || '-'}</td>
-                        <td class="py-4 px-6 text-gray-600 font-medium hidden md:table-cell">${p.aprovador || '-'}</td>
-                        <td class="py-4 px-6 text-gray-500 font-bold">${p.prazoFinal || '-'}</td>
-                        <td class="py-4 px-6 text-center border-l border-gray-50 flex justify-center items-center">
+                        <td class="py-4 px-6">${badgeGravacao}</td>
+                        <td class="py-4 px-6">${badgePrazo}</td>
+                        <td class="py-4 px-6 text-xs text-gray-600">
+                            <span class="block">Resp: <strong class="text-blue-700">${p.responsavel || '-'}</strong></span>
+                            <span class="block text-gray-400">Sol: ${p.sponsor || '-'}</span>
+                        </td>
+                        <td class="py-4 px-6 text-center flex justify-center items-center h-full">
                             ${btnJiraHtml}
-                            <button class="w-8 h-8 rounded-full bg-[#0A1128] hover:bg-gray-800 text-white transition-colors shadow-sm flex justify-center items-center text-sm" title="Ver Detalhes"><i class="fa-solid fa-expand"></i></button>
+                            <button class="w-8 h-8 rounded-full bg-[#0A1128] hover:bg-gray-800 text-white transition-colors shadow-sm flex justify-center items-center text-sm"><i class="fa-solid fa-expand"></i></button>
                         </td>
                     </tr>
                 `;
@@ -372,10 +358,7 @@
 
         function aplicarFiltros() {
             const dadosFiltrados = dadosGlobais.filter(projeto => {
-                const search = normalizarTexto(projeto.demanda) + " " + 
-                               normalizarTexto(projeto.responsavel) + " " + 
-                               normalizarTexto(projeto.aprovador) + " " + 
-                               normalizarTexto(projeto.sponsor);
+                const search = normalizarTexto(projeto.demanda) + " " + normalizarTexto(projeto.responsavel) + " " + normalizarTexto(projeto.aprovador) + " " + normalizarTexto(projeto.sponsor);
                 return search.includes(textoBuscado);
             });
             renderizarTabela(dadosFiltrados);
@@ -394,7 +377,7 @@
                 aplicarFiltros(); 
                 document.getElementById('loading-screen').classList.add('loader-hidden');
             } catch(e) {
-                document.getElementById('tabela-demandas').innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500 font-bold"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Erro ao conectar com o banco de dados. Verifique a URL do Apps Script.</td></tr>';
+                document.getElementById('tabela-demandas').innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500 font-bold"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Erro ao conectar com o banco de dados.</td></tr>';
                 document.getElementById('loading-screen').classList.add('loader-hidden');
             }
         }
