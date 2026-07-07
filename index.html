@@ -38,7 +38,7 @@
         .bg-card-blue { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
         .bg-card-green { background: linear-gradient(135deg, #10B981, #059669); }
         .bg-card-yellow { background: linear-gradient(135deg, #F59E0B, #D97706); }
-        .bg-card-red { background: linear-gradient(135deg, #EF4444, #DC2626); }
+        .bg-card-neutral { background: linear-gradient(135deg, #64748B, #475569); } /* Cor neutra para "Na Fila" */
 
         .status-dot {
             width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
@@ -52,11 +52,6 @@
         .modal.active { opacity: 1; pointer-events: auto; }
         .modal-content { transform: scale(0.95); transition: all 0.3s ease; }
         .modal.active .modal-content { transform: scale(1); }
-
-        .custom-scroll::-webkit-scrollbar { height: 6px; }
-        .custom-scroll::-webkit-scrollbar-track { background: #F1F5F9; border-radius: 4px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
-        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
     </style>
 </head>
 <body class="antialiased">
@@ -74,11 +69,11 @@
             <div class="flex items-center gap-4">
                 <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-20 md:h-28 object-contain filter brightness-0 invert drop-shadow-md">
                 <div class="w-px h-12 bg-gray-600/50 hidden sm:block"></div>
-                <span class="text-white text-lg font-bold tracking-wide hidden sm:block"><i class="fa-solid fa-video text-[#FF5722] mr-2"></i>Área do Solicitante</span>
+                <span class="text-white text-lg font-bold tracking-wide hidden sm:block"><i class="fa-solid fa-video text-[#FF5722] mr-2"></i>Gestão de Demandas</span>
             </div>
             
             <button onclick="abrirModal('modal-indicadores')" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm py-2.5 px-6 rounded-full transition-all flex items-center gap-2 backdrop-blur-sm shadow-lg whitespace-nowrap">
-                <i class="fa-solid fa-chart-pie text-[#FF5722]"></i> Como estamos indo?
+                <i class="fa-solid fa-chart-pie text-[#FF5722]"></i> Visão Geral da Fábrica
             </button>
         </div>
 
@@ -87,16 +82,16 @@
         </div>
     </div>
 
-    <main class="max-w-[1300px] mx-auto px-4 sm:px-8 relative z-10">
+    <main class="max-w-[1200px] mx-auto px-4 sm:px-8 relative z-10">
         
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 -mt-16 mb-12">
             <div class="stat-card bg-card-blue flex flex-col justify-between">
                 <div class="flex justify-between items-start mb-4">
-                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-list-check"></i></div>
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-folder-open"></i></div>
                 </div>
                 <div>
                     <h3 class="text-4xl font-black" id="count-total">0</h3>
-                    <p class="text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Pedidos Totais</p>
+                    <p class="text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Total de Demandas</p>
                 </div>
             </div>
             
@@ -120,13 +115,13 @@
                 </div>
             </div>
 
-            <div class="stat-card bg-card-red flex flex-col justify-between">
+            <div class="stat-card bg-card-neutral flex flex-col justify-between">
                 <div class="flex justify-between items-start mb-4">
-                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-clock"></i></div>
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-layer-group"></i></div>
                 </div>
                 <div>
                     <h3 class="text-4xl font-black" id="count-pendente">0</h3>
-                    <p class="text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Na Fila (Pendentes)</p>
+                    <p class="text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Na Fila</p>
                 </div>
             </div>
         </div>
@@ -140,7 +135,7 @@
                     <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-4 items-center">
                         <div class="relative w-full sm:w-72">
                             <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                            <input type="text" id="inputPesquisa" placeholder="Buscar projeto, área ou responsável..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-full text-sm focus:outline-none focus:border-[#FF5722] focus:ring-1 focus:ring-[#FF5722] transition-colors bg-gray-50">
+                            <input type="text" id="inputPesquisa" placeholder="Buscar demanda, responsável..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-full text-sm focus:outline-none focus:border-[#FF5722] focus:ring-1 focus:ring-[#FF5722] transition-colors bg-gray-50">
                         </div>
 
                         <button onclick="abrirModal('modal-novo')" class="w-full sm:w-auto bg-[#0A1128] hover:bg-gray-800 text-white text-sm font-bold py-2.5 px-6 rounded-full transition-colors flex items-center justify-center gap-2 shadow-md whitespace-nowrap">
@@ -148,32 +143,14 @@
                         </button>
                     </div>
                 </div>
-
-                <div class="mt-6 flex items-center gap-2 overflow-x-auto pb-2 custom-scroll">
-                    <span class="text-xs font-bold text-gray-400 uppercase mr-1 whitespace-nowrap"><i class="fa-regular fa-calendar-days mr-1"></i> Filtrar Mês:</span>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-[#FF5722] text-white transition-colors whitespace-nowrap shadow-sm" data-month="todos">Todos</button>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="01">Jan</button>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="02">Fev</button>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="03">Mar</button>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="04">Abr</button>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="05">Mai</button>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="06">Jun</button>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="07">Jul</button>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="08">Ago</button>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="09">Set</button>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="10">Out</button>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="11">Nov</button>
-                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="12">Dez</button>
-                </div>
-
             </div>
             
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse whitespace-nowrap">
                     <thead>
                         <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider border-b border-gray-100">
-                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-file-signature mr-1"></i> Nome do Projeto</th>
-                            <th class="py-4 px-6 font-semibold text-center"><i class="fa-solid fa-traffic-light mr-1"></i> Onde estamos?</th>
+                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-file-signature mr-1"></i> Demanda</th>
+                            <th class="py-4 px-6 font-semibold text-center"><i class="fa-solid fa-traffic-light mr-1"></i> Status</th>
                             <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-video mr-1"></i> Data Gravação</th>
                             <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-user-tag mr-1"></i> Solicitante</th>
                             <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-headset mr-1"></i> Responsável</th>
@@ -196,15 +173,14 @@
 
             <div class="mb-8 border-b border-gray-100 pb-4">
                 <h2 class="text-3xl font-black text-[#0A1128] flex items-center gap-3">
-                    <i class="fa-solid fa-handshake-angle text-[#FF5722]"></i> Resumo do Nosso Trabalho
+                    <i class="fa-solid fa-chart-line text-[#FF5722]"></i> Visão Geral da Fábrica
                 </h2>
-                <p class="text-gray-500 mt-2 font-medium">Acompanhe como está o andamento das solicitações que chegam para a nossa equipe.</p>
             </div>
 
             <div class="space-y-8">
                 <div>
                     <div class="flex justify-between items-end mb-2">
-                        <span class="font-bold text-gray-700 uppercase text-sm"><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>Projetos Concluídos e Entregues</span>
+                        <span class="font-bold text-gray-700 uppercase text-sm"><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>Projetos Concluídos</span>
                         <span class="font-black text-2xl text-green-500" id="chart-percent-concluido">0%</span>
                     </div>
                     <div class="bar-bg"><div class="bar-fill bg-green-500" id="chart-bar-concluido" style="width: 0%;"></div></div>
@@ -212,7 +188,7 @@
 
                 <div>
                     <div class="flex justify-between items-end mb-2">
-                        <span class="font-bold text-gray-700 uppercase text-sm"><i class="fa-solid fa-person-digging text-yellow-500 mr-2"></i>Trabalhos em Andamento / Revisão</span>
+                        <span class="font-bold text-gray-700 uppercase text-sm"><i class="fa-solid fa-person-digging text-yellow-500 mr-2"></i>Trabalhos em Andamento</span>
                         <span class="font-black text-2xl text-yellow-500" id="chart-percent-andamento">0%</span>
                     </div>
                     <div class="bar-bg"><div class="bar-fill bg-yellow-500" id="chart-bar-andamento" style="width: 0%;"></div></div>
@@ -220,10 +196,10 @@
 
                 <div>
                     <div class="flex justify-between items-end mb-2">
-                        <span class="font-bold text-gray-700 uppercase text-sm"><i class="fa-solid fa-clock text-red-400 mr-2"></i>Aguardando Início (Na Fila)</span>
-                        <span class="font-black text-2xl text-red-400" id="chart-percent-pendente">0%</span>
+                        <span class="font-bold text-gray-700 uppercase text-sm"><i class="fa-solid fa-layer-group text-slate-500 mr-2"></i>Na Fila (Aguardando Início)</span>
+                        <span class="font-black text-2xl text-slate-500" id="chart-percent-pendente">0%</span>
                     </div>
-                    <div class="bar-bg"><div class="bar-fill bg-red-400" id="chart-bar-pendente" style="width: 0%;"></div></div>
+                    <div class="bar-bg"><div class="bar-fill bg-slate-500" id="chart-bar-pendente" style="width: 0%;"></div></div>
                 </div>
             </div>
         </div>
@@ -243,7 +219,7 @@
                 
                 <form id="project-form" class="space-y-4 flex-grow">
                     <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Qual é o nome do Projeto?</label>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nome da Demanda/Projeto</label>
                         <input type="text" id="projetoName" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none">
                     </div>
                     <div>
@@ -255,7 +231,7 @@
                         <input type="text" id="sponsorName" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Deixe uma observação</label>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Observações</label>
                         <textarea id="additionalInfo" rows="3" placeholder="Opcional..." class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none resize-none"></textarea>
                     </div>
                     <button type="submit" id="submit-btn" class="w-full bg-[#FF5722] hover:bg-[#E64A19] text-white font-bold py-4 rounded-xl transition-colors mt-6 shadow-lg">
@@ -275,27 +251,20 @@
             <button onclick="fecharModal('modal-detalhes')" class="absolute top-6 right-6 text-gray-400 hover:text-gray-800 transition-colors z-10 text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="p-8 pb-4 border-b border-gray-100">
-                <div class="flex items-center gap-2 text-[#0A1128] font-bold text-sm mb-4">
-                    <i class="fa-solid fa-circle-play text-[#FF5722]"></i> Acompanhamento <span class="text-gray-300 font-normal">|</span> do seu pedido
-                </div>
-                <h2 class="text-3xl font-extrabold text-[#0A1128] tracking-tight" id="modal-titulo">Nome do Projeto</h2>
+            <div class="p-8 pb-6 border-b border-gray-100 bg-[#0A1128] rounded-t-[24px]">
+                <p class="text-[#FF5722] font-bold text-sm mb-2 uppercase tracking-widest">Detalhes da Demanda</p>
+                <h2 class="text-3xl font-extrabold text-white tracking-tight leading-tight" id="modal-titulo">Nome do Projeto</h2>
             </div>
             
             <div class="px-8 py-6">
-                <h3 class="text-sm font-bold text-gray-400 mb-4 uppercase">Informações da Solicitação</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
                         <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-user-tag mr-1"></i> Solicitante</p>
                         <p class="font-bold text-gray-800" id="modal-sponsor">-</p>
                     </div>
                     <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
                         <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-headset mr-1"></i> Responsável (Estúdio)</p>
-                        <p class="font-bold text-gray-800" id="modal-responsavel">-</p>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
-                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-layer-group mr-1"></i> Fase Atual</p>
-                        <p class="font-bold text-[#FF5722]" id="modal-fase">-</p>
+                        <p class="font-bold text-[#1D4ED8]" id="modal-responsavel">-</p>
                     </div>
                     <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
                         <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-video mr-1"></i> Data de Gravação</p>
@@ -308,7 +277,7 @@
                 </div>
             </div>
 
-            <div class="p-8 bg-gray-50 border-t border-gray-100 rounded-b-[24px]" id="modal-area-entrega"></div>
+            <div class="p-8 bg-gray-50 border-t border-gray-100 rounded-b-[24px] flex flex-col md:flex-row gap-4 justify-center items-center" id="modal-area-entrega"></div>
         </div>
     </div>
 
@@ -319,24 +288,26 @@
         const googleAppUrl = "https://script.google.com/macros/s/AKfycbxntPEFXM6ATjyfIUHwkmBt0Ax3RvpcJYcD70N9P52BWT4-LhDP1QdxTd4s5HC5I42WJg/exec";
 
         let dadosGlobais = [];
-        let mesSelecionado = 'todos';
         let textoBuscado = '';
 
         function abrirModal(id) { document.getElementById(id).classList.add('active'); }
         function fecharModal(id) { document.getElementById(id).classList.remove('active'); }
 
+        // Normalização agressiva para nunca errar no filtro de status
         function normalizarTexto(texto) {
             return (texto || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
         }
 
+        // Lógica blindada para capturar o "Em andamento" da planilha
         function obterDadosStatus(statusTexto) {
             const txt = normalizarTexto(statusTexto);
             if(txt.includes('conclu')) return { bg: 'bg-green-500', icon: 'fa-check', label: 'Concluído' };
-            if(txt.includes('andamento')) return { bg: 'bg-yellow-500', icon: 'fa-person-digging', label: 'Em andamento' };
+            if(txt.includes('andamento') || txt.includes('edicao') || txt.includes('planejamento')) return { bg: 'bg-yellow-500', icon: 'fa-person-digging', label: 'Em andamento' };
             if(txt.includes('revisao')) return { bg: 'bg-blue-500', icon: 'fa-eye', label: 'Revisão' };
             if(txt.includes('pausado')) return { bg: 'bg-gray-800', icon: 'fa-pause', label: 'Pausado' };
-            if(txt.includes('pendente')) return { bg: 'bg-red-400', icon: 'fa-clock', label: 'Pendente' };
-            return { bg: 'bg-gray-400', icon: 'fa-circle-dot', label: statusTexto || 'Pendente' }; 
+            
+            // Tudo que não for os acima, cai na Fila
+            return { bg: 'bg-slate-500', icon: 'fa-layer-group', label: 'Na Fila' }; 
         }
 
         function atualizarIndicadores(dados) {
@@ -346,7 +317,7 @@
                 const statusInfo = obterDadosStatus(p.status);
                 if(statusInfo.label === 'Concluído') contagens.concluido++;
                 else if(statusInfo.label === 'Em andamento' || statusInfo.label === 'Revisão') contagens.andamento++;
-                else if(statusInfo.label === 'Pendente' || statusInfo.label === 'Pausado') contagens.pendente++;
+                else contagens.pendente++; // Na Fila
             });
 
             document.getElementById('count-total').textContent = contagens.total;
@@ -374,66 +345,52 @@
             const p = dadosGlobais[index];
             
             document.getElementById('modal-titulo').textContent = p.demanda;
-            document.getElementById('modal-fase').textContent = p.etapaAtual || '-';
             document.getElementById('modal-prazo').textContent = p.prazoFinal || '-';
             document.getElementById('modal-gravacao').textContent = p.dataGravacao || '-';
-            
-            // Aqui garantimos os papéis corretos
             document.getElementById('modal-sponsor').textContent = p.sponsor || '-';
             document.getElementById('modal-responsavel').textContent = p.responsavel || '-';
 
             const areaEntrega = document.getElementById('modal-area-entrega');
             
             // EXTRATOR INTELIGENTE DE LINKS
-            // Pega todo o texto da Coluna L e tenta encontrar URLs (começando com http ou https)
             const urlRegex = /(https?:\/\/[^\s]+)/g;
             const linksEncontrados = (p.linkAcesso || '').match(urlRegex) || [];
-            
-            // Limpa caso o usuário tenha digitado um "|" colado no link sem espaço
             const linksLimpos = linksEncontrados.map(l => l.replace(/\|$/, '').trim());
             
-            // Tenta identificar qual é o Jira e qual é o de Vídeo (Drive, Youtube, etc)
             const jiraLink = linksLimpos.find(l => l.includes('atlassian') || l.includes('jira'));
             const videoLink = linksLimpos.find(l => !l.includes('atlassian') && !l.includes('jira'));
 
             let botoesHtml = '';
 
-            // 1. Sempre mostra o botão do Jira se existir
+            // Botão fixo do Jira
             if(jiraLink) {
                 botoesHtml += `
-                    <a href="${jiraLink}" target="_blank" class="w-full max-w-md bg-white hover:bg-gray-100 text-[#0A1128] font-bold py-3 px-4 rounded-xl transition-colors shadow-sm border border-gray-200 flex justify-center items-center gap-2 mb-3 mx-auto">
-                        <i class="fa-brands fa-jira text-blue-600"></i> Ver Chamado Original
+                    <a href="${jiraLink}" target="_blank" class="w-full md:w-auto px-8 bg-white hover:bg-gray-100 text-[#0A1128] font-bold py-4 rounded-xl transition-colors shadow-sm border border-gray-200 flex justify-center items-center gap-2">
+                        <i class="fa-brands fa-jira text-blue-600 text-lg"></i> Acessar Chamado (Jira)
                     </a>
                 `;
             }
 
-            // 2. Lógica do Vídeo com base no status "Concluído"
+            // Lógica do Vídeo
             if(p.status.toLowerCase().includes('conclu')) {
                 if(videoLink) {
-                    // Tem vídeo final liberado!
                     botoesHtml += `
-                        <a href="${videoLink}" target="_blank" class="w-full max-w-md bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 mx-auto">
-                            <i class="fa-solid fa-play-circle text-xl"></i> Assistir Vídeo Finalizado
+                        <a href="${videoLink}" target="_blank" class="w-full md:w-auto px-8 bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+                            <i class="fa-solid fa-play-circle text-xl"></i> Assistir Vídeo Final
                         </a>
                     `;
-                } else if(jiraLink) {
-                    // Está concluído mas só tem o Jira. Como segurança, liberamos para o usuário se virar no Jira
-                    botoesHtml += `
-                        <button disabled class="w-full max-w-md bg-gray-200 text-gray-500 font-bold py-4 rounded-xl border border-gray-300 cursor-not-allowed flex justify-center items-center gap-2 mx-auto">
-                            <i class="fa-solid fa-check-double"></i> Concluído (Sem link de vídeo anexo)
-                        </button>
-                    `;
+                } else if(!jiraLink) {
+                    botoesHtml += `<p class="text-sm font-bold text-gray-400"><i class="fa-solid fa-check-double"></i> Concluído (Sem links na planilha)</p>`;
                 }
             } else {
-                // Não está concluído
                 botoesHtml += `
-                    <button disabled class="w-full max-w-md bg-gray-200 text-gray-500 font-bold py-4 rounded-xl border border-gray-300 cursor-not-allowed flex justify-center items-center gap-2 mx-auto">
-                        <i class="fa-solid fa-lock"></i> O vídeo será liberado aqui ao finalizar
+                    <button disabled class="w-full md:w-auto px-8 bg-gray-200 text-gray-500 font-bold py-4 rounded-xl border border-gray-300 cursor-not-allowed flex justify-center items-center gap-2">
+                        <i class="fa-solid fa-lock"></i> Vídeo será liberado ao concluir
                     </button>
                 `;
             }
 
-            areaEntrega.innerHTML = botoesHtml;
+            areaEntrega.innerHTML = botoesHtml || `<p class="text-sm text-gray-400">Nenhum link anexado a esta demanda.</p>`;
             abrirModal('modal-detalhes');
         }
 
@@ -442,7 +399,7 @@
             tbody.innerHTML = '';
 
             if (dadosParaRenderizar.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500 font-medium"><i class="fa-solid fa-folder-open text-gray-300 text-3xl mb-3 block"></i> Nenhum projeto encontrado com estes filtros.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500 font-medium"><i class="fa-solid fa-folder-open text-gray-300 text-3xl mb-3 block"></i> Nenhuma demanda encontrada com estes filtros.</td></tr>`;
                 return;
             }
 
@@ -476,16 +433,7 @@
                 const responsavel = normalizarTexto(projeto.responsavel);
                 const sponsor = normalizarTexto(projeto.sponsor);
                 
-                const matchTexto = demanda.includes(textoBuscado) || responsavel.includes(textoBuscado) || sponsor.includes(textoBuscado);
-                
-                let matchMes = true;
-                if (mesSelecionado !== 'todos') {
-                    const padraoMes = `/${mesSelecionado}/`; 
-                    matchMes = ((projeto.dataGravacao || '').includes(padraoMes)) || 
-                               ((projeto.prazoFinal || '').includes(padraoMes));
-                }
-                
-                return matchTexto && matchMes;
+                return demanda.includes(textoBuscado) || responsavel.includes(textoBuscado) || sponsor.includes(textoBuscado);
             });
             
             renderizarTabela(dadosFiltrados);
@@ -494,20 +442,6 @@
         document.getElementById('inputPesquisa').addEventListener('input', (e) => {
             textoBuscado = normalizarTexto(e.target.value);
             aplicarFiltros();
-        });
-
-        document.querySelectorAll('.month-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.month-btn').forEach(b => {
-                    b.classList.remove('bg-[#FF5722]', 'text-white', 'shadow-sm');
-                    b.classList.add('bg-gray-100', 'text-gray-500');
-                });
-                e.target.classList.remove('bg-gray-100', 'text-gray-500');
-                e.target.classList.add('bg-[#FF5722]', 'text-white', 'shadow-sm');
-
-                mesSelecionado = e.target.getAttribute('data-month');
-                aplicarFiltros();
-            });
         });
 
         async function carregarDemandas() {
