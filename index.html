@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acompanhamento de Solicitações | Fábrica de Conteúdo</title>
+    <title>Gestão de Demandas | Fábrica de Conteúdo</title>
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 576 512%22><path fill=%22%23FF5722%22 d=%22M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z%22/></svg>" type="image/svg+xml">
     
@@ -38,7 +38,7 @@
         .bg-card-blue { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
         .bg-card-green { background: linear-gradient(135deg, #10B981, #059669); }
         .bg-card-yellow { background: linear-gradient(135deg, #F59E0B, #D97706); }
-        .bg-card-neutral { background: linear-gradient(135deg, #64748B, #475569); } /* Cor neutra para "Na Fila" */
+        .bg-card-neutral { background: linear-gradient(135deg, #64748B, #475569); }
 
         .status-dot {
             width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
@@ -154,7 +154,7 @@
                             <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-video mr-1"></i> Data Gravação</th>
                             <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-user-tag mr-1"></i> Solicitante</th>
                             <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-headset mr-1"></i> Responsável</th>
-                            <th class="py-4 px-6 font-semibold text-center"><i class="fa-solid fa-hand-pointer mr-1"></i> Detalhes</th>
+                            <th class="py-4 px-6 font-semibold text-center"><i class="fa-solid fa-bolt mr-1"></i> Ações</th>
                         </tr>
                     </thead>
                     <tbody id="tabela-demandas" class="text-sm text-gray-700 divide-y divide-gray-50">
@@ -248,7 +248,7 @@
 
     <div id="modal-detalhes" class="modal fixed inset-0 flex items-center justify-center bg-[#0A1128]/80 p-4">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-4xl shadow-2xl relative flex flex-col">
-            <button onclick="fecharModal('modal-detalhes')" class="absolute top-6 right-6 text-gray-400 hover:text-gray-800 transition-colors z-10 text-xl">
+            <button onclick="fecharModal('modal-detalhes')" class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors z-10 text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="p-8 pb-6 border-b border-gray-100 bg-[#0A1128] rounded-t-[24px]">
@@ -267,17 +267,20 @@
                         <p class="font-bold text-[#1D4ED8]" id="modal-responsavel">-</p>
                     </div>
                     <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
-                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-video mr-1"></i> Data de Gravação</p>
-                        <p class="font-bold text-gray-800" id="modal-gravacao">-</p>
+                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-layer-group mr-1"></i> Fase Atual</p>
+                        <p class="font-bold text-[#FF5722]" id="modal-fase">-</p>
                     </div>
                     <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
                         <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-flag-checkered mr-1"></i> Prazo de Entrega</p>
                         <p class="font-bold text-gray-800" id="modal-prazo">-</p>
                     </div>
                 </div>
+
+                <div class="mt-4 bg-blue-50 p-4 rounded-xl border border-blue-100" id="modal-box-jira">
+                    </div>
             </div>
 
-            <div class="p-8 bg-gray-50 border-t border-gray-100 rounded-b-[24px] flex flex-col md:flex-row gap-4 justify-center items-center" id="modal-area-entrega"></div>
+            <div class="p-8 bg-gray-50 border-t border-gray-100 rounded-b-[24px] flex justify-center items-center" id="modal-area-entrega"></div>
         </div>
     </div>
 
@@ -349,48 +352,50 @@
             document.getElementById('modal-gravacao').textContent = p.dataGravacao || '-';
             document.getElementById('modal-sponsor').textContent = p.sponsor || '-';
             document.getElementById('modal-responsavel').textContent = p.responsavel || '-';
+            document.getElementById('modal-fase').textContent = p.etapaAtual || p.status || '-';
 
             const areaEntrega = document.getElementById('modal-area-entrega');
+            const boxJira = document.getElementById('modal-box-jira');
             
-            // EXTRATOR INTELIGENTE DE LINKS
-            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            // Extrator de Links
+            const urlRegex = /(https?:\/\/[^\s|]+)/g;
             const linksEncontrados = (p.linkAcesso || '').match(urlRegex) || [];
-            const linksLimpos = linksEncontrados.map(l => l.replace(/\|$/, '').trim());
             
-            const jiraLink = linksLimpos.find(l => l.includes('atlassian') || l.includes('jira'));
-            const videoLink = linksLimpos.find(l => !l.includes('atlassian') && !l.includes('jira'));
+            const jiraLink = linksEncontrados.find(l => l.includes('atlassian') || l.includes('jira'));
+            const videoLink = linksEncontrados.find(l => !l.includes('atlassian') && !l.includes('jira'));
 
-            let botoesHtml = '';
-
-            // Botão fixo do Jira
+            // Mostra o Jira dentro da caixa azul do modal
             if(jiraLink) {
-                botoesHtml += `
-                    <a href="${jiraLink}" target="_blank" class="w-full md:w-auto px-8 bg-white hover:bg-gray-100 text-[#0A1128] font-bold py-4 rounded-xl transition-colors shadow-sm border border-gray-200 flex justify-center items-center gap-2">
-                        <i class="fa-brands fa-jira text-blue-600 text-lg"></i> Acessar Chamado (Jira)
-                    </a>
+                boxJira.innerHTML = `
+                    <p class="text-[11px] font-bold text-blue-500 uppercase tracking-wider mb-1"><i class="fa-brands fa-jira mr-1"></i> Link do Chamado Jira</p>
+                    <a href="${jiraLink}" target="_blank" class="font-bold text-blue-700 hover:text-blue-900 underline truncate block">${jiraLink}</a>
                 `;
+                boxJira.style.display = 'block';
+            } else {
+                boxJira.style.display = 'none';
             }
 
-            // Lógica do Vídeo
+            // Lógica do Vídeo no Rodapé do Modal
+            let botoesHtml = '';
             if(p.status.toLowerCase().includes('conclu')) {
                 if(videoLink) {
-                    botoesHtml += `
-                        <a href="${videoLink}" target="_blank" class="w-full md:w-auto px-8 bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+                    botoesHtml = `
+                        <a href="${videoLink}" target="_blank" class="w-full max-w-md bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
                             <i class="fa-solid fa-play-circle text-xl"></i> Assistir Vídeo Final
                         </a>
                     `;
-                } else if(!jiraLink) {
-                    botoesHtml += `<p class="text-sm font-bold text-gray-400"><i class="fa-solid fa-check-double"></i> Concluído (Sem links na planilha)</p>`;
+                } else {
+                    botoesHtml = `<p class="text-sm font-bold text-gray-400"><i class="fa-solid fa-check-double"></i> Concluído (Nenhum link de vídeo disponibilizado na planilha)</p>`;
                 }
             } else {
-                botoesHtml += `
-                    <button disabled class="w-full md:w-auto px-8 bg-gray-200 text-gray-500 font-bold py-4 rounded-xl border border-gray-300 cursor-not-allowed flex justify-center items-center gap-2">
+                botoesHtml = `
+                    <button disabled class="w-full max-w-md bg-gray-200 text-gray-500 font-bold py-4 rounded-xl border border-gray-300 cursor-not-allowed flex justify-center items-center gap-2">
                         <i class="fa-solid fa-lock"></i> Vídeo será liberado ao concluir
                     </button>
                 `;
             }
 
-            areaEntrega.innerHTML = botoesHtml || `<p class="text-sm text-gray-400">Nenhum link anexado a esta demanda.</p>`;
+            areaEntrega.innerHTML = botoesHtml;
             abrirModal('modal-detalhes');
         }
 
@@ -399,13 +404,23 @@
             tbody.innerHTML = '';
 
             if (dadosParaRenderizar.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500 font-medium"><i class="fa-solid fa-folder-open text-gray-300 text-3xl mb-3 block"></i> Nenhuma demanda encontrada com estes filtros.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500 font-medium"><i class="fa-solid fa-folder-open text-gray-300 text-3xl mb-3 block"></i> Nenhuma demanda encontrada.</td></tr>`;
                 return;
             }
 
             dadosParaRenderizar.forEach((p) => {
                 const statusInfo = obterDadosStatus(p.status);
                 const originalIndex = dadosGlobais.indexOf(p);
+
+                // Lógica para o botão do Jira direto na Tabela
+                const urlRegex = /(https?:\/\/[^\s|]+)/g;
+                const linksEncontrados = (p.linkAcesso || '').match(urlRegex) || [];
+                const jiraLink = linksEncontrados.find(l => l.includes('atlassian') || l.includes('jira'));
+
+                let btnJiraHtml = '';
+                if(jiraLink) {
+                    btnJiraHtml = `<a href="${jiraLink}" target="_blank" onclick="event.stopPropagation()" class="w-10 h-10 rounded-full bg-blue-100 hover:bg-blue-600 hover:text-white text-blue-600 transition-colors shadow-sm flex justify-center items-center mr-2" title="Abrir Jira"><i class="fa-brands fa-jira"></i></a>`;
+                }
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-gray-50 transition-colors cursor-pointer" onclick="abrirDetalhes(${originalIndex})">
@@ -419,8 +434,9 @@
                         <td class="py-4 px-6 text-gray-600 font-semibold">${p.dataGravacao || '-'}</td>
                         <td class="py-4 px-6 text-gray-500 font-medium">${p.sponsor || '-'}</td>
                         <td class="py-4 px-6 text-[#1D4ED8] font-bold">${p.responsavel || '-'}</td>
-                        <td class="py-4 px-6 text-center border-l border-gray-50">
-                            <button class="w-10 h-10 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white text-gray-600 transition-colors shadow-sm"><i class="fa-solid fa-arrow-right"></i></button>
+                        <td class="py-4 px-6 text-center border-l border-gray-50 flex justify-center items-center">
+                            ${btnJiraHtml}
+                            <button class="w-10 h-10 rounded-full bg-[#0A1128] hover:bg-gray-800 text-white transition-colors shadow-sm flex justify-center items-center" title="Ver Detalhes"><i class="fa-solid fa-expand"></i></button>
                         </td>
                     </tr>
                 `;
