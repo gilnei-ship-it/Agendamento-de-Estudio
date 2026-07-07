@@ -33,13 +33,6 @@
             transition: transform 0.3s ease; position: relative; overflow: hidden;
         }
         .stat-card:hover { transform: translateY(-5px); }
-        .stat-card::after {
-            content: ''; position: absolute; top: -50%; right: -20%; width: 80px; height: 80px;
-            background: rgba(255,255,255,0.1); border-radius: 50%;
-        }
-        @media (min-width: 768px) {
-            .stat-card::after { width: 100px; height: 100px; }
-        }
 
         .bg-card-blue { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
         .bg-card-green { background: linear-gradient(135deg, #10B981, #059669); }
@@ -50,9 +43,6 @@
             width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
             color: white; font-size: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
-        @media (min-width: 768px) {
-            .status-dot { width: 32px; height: 32px; font-size: 14px; }
-        }
 
         .bar-bg { background: #E2E8F0; border-radius: 999px; height: 10px; width: 100%; overflow: hidden; }
         .bar-fill { height: 100%; border-radius: 999px; transition: width 0.8s ease-out; }
@@ -62,29 +52,13 @@
         .modal-content { transform: scale(0.95); transition: all 0.2s ease; max-height: 95vh; display: flex; flex-direction: column;}
         .modal.active .modal-content { transform: scale(1); }
         
-        .custom-scroll::-webkit-scrollbar { height: 4px; width: 4px; }
-        .custom-scroll::-webkit-scrollbar-track { background: #F1F5F9; border-radius: 4px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
-
-        /* Nova Linha do Tempo Estilizada */
         .timeline-container { position: relative; display: flex; justify-content: space-between; align-items: center; margin: 20px 0 10px 0; padding: 0 10px; }
         .timeline-line { position: absolute; top: 18px; left: 10px; right: 10px; height: 3px; background: #E2E8F0; z-index: 0; }
         .timeline-line-fill { position: absolute; top: 18px; left: 10px; height: 3px; background: #FF5722; z-index: 1; transition: width 0.5s ease; }
-        
         .timeline-step { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 20%; }
-        .timeline-circle { 
-            width: 36px; height: 36px; border-radius: 50%; background: #FFF; border: 3px solid #E2E8F0; 
-            display: flex; align-items: center; justify-content: center; font-size: 14px; color: #CBD5E1; transition: all 0.3s;
-        }
-        
-        /* Passos Concluídos */
+        .timeline-circle { width: 36px; height: 36px; border-radius: 50%; background: #FFF; border: 3px solid #E2E8F0; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #CBD5E1; transition: all 0.3s; }
         .timeline-step.completed .timeline-circle { background: #FF5722; border-color: #FF5722; color: white; }
-        
-        /* Passo Atual (Com o Anel Duplo Laranja) */
-        .timeline-step.active .timeline-circle { 
-            background: #FF5722; border-color: #FF5722; color: white; 
-            box-shadow: 0 0 0 3px white, 0 0 0 5px #FF5722; 
-        }
+        .timeline-step.active .timeline-circle { background: #FF5722; border-color: #FF5722; color: white; box-shadow: 0 0 0 3px white, 0 0 0 5px #FF5722; }
     </style>
 </head>
 <body class="antialiased">
@@ -117,28 +91,30 @@
                 <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-folder-open"></i></div></div>
                 <div><h3 class="text-2xl md:text-4xl font-black" id="count-total">0</h3><p class="text-[10px] md:text-sm font-semibold opacity-90 mt-1 uppercase tracking-wider leading-tight">Total Projetos</p></div>
             </div>
-            
             <div class="stat-card bg-card-green flex flex-col justify-between p-4 md:p-6">
                 <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-check-double"></i></div></div>
                 <div><h3 class="text-2xl md:text-4xl font-black" id="count-concluido">0</h3><p class="text-[10px] md:text-sm font-semibold opacity-90 mt-1 uppercase tracking-wider leading-tight">Concluídos</p></div>
             </div>
-
             <div class="stat-card bg-card-yellow flex flex-col justify-between p-4 md:p-6">
                 <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-person-digging"></i></div></div>
                 <div><h3 class="text-2xl md:text-4xl font-black" id="count-andamento">0</h3><p class="text-[10px] md:text-sm font-semibold opacity-90 mt-1 uppercase tracking-wider leading-tight">Em Andamento</p></div>
             </div>
-
             <div class="stat-card bg-card-neutral flex flex-col justify-between p-4 md:p-6">
                 <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-layer-group"></i></div></div>
                 <div><h3 class="text-2xl md:text-4xl font-black" id="count-pendente">0</h3><p class="text-[10px] md:text-sm font-semibold opacity-90 mt-1 uppercase tracking-wider leading-tight">Na Fila</p></div>
             </div>
         </div>
 
+        <div class="bg-white rounded-[16px] md:rounded-[20px] shadow-sm border border-gray-100 mb-8 p-6">
+            <h2 class="text-base md:text-lg font-bold text-gray-800 mb-4"><i class="fa-solid fa-users text-[#FF5722] mr-2"></i> Produtividade do Estúdio (Por Responsável)</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="painel-responsaveis">
+                </div>
+        </div>
+
         <div class="bg-white rounded-[16px] md:rounded-[20px] shadow-sm border border-gray-100 mb-12 overflow-hidden">
             <div class="p-4 md:p-6 border-b border-gray-100 bg-white">
                 <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
                     <h2 class="text-lg md:text-xl font-bold text-gray-800 w-full lg:w-auto text-left"><i class="fa-solid fa-calendar-check text-blue-600 mr-2"></i> Cronograma de Projetos</h2>
-                    
                     <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-3 items-center">
                         <div class="relative w-full sm:w-72 md:w-80">
                             <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
@@ -214,82 +190,37 @@
     <div id="modal-detalhes" class="modal fixed inset-0 flex items-center justify-center bg-[#0A1128]/80">
         <div class="modal-content bg-white rounded-[20px] md:rounded-[24px] w-full max-w-4xl shadow-2xl relative flex flex-col max-h-[90vh]">
             <button onclick="fecharModal('modal-detalhes')" class="absolute top-4 right-4 md:top-6 md:right-6 text-gray-400 hover:text-white transition-colors z-10 text-lg md:text-xl"><i class="fa-solid fa-xmark"></i></button>
-            
-            <div class="p-6 md:p-8 pb-4 md:pb-6 bg-[#0A1128] rounded-t-[20px] md:rounded-t-[24px] shrink-0">
+            <div class="p-5 md:p-8 pb-4 md:pb-6 bg-[#0A1128] rounded-t-[20px] md:rounded-t-[24px] shrink-0">
                 <p class="text-[#FF5722] font-bold text-[10px] md:text-xs mb-1 md:mb-2 uppercase tracking-widest">Detalhes da Demanda / Projeto</p>
                 <h2 class="text-xl md:text-3xl font-extrabold text-white tracking-tight leading-tight pr-6" id="modal-titulo">Nome do Projeto</h2>
             </div>
-            
             <div class="px-6 md:px-8 py-6 overflow-y-auto custom-scroll">
-                
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
-                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center">
-                        <p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-user-tag mr-1"></i> Solicitante</p>
-                        <p class="font-bold text-gray-800 text-sm md:text-base truncate w-full" id="modal-sponsor">-</p>
-                    </div>
-                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center">
-                        <p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-headset mr-1"></i> Responsável</p>
-                        <p class="font-bold text-blue-600 text-sm md:text-base truncate w-full" id="modal-responsavel">-</p>
-                    </div>
-                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center">
-                        <p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-stamp mr-1"></i> Aprovador</p>
-                        <p class="font-bold text-gray-800 text-sm md:text-base truncate w-full" id="modal-aprovador">-</p>
-                    </div>
-                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center">
-                        <p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-flag-checkered mr-1"></i> Prazo Final</p>
-                        <p class="font-bold text-[#FF5722] text-sm md:text-base" id="modal-prazo">-</p>
-                    </div>
-                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center">
-                        <p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-calendar-plus mr-1"></i> Recebido em</p>
-                        <p class="font-bold text-gray-800 text-sm md:text-base" id="modal-recebimento">-</p>
-                    </div>
-                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center">
-                        <p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-video mr-1"></i> Gravação</p>
-                        <p class="font-bold text-gray-800 text-sm md:text-base" id="modal-gravacao">-</p>
-                    </div>
-                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center md:col-span-2">
-                        <p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-users mr-1"></i> Colaborador</p>
-                        <p class="font-bold text-gray-800 text-sm md:text-base truncate w-full" id="modal-colaborador">-</p>
-                    </div>
+                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center"><p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-user-tag mr-1"></i> Solicitante</p><p class="font-bold text-gray-800 text-sm md:text-base truncate w-full" id="modal-sponsor">-</p></div>
+                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center"><p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-headset mr-1"></i> Responsável</p><p class="font-bold text-blue-600 text-sm md:text-base truncate w-full" id="modal-responsavel">-</p></div>
+                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center"><p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-stamp mr-1"></i> Aprovador</p><p class="font-bold text-gray-800 text-sm md:text-base truncate w-full" id="modal-aprovador">-</p></div>
+                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center"><p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-flag-checkered mr-1"></i> Prazo Final</p><p class="font-bold text-[#FF5722] text-sm md:text-base" id="modal-prazo">-</p></div>
+                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center"><p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-calendar-plus mr-1"></i> Recebido em</p><p class="font-bold text-gray-800 text-sm md:text-base" id="modal-recebimento">-</p></div>
+                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center"><p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-video mr-1"></i> Gravação</p><p class="font-bold text-gray-800 text-sm md:text-base" id="modal-gravacao">-</p></div>
+                    <div class="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 flex flex-col justify-center md:col-span-2"><p class="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-users mr-1"></i> Colaborador</p><p class="font-bold text-gray-800 text-sm md:text-base truncate w-full" id="modal-colaborador">-</p></div>
                 </div>
-
-                <div class="bg-white p-4 md:p-5 rounded-xl border border-blue-100 shadow-sm mb-8">
-                    <p class="text-[10px] md:text-[11px] font-bold text-blue-600 uppercase tracking-wider mb-2"><i class="fa-solid fa-align-left mr-1"></i> Observações da Demanda</p>
-                    <p class="text-sm text-gray-600 font-medium" id="modal-observacoes">Nenhuma observação informada.</p>
-                </div>
-
+                <div class="bg-white p-4 md:p-5 rounded-xl border border-blue-100 shadow-sm mb-8"><p class="text-[10px] md:text-[11px] font-bold text-blue-600 uppercase tracking-wider mb-2"><i class="fa-solid fa-align-left mr-1"></i> Observações da Demanda</p><p class="text-sm text-gray-600 font-medium" id="modal-observacoes">Nenhuma observação informada.</p></div>
                 <h3 class="text-xs md:text-sm font-bold text-gray-400 mb-6 uppercase text-center tracking-widest">Acompanhamento do Processo</h3>
                 <div class="timeline-container pb-4">
-                    <div class="timeline-line"></div>
-                    <div class="timeline-line-fill" id="timeline-progress" style="width: 0%;"></div>
-                    
-                    <div class="timeline-step step-1">
-                        <div class="timeline-circle"><i class="fa-solid fa-inbox"></i></div>
-                    </div>
-                    <div class="timeline-step step-2">
-                        <div class="timeline-circle"><i class="fa-regular fa-calendar-check"></i></div>
-                    </div>
-                    <div class="timeline-step step-3">
-                        <div class="timeline-circle"><i class="fa-solid fa-video"></i></div>
-                    </div>
-                    <div class="timeline-step step-4">
-                        <div class="timeline-circle"><i class="fa-solid fa-laptop-file"></i></div>
-                    </div>
-                    <div class="timeline-step step-5">
-                        <div class="timeline-circle"><i class="fa-solid fa-check-double"></i></div>
-                    </div>
+                    <div class="timeline-line"></div><div class="timeline-line-fill" id="timeline-progress" style="width: 0%;"></div>
+                    <div class="timeline-step step-1"><div class="timeline-circle"><i class="fa-solid fa-inbox"></i></div></div>
+                    <div class="timeline-step step-2"><div class="timeline-circle"><i class="fa-regular fa-calendar-check"></i></div></div>
+                    <div class="timeline-step step-3"><div class="timeline-circle"><i class="fa-solid fa-video"></i></div></div>
+                    <div class="timeline-step step-4"><div class="timeline-circle"><i class="fa-solid fa-laptop-file"></i></div></div>
+                    <div class="timeline-step step-5"><div class="timeline-circle"><i class="fa-solid fa-check-double"></i></div></div>
                 </div>
             </div>
-            
-            <div class="p-6 md:p-8 bg-white border-t border-gray-100 rounded-b-[20px] md:rounded-b-[24px] flex flex-col sm:flex-row gap-4 justify-center items-center shrink-0" id="modal-area-entrega"></div>
+            <div class="p-5 md:p-8 bg-gray-50 border-t border-gray-100 rounded-b-[20px] md:rounded-b-[24px] flex flex-col sm:flex-row gap-4 justify-center items-center shrink-0" id="modal-area-entrega"></div>
         </div>
     </div>
 
     <script>
-        // ====================================================================================
-        // ATENÇÃO: COLE A URL DO APPS SCRIPT ABAIXO
-        // ====================================================================================
-        const googleAppUrl = "https://script.google.com/macros/s/AKfycbxntPEFXM6ATjyfIUHwkmBt0Ax3RvpcJYcD70N9P52BWT4-LhDP1QdxTd4s5HC5I42WJg/exec";
+        const googleAppUrl = "https://script.google.com/macros/s/AKfycbyh9nCwfuvhBjzuopA6s9qzZdgoR41jQX1Ws-qKPdzsh2OW4f_PPSUt66_-3qUOTfoDEg/exec";
 
         let dadosGlobais = [];
         let textoBuscado = '';
@@ -318,7 +249,7 @@
         function ordernarProjetos(dados) {
             return dados.sort((a, b) => {
                 const statusA = obterDadosStatus(a.status, a.etapaAtual).step;
-                const statusB = obterDadosStatus(b.status, b.etapaAtual).step;
+                const statusB = obterDadosStatus(b.status, b.etener).step;
                 const prioridade = { 4: 1, 3: 2, 2: 3, 1: 4, 5: 5 };
                 return (prioridade[statusA] || 9) - (prioridade[statusB] || 9);
             });
@@ -340,6 +271,42 @@
             };
         }
 
+        // NOVO: Constrói a visão estratégica individual de desempenho dos integrantes do estúdio
+        function construirPainelGerencial(dados) {
+            const container = document.getElementById('painel-responsaveis');
+            container.innerHTML = '';
+            
+            let resumo = {};
+            dados.forEach(p => {
+                let resp = (p.responsavel || '').trim();
+                if(!resp || resp === '-' || resp.toLowerCase() === 'a combinar') return;
+                
+                if(!resumo[resp]) {
+                    resumo[resp] = { total: 0, concluido: 0, andamento: 0 };
+                }
+                
+                resumo[resp].total++;
+                const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
+                if(statusInfo.label === 'Concluído') resumo[resp].concluido++;
+                else if(statusInfo.label === 'Em andamento' || statusInfo.label === 'Revisão') resumo[resp].andamento++;
+            });
+
+            for (let pessoa in resumo) {
+                container.innerHTML += `
+                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-xl shadow-sm">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-gray-800 text-sm md:text-base"><i class="fa-solid fa-user text-blue-500 mr-2"></i>${pessoa}</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-0.5 rounded-full">${resumo[pessoa].total} Total</span>
+                        </div>
+                        <div class="flex gap-4 text-xs font-medium text-gray-500">
+                            <div><span class="text-green-600 font-bold">${resumo[pessoa].concluido}</span> Entregues</div>
+                            <div><span class="text-yellow-600 font-bold">${resumo[pessoa].andamento}</span> Produzindo</div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
         function atualizarIndicadores(dados) {
             let contagens = { total: dados.length, concluido: 0, andamento: 0, pendente: 0 };
             dados.forEach((p) => {
@@ -359,11 +326,9 @@
             document.getElementById('chart-percent-andamento').textContent = Math.round((contagens.andamento / total) * 100) + '%';
             document.getElementById('chart-percent-pendente').textContent = Math.round((contagens.pendente / total) * 100) + '%';
             
-            setTimeout(() => {
-                document.getElementById('chart-bar-concluido').style.width = Math.round((contagens.concluido / total) * 100) + '%';
-                document.getElementById('chart-bar-andamento').style.width = Math.round((contagens.andamento / total) * 100) + '%';
-                document.getElementById('chart-bar-pendente').style.width = Math.round((contagens.pendente / total) * 100) + '%';
-            }, 50);
+            document.getElementById('chart-bar-concluido').style.width = Math.round((contagens.concluido / total) * 100) + '%';
+            document.getElementById('chart-bar-andamento').style.width = Math.round((contagens.andamento / total) * 100) + '%';
+            document.getElementById('chart-bar-pendente').style.width = Math.round((contagens.pendente / total) * 100) + '%';
         }
 
         function abrirDetalhes(index) {
@@ -381,7 +346,6 @@
             document.getElementById('modal-recebimento').textContent = p.dataRecebimento || '-';
             document.getElementById('modal-observacoes').textContent = infosLink.obs;
 
-            // Atualiza Timeline
             const stepIndex = statusInfo.step;
             document.getElementById('timeline-progress').style.width = `${((stepIndex - 1) / 4) * 100}%`;
 
@@ -392,7 +356,6 @@
                 if(i === stepIndex) el.classList.add('active');
             }
             
-            // Área de Botões (Rodapé)
             const areaEntrega = document.getElementById('modal-area-entrega');
             let botoesHtml = '';
             
@@ -480,8 +443,11 @@
             try {
                 const response = await fetch(googleAppUrl);
                 dadosGlobais = await response.json();
+                
                 atualizarIndicadores(dadosGlobais);
+                construirPainelGerencial(dadosGlobais); // Constrói a visão estratégica por nomes
                 aplicarFiltros(); 
+                
                 document.getElementById('loading-screen').classList.add('loader-hidden');
             } catch(e) {
                 document.getElementById('tabela-demandas').innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500 font-bold"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Erro ao conectar com o banco de dados.</td></tr>';
