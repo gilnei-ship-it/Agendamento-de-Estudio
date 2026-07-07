@@ -3,75 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fábrica de Conteúdo | Unibrisa Brisanet</title>
+    <title>Acompanhamento de Solicitações | Fábrica de Conteúdo</title>
     
-    <!-- Metadados de Compartilhamento Estratégico -->
-    <meta property="og:title" content="Agendamento - Fábrica de Conteúdo | Unibrisa Brisanet">
-    <meta property="og:description" content="Sistema oficial para agendamento de gravações no estúdio. Insira os dados do projeto para liberar a agenda.">
-    <meta property="og:type" content="website">
+    <link rel="icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/video.svg" type="image/svg+xml">
     
-    <!-- Favicon Profissional -->
-    <link rel="icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/clapperboard.svg" type="image/svg+xml">
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['Montserrat', 'sans-serif'] },
                     colors: {
                         brand: {
-                            bg: '#f4f4f6',
-                            blue: '#142cc6',
-                            orange: '#ff7700',
-                            orangeDark: '#e66b00',
-                            orangeLight: '#ff9e40',
-                            textDark: '#1e1e1e',
-                            textGray: '#555555'
-                        }
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'float-1': 'float1 10s ease-in-out infinite',
-                        'float-2': 'float2 12s ease-in-out infinite',
-                        'pulse-glow': 'pulseGlow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'scanline': 'scanline 3s linear infinite',
-                        'shimmer': 'shimmer 2.5s linear infinite',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(40px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        float1: {
-                            '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
-                            '50%': { transform: 'translate(-20px, 30px) scale(1.05)' },
-                        },
-                        float2: {
-                            '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
-                            '50%': { transform: 'translate(30px, -20px) scale(1.08)' },
-                        },
-                        pulseGlow: {
-                            '0%, 100%': { opacity: '1', transform: 'scale(1)', boxShadow: '0 0 15px rgba(20, 44, 198, 0.3)' },
-                            '50%': { opacity: '.9', transform: 'scale(1.02)', boxShadow: '0 0 30px rgba(20, 44, 198, 0.6), 0 0 10px rgba(255, 119, 0, 0.4) inset' },
-                        },
-                        scanline: {
-                            '0%': { transform: 'translateY(-100%)' },
-                            '100%': { transform: 'translateY(100%)' },
-                        },
-                        shimmer: {
-                            '0%': { backgroundPosition: '200% center' },
-                            '100%': { backgroundPosition: '-200% center' },
+                            navy: '#0A1128',
+                            blue: '#1D4ED8',
+                            orange: '#FF5722',
+                            green: '#10B981',
+                            yellow: '#F59E0B',
+                            bg: '#F3F4F6'
                         }
                     }
                 }
@@ -80,400 +32,427 @@
     </script>
 
     <style>
-        body {
-            background-color: #f4f4f6;
-            min-height: 100vh;
-            color: #1e1e1e;
-        }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(20, 44, 198, 0.1);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255,255,255,1);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-panel:hover {
-            border-color: rgba(255, 119, 0, 0.3);
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08), 0 0 20px rgba(255, 119, 0, 0.05);
-        }
-
-        .input-field {
-            background: #ffffff;
-            border: 1px solid #d1d5db;
-            color: #1e1e1e;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
-        }
-
-        .input-field:focus {
-            border-color: #142cc6;
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(20, 44, 198, 0.1);
-            outline: none;
-        }
+        body { font-family: 'Montserrat', sans-serif; background-color: #F8FAFC; color: #1E293B; overflow-x: hidden; }
         
-        .input-field::placeholder { color: #9ca3af; }
+        /* Tela de Carregamento Inicial (Splash Screen) */
+        #loading-screen { transition: opacity 0.8s ease, visibility 0.8s; }
+        .loader-hidden { opacity: 0; visibility: hidden; }
 
-        .calendar-locked {
-            filter: blur(8px) grayscale(40%) brightness(0.9);
-            pointer-events: none;
-            opacity: 0.8;
-            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-            transform: scale(0.99);
+        /* Cabeçalho Curvado */
+        .header-bg {
+            background-color: #0A1128;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            padding-bottom: 6.5rem;
         }
 
-        .calendar-unlocked {
-            filter: blur(0px) grayscale(0%) brightness(1);
-            pointer-events: auto;
-            opacity: 1;
-            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-            transform: scale(1);
+        /* Cartões Flutuantes */
+        .stat-card {
+            border-radius: 16px; padding: 24px; color: white;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease; position: relative; overflow: hidden;
+        }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-card::after {
+            content: ''; position: absolute; top: -50%; right: -20%; width: 100px; height: 100px;
+            background: rgba(255,255,255,0.1); border-radius: 50%;
         }
 
-        .lock-container::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(transparent, rgba(20, 44, 198, 0.05), transparent);
-            height: 15px;
-            width: 100%;
-            animation: scanline 3s linear infinite;
-            z-index: 25;
-            pointer-events: none;
+        /* Cores dos Cartões */
+        .bg-card-blue { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
+        .bg-card-green { background: linear-gradient(135deg, #10B981, #059669); }
+        .bg-card-yellow { background: linear-gradient(135deg, #F59E0B, #D97706); }
+        .bg-card-red { background: linear-gradient(135deg, #EF4444, #DC2626); }
+
+        /* Ícone de Status Circular */
+        .status-dot {
+            width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            color: white; font-size: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f4f4f6; }
-        ::-webkit-scrollbar-thumb { background: #142cc6; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ff7700; }
+        /* Barras Animadas do Resumo */
+        .bar-bg { background: #E2E8F0; border-radius: 999px; height: 12px; width: 100%; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 999px; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        .modal { opacity: 0; pointer-events: none; transition: all 0.3s ease; backdrop-filter: blur(5px); z-index: 100; }
+        .modal.active { opacity: 1; pointer-events: auto; }
+        .modal-content { transform: scale(0.95); transition: all 0.3s ease; }
+        .modal.active .modal-content { transform: scale(1); }
     </style>
 </head>
-<body class="antialiased selection:bg-brand-orange selection:text-white pb-12 overflow-x-hidden relative pl-4 md:pl-8">
+<body class="antialiased">
 
-    <!-- Borda Lateral Azul Corporativo -->
-    <div class="fixed left-0 top-0 bottom-0 w-3 md:w-6 bg-brand-blue z-50 shadow-[4px_0_15px_rgba(20,44,198,0.3)]"></div>
-
-    <!-- Fundo Imersivo Animado com Tons Claros -->
-    <div class="fixed inset-0 w-full h-full pointer-events-none z-[-1] overflow-hidden bg-brand-bg">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMCwwLDAsMC4wMikiLz48L3N2Zz4=')] opacity-50"></div>
-        <div class="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-brand-orange rounded-full mix-blend-multiply filter blur-[120px] opacity-10 animate-float-1"></div>
-        <div class="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-brand-blue rounded-full mix-blend-multiply filter blur-[140px] opacity-[0.08] animate-float-2"></div>
-    </div>
-
-    <!-- Notificação Flutuante (Toast) -->
-    <div id="toast" class="fixed top-8 left-1/2 transform -translate-x-1/2 bg-white border-l-4 border-green-500 px-6 py-4 rounded-xl shadow-2xl z-50 flex items-center gap-4 opacity-0 translate-y-[-20px] transition-all duration-500 pointer-events-none">
-        <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-green-500">
-            <i class="fa-solid fa-check-circle text-xl"></i>
-        </div>
-        <div>
-            <p class="font-bold text-gray-800" id="toast-title">Dados Enviados!</p>
-            <p class="text-sm text-gray-500" id="toast-desc">O projeto foi registado na planilha com sucesso.</p>
+    <div id="loading-screen" class="fixed inset-0 bg-[#0A1128] z-[9999] flex flex-col items-center justify-center">
+        <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-32 md:h-48 object-contain filter brightness-0 invert mb-8 animate-pulse">
+        <div class="flex flex-col items-center gap-3">
+            <i class="fa-solid fa-circle-notch fa-spin text-[#FF5722] text-3xl"></i>
+            <span class="text-gray-300 font-semibold tracking-widest uppercase text-sm mt-2">Sincronizando com a base de dados...</span>
         </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 relative">
-        
-        <!-- Logo e Cabeçalho -->
-        <header class="mb-10 md:mb-16 opacity-0 animate-fade-in-up relative z-10 flex flex-col items-center text-center">
-            <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Unibrisa Brisanet" class="h-16 md:h-24 object-contain drop-shadow-sm mb-4">
-            <p class="text-brand-textGray text-base md:text-lg max-w-2xl font-medium leading-relaxed">
-                Portal oficial para agendamento do estúdio. Registre os dados do seu projeto para liberar o calendário.
-            </p>
-        </header>
-
-        <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 mb-12 items-start z-10 relative">
+    <div class="header-bg pt-8 px-4 sm:px-8 relative">
+        <div class="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+                <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-20 md:h-28 object-contain filter brightness-0 invert drop-shadow-md">
+                <div class="w-px h-12 bg-gray-600/50 hidden sm:block"></div>
+                <span class="text-white text-lg font-bold tracking-wide hidden sm:block"><i class="fa-solid fa-video text-[#FF5722] mr-2"></i>Área do Solicitante</span>
+            </div>
             
-            <!-- COLUNA ESQUERDA: Formulário -->
-            <div class="xl:col-span-4 opacity-0 animate-fade-in-up delay-100 xl:sticky xl:top-8 mb-8 xl:mb-0">
-                
-                <div class="glass-panel rounded-3xl p-1 relative">
-                    <div class="bg-white/60 backdrop-blur-xl rounded-[26px] p-6 h-full relative z-10 border border-white">
-                        <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
-                            <div class="flex items-center gap-3">
-                                <span class="flex items-center justify-center w-8 h-8 rounded-full bg-brand-blue text-white font-bold text-sm shadow-md shadow-brand-blue/30">1</span>
-                                <h3 class="text-xl font-bold text-gray-800 tracking-tight">Dados Iniciais</h3>
-                            </div>
-                        </div>
-
-                        <form id="project-form" class="space-y-5">
-                            
-                            <div class="relative group">
-                                <label class="block text-xs font-bold text-brand-blue uppercase tracking-wider mb-1.5 ml-1">Nome Estratégico</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-brand-orange transition-colors">
-                                        <i class="fa-solid fa-bullseye"></i>
-                                    </div>
-                                    <input type="text" id="videoName" required placeholder="Ex: Campanha Q3..." class="input-field w-full pl-11 pr-4 py-3 rounded-xl font-medium">
-                                </div>
-                            </div>
-
-                            <div class="relative group">
-                                <label class="block text-xs font-bold text-brand-blue uppercase tracking-wider mb-1.5 ml-1">Link do Chamado</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-blue-500 transition-colors">
-                                        <i class="fa-brands fa-jira"></i>
-                                    </div>
-                                    <input type="url" id="jiraLink" required placeholder="https://jira.empresa.com/..." class="input-field w-full pl-11 pr-4 py-3 rounded-xl font-medium">
-                                </div>
-                            </div>
-
-                            <div class="relative group">
-                                <label class="block text-xs font-bold text-brand-blue uppercase tracking-wider mb-1.5 ml-1">Sponsor do Projeto</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-brand-orange transition-colors">
-                                        <i class="fa-solid fa-diagram-project"></i>
-                                    </div>
-                                    <input type="text" id="sponsorName" required placeholder="Nome do Líder/Área..." class="input-field w-full pl-11 pr-4 py-3 rounded-xl font-medium">
-                                </div>
-                            </div>
-
-                            <!-- NOVO CAMPO: Informações Adicionais -->
-                            <div class="relative group">
-                                <label class="block text-xs font-bold text-brand-blue uppercase tracking-wider mb-1.5 ml-1">Informações Adicionais (Opcional)</label>
-                                <div class="relative">
-                                    <div class="absolute top-3 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-brand-orange transition-colors">
-                                        <i class="fa-solid fa-align-left"></i>
-                                    </div>
-                                    <textarea id="additionalInfo" rows="3" placeholder="Detalhes sobre equipamentos, roteiro, etc..." class="input-field w-full pl-11 pr-4 py-3 rounded-xl font-medium resize-none"></textarea>
-                                </div>
-                            </div>
-
-                            <button type="submit" id="submit-btn" class="w-full relative group overflow-hidden rounded-xl mt-6 shadow-lg shadow-brand-orange/30 hover:shadow-brand-orange/50 transition-shadow">
-                                <span class="absolute inset-0 bg-gradient-to-r from-brand-orange via-brand-orangeLight to-brand-orangeDark bg-[length:200%_auto] animate-shimmer"></span>
-                                <div class="relative px-6 py-3.5 transition-all duration-300 flex items-center justify-center gap-3">
-                                    <i id="btn-icon" class="fa-solid fa-paper-plane text-white"></i>
-                                    <span id="btn-text" class="font-bold text-white text-base tracking-wide uppercase">Enviar Dados & Agendar</span>
-                                </div>
-                            </button>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- COLUNA DIREITA: Agenda Google -->
-            <div class="xl:col-span-8 opacity-0 animate-fade-in-up delay-200" id="calendar-section">
-                <div class="relative h-full flex flex-col">
-                    <div class="flex items-center gap-4 mb-6 px-2 transition-all duration-700" id="step2-header">
-                        <span class="flex items-center justify-center w-8 h-8 rounded-full border-2 border-gray-300 text-gray-400 font-bold text-sm bg-white" id="step2-badge">2</span>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-600" id="step2-title">Escolha o Horário</h3>
-                            <p class="text-sm text-gray-500 font-medium" id="step2-desc">Aguardando o envio dos dados do projeto...</p>
-                        </div>
-                    </div>
-
-                    <div class="relative flex-grow">
-                        <!-- Overlay Lock Claro -->
-                        <div id="lock-overlay" class="lock-container absolute inset-0 z-20 flex flex-col items-center justify-center bg-white/80 backdrop-blur-md rounded-3xl border border-gray-200 transition-all duration-700 overflow-hidden shadow-sm">
-                            <div class="relative z-10 flex flex-col items-center p-8 text-center">
-                                <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center border border-gray-200 mb-5 shadow-xl shadow-brand-blue/10 animate-pulse-glow">
-                                    <i class="fa-solid fa-lock text-3xl text-brand-blue"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold text-gray-800 mb-2">Agenda Bloqueada</h3>
-                                <p class="text-gray-500 max-w-sm text-base">
-                                    Preencha os dados estratégicos ao lado e clique em Enviar para visualizar a disponibilidade do estúdio.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="glass-panel rounded-3xl p-1 md:p-2 shadow-2xl shadow-blue-900/5 relative z-10 calendar-locked h-full" id="calendar-container">
-                            <div class="w-full bg-white rounded-[20px] overflow-hidden relative shadow-inner h-full min-h-[700px] border-[4px] border-white">
-                                <iframe 
-                                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0ZxXo16zADmQ5cZDtfMXCUb3stCgT46ety0XOExviZh8sRXPMquIK5-EvClrxsqt4EzpRBWPcs?gv=true" 
-                                    title="Agendamento Google Calendar"
-                                    class="w-full h-full border-none absolute inset-0 bg-white"
-                                ></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <button onclick="abrirModal('modal-indicadores')" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm py-2.5 px-6 rounded-full transition-all flex items-center gap-2 backdrop-blur-sm shadow-lg whitespace-nowrap">
+                <i class="fa-solid fa-chart-pie text-[#FF5722]"></i> Como estamos indo?
+            </button>
         </div>
 
-        <!-- Rodapé -->
-        <footer class="mt-20 mb-8 text-center opacity-0 animate-fade-in-up delay-300 relative z-10">
-            <div class="w-32 h-1 bg-gradient-to-r from-transparent via-brand-blue/30 to-transparent mx-auto mb-6"></div>
-            <p class="text-gray-500 text-sm font-semibold uppercase tracking-widest">
-                &copy; <span id="year"></span> Fábrica de Conteúdo <span class="text-brand-orange mx-1">|</span> Unibrisa Brisanet
-            </p>
-        </footer>
+        <div class="max-w-[1200px] mx-auto mt-10 flex items-center gap-4">
+            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight">Fábrica de<br>Conteúdo</h1>
+        </div>
+    </div>
 
+    <main class="max-w-[1200px] mx-auto px-4 sm:px-8 relative z-10">
+        
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 -mt-16 mb-12">
+            <div class="stat-card bg-card-blue flex flex-col justify-between">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-list-check"></i></div>
+                </div>
+                <div>
+                    <h3 class="text-4xl font-black" id="count-total">0</h3>
+                    <p class="text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Pedidos Totais</p>
+                </div>
+            </div>
+            
+            <div class="stat-card bg-card-green flex flex-col justify-between">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-check-double"></i></div>
+                </div>
+                <div>
+                    <h3 class="text-4xl font-black" id="count-concluido">0</h3>
+                    <p class="text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Concluídos</p>
+                </div>
+            </div>
+
+            <div class="stat-card bg-card-yellow flex flex-col justify-between">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-person-digging"></i></div>
+                </div>
+                <div>
+                    <h3 class="text-4xl font-black" id="count-andamento">0</h3>
+                    <p class="text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Em Andamento</p>
+                </div>
+            </div>
+
+            <div class="stat-card bg-card-red flex flex-col justify-between">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-clock"></i></div>
+                </div>
+                <div>
+                    <h3 class="text-4xl font-black" id="count-pendente">0</h3>
+                    <p class="text-sm font-semibold opacity-90 mt-1 uppercase tracking-wide">Na Fila (Pendentes)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-[20px] shadow-sm border border-gray-100 mb-12 overflow-hidden">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-white flex-wrap gap-4">
+                <h2 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-clipboard-list text-blue-600 mr-2"></i> Acompanhamento de Solicitações para a Fábrica de Conteúdo</h2>
+                
+                <button onclick="abrirModal('modal-novo')" class="bg-[#0A1128] hover:bg-gray-800 text-white text-sm font-bold py-2.5 px-6 rounded-full transition-colors flex items-center gap-2 shadow-md whitespace-nowrap">
+                    <i class="fa-solid fa-video text-[#FF5722]"></i> Agendar Gravação
+                </button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse whitespace-nowrap">
+                    <thead>
+                        <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider border-b border-gray-100">
+                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-file-signature mr-1"></i> Nome do Projeto</th>
+                            <th class="py-4 px-6 font-semibold text-center"><i class="fa-solid fa-traffic-light mr-1"></i> Onde estamos?</th>
+                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-flag-checkered mr-1"></i> Prazo Final</th>
+                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-user mr-1"></i> Responsável</th>
+                            <th class="py-4 px-6 font-semibold text-center"><i class="fa-solid fa-hand-pointer mr-1"></i> Detalhes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-demandas" class="text-sm text-gray-700 divide-y divide-gray-50">
+                        <tr><td colspan="5" class="p-8 text-center text-gray-400"><i class="fa-solid fa-spinner fa-spin mr-2 text-2xl"></i></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
 
-    <!-- FIREBASE SDK & LÓGICA DO FORMULÁRIO -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    <div id="modal-indicadores" class="modal fixed inset-0 flex items-center justify-center bg-[#0A1128]/90 p-4">
+        <div class="modal-content bg-white rounded-[24px] w-full max-w-3xl shadow-2xl relative p-8">
+            <button onclick="fecharModal('modal-indicadores')" class="absolute top-6 right-6 w-10 h-10 bg-gray-100 rounded-full text-gray-500 hover:bg-gray-200 transition-colors flex items-center justify-center z-10">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
 
-        document.getElementById('year').textContent = new Date().getFullYear();
+            <div class="mb-8 border-b border-gray-100 pb-4">
+                <h2 class="text-3xl font-black text-[#0A1128] flex items-center gap-3">
+                    <i class="fa-solid fa-handshake-angle text-[#FF5722]"></i> Resumo do Nosso Trabalho
+                </h2>
+                <p class="text-gray-500 mt-2 font-medium">Acompanhe como está o andamento das solicitações que chegam para a nossa equipe.</p>
+            </div>
 
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        
-        let app, auth, db, currentUser = null;
+            <div class="space-y-8">
+                <div>
+                    <div class="flex justify-between items-end mb-2">
+                        <span class="font-bold text-gray-700 uppercase text-sm"><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>Projetos Concluídos e Entregues</span>
+                        <span class="font-black text-2xl text-green-500" id="chart-percent-concluido">0%</span>
+                    </div>
+                    <div class="bar-bg"><div class="bar-fill bg-green-500" id="chart-bar-concluido" style="width: 0%;"></div></div>
+                </div>
 
-        try {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
+                <div>
+                    <div class="flex justify-between items-end mb-2">
+                        <span class="font-bold text-gray-700 uppercase text-sm"><i class="fa-solid fa-person-digging text-yellow-500 mr-2"></i>Trabalhos em Andamento / Revisão</span>
+                        <span class="font-black text-2xl text-yellow-500" id="chart-percent-andamento">0%</span>
+                    </div>
+                    <div class="bar-bg"><div class="bar-fill bg-yellow-500" id="chart-bar-andamento" style="width: 0%;"></div></div>
+                </div>
 
-            const initAuth = async () => {
-                try {
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                } catch(e) {
-                    console.warn("Modo de visualização local");
-                }
-            };
-            initAuth();
+                <div>
+                    <div class="flex justify-between items-end mb-2">
+                        <span class="font-bold text-gray-700 uppercase text-sm"><i class="fa-solid fa-clock text-red-400 mr-2"></i>Aguardando Início (Na Fila)</span>
+                        <span class="font-black text-2xl text-red-400" id="chart-percent-pendente">0%</span>
+                    </div>
+                    <div class="bar-bg"><div class="bar-fill bg-red-400" id="chart-bar-pendente" style="width: 0%;"></div></div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-gray-50 p-4 rounded-xl border border-gray-200 flex items-center gap-4">
+                <i class="fa-solid fa-face-smile text-2xl text-blue-600"></i>
+                <p class="text-sm text-gray-600 font-medium">Estes números são atualizados automaticamente sempre que vocês agendam uma gravação ou quando nossa equipe finaliza um trabalho!</p>
+            </div>
+        </div>
+    </div>
 
-            onAuthStateChanged(auth, (user) => { currentUser = user; });
-        } catch(error) {
-            console.error("Erro inicialização:", error);
+    <div id="modal-novo" class="modal fixed inset-0 flex items-center justify-center bg-[#0A1128]/90 p-4">
+        <div class="modal-content bg-white rounded-[24px] w-full max-w-5xl h-[85vh] shadow-2xl relative flex flex-col md:flex-row overflow-hidden">
+            <button onclick="fecharModal('modal-novo')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 z-20 hover:bg-gray-200">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            
+            <div class="w-full md:w-1/3 p-8 bg-gray-50 flex flex-col overflow-y-auto border-r border-gray-200">
+                <h3 class="text-2xl font-black text-[#0A1128] mb-6 leading-tight">
+                    <i class="fa-solid fa-video text-[#FF5722] mr-2"></i> Agendar Gravação
+                    <span class="block text-sm font-medium text-gray-500 mt-1">No Estúdio ou Externa</span>
+                </h3>
+                
+                <form id="project-form" class="space-y-4 flex-grow">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Qual é o nome do Projeto?</label>
+                        <input type="text" id="projetoName" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Link do Chamado (Jira)</label>
+                        <input type="url" id="jiraLink" required placeholder="https://" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Quem está pedindo? (Nome/Área)</label>
+                        <input type="text" id="sponsorName" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Deixe uma observação</label>
+                        <textarea id="additionalInfo" rows="3" placeholder="Opcional..." class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-[#FF5722] outline-none resize-none"></textarea>
+                    </div>
+                    <button type="submit" id="submit-btn" class="w-full bg-[#FF5722] hover:bg-[#E64A19] text-white font-bold py-4 rounded-xl transition-colors mt-6 shadow-lg">
+                        <i class="fa-solid fa-calendar-check mr-2"></i> <span id="btn-text">Confirmar Agendamento</span>
+                    </button>
+                </form>
+            </div>
+            
+            <div class="w-full md:w-2/3 bg-white relative">
+                <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0ZxXo16zADmQ5cZDtfMXCUb3stCgT46ety0XOExviZh8sRXPMquIK5-EvClrxsqt4EzpRBWPcs?gv=true" class="w-full h-full border-none absolute inset-0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-detalhes" class="modal fixed inset-0 flex items-center justify-center bg-[#0A1128]/80 p-4">
+        <div class="modal-content bg-white rounded-[24px] w-full max-w-4xl shadow-2xl relative flex flex-col">
+            <button onclick="fecharModal('modal-detalhes')" class="absolute top-6 right-6 text-gray-400 hover:text-gray-800 transition-colors z-10 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="p-8 pb-4">
+                <div class="flex items-center gap-2 text-[#0A1128] font-bold text-sm mb-6">
+                    <i class="fa-solid fa-circle-play text-[#FF5722]"></i> Acompanhamento <span class="text-gray-300 font-normal">|</span> do seu pedido
+                </div>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#0A1128] tracking-tight" id="modal-titulo">Nome do Projeto</h2>
+            </div>
+            <div class="px-8 py-6">
+                <h3 class="text-sm font-bold text-gray-400 mb-4 uppercase">Informações da Solicitação</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bg-gray-50/50 p-5 rounded-2xl border border-gray-100">
+                    <div>
+                        <p class="text-xs text-gray-500 mb-1">Fase da Fábrica</p>
+                        <p class="font-bold text-[#FF5722]" id="modal-fase">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 mb-1">Nosso prazo com você</p>
+                        <p class="font-bold text-gray-800" id="modal-prazo">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 mb-1">Data da Gravação</p>
+                        <p class="font-bold text-gray-800" id="modal-gravacao">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 mb-1">Responsável (Fábrica)</p>
+                        <p class="font-bold text-gray-800" id="modal-responsavel">-</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 bg-white border-t border-gray-100 rounded-b-[24px] flex justify-center" id="modal-area-entrega"></div>
+        </div>
+    </div>
+
+    <script>
+        // URL Oficial e Direta do seu Google Apps Script já sincronizada
+        const googleAppUrl = "https://script.google.com/macros/s/AKfycbxntPEFXM6ATjyfIUHwkmBt0Ax3RvpcJYcD70N9P52BWT4-LhDP1QdxTd4s5HC5I42WJg/exec";
+
+        let dadosGlobais = [];
+
+        function abrirModal(id) { document.getElementById(id).classList.add('active'); }
+        function fecharModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        // Mapeia os status exatos com base nas cores da sua planilha
+        function obterDadosStatus(statusTexto) {
+            const txt = (statusTexto || '').toLowerCase().trim();
+            
+            if(txt.includes('conclu')) return { bg: 'bg-green-500', icon: 'fa-check', label: 'Concluído' };
+            if(txt.includes('andamento')) return { bg: 'bg-yellow-500', icon: 'fa-person-digging', label: 'Em andamento' };
+            if(txt.includes('revisão') || txt.includes('revisao')) return { bg: 'bg-blue-500', icon: 'fa-eye', label: 'Revisão' };
+            if(txt.includes('pausado')) return { bg: 'bg-gray-800', icon: 'fa-pause', label: 'Pausado' };
+            if(txt.includes('pendente')) return { bg: 'bg-red-400', icon: 'fa-clock', label: 'Pendente' };
+            
+            return { bg: 'bg-gray-400', icon: 'fa-circle-dot', label: statusTexto || 'Pendente' };
         }
 
-        document.getElementById('project-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        function atualizarGraficos(contagens) {
+            const total = contagens.total || 1; 
+            const pctConcluido = Math.round((contagens.concluido / total) * 100);
+            const pctAndamento = Math.round((contagens.andamento / total) * 100);
+            const pctPendente = Math.round((contagens.pendente / total) * 100);
 
-            const btnText = document.getElementById('btn-text');
-            const btnIcon = document.getElementById('btn-icon');
+            document.getElementById('chart-percent-concluido').textContent = pctConcluido + '%';
+            document.getElementById('chart-percent-andamento').textContent = pctAndamento + '%';
+            document.getElementById('chart-percent-pendente').textContent = pctPendente + '%';
+
+            setTimeout(() => {
+                document.getElementById('chart-bar-concluido').style.width = pctConcluido + '%';
+                document.getElementById('chart-bar-andamento').style.width = pctAndamento + '%';
+                document.getElementById('chart-bar-pendente').style.width = pctPendente + '%';
+            }, 300);
+        }
+
+        function abrirDetalhes(index) {
+            const p = dadosGlobais[index];
             
-            // ====================================================================================
-            // ATENÇÃO: COLE A URL GERADA NO APPS SCRIPT NA VARIÁVEL ABAIXO
-            // ====================================================================================
-            const googleSheetUrl = "https://script.google.com/macros/s/AKfycby2iv1j9G8l_1shjOBs3av17SAXudfNU0Wy8AfzBXUQ7ttM2Nc8RlgjHUyVFMpWQqJieg/exec"; 
+            document.getElementById('modal-titulo').textContent = p.demanda;
+            document.getElementById('modal-fase').textContent = p.etapaAtual || '-';
+            document.getElementById('modal-prazo').textContent = p.prazoFinal || '-';
+            document.getElementById('modal-gravacao').textContent = p.dataGravacao || '-';
+            document.getElementById('modal-responsavel').textContent = p.responsavel || '-';
 
-            // Verificação de segurança caso o usuário esqueça de colocar a URL
-            if(googleSheetUrl === "COLE_AQUI_A_URL_DO_SEU_WEB_APP_DO_APPS_SCRIPT") {
-                alert("⚠️ ATENÇÃO: Você esqueceu de colocar a URL do Google Sheets no código! Volte no passo a passo anterior, copie a URL gerada no Apps Script e cole na linha 348 do código.");
+            const areaEntrega = document.getElementById('modal-area-entrega');
+            
+            if(p.status.toLowerCase().includes('conclu')) {
+                const linkParts = (p.linkAcesso || '').split('|');
+                const linkReal = linkParts[0].trim();
                 
-                btnText.textContent = "FALTA A URL";
-                btnIcon.className = "fa-solid fa-triangle-exclamation text-white";
-                return; // Bloqueia o envio para não enganar o usuário
-            }
-
-            btnText.textContent = "ENVIANDO...";
-            btnIcon.className = "fa-solid fa-spinner fa-spin text-white";
-
-            const nomeVideo = document.getElementById('videoName').value;
-            const linkJira = document.getElementById('jiraLink').value;
-            const sponsor = document.getElementById('sponsorName').value;
-            const infoAdicional = document.getElementById('additionalInfo').value;
-
-            // 1. SALVAR NO FIREBASE (Backup automático interno)
-            if (currentUser && db) {
-                try {
-                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'agendamentos_estudio'), {
-                        videoName: nomeVideo,
-                        jiraLink: linkJira,
-                        sponsorName: sponsor,
-                        additionalInfo: infoAdicional,
-                        status: 'Aguardando Agenda',
-                        userId: currentUser.uid,
-                        createdAt: serverTimestamp()
-                    });
-                } catch (err) {
-                    console.error("Falha BD:", err);
+                if(linkReal.startsWith('http')) {
+                    areaEntrega.innerHTML = `<a href="${linkReal}" target="_blank" class="block w-full max-w-md bg-green-500 hover:bg-green-600 text-white text-center font-bold py-4 rounded-xl transition-colors shadow-lg"><i class="fa-solid fa-play-circle mr-2"></i> Assistir ao Vídeo Finalizado</a>`;
+                } else {
+                    areaEntrega.innerHTML = `<button disabled class="block w-full max-w-md bg-gray-100 text-gray-500 text-center font-bold py-4 rounded-xl cursor-not-allowed border border-gray-200"><i class="fa-solid fa-check-double mr-2"></i> Material Concluído (Sem link disponível)</button>`;
                 }
+            } else {
+                areaEntrega.innerHTML = `<button disabled class="block w-full max-w-md bg-gray-100 text-gray-500 text-center font-bold py-4 rounded-xl cursor-not-allowed border border-gray-200"><i class="fa-solid fa-lock mr-2"></i> O vídeo será liberado aqui quando estiver pronto</button>`;
             }
 
-            // 2. SALVAR NO GOOGLE SHEETS 
+            abrirModal('modal-detalhes');
+        }
+
+        function renderizarTabela(dados) {
+            const tbody = document.getElementById('tabela-demandas');
+            tbody.innerHTML = '';
+
+            let contagens = { total: dados.length, concluido: 0, andamento: 0, pendente: 0 };
+
+            dados.forEach((p, index) => {
+                const statusInfo = obterDadosStatus(p.status);
+                
+                if(statusInfo.label === 'Concluído') contagens.concluido++;
+                else if(statusInfo.label === 'Em andamento' || statusInfo.label === 'Revisão') contagens.andamento++;
+                else if(statusInfo.label === 'Pendente' || statusInfo.label === 'Pausado') contagens.pendente++;
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50 transition-colors cursor-pointer" onclick="abrirDetalhes(${index})">
+                        <td class="py-4 px-6 font-bold text-gray-800"><i class="fa-solid fa-angle-right text-[#FF5722] text-xs mr-2"></i> ${p.demanda}</td>
+                        <td class="py-4 px-6">
+                            <div class="flex justify-center flex-col items-center gap-1">
+                                <div class="status-dot ${statusInfo.bg}" title="${statusInfo.label}"><i class="fa-solid ${statusInfo.icon}"></i></div>
+                                <span class="text-[10px] font-bold text-gray-500 uppercase">${statusInfo.label}</span>
+                            </div>
+                        </td>
+                        <td class="py-4 px-6 text-gray-500 font-medium">${p.prazoFinal || '-'}</td>
+                        <td class="py-4 px-6 text-gray-600 font-semibold">${p.responsavel || '-'}</td>
+                        <td class="py-4 px-6 text-center border-l border-gray-50">
+                            <button class="w-10 h-10 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white text-gray-600 transition-colors shadow-sm"><i class="fa-solid fa-arrow-right"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById('count-total').textContent = contagens.total;
+            document.getElementById('count-concluido').textContent = contagens.concluido;
+            document.getElementById('count-andamento').textContent = contagens.andamento;
+            document.getElementById('count-pendente').textContent = contagens.pendente;
+
+            atualizarGraficos(contagens);
+        }
+
+        async function carregarDemandas() {
             try {
-                await fetch(googleSheetUrl, {
-                    method: 'POST',
-                    mode: 'no-cors', // Fundamental para não bloquear por erro de CORS
-                    headers: {
-                        // O uso de text/plain impede o navegador de realizar o bloqueio de "Preflight"
-                        'Content-Type': 'text/plain;charset=utf-8',
-                    },
-                    body: JSON.stringify({
-                        videoName: nomeVideo,
-                        jiraLink: linkJira,
-                        sponsorName: sponsor,
-                        additionalInfo: infoAdicional
-                    })
-                });
+                const response = await fetch(googleAppUrl);
+                dadosGlobais = await response.json();
+                renderizarTabela(dadosGlobais);
+                
+                setTimeout(() => { document.getElementById('loading-screen').classList.add('loader-hidden'); }, 800);
+            } catch(e) {
+                document.getElementById('tabela-demandas').innerHTML = '<tr><td colspan="5" class="p-8 text-center text-red-500 font-bold"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Erro ao conectar com o banco de dados. Verifique a planilha!</td></tr>';
+                setTimeout(() => { document.getElementById('loading-screen').classList.add('loader-hidden'); }, 1000);
+            }
+        }
 
-                // Sucesso Visual
-                btnText.textContent = "DADOS ENVIADOS";
-                btnIcon.className = "fa-solid fa-check text-white";
+        document.getElementById('project-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btnText = document.getElementById('btn-text');
+            const originalText = btnText.textContent;
+            btnText.textContent = "Agendando...";
+            
+            const payload = {
+                projetoName: document.getElementById('projetoName').value,
+                jiraLink: document.getElementById('jiraLink').value,
+                sponsorName: document.getElementById('sponsorName').value,
+                additionalInfo: document.getElementById('additionalInfo').value
+            };
 
-                const toast = document.getElementById('toast');
-                toast.style.opacity = '1';
-                toast.style.transform = 'translate(-50%, 20px)';
-                setTimeout(() => {
-                    toast.style.opacity = '0';
-                    toast.style.transform = 'translate(-50%, -20px)';
-                }, 5000);
-
-                desbloquearCalendario();
-
+            try {
+                await fetch(googleAppUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+                btnText.textContent = "Horário Agendado com Sucesso!";
+                document.getElementById('submit-btn').classList.replace('bg-[#FF5722]', 'bg-green-500');
+                
+                setTimeout(() => { 
+                    fecharModal('modal-novo'); 
+                    document.getElementById('submit-btn').classList.replace('bg-green-500', 'bg-[#FF5722]');
+                    btnText.textContent = originalText;
+                    document.getElementById('project-form').reset();
+                    
+                    document.getElementById('loading-screen').classList.remove('loader-hidden');
+                    carregarDemandas(); 
+                }, 2000);
             } catch(error) {
-                console.error("Erro ao enviar para Google Sheets:", error);
-                
-                // Mostrar erro na tela se falhar a rede
-                btnText.textContent = "ERRO DE REDE";
-                btnIcon.className = "fa-solid fa-xmark text-white";
-                
-                const toast = document.getElementById('toast');
-                toast.classList.replace('border-green-500', 'border-red-500');
-                document.getElementById('toast-title').textContent = "Erro de Conexão";
-                document.getElementById('toast-desc').textContent = "Falha ao enviar. Verifique sua internet.";
-                toast.style.opacity = '1';
-                toast.style.transform = 'translate(-50%, 20px)';
-                
-                setTimeout(() => {
-                    toast.style.opacity = '0';
-                    toast.style.transform = 'translate(-50%, -20px)';
-                    btnText.textContent = "Tentar Novamente";
-                }, 4000);
+                btnText.textContent = "Ops! Ocorreu um erro.";
             }
         });
 
-        function desbloquearCalendario() {
-            const lockOverlay = document.getElementById('lock-overlay');
-            const calContainer = document.getElementById('calendar-container');
-            const step2Badge = document.getElementById('step2-badge');
-            const step2Title = document.getElementById('step2-title');
-            const step2Desc = document.getElementById('step2-desc');
-
-            lockOverlay.style.opacity = '0';
-            lockOverlay.style.transform = 'scale(1.02)';
-            setTimeout(() => { lockOverlay.style.display = 'none'; }, 700);
-
-            calContainer.classList.remove('calendar-locked');
-            calContainer.classList.add('calendar-unlocked');
-            calContainer.style.borderColor = 'rgba(20, 44, 198, 0.2)';
-
-            step2Badge.classList.replace('border-gray-300', 'border-brand-blue');
-            step2Badge.classList.replace('text-gray-400', 'text-white');
-            step2Badge.classList.replace('bg-white', 'bg-brand-blue');
-            
-            step2Title.classList.replace('text-gray-600', 'text-brand-blue');
-            step2Desc.classList.replace('text-gray-500', 'text-gray-700');
-            
-            step2Desc.innerHTML = '✅ Agenda liberada! Escolha o seu horário abaixo.';
-
-            document.querySelectorAll('.input-field').forEach(input => {
-                input.style.borderColor = 'rgba(34,197,94,0.4)';
-                input.style.backgroundColor = '#f0fdf4';
-                input.disabled = true; 
-            });
-
-            if(window.innerWidth < 1280) {
-                setTimeout(() => {
-                    document.getElementById('step2-header').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 400);
-            }
-        }
+        window.addEventListener('DOMContentLoaded', carregarDemandas);
     </script>
 </body>
 </html>
