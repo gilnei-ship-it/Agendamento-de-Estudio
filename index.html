@@ -14,7 +14,7 @@
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #F8FAFC; color: #1E293B; overflow-x: hidden; }
         
-        #loading-screen { transition: opacity 0.8s ease, visibility 0.8s; }
+        #loading-screen { transition: opacity 0.3s ease, visibility 0.3s; }
         .loader-hidden { opacity: 0; visibility: hidden; }
 
         .header-bg {
@@ -30,10 +30,6 @@
             transition: transform 0.3s ease; position: relative; overflow: hidden;
         }
         .stat-card:hover { transform: translateY(-5px); }
-        .stat-card::after {
-            content: ''; position: absolute; top: -50%; right: -20%; width: 100px; height: 100px;
-            background: rgba(255,255,255,0.1); border-radius: 50%;
-        }
 
         .bg-card-blue { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
         .bg-card-green { background: linear-gradient(135deg, #10B981, #059669); }
@@ -46,12 +42,26 @@
         }
 
         .bar-bg { background: #E2E8F0; border-radius: 999px; height: 12px; width: 100%; overflow: hidden; }
-        .bar-fill { height: 100%; border-radius: 999px; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .bar-fill { height: 100%; border-radius: 999px; transition: width 0.8s ease-out; }
 
         .modal { opacity: 0; pointer-events: none; transition: all 0.3s ease; backdrop-filter: blur(5px); z-index: 100; }
         .modal.active { opacity: 1; pointer-events: auto; }
         .modal-content { transform: scale(0.95); transition: all 0.3s ease; }
         .modal.active .modal-content { transform: scale(1); }
+
+        /* Linha do Tempo CSS */
+        .timeline-container { position: relative; display: flex; justify-content: space-between; align-items: center; margin: 30px 0; }
+        .timeline-line { position: absolute; top: 16px; left: 0; right: 0; height: 3px; background: #E2E8F0; z-index: 0; }
+        .timeline-line-fill { position: absolute; top: 16px; left: 0; height: 3px; background: #FF5722; z-index: 1; transition: width 0.5s ease; }
+        .timeline-step { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 20%; }
+        .timeline-circle { 
+            width: 34px; height: 34px; border-radius: 50%; background: #FFF; border: 3px solid #E2E8F0; 
+            display: flex; align-items: center; justify-content: center; font-size: 14px; color: #E2E8F0; transition: all 0.3s;
+        }
+        .timeline-step.completed .timeline-circle { background: #FF5722; border-color: #FF5722; color: white; }
+        .timeline-step.active .timeline-circle { background: #FFF; border-color: #FF5722; color: #FF5722; box-shadow: 0 0 0 4px rgba(255, 87, 34, 0.2); }
+        .timeline-label { font-size: 12px; font-weight: 700; color: #64748B; text-align: center; text-transform: uppercase; }
+        .timeline-step.completed .timeline-label, .timeline-step.active .timeline-label { color: #1E293B; }
     </style>
 </head>
 <body class="antialiased">
@@ -60,7 +70,7 @@
         <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-32 md:h-48 object-contain filter brightness-0 invert mb-8 animate-pulse">
         <div class="flex flex-col items-center gap-3">
             <i class="fa-solid fa-circle-notch fa-spin text-[#FF5722] text-3xl"></i>
-            <span class="text-gray-300 font-semibold tracking-widest uppercase text-sm mt-2">Sincronizando com a base de dados...</span>
+            <span class="text-gray-300 font-semibold tracking-widest uppercase text-sm mt-2">Conectando aos dados da Fábrica...</span>
         </div>
     </div>
 
@@ -128,14 +138,13 @@
 
         <div class="bg-white rounded-[20px] shadow-sm border border-gray-100 mb-12 overflow-hidden">
             <div class="p-6 border-b border-gray-100 bg-white">
-                
                 <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
                     <h2 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-clipboard-list text-blue-600 mr-2"></i> Acompanhamento de Solicitações</h2>
                     
                     <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-4 items-center">
                         <div class="relative w-full sm:w-72">
                             <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                            <input type="text" id="inputPesquisa" placeholder="Buscar demanda, responsável..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-full text-sm focus:outline-none focus:border-[#FF5722] focus:ring-1 focus:ring-[#FF5722] transition-colors bg-gray-50">
+                            <input type="text" id="inputPesquisa" placeholder="Buscar projeto, área..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-full text-sm focus:outline-none focus:border-[#FF5722] focus:ring-1 focus:ring-[#FF5722] transition-colors bg-gray-50">
                         </div>
 
                         <button onclick="abrirModal('modal-novo')" class="w-full sm:w-auto bg-[#0A1128] hover:bg-gray-800 text-white text-sm font-bold py-2.5 px-6 rounded-full transition-colors flex items-center justify-center gap-2 shadow-md whitespace-nowrap">
@@ -149,7 +158,7 @@
                 <table class="w-full text-left border-collapse whitespace-nowrap">
                     <thead>
                         <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider border-b border-gray-100">
-                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-file-signature mr-1"></i> Demanda</th>
+                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-file-signature mr-1"></i> Demanda / Projeto</th>
                             <th class="py-4 px-6 font-semibold text-center"><i class="fa-solid fa-traffic-light mr-1"></i> Status</th>
                             <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-video mr-1"></i> Data Gravação</th>
                             <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-user-tag mr-1"></i> Solicitante</th>
@@ -252,12 +261,12 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="p-8 pb-6 border-b border-gray-100 bg-[#0A1128] rounded-t-[24px]">
-                <p class="text-[#FF5722] font-bold text-sm mb-2 uppercase tracking-widest">Detalhes da Demanda</p>
+                <p class="text-[#FF5722] font-bold text-sm mb-2 uppercase tracking-widest">Detalhes da Demanda / Projeto</p>
                 <h2 class="text-3xl font-extrabold text-white tracking-tight leading-tight" id="modal-titulo">Nome do Projeto</h2>
             </div>
             
             <div class="px-8 py-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                     <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
                         <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-user-tag mr-1"></i> Solicitante</p>
                         <p class="font-bold text-gray-800" id="modal-sponsor">-</p>
@@ -267,8 +276,8 @@
                         <p class="font-bold text-[#1D4ED8]" id="modal-responsavel">-</p>
                     </div>
                     <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
-                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-layer-group mr-1"></i> Fase Atual</p>
-                        <p class="font-bold text-[#FF5722]" id="modal-fase">-</p>
+                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-video mr-1"></i> Data de Gravação</p>
+                        <p class="font-bold text-gray-800" id="modal-gravacao">-</p>
                     </div>
                     <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
                         <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-flag-checkered mr-1"></i> Prazo de Entrega</p>
@@ -276,11 +285,35 @@
                     </div>
                 </div>
 
-                <div class="mt-4 bg-blue-50 p-4 rounded-xl border border-blue-100" id="modal-box-jira">
+                <h3 class="text-sm font-bold text-gray-400 mb-2 mt-4 uppercase text-center tracking-wider">Acompanhamento do Processo</h3>
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-line-fill" id="timeline-progress" style="width: 0%;"></div>
+                    
+                    <div class="timeline-step step-1">
+                        <div class="timeline-circle"><i class="fa-solid fa-inbox"></i></div>
+                        <p class="timeline-label mt-2">Recebido</p>
                     </div>
+                    <div class="timeline-step step-2">
+                        <div class="timeline-circle"><i class="fa-solid fa-calendar-check"></i></div>
+                        <p class="timeline-label mt-2">Agendado</p>
+                    </div>
+                    <div class="timeline-step step-3">
+                        <div class="timeline-circle"><i class="fa-solid fa-video"></i></div>
+                        <p class="timeline-label mt-2">Gravação</p>
+                    </div>
+                    <div class="timeline-step step-4">
+                        <div class="timeline-circle"><i class="fa-solid fa-laptop-file"></i></div>
+                        <p class="timeline-label mt-2">Edição</p>
+                    </div>
+                    <div class="timeline-step step-5">
+                        <div class="timeline-circle"><i class="fa-solid fa-check-double"></i></div>
+                        <p class="timeline-label mt-2">Entregue</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="p-8 bg-gray-50 border-t border-gray-100 rounded-b-[24px] flex justify-center items-center" id="modal-area-entrega"></div>
+            <div class="p-8 bg-gray-50 border-t border-gray-100 rounded-b-[24px] flex flex-col md:flex-row gap-4 justify-center items-center" id="modal-area-entrega"></div>
         </div>
     </div>
 
@@ -296,31 +329,33 @@
         function abrirModal(id) { document.getElementById(id).classList.add('active'); }
         function fecharModal(id) { document.getElementById(id).classList.remove('active'); }
 
-        // Normalização agressiva para nunca errar no filtro de status
+        // Remove acentos e espaços invisíveis
         function normalizarTexto(texto) {
-            return (texto || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+            return (texto || '').toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
         }
 
-        // Lógica blindada para capturar o "Em andamento" da planilha
-        function obterDadosStatus(statusTexto) {
-            const txt = normalizarTexto(statusTexto);
-            if(txt.includes('conclu')) return { bg: 'bg-green-500', icon: 'fa-check', label: 'Concluído' };
-            if(txt.includes('andamento') || txt.includes('edicao') || txt.includes('planejamento')) return { bg: 'bg-yellow-500', icon: 'fa-person-digging', label: 'Em andamento' };
-            if(txt.includes('revisao')) return { bg: 'bg-blue-500', icon: 'fa-eye', label: 'Revisão' };
-            if(txt.includes('pausado')) return { bg: 'bg-gray-800', icon: 'fa-pause', label: 'Pausado' };
+        // Lógica BLINDADA: Reconhece as etapas da planilha corretamente
+        function obterDadosStatus(statusTexto, faseTexto) {
+            const status = normalizarTexto(statusTexto);
+            const fase = normalizarTexto(faseTexto);
+            const combinado = status + " " + fase;
             
-            // Tudo que não for os acima, cai na Fila
-            return { bg: 'bg-slate-500', icon: 'fa-layer-group', label: 'Na Fila' }; 
+            if(combinado.includes('conclu')) return { bg: 'bg-green-500', icon: 'fa-check', label: 'Concluído', step: 5 };
+            if(combinado.includes('andamento') || combinado.includes('edicao') || combinado.includes('gravacao')) return { bg: 'bg-yellow-500', icon: 'fa-person-digging', label: 'Em andamento', step: 4 };
+            if(combinado.includes('revisao')) return { bg: 'bg-blue-500', icon: 'fa-eye', label: 'Revisão', step: 4 };
+            if(combinado.includes('pausado')) return { bg: 'bg-gray-800', icon: 'fa-pause', label: 'Pausado', step: 2 };
+            
+            return { bg: 'bg-slate-500', icon: 'fa-layer-group', label: 'Na Fila', step: 1 }; 
         }
 
         function atualizarIndicadores(dados) {
             let contagens = { total: dados.length, concluido: 0, andamento: 0, pendente: 0 };
 
             dados.forEach((p) => {
-                const statusInfo = obterDadosStatus(p.status);
+                const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
                 if(statusInfo.label === 'Concluído') contagens.concluido++;
                 else if(statusInfo.label === 'Em andamento' || statusInfo.label === 'Revisão') contagens.andamento++;
-                else contagens.pendente++; // Na Fila
+                else contagens.pendente++; 
             });
 
             document.getElementById('count-total').textContent = contagens.total;
@@ -329,73 +364,73 @@
             document.getElementById('count-pendente').textContent = contagens.pendente;
 
             const total = contagens.total || 1; 
-            const pctConcluido = Math.round((contagens.concluido / total) * 100);
-            const pctAndamento = Math.round((contagens.andamento / total) * 100);
-            const pctPendente = Math.round((contagens.pendente / total) * 100);
-
-            document.getElementById('chart-percent-concluido').textContent = pctConcluido + '%';
-            document.getElementById('chart-percent-andamento').textContent = pctAndamento + '%';
-            document.getElementById('chart-percent-pendente').textContent = pctPendente + '%';
+            document.getElementById('chart-percent-concluido').textContent = Math.round((contagens.concluido / total) * 100) + '%';
+            document.getElementById('chart-percent-andamento').textContent = Math.round((contagens.andamento / total) * 100) + '%';
+            document.getElementById('chart-percent-pendente').textContent = Math.round((contagens.pendente / total) * 100) + '%';
 
             setTimeout(() => {
-                document.getElementById('chart-bar-concluido').style.width = pctConcluido + '%';
-                document.getElementById('chart-bar-andamento').style.width = pctAndamento + '%';
-                document.getElementById('chart-bar-pendente').style.width = pctPendente + '%';
-            }, 300);
+                document.getElementById('chart-bar-concluido').style.width = Math.round((contagens.concluido / total) * 100) + '%';
+                document.getElementById('chart-bar-andamento').style.width = Math.round((contagens.andamento / total) * 100) + '%';
+                document.getElementById('chart-bar-pendente').style.width = Math.round((contagens.pendente / total) * 100) + '%';
+            }, 50);
         }
 
         function abrirDetalhes(index) {
             const p = dadosGlobais[index];
+            const nomeCorreto = p.demanda || p.nome || p.videoName || 'Projeto sem nome';
             
-            document.getElementById('modal-titulo').textContent = p.demanda;
+            document.getElementById('modal-titulo').textContent = nomeCorreto;
             document.getElementById('modal-prazo').textContent = p.prazoFinal || '-';
             document.getElementById('modal-gravacao').textContent = p.dataGravacao || '-';
             document.getElementById('modal-sponsor').textContent = p.sponsor || '-';
             document.getElementById('modal-responsavel').textContent = p.responsavel || '-';
-            document.getElementById('modal-fase').textContent = p.etapaAtual || p.status || '-';
 
+            // Atualiza a TIMELINE baseada no Status
+            const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
+            const stepIndex = statusInfo.step;
+            document.getElementById('timeline-progress').style.width = `${((stepIndex - 1) / 4) * 100}%`;
+
+            for(let i = 1; i <= 5; i++) {
+                const el = document.querySelector(`.step-${i}`);
+                el.classList.remove('active', 'completed');
+                if(i < stepIndex) el.classList.add('completed');
+                if(i === stepIndex) el.classList.add('active');
+            }
+
+            // EXTRATOR INTELIGENTE DE LINKS
             const areaEntrega = document.getElementById('modal-area-entrega');
-            const boxJira = document.getElementById('modal-box-jira');
-            
-            // Extrator de Links
             const urlRegex = /(https?:\/\/[^\s|]+)/g;
             const linksEncontrados = (p.linkAcesso || '').match(urlRegex) || [];
+            const linksLimpos = linksEncontrados.map(l => l.replace(/\|$/, '').trim());
             
-            const jiraLink = linksEncontrados.find(l => l.includes('atlassian') || l.includes('jira'));
-            const videoLink = linksEncontrados.find(l => !l.includes('atlassian') && !l.includes('jira'));
+            const jiraLink = linksLimpos.find(l => l.includes('atlassian') || l.includes('jira'));
+            const videoLink = linksLimpos.find(l => !l.includes('atlassian') && !l.includes('jira'));
 
-            // Mostra o Jira dentro da caixa azul do modal
+            let botoesHtml = '';
             if(jiraLink) {
-                boxJira.innerHTML = `
-                    <p class="text-[11px] font-bold text-blue-500 uppercase tracking-wider mb-1"><i class="fa-brands fa-jira mr-1"></i> Link do Chamado Jira</p>
-                    <a href="${jiraLink}" target="_blank" class="font-bold text-blue-700 hover:text-blue-900 underline truncate block">${jiraLink}</a>
-                `;
-                boxJira.style.display = 'block';
-            } else {
-                boxJira.style.display = 'none';
+                botoesHtml += `
+                    <a href="${jiraLink}" target="_blank" class="w-full md:w-auto px-8 bg-white hover:bg-gray-100 text-[#0A1128] font-bold py-4 rounded-xl transition-colors shadow-sm border border-gray-200 flex justify-center items-center gap-2">
+                        <i class="fa-brands fa-jira text-blue-600 text-lg"></i> Acessar Chamado (Jira)
+                    </a>`;
             }
 
-            // Lógica do Vídeo no Rodapé do Modal
-            let botoesHtml = '';
-            if(p.status.toLowerCase().includes('conclu')) {
+            if(statusInfo.label === 'Concluído') {
                 if(videoLink) {
-                    botoesHtml = `
-                        <a href="${videoLink}" target="_blank" class="w-full max-w-md bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+                    botoesHtml += `
+                        <a href="${videoLink}" target="_blank" class="w-full md:w-auto px-8 bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
                             <i class="fa-solid fa-play-circle text-xl"></i> Assistir Vídeo Final
-                        </a>
-                    `;
-                } else {
-                    botoesHtml = `<p class="text-sm font-bold text-gray-400"><i class="fa-solid fa-check-double"></i> Concluído (Nenhum link de vídeo disponibilizado na planilha)</p>`;
+                        </a>`;
+                } else if(!jiraLink) {
+                    botoesHtml += `<p class="text-sm font-bold text-gray-400"><i class="fa-solid fa-check-double"></i> Concluído (Sem links na planilha)</p>`;
                 }
             } else {
-                botoesHtml = `
-                    <button disabled class="w-full max-w-md bg-gray-200 text-gray-500 font-bold py-4 rounded-xl border border-gray-300 cursor-not-allowed flex justify-center items-center gap-2">
+                botoesHtml += `
+                    <button disabled class="w-full md:w-auto px-8 bg-gray-200 text-gray-500 font-bold py-4 rounded-xl border border-gray-300 cursor-not-allowed flex justify-center items-center gap-2">
                         <i class="fa-solid fa-lock"></i> Vídeo será liberado ao concluir
-                    </button>
-                `;
+                    </button>`;
             }
 
-            areaEntrega.innerHTML = botoesHtml;
+            areaEntrega.innerHTML = botoesHtml || `<p class="text-sm text-gray-400">Nenhum link anexado.</p>`;
             abrirModal('modal-detalhes');
         }
 
@@ -404,15 +439,15 @@
             tbody.innerHTML = '';
 
             if (dadosParaRenderizar.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500 font-medium"><i class="fa-solid fa-folder-open text-gray-300 text-3xl mb-3 block"></i> Nenhuma demanda encontrada.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500 font-medium"><i class="fa-solid fa-folder-open text-gray-300 text-3xl mb-3 block"></i> Nenhuma demanda encontrada com estes filtros.</td></tr>`;
                 return;
             }
 
             dadosParaRenderizar.forEach((p) => {
-                const statusInfo = obterDadosStatus(p.status);
+                const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
                 const originalIndex = dadosGlobais.indexOf(p);
+                const nomeCorreto = p.demanda || p.nome || p.videoName || 'Projeto sem nome';
 
-                // Lógica para o botão do Jira direto na Tabela
                 const urlRegex = /(https?:\/\/[^\s|]+)/g;
                 const linksEncontrados = (p.linkAcesso || '').match(urlRegex) || [];
                 const jiraLink = linksEncontrados.find(l => l.includes('atlassian') || l.includes('jira'));
@@ -424,7 +459,7 @@
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-gray-50 transition-colors cursor-pointer" onclick="abrirDetalhes(${originalIndex})">
-                        <td class="py-4 px-6 font-bold text-gray-800"><i class="fa-solid fa-angle-right text-[#FF5722] text-xs mr-2"></i> ${p.demanda}</td>
+                        <td class="py-4 px-6 font-bold text-gray-800"><i class="fa-solid fa-angle-right text-[#FF5722] text-xs mr-2"></i> ${nomeCorreto}</td>
                         <td class="py-4 px-6 text-center">
                             <div class="flex justify-center flex-col items-center gap-1">
                                 <div class="status-dot ${statusInfo.bg}" title="${statusInfo.label}"><i class="fa-solid ${statusInfo.icon}"></i></div>
@@ -445,13 +480,12 @@
 
         function aplicarFiltros() {
             const dadosFiltrados = dadosGlobais.filter(projeto => {
-                const demanda = normalizarTexto(projeto.demanda);
+                const nomeCorreto = normalizarTexto(projeto.demanda || projeto.nome || projeto.videoName);
                 const responsavel = normalizarTexto(projeto.responsavel);
                 const sponsor = normalizarTexto(projeto.sponsor);
                 
-                return demanda.includes(textoBuscado) || responsavel.includes(textoBuscado) || sponsor.includes(textoBuscado);
+                return nomeCorreto.includes(textoBuscado) || responsavel.includes(textoBuscado) || sponsor.includes(textoBuscado);
             });
-            
             renderizarTabela(dadosFiltrados);
         }
 
@@ -468,10 +502,11 @@
                 atualizarIndicadores(dadosGlobais);
                 aplicarFiltros(); 
                 
-                setTimeout(() => { document.getElementById('loading-screen').classList.add('loader-hidden'); }, 800);
+                // Remove o loading instantaneamente
+                document.getElementById('loading-screen').classList.add('loader-hidden');
             } catch(e) {
-                document.getElementById('tabela-demandas').innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500 font-bold"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Erro ao conectar com o banco de dados. Verifique a planilha!</td></tr>';
-                setTimeout(() => { document.getElementById('loading-screen').classList.add('loader-hidden'); }, 1000);
+                document.getElementById('tabela-demandas').innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500 font-bold"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Erro ao conectar com o banco de dados.</td></tr>';
+                document.getElementById('loading-screen').classList.add('loader-hidden');
             }
         }
 
@@ -490,7 +525,7 @@
 
             try {
                 await fetch(googleAppUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
-                btnText.textContent = "Horário Agendado com Sucesso!";
+                btnText.textContent = "Agendado!";
                 document.getElementById('submit-btn').classList.replace('bg-[#FF5722]', 'bg-green-500');
                 
                 setTimeout(() => { 
@@ -501,9 +536,9 @@
                     
                     document.getElementById('loading-screen').classList.remove('loader-hidden');
                     carregarDemandas(); 
-                }, 2000);
+                }, 1500);
             } catch(error) {
-                btnText.textContent = "Ops! Ocorreu um erro.";
+                btnText.textContent = "Ops! Erro de rede.";
             }
         });
 
