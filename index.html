@@ -42,6 +42,7 @@
 </head>
 <body class="antialiased">
 
+    <!-- TELA DE INICIALIZAÇÃO -->
     <div id="loading-screen" class="fixed inset-0 bg-[#0A1128] z-[9999] flex flex-col items-center justify-center">
         <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-32 md:h-48 object-contain filter brightness-0 invert mb-8 animate-pulse">
         <div class="flex flex-col items-center gap-3">
@@ -50,6 +51,7 @@
         </div>
     </div>
 
+    <!-- CABEÇALHO -->
     <div class="header-bg pt-8 px-4 sm:px-8 relative">
         <div class="max-w-[1300px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-4">
@@ -68,6 +70,7 @@
 
     <main class="max-w-[1300px] mx-auto px-4 sm:px-8 relative z-10">
         
+        <!-- CARTÕES FLUTUANTES -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 -mt-16 mb-12">
             <div class="stat-card bg-card-blue flex flex-col justify-between">
                 <div class="flex justify-between items-start mb-4"><div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fa-solid fa-folder-open"></i></div></div>
@@ -87,6 +90,7 @@
             </div>
         </div>
 
+        <!-- TABELA COM LUPA -->
         <div class="bg-white rounded-[20px] shadow-sm border border-gray-100 mb-12 overflow-hidden">
             <div class="p-6 border-b border-gray-100 bg-white">
                 <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
@@ -123,6 +127,7 @@
         </div>
     </main>
 
+    <!-- MODAL 1: RESUMO DO TRABALHO -->
     <div id="modal-indicadores" class="modal fixed inset-0 flex items-center justify-center bg-[#0A1128]/90 p-4">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-3xl shadow-2xl relative p-8">
             <button onclick="fecharModal('modal-indicadores')" class="absolute top-6 right-6 w-10 h-10 bg-gray-100 rounded-full text-gray-500 hover:bg-gray-200 transition-colors flex items-center justify-center z-10"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -146,6 +151,7 @@
         </div>
     </div>
 
+    <!-- MODAL 2: AGENDAMENTO -->
     <div id="modal-novo" class="modal fixed inset-0 flex items-center justify-center bg-[#0A1128]/90 p-4">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-5xl h-[85vh] shadow-2xl relative flex flex-col md:flex-row overflow-hidden">
             <button onclick="fecharModal('modal-novo')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 z-20 hover:bg-gray-200"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -163,6 +169,7 @@
         </div>
     </div>
 
+    <!-- MODAL 3: DETALHES COMPLETOS COM TIMELINE -->
     <div id="modal-detalhes" class="modal fixed inset-0 flex items-center justify-center bg-[#0A1128]/80 p-4">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-4xl shadow-2xl relative flex flex-col">
             <button onclick="fecharModal('modal-detalhes')" class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors z-10 text-xl"><i class="fa-solid fa-xmark"></i></button>
@@ -199,15 +206,17 @@
                 </div>
             </div>
 
+            <!-- Área de Botões (Jira + Vídeo) -->
             <div class="p-6 bg-gray-50 border-t border-gray-100 rounded-b-[24px] flex flex-col md:flex-row gap-4 justify-center items-center" id="modal-area-entrega"></div>
         </div>
     </div>
 
+    <!-- SCRIPT DE INTELIGÊNCIA BLINDADO -->
     <script>
         // ====================================================================================
-        // ATENÇÃO: COLE A URL GERADA NA NOVA IMPLANTAÇÃO DO APPS SCRIPT AQUI
+        // URL DO WEB APP DO APPS SCRIPT ATUALIZADA
         // ====================================================================================
-        const googleAppUrl = "COLE_AQUI_A_NOVA_URL_DO_APPS_SCRIPT";
+        const googleAppUrl = "https://script.google.com/macros/s/AKfycbyh9nCwfuvhBjzuopA6s9qzZdgoR41jQX1Ws-qKPdzsh2OW4f_PPSUt66_-3qUOTfoDEg/exec";
 
         let dadosGlobais = [];
         let textoBuscado = '';
