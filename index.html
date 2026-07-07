@@ -5,40 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acompanhamento de Solicitações | Fábrica de Conteúdo</title>
     
-    <link rel="icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/video.svg" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 576 512%22><path fill=%22%23FF5722%22 d=%22M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z%22/></svg>" type="image/svg+xml">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Montserrat', 'sans-serif'] },
-                    colors: {
-                        brand: {
-                            navy: '#0A1128',
-                            blue: '#1D4ED8',
-                            orange: '#FF5722',
-                            green: '#10B981',
-                            yellow: '#F59E0B',
-                            bg: '#F3F4F6'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #F8FAFC; color: #1E293B; overflow-x: hidden; }
         
-        /* Tela de Carregamento Inicial (Splash Screen) */
         #loading-screen { transition: opacity 0.8s ease, visibility 0.8s; }
         .loader-hidden { opacity: 0; visibility: hidden; }
 
-        /* Cabeçalho Curvado */
         .header-bg {
             background-color: #0A1128;
             border-bottom-left-radius: 40px;
@@ -46,7 +24,6 @@
             padding-bottom: 6.5rem;
         }
 
-        /* Cartões Flutuantes */
         .stat-card {
             border-radius: 16px; padding: 24px; color: white;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
@@ -58,19 +35,16 @@
             background: rgba(255,255,255,0.1); border-radius: 50%;
         }
 
-        /* Cores dos Cartões */
         .bg-card-blue { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
         .bg-card-green { background: linear-gradient(135deg, #10B981, #059669); }
         .bg-card-yellow { background: linear-gradient(135deg, #F59E0B, #D97706); }
         .bg-card-red { background: linear-gradient(135deg, #EF4444, #DC2626); }
 
-        /* Ícone de Status Circular */
         .status-dot {
             width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
             color: white; font-size: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
 
-        /* Barras Animadas do Resumo */
         .bar-bg { background: #E2E8F0; border-radius: 999px; height: 12px; width: 100%; overflow: hidden; }
         .bar-fill { height: 100%; border-radius: 999px; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
 
@@ -78,6 +52,11 @@
         .modal.active { opacity: 1; pointer-events: auto; }
         .modal-content { transform: scale(0.95); transition: all 0.3s ease; }
         .modal.active .modal-content { transform: scale(1); }
+
+        .custom-scroll::-webkit-scrollbar { height: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #F1F5F9; border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
     </style>
 </head>
 <body class="antialiased">
@@ -108,7 +87,7 @@
         </div>
     </div>
 
-    <main class="max-w-[1200px] mx-auto px-4 sm:px-8 relative z-10">
+    <main class="max-w-[1300px] mx-auto px-4 sm:px-8 relative z-10">
         
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 -mt-16 mb-12">
             <div class="stat-card bg-card-blue flex flex-col justify-between">
@@ -153,26 +132,56 @@
         </div>
 
         <div class="bg-white rounded-[20px] shadow-sm border border-gray-100 mb-12 overflow-hidden">
-            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-white flex-wrap gap-4">
-                <h2 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-clipboard-list text-blue-600 mr-2"></i> Acompanhamento de Solicitações para a Fábrica de Conteúdo</h2>
+            <div class="p-6 border-b border-gray-100 bg-white">
                 
-                <button onclick="abrirModal('modal-novo')" class="bg-[#0A1128] hover:bg-gray-800 text-white text-sm font-bold py-2.5 px-6 rounded-full transition-colors flex items-center gap-2 shadow-md whitespace-nowrap">
-                    <i class="fa-solid fa-video text-[#FF5722]"></i> Agendar Gravação
-                </button>
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                    <h2 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-clipboard-list text-blue-600 mr-2"></i> Acompanhamento de Solicitações</h2>
+                    
+                    <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-4 items-center">
+                        <div class="relative w-full sm:w-72">
+                            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" id="inputPesquisa" placeholder="Buscar projeto, área ou responsável..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-full text-sm focus:outline-none focus:border-[#FF5722] focus:ring-1 focus:ring-[#FF5722] transition-colors bg-gray-50">
+                        </div>
+
+                        <button onclick="abrirModal('modal-novo')" class="w-full sm:w-auto bg-[#0A1128] hover:bg-gray-800 text-white text-sm font-bold py-2.5 px-6 rounded-full transition-colors flex items-center justify-center gap-2 shadow-md whitespace-nowrap">
+                            <i class="fa-solid fa-video text-[#FF5722]"></i> Agendar Gravação
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex items-center gap-2 overflow-x-auto pb-2 custom-scroll">
+                    <span class="text-xs font-bold text-gray-400 uppercase mr-1 whitespace-nowrap"><i class="fa-regular fa-calendar-days mr-1"></i> Filtrar Mês:</span>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-[#FF5722] text-white transition-colors whitespace-nowrap shadow-sm" data-month="todos">Todos</button>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="01">Jan</button>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="02">Fev</button>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="03">Mar</button>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="04">Abr</button>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="05">Mai</button>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="06">Jun</button>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="07">Jul</button>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="08">Ago</button>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="09">Set</button>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="10">Out</button>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="11">Nov</button>
+                    <button class="month-btn px-4 py-1.5 rounded-full text-sm font-bold bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors whitespace-nowrap" data-month="12">Dez</button>
+                </div>
+
             </div>
+            
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse whitespace-nowrap">
                     <thead>
                         <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider border-b border-gray-100">
                             <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-file-signature mr-1"></i> Nome do Projeto</th>
                             <th class="py-4 px-6 font-semibold text-center"><i class="fa-solid fa-traffic-light mr-1"></i> Onde estamos?</th>
-                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-flag-checkered mr-1"></i> Prazo Final</th>
-                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-user mr-1"></i> Responsável</th>
+                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-video mr-1"></i> Data Gravação</th>
+                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-user-tag mr-1"></i> Solicitante</th>
+                            <th class="py-4 px-6 font-semibold"><i class="fa-solid fa-headset mr-1"></i> Responsável</th>
                             <th class="py-4 px-6 font-semibold text-center"><i class="fa-solid fa-hand-pointer mr-1"></i> Detalhes</th>
                         </tr>
                     </thead>
                     <tbody id="tabela-demandas" class="text-sm text-gray-700 divide-y divide-gray-50">
-                        <tr><td colspan="5" class="p-8 text-center text-gray-400"><i class="fa-solid fa-spinner fa-spin mr-2 text-2xl"></i></td></tr>
+                        <tr><td colspan="6" class="p-8 text-center text-gray-400"><i class="fa-solid fa-spinner fa-spin mr-2 text-2xl"></i></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -216,11 +225,6 @@
                     </div>
                     <div class="bar-bg"><div class="bar-fill bg-red-400" id="chart-bar-pendente" style="width: 0%;"></div></div>
                 </div>
-            </div>
-            
-            <div class="mt-8 bg-gray-50 p-4 rounded-xl border border-gray-200 flex items-center gap-4">
-                <i class="fa-solid fa-face-smile text-2xl text-blue-600"></i>
-                <p class="text-sm text-gray-600 font-medium">Estes números são atualizados automaticamente sempre que vocês agendam uma gravação ou quando nossa equipe finaliza um trabalho!</p>
             </div>
         </div>
     </div>
@@ -271,60 +275,85 @@
             <button onclick="fecharModal('modal-detalhes')" class="absolute top-6 right-6 text-gray-400 hover:text-gray-800 transition-colors z-10 text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="p-8 pb-4">
-                <div class="flex items-center gap-2 text-[#0A1128] font-bold text-sm mb-6">
+            <div class="p-8 pb-4 border-b border-gray-100">
+                <div class="flex items-center gap-2 text-[#0A1128] font-bold text-sm mb-4">
                     <i class="fa-solid fa-circle-play text-[#FF5722]"></i> Acompanhamento <span class="text-gray-300 font-normal">|</span> do seu pedido
                 </div>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-[#0A1128] tracking-tight" id="modal-titulo">Nome do Projeto</h2>
+                <h2 class="text-3xl font-extrabold text-[#0A1128] tracking-tight" id="modal-titulo">Nome do Projeto</h2>
             </div>
+            
             <div class="px-8 py-6">
                 <h3 class="text-sm font-bold text-gray-400 mb-4 uppercase">Informações da Solicitação</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bg-gray-50/50 p-5 rounded-2xl border border-gray-100">
-                    <div>
-                        <p class="text-xs text-gray-500 mb-1">Fase da Fábrica</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-user-tag mr-1"></i> Solicitante</p>
+                        <p class="font-bold text-gray-800" id="modal-sponsor">-</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-headset mr-1"></i> Responsável (Estúdio)</p>
+                        <p class="font-bold text-gray-800" id="modal-responsavel">-</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-layer-group mr-1"></i> Fase Atual</p>
                         <p class="font-bold text-[#FF5722]" id="modal-fase">-</p>
                     </div>
-                    <div>
-                        <p class="text-xs text-gray-500 mb-1">Nosso prazo com você</p>
-                        <p class="font-bold text-gray-800" id="modal-prazo">-</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-500 mb-1">Data da Gravação</p>
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-video mr-1"></i> Data de Gravação</p>
                         <p class="font-bold text-gray-800" id="modal-gravacao">-</p>
                     </div>
-                    <div>
-                        <p class="text-xs text-gray-500 mb-1">Responsável (Fábrica)</p>
-                        <p class="font-bold text-gray-800" id="modal-responsavel">-</p>
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-flag-checkered mr-1"></i> Prazo de Entrega</p>
+                        <p class="font-bold text-gray-800" id="modal-prazo">-</p>
                     </div>
                 </div>
             </div>
-            <div class="p-6 bg-white border-t border-gray-100 rounded-b-[24px] flex justify-center" id="modal-area-entrega"></div>
+
+            <div class="p-8 bg-gray-50 border-t border-gray-100 rounded-b-[24px]" id="modal-area-entrega"></div>
         </div>
     </div>
 
     <script>
-        // URL Oficial e Direta do seu Google Apps Script já sincronizada
+        // ====================================================================================
+        // URL DO WEB APP DO APPS SCRIPT
+        // ====================================================================================
         const googleAppUrl = "https://script.google.com/macros/s/AKfycbxntPEFXM6ATjyfIUHwkmBt0Ax3RvpcJYcD70N9P52BWT4-LhDP1QdxTd4s5HC5I42WJg/exec";
 
         let dadosGlobais = [];
+        let mesSelecionado = 'todos';
+        let textoBuscado = '';
 
         function abrirModal(id) { document.getElementById(id).classList.add('active'); }
         function fecharModal(id) { document.getElementById(id).classList.remove('active'); }
 
-        // Mapeia os status exatos com base nas cores da sua planilha
-        function obterDadosStatus(statusTexto) {
-            const txt = (statusTexto || '').toLowerCase().trim();
-            
-            if(txt.includes('conclu')) return { bg: 'bg-green-500', icon: 'fa-check', label: 'Concluído' };
-            if(txt.includes('andamento')) return { bg: 'bg-yellow-500', icon: 'fa-person-digging', label: 'Em andamento' };
-            if(txt.includes('revisão') || txt.includes('revisao')) return { bg: 'bg-blue-500', icon: 'fa-eye', label: 'Revisão' };
-            if(txt.includes('pausado')) return { bg: 'bg-gray-800', icon: 'fa-pause', label: 'Pausado' };
-            if(txt.includes('pendente')) return { bg: 'bg-red-400', icon: 'fa-clock', label: 'Pendente' };
-            
-            return { bg: 'bg-gray-400', icon: 'fa-circle-dot', label: statusTexto || 'Pendente' };
+        function normalizarTexto(texto) {
+            return (texto || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
         }
 
-        function atualizarGraficos(contagens) {
+        function obterDadosStatus(statusTexto) {
+            const txt = normalizarTexto(statusTexto);
+            if(txt.includes('conclu')) return { bg: 'bg-green-500', icon: 'fa-check', label: 'Concluído' };
+            if(txt.includes('andamento')) return { bg: 'bg-yellow-500', icon: 'fa-person-digging', label: 'Em andamento' };
+            if(txt.includes('revisao')) return { bg: 'bg-blue-500', icon: 'fa-eye', label: 'Revisão' };
+            if(txt.includes('pausado')) return { bg: 'bg-gray-800', icon: 'fa-pause', label: 'Pausado' };
+            if(txt.includes('pendente')) return { bg: 'bg-red-400', icon: 'fa-clock', label: 'Pendente' };
+            return { bg: 'bg-gray-400', icon: 'fa-circle-dot', label: statusTexto || 'Pendente' }; 
+        }
+
+        function atualizarIndicadores(dados) {
+            let contagens = { total: dados.length, concluido: 0, andamento: 0, pendente: 0 };
+
+            dados.forEach((p) => {
+                const statusInfo = obterDadosStatus(p.status);
+                if(statusInfo.label === 'Concluído') contagens.concluido++;
+                else if(statusInfo.label === 'Em andamento' || statusInfo.label === 'Revisão') contagens.andamento++;
+                else if(statusInfo.label === 'Pendente' || statusInfo.label === 'Pausado') contagens.pendente++;
+            });
+
+            document.getElementById('count-total').textContent = contagens.total;
+            document.getElementById('count-concluido').textContent = contagens.concluido;
+            document.getElementById('count-andamento').textContent = contagens.andamento;
+            document.getElementById('count-pendente').textContent = contagens.pendente;
+
             const total = contagens.total || 1; 
             const pctConcluido = Math.round((contagens.concluido / total) * 100);
             const pctAndamento = Math.round((contagens.andamento / total) * 100);
@@ -348,74 +377,150 @@
             document.getElementById('modal-fase').textContent = p.etapaAtual || '-';
             document.getElementById('modal-prazo').textContent = p.prazoFinal || '-';
             document.getElementById('modal-gravacao').textContent = p.dataGravacao || '-';
+            
+            // Aqui garantimos os papéis corretos
+            document.getElementById('modal-sponsor').textContent = p.sponsor || '-';
             document.getElementById('modal-responsavel').textContent = p.responsavel || '-';
 
             const areaEntrega = document.getElementById('modal-area-entrega');
             
-            if(p.status.toLowerCase().includes('conclu')) {
-                const linkParts = (p.linkAcesso || '').split('|');
-                const linkReal = linkParts[0].trim();
-                
-                if(linkReal.startsWith('http')) {
-                    areaEntrega.innerHTML = `<a href="${linkReal}" target="_blank" class="block w-full max-w-md bg-green-500 hover:bg-green-600 text-white text-center font-bold py-4 rounded-xl transition-colors shadow-lg"><i class="fa-solid fa-play-circle mr-2"></i> Assistir ao Vídeo Finalizado</a>`;
-                } else {
-                    areaEntrega.innerHTML = `<button disabled class="block w-full max-w-md bg-gray-100 text-gray-500 text-center font-bold py-4 rounded-xl cursor-not-allowed border border-gray-200"><i class="fa-solid fa-check-double mr-2"></i> Material Concluído (Sem link disponível)</button>`;
-                }
-            } else {
-                areaEntrega.innerHTML = `<button disabled class="block w-full max-w-md bg-gray-100 text-gray-500 text-center font-bold py-4 rounded-xl cursor-not-allowed border border-gray-200"><i class="fa-solid fa-lock mr-2"></i> O vídeo será liberado aqui quando estiver pronto</button>`;
+            // EXTRATOR INTELIGENTE DE LINKS
+            // Pega todo o texto da Coluna L e tenta encontrar URLs (começando com http ou https)
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            const linksEncontrados = (p.linkAcesso || '').match(urlRegex) || [];
+            
+            // Limpa caso o usuário tenha digitado um "|" colado no link sem espaço
+            const linksLimpos = linksEncontrados.map(l => l.replace(/\|$/, '').trim());
+            
+            // Tenta identificar qual é o Jira e qual é o de Vídeo (Drive, Youtube, etc)
+            const jiraLink = linksLimpos.find(l => l.includes('atlassian') || l.includes('jira'));
+            const videoLink = linksLimpos.find(l => !l.includes('atlassian') && !l.includes('jira'));
+
+            let botoesHtml = '';
+
+            // 1. Sempre mostra o botão do Jira se existir
+            if(jiraLink) {
+                botoesHtml += `
+                    <a href="${jiraLink}" target="_blank" class="w-full max-w-md bg-white hover:bg-gray-100 text-[#0A1128] font-bold py-3 px-4 rounded-xl transition-colors shadow-sm border border-gray-200 flex justify-center items-center gap-2 mb-3 mx-auto">
+                        <i class="fa-brands fa-jira text-blue-600"></i> Ver Chamado Original
+                    </a>
+                `;
             }
 
+            // 2. Lógica do Vídeo com base no status "Concluído"
+            if(p.status.toLowerCase().includes('conclu')) {
+                if(videoLink) {
+                    // Tem vídeo final liberado!
+                    botoesHtml += `
+                        <a href="${videoLink}" target="_blank" class="w-full max-w-md bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 mx-auto">
+                            <i class="fa-solid fa-play-circle text-xl"></i> Assistir Vídeo Finalizado
+                        </a>
+                    `;
+                } else if(jiraLink) {
+                    // Está concluído mas só tem o Jira. Como segurança, liberamos para o usuário se virar no Jira
+                    botoesHtml += `
+                        <button disabled class="w-full max-w-md bg-gray-200 text-gray-500 font-bold py-4 rounded-xl border border-gray-300 cursor-not-allowed flex justify-center items-center gap-2 mx-auto">
+                            <i class="fa-solid fa-check-double"></i> Concluído (Sem link de vídeo anexo)
+                        </button>
+                    `;
+                }
+            } else {
+                // Não está concluído
+                botoesHtml += `
+                    <button disabled class="w-full max-w-md bg-gray-200 text-gray-500 font-bold py-4 rounded-xl border border-gray-300 cursor-not-allowed flex justify-center items-center gap-2 mx-auto">
+                        <i class="fa-solid fa-lock"></i> O vídeo será liberado aqui ao finalizar
+                    </button>
+                `;
+            }
+
+            areaEntrega.innerHTML = botoesHtml;
             abrirModal('modal-detalhes');
         }
 
-        function renderizarTabela(dados) {
+        function renderizarTabela(dadosParaRenderizar) {
             const tbody = document.getElementById('tabela-demandas');
             tbody.innerHTML = '';
 
-            let contagens = { total: dados.length, concluido: 0, andamento: 0, pendente: 0 };
+            if (dadosParaRenderizar.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500 font-medium"><i class="fa-solid fa-folder-open text-gray-300 text-3xl mb-3 block"></i> Nenhum projeto encontrado com estes filtros.</td></tr>`;
+                return;
+            }
 
-            dados.forEach((p, index) => {
+            dadosParaRenderizar.forEach((p) => {
                 const statusInfo = obterDadosStatus(p.status);
-                
-                if(statusInfo.label === 'Concluído') contagens.concluido++;
-                else if(statusInfo.label === 'Em andamento' || statusInfo.label === 'Revisão') contagens.andamento++;
-                else if(statusInfo.label === 'Pendente' || statusInfo.label === 'Pausado') contagens.pendente++;
+                const originalIndex = dadosGlobais.indexOf(p);
 
                 tbody.innerHTML += `
-                    <tr class="hover:bg-gray-50 transition-colors cursor-pointer" onclick="abrirDetalhes(${index})">
+                    <tr class="hover:bg-gray-50 transition-colors cursor-pointer" onclick="abrirDetalhes(${originalIndex})">
                         <td class="py-4 px-6 font-bold text-gray-800"><i class="fa-solid fa-angle-right text-[#FF5722] text-xs mr-2"></i> ${p.demanda}</td>
-                        <td class="py-4 px-6">
+                        <td class="py-4 px-6 text-center">
                             <div class="flex justify-center flex-col items-center gap-1">
                                 <div class="status-dot ${statusInfo.bg}" title="${statusInfo.label}"><i class="fa-solid ${statusInfo.icon}"></i></div>
                                 <span class="text-[10px] font-bold text-gray-500 uppercase">${statusInfo.label}</span>
                             </div>
                         </td>
-                        <td class="py-4 px-6 text-gray-500 font-medium">${p.prazoFinal || '-'}</td>
-                        <td class="py-4 px-6 text-gray-600 font-semibold">${p.responsavel || '-'}</td>
+                        <td class="py-4 px-6 text-gray-600 font-semibold">${p.dataGravacao || '-'}</td>
+                        <td class="py-4 px-6 text-gray-500 font-medium">${p.sponsor || '-'}</td>
+                        <td class="py-4 px-6 text-[#1D4ED8] font-bold">${p.responsavel || '-'}</td>
                         <td class="py-4 px-6 text-center border-l border-gray-50">
                             <button class="w-10 h-10 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white text-gray-600 transition-colors shadow-sm"><i class="fa-solid fa-arrow-right"></i></button>
                         </td>
                     </tr>
                 `;
             });
-
-            document.getElementById('count-total').textContent = contagens.total;
-            document.getElementById('count-concluido').textContent = contagens.concluido;
-            document.getElementById('count-andamento').textContent = contagens.andamento;
-            document.getElementById('count-pendente').textContent = contagens.pendente;
-
-            atualizarGraficos(contagens);
         }
+
+        function aplicarFiltros() {
+            const dadosFiltrados = dadosGlobais.filter(projeto => {
+                const demanda = normalizarTexto(projeto.demanda);
+                const responsavel = normalizarTexto(projeto.responsavel);
+                const sponsor = normalizarTexto(projeto.sponsor);
+                
+                const matchTexto = demanda.includes(textoBuscado) || responsavel.includes(textoBuscado) || sponsor.includes(textoBuscado);
+                
+                let matchMes = true;
+                if (mesSelecionado !== 'todos') {
+                    const padraoMes = `/${mesSelecionado}/`; 
+                    matchMes = ((projeto.dataGravacao || '').includes(padraoMes)) || 
+                               ((projeto.prazoFinal || '').includes(padraoMes));
+                }
+                
+                return matchTexto && matchMes;
+            });
+            
+            renderizarTabela(dadosFiltrados);
+        }
+
+        document.getElementById('inputPesquisa').addEventListener('input', (e) => {
+            textoBuscado = normalizarTexto(e.target.value);
+            aplicarFiltros();
+        });
+
+        document.querySelectorAll('.month-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.month-btn').forEach(b => {
+                    b.classList.remove('bg-[#FF5722]', 'text-white', 'shadow-sm');
+                    b.classList.add('bg-gray-100', 'text-gray-500');
+                });
+                e.target.classList.remove('bg-gray-100', 'text-gray-500');
+                e.target.classList.add('bg-[#FF5722]', 'text-white', 'shadow-sm');
+
+                mesSelecionado = e.target.getAttribute('data-month');
+                aplicarFiltros();
+            });
+        });
 
         async function carregarDemandas() {
             try {
                 const response = await fetch(googleAppUrl);
                 dadosGlobais = await response.json();
-                renderizarTabela(dadosGlobais);
+                
+                atualizarIndicadores(dadosGlobais);
+                aplicarFiltros(); 
                 
                 setTimeout(() => { document.getElementById('loading-screen').classList.add('loader-hidden'); }, 800);
             } catch(e) {
-                document.getElementById('tabela-demandas').innerHTML = '<tr><td colspan="5" class="p-8 text-center text-red-500 font-bold"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Erro ao conectar com o banco de dados. Verifique a planilha!</td></tr>';
+                document.getElementById('tabela-demandas').innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500 font-bold"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Erro ao conectar com o banco de dados. Verifique a planilha!</td></tr>';
                 setTimeout(() => { document.getElementById('loading-screen').classList.add('loader-hidden'); }, 1000);
             }
         }
