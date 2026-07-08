@@ -65,7 +65,6 @@
         .bar-bg { background: #E2E8F0; border-radius: 999px; height: 8px; width: 100%; overflow: hidden; }
         .bar-fill { height: 100%; border-radius: 999px; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        /* Animações Premium para os Modais */
         .modal { opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100; padding: 10px; backdrop-filter: blur(5px); }
         .modal.active { opacity: 1; visibility: visible; }
         .modal-content { transform: scale(0.95) translateY(20px); opacity: 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); max-height: 95vh; display: flex; flex-direction: column;}
@@ -75,7 +74,6 @@
         .custom-scroll::-webkit-scrollbar-track { background: #F1F5F9; border-radius: 4px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
 
-        /* Tooltips e Timeline Animada */
         .timeline-container { position: relative; display: flex; justify-content: space-between; align-items: center; margin: 30px 0 20px 0; padding: 0 10px; }
         .timeline-line { position: absolute; top: 18px; left: 10px; right: 10px; height: 3px; background: #E2E8F0; z-index: 0; }
         .timeline-line-fill { position: absolute; top: 18px; left: 10px; height: 3px; background: #FF5A00; z-index: 1; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -87,7 +85,6 @@
         .timeline-step.completed .timeline-circle { background: #FF5A00; border-color: #FF5A00; color: white; }
         .timeline-step.active .timeline-circle { background: #FF5A00; border-color: #FF5A00; color: white; box-shadow: 0 0 0 4px white, 0 0 0 7px #FF5A00; transform: scale(1.1); }
         
-        /* O Segredo do Tooltip (Aparece ao passar o rato) */
         .timeline-tooltip {
             position: absolute; top: -35px; background-color: #0A1128; color: #FFF; font-size: 10px; font-weight: 800; 
             padding: 6px 10px; border-radius: 8px; white-space: nowrap; opacity: 0; visibility: hidden; 
@@ -96,7 +93,6 @@
         .timeline-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #0A1128 transparent transparent transparent; }
         .timeline-step:hover .timeline-tooltip { opacity: 1; visibility: visible; transform: translateY(0); }
 
-        /* Cartões de Equipa Animados */
         .team-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-left-width: 6px; }
         .team-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); }
     </style>
@@ -147,44 +143,44 @@
             </div>
         </div>
 
-        <!-- VISÃO DE PRODUÇÃO INTERATIVA (CARTÕES ASSERTIVOS) -->
+        <!-- VISÃO DE FILA DE TRABALHO (Foco em Etapas, sem Placares de números) -->
         <div class="bg-white rounded-[16px] md:rounded-[24px] shadow-sm border border-gray-100 mb-8 p-6">
             <div class="flex justify-between items-center mb-6 flex-wrap gap-2">
-                <h2 class="text-base md:text-xl font-black text-brisa-blue uppercase tracking-tight"><i class="fa-solid fa-users text-brisa-orange mr-2"></i> Dashboard de Produtividade</h2>
+                <h2 class="text-base md:text-xl font-black text-brisa-blue uppercase tracking-tight"><i class="fa-solid fa-users text-brisa-orange mr-2"></i> Filas de Trabalho da Equipa</h2>
                 <button onclick="limparFiltroEquipe()" id="btn-limpar-equipe" class="hidden text-xs bg-gray-100 text-gray-600 px-4 py-2 rounded-full font-bold hover:bg-gray-200 transition-colors shadow-sm"><i class="fa-solid fa-filter-circle-xmark mr-1"></i> Limpar Filtro</button>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 border-b border-gray-100 pb-6">
                 
                 <div id="card-Gilnei" onclick="filtrarPorEquipe('Gilnei', 'responsavel')" class="team-card bg-white border border-gray-100 border-l-gray-200 p-5 rounded-xl cursor-pointer">
-                    <div class="flex justify-between items-center mb-4">
+                    <div class="flex justify-between items-center mb-3">
                         <span class="font-black text-gray-800 text-base md:text-lg"><i class="fa-solid fa-user-tie text-brisa-blue mr-2"></i>Gilnei</span>
                         <span class="text-[9px] font-black bg-gray-100 text-gray-500 px-2 py-1 rounded uppercase tracking-widest" id="badge-Gilnei">Responsável</span>
                     </div>
-                    <div class="flex justify-between text-xs font-medium bg-gray-50 p-3 rounded-lg border border-gray-100">
-                        <div class="text-center w-1/2 border-r border-gray-200">Total<span class="block font-black text-xl text-gray-800" id="total-Gilnei">0</span></div>
-                        <div class="text-center w-1/2">Entregas<span class="block font-black text-xl text-green-500" id="concluido-Gilnei">0</span></div>
+                    <div class="mt-4 flex items-center justify-between text-xs font-bold text-gray-500 bg-gray-50 p-3 rounded-lg border border-gray-100 hover:bg-blue-50 transition-colors">
+                        <span>Visualizar fila de trabalho</span>
+                        <i class="fa-solid fa-arrow-right text-brisa-blue"></i>
                     </div>
                 </div>
                 
                 <div id="card-Marcos" onclick="filtrarPorEquipe('Marcos', 'responsavel')" class="team-card bg-white border border-gray-100 border-l-gray-200 p-5 rounded-xl cursor-pointer">
-                    <div class="flex justify-between items-center mb-4">
+                    <div class="flex justify-between items-center mb-3">
                         <span class="font-black text-gray-800 text-base md:text-lg"><i class="fa-solid fa-user-tie text-brisa-blue mr-2"></i>Marcos</span>
                         <span class="text-[9px] font-black bg-gray-100 text-gray-500 px-2 py-1 rounded uppercase tracking-widest" id="badge-Marcos">Responsável</span>
                     </div>
-                    <div class="flex justify-between text-xs font-medium bg-gray-50 p-3 rounded-lg border border-gray-100">
-                        <div class="text-center w-1/2 border-r border-gray-200">Total<span class="block font-black text-xl text-gray-800" id="total-Marcos">0</span></div>
-                        <div class="text-center w-1/2">Entregas<span class="block font-black text-xl text-green-500" id="concluido-Marcos">0</span></div>
+                    <div class="mt-4 flex items-center justify-between text-xs font-bold text-gray-500 bg-gray-50 p-3 rounded-lg border border-gray-100 hover:bg-blue-50 transition-colors">
+                        <span>Visualizar fila de trabalho</span>
+                        <i class="fa-solid fa-arrow-right text-brisa-blue"></i>
                     </div>
                 </div>
                 
                 <div id="card-Erick" onclick="filtrarPorEquipe('Erick', 'colaborador')" class="team-card bg-white border border-gray-100 border-l-gray-200 p-5 rounded-xl cursor-pointer">
-                    <div class="flex justify-between items-center mb-4">
+                    <div class="flex justify-between items-center mb-3">
                         <span class="font-black text-gray-800 text-base md:text-lg"><i class="fa-solid fa-user-gear text-brisa-orange mr-2"></i>Erick Gustavo</span>
                         <span class="text-[9px] font-black bg-gray-100 text-gray-500 px-2 py-1 rounded uppercase tracking-widest" id="badge-Erick">Colaborador</span>
                     </div>
-                    <div class="flex justify-between text-xs font-medium bg-gray-50 p-3 rounded-lg border border-gray-100">
-                        <div class="text-center w-1/2 border-r border-gray-200">Total<span class="block font-black text-xl text-gray-800" id="total-Erick">0</span></div>
-                        <div class="text-center w-1/2">Entregas<span class="block font-black text-xl text-green-500" id="concluido-Erick">0</span></div>
+                    <div class="mt-4 flex items-center justify-between text-xs font-bold text-gray-500 bg-gray-50 p-3 rounded-lg border border-gray-100 hover:bg-orange-50 transition-colors">
+                        <span>Visualizar fila de trabalho</span>
+                        <i class="fa-solid fa-arrow-right text-brisa-orange"></i>
                     </div>
                 </div>
             </div>
@@ -415,37 +411,13 @@
             };
         }
 
-        function calcularPainelEquipe(dados) {
-            let integrantes = {
-                'Gilnei': { total: 0, concluido: 0 },
-                'Marcos': { total: 0, concluido: 0 },
-                'Erick': { total: 0, concluido: 0 }
-            };
-
-            dados.forEach(p => {
-                const resp = p.responsavel || '';
-                const colab = p.colaborador || '';
-                const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
-
-                if (resp.includes('Gilnei')) { integrantes['Gilnei'].total++; if(statusInfo.label === 'Concluído') integrantes['Gilnei'].concluido++; }
-                if (resp.includes('Marcos') || resp.includes('Guilherme')) { integrantes['Marcos'].total++; if(statusInfo.label === 'Concluído') integrantes['Marcos'].concluido++; }
-                if (colab.includes('Erick') || colab.includes('Gustavo')) { integrantes['Erick'].total++; if(statusInfo.label === 'Concluído') integrantes['Erick'].concluido++; }
-            });
-
-            for (let chave in integrantes) {
-                const elTotal = document.getElementById(`total-${chave}`);
-                const elConcl = document.getElementById(`concluido-${chave}`);
-                if(elTotal) elTotal.textContent = integrantes[chave].total;
-                if(elConcl) elConcl.textContent = integrantes[chave].concluido;
-            }
-        }
-
+        // Nova lógica de Equipa (Apenas Filtro, Sem Placares de números)
         function filtrarPorEquipe(nome, cargo) {
             filtroEquipeNome = nome;
             filtroEquipeCargo = cargo;
             
             document.querySelectorAll('.team-card').forEach(c => {
-                c.classList.remove('border-l-brisa-blue', 'border-l-brisa-orange', 'bg-blue-50', 'bg-orange-50');
+                c.classList.remove('border-l-brisa-blue', 'border-l-brisa-orange');
                 c.classList.add('border-l-gray-200');
                 const badge = c.querySelector('span:nth-child(2)');
                 if(badge) {
@@ -461,10 +433,10 @@
                 badgeId.classList.remove('bg-gray-100', 'text-gray-500');
                 
                 if(cargo === 'responsavel') {
-                    cardId.classList.add('border-l-brisa-blue', 'bg-blue-50');
+                    cardId.classList.add('border-l-brisa-blue');
                     badgeId.classList.add('bg-blue-100', 'text-brisa-blue');
                 } else {
-                    cardId.classList.add('border-l-brisa-orange', 'bg-orange-50');
+                    cardId.classList.add('border-l-brisa-orange');
                     badgeId.classList.add('bg-orange-100', 'text-brisa-orange');
                 }
             }
@@ -479,7 +451,7 @@
             filtroEquipeNome = '';
             filtroEquipeCargo = '';
             document.querySelectorAll('.team-card').forEach(c => {
-                c.classList.remove('border-l-brisa-blue', 'border-l-brisa-orange', 'bg-blue-50', 'bg-orange-50');
+                c.classList.remove('border-l-brisa-blue', 'border-l-brisa-orange');
                 c.classList.add('border-l-gray-200');
                 const badge = c.querySelector('span:nth-child(2)');
                 if(badge) {
@@ -495,14 +467,16 @@
 
         function filtrarPorStatus(status) {
             filtroStatusNome = status;
+            
             const statuses = ['todos', 'concluido', 'andamento', 'fila'];
             statuses.forEach(s => {
                 const el = document.getElementById(`card-status-${s}`);
                 if(el) {
-                    el.classList.remove('active-filter');
-                    if(s === status) el.classList.add('active-filter');
+                    el.classList.remove('ring-4', 'ring-white');
+                    if(s === status) el.classList.add('ring-4', 'ring-white');
                 }
             });
+
             aplicarFiltrosCombinados();
         }
 
@@ -510,7 +484,7 @@
             const legenda = document.getElementById('filtro-legenda');
             if(legenda) {
                 if(filtroEquipeNome) {
-                    legenda.textContent = `Filtro: ${filtroEquipeNome}`;
+                    legenda.textContent = `(Filtrado por: ${filtroEquipeNome})`;
                     legenda.classList.remove('hidden');
                 } else {
                     legenda.classList.add('hidden');
@@ -617,6 +591,7 @@
         function renderizarTabela(dadosParaRenderizar) {
             const tbody = document.getElementById('tabela-demandas');
             if(!tbody) return;
+            
             tbody.innerHTML = '';
 
             if (dadosParaRenderizar.length === 0) {
@@ -633,17 +608,17 @@
 
                 let badgeGravacao = p.dataGravacao && p.dataGravacao.toLowerCase() !== 'a combinar' && p.dataGravacao !== '-' 
                     ? `<span class="bg-orange-50 text-brisa-orange font-bold px-2 py-1 rounded-md text-[10px] md:text-[11px] whitespace-nowrap"><i class="fa-solid fa-video mr-1"></i>${p.dataGravacao}</span>` 
-                    : `<span class="text-gray-400 font-semibold text-[10px] md:text-[11px]">A definir</span>`;
+                    : `<span class="text-gray-400 font-medium text-[10px] md:text-[11px]">A definir</span>`;
                     
                 let badgePrazo = p.prazoFinal && p.prazoFinal.toLowerCase() !== 'a combinar' && p.prazoFinal !== '-' 
-                    ? `<span class="bg-blue-50 text-brisa-blue font-bold px-2 py-1 rounded-md text-[10px] md:text-[11px] whitespace-nowrap"><i class="fa-regular fa-calendar mr-1"></i>${p.prazoFinal}</span>` 
-                    : `<span class="text-gray-400 font-semibold text-[10px] md:text-[11px]">A definir</span>`;
+                    ? `<span class="bg-blue-50 text-blue-700 font-bold px-2 py-1 rounded-md text-[10px] md:text-[11px] whitespace-nowrap"><i class="fa-regular fa-calendar mr-1"></i>${p.prazoFinal}</span>` 
+                    : `<span class="text-gray-400 font-medium text-[10px] md:text-[11px]">A definir</span>`;
 
-                let btnJiraHtml = infosLink.jira ? `<button onclick="window.open('${infosLink.jira}', '_blank'); event.stopPropagation();" class="w-8 h-8 rounded-full bg-blue-50 hover:bg-blue-600 hover:text-white text-blue-600 transition-transform hover:scale-110 shadow-sm flex justify-center items-center mr-2 border border-blue-100" title="Abrir Jira"><i class="fa-brands fa-jira text-xs md:text-sm"></i></button>` : '';
+                let btnJiraHtml = infosLink.jira ? `<a href="${infosLink.jira}" target="_blank" onclick="event.stopPropagation()" class="w-8 h-8 rounded-full bg-blue-50 hover:bg-blue-600 hover:text-white text-blue-600 transition-transform hover:scale-110 shadow-sm flex justify-center items-center mr-2 border border-blue-100" title="Abrir Jira"><i class="fa-brands fa-jira text-xs md:text-sm"></i></a>` : '';
 
                 tbody.innerHTML += `
-                    <tr class="hover:bg-blue-50/40 transition-colors cursor-pointer group border-b border-gray-50" onclick="abrirDetalhes(${originalIndex})">
-                        <td class="py-4 px-4 md:px-8 font-black text-brisa-blue truncate max-w-[150px] sm:max-w-[250px]"><i class="fa-solid fa-angle-right text-brisa-orange text-[10px] md:text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>${p.demanda || '-'}</td>
+                    <tr class="hover:bg-blue-50/40 transition-colors cursor-pointer group" onclick="abrirDetalhes(${originalIndex})">
+                        <td class="py-4 px-4 md:px-6 font-black text-brisa-blue truncate max-w-[150px] sm:max-w-[200px]"><i class="fa-solid fa-angle-right text-[#FF5A00] text-[10px] md:text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>${p.demanda || '-'}</td>
                         <td class="py-4 px-4 md:px-6 text-center">
                             <div class="flex justify-center flex-col items-center gap-1">
                                 <div class="status-dot ${statusInfo.bg}" title="${statusInfo.label}"><i class="fa-solid ${statusInfo.icon}"></i></div>
@@ -654,12 +629,12 @@
                         <td class="py-4 px-4 md:px-6 hidden lg:table-cell">${badgePrazo}</td>
                         <td class="py-4 px-4 md:px-6 text-[10px] md:text-xs text-gray-500 hidden sm:table-cell">
                             <span class="block">Resp: <strong class="text-brisa-blue font-black">${p.responsavel || '-'}</strong></span>
-                            <span class="block text-gray-400 truncate max-w-[120px]">Sol: ${p.sponsor || '-'}</span>
+                            <span class="block text-gray-400 truncate max-w-[120px]">Colab: ${p.colaborador || '-'}</span>
                         </td>
                         <td class="py-4 px-4 md:px-6 text-center">
                             <div class="flex justify-center items-center h-full">
                                 ${btnJiraHtml}
-                                <button class="w-8 h-8 rounded-full bg-[#0A1128] text-white flex justify-center items-center text-xs hover:scale-110 transition-transform shadow-sm"><i class="fa-solid fa-expand"></i></button>
+                                <button class="w-8 h-8 rounded-full bg-[#0A1128] text-white flex justify-center items-center text-xs shadow-sm hover:bg-gray-800 transition-colors"><i class="fa-solid fa-expand"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -667,75 +642,83 @@
             });
         }
 
-        document.getElementById('inputPesquisa').addEventListener('input', (e) => {
-            textoBuscado = normalizarTexto(e.target.value);
-            aplicarFiltrosCombinados();
+        document.addEventListener('DOMContentLoaded', () => {
+            const elInput = document.getElementById('inputPesquisa');
+            if(elInput) {
+                elInput.addEventListener('input', (e) => {
+                    textoBuscado = normalizarTexto(e.target.value);
+                    aplicarFiltrosCombinados();
+                });
+            }
+
+            const elForm = document.getElementById('project-form');
+            if(elForm) {
+                elForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const btnSubmit = document.getElementById('submit-btn');
+                    if(btnSubmit) btnSubmit.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Enviando...`;
+                    
+                    const payload = {
+                        projetoName: document.getElementById('projetoName').value,
+                        jiraLink: document.getElementById('jiraLink').value,
+                        sponsorName: document.getElementById('sponsorName').value,
+                        additionalInfo: document.getElementById('additionalInfo').value
+                    };
+                    
+                    try {
+                        await fetch(googleAppUrl, { 
+                            method: 'POST', 
+                            mode: 'no-cors', 
+                            headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                            body: JSON.stringify(payload) 
+                        });
+                        
+                        if(btnSubmit) {
+                            btnSubmit.classList.replace('bg-brisa-orange', 'bg-green-500');
+                            btnSubmit.innerHTML = `<i class="fa-solid fa-check mr-2"></i> Sucesso!`;
+                        }
+                        
+                        setTimeout(() => { 
+                            fecharModal('modal-novo'); 
+                            if(btnSubmit) {
+                                btnSubmit.classList.replace('bg-green-500', 'bg-brisa-orange');
+                                btnSubmit.innerHTML = `<i class="fa-solid fa-calendar-check mr-2"></i> Confirmar`;
+                            }
+                            elForm.reset();
+                            const screen = document.getElementById('loading-screen');
+                            if(screen) screen.classList.remove('loader-hidden');
+                            carregarDemandas(); 
+                        }, 1500);
+
+                    } catch(error) {
+                        if(btnSubmit) btnSubmit.innerHTML = `Erro. Tente Novamente.`;
+                    }
+                });
+            }
+
+            carregarDemandas();
         });
 
         async function carregarDemandas() {
             try {
-                // Fetch puro sem cache para tempo real absoluto
-                const response = await fetch(`${googleAppUrl}?t=${new Date().getTime()}`, { cache: "no-store" });
-                dadosGlobais = await response.json();
+                const urlComBuster = `${googleAppUrl}?nocache=${new Date().getTime()}`;
+                const response = await fetch(urlComBuster, { method: 'GET', cache: 'no-store' });
                 
+                dadosGlobais = await response.json();
                 atualizarIndicadores(dadosGlobais);
-                calcularPainelEquipe(dadosGlobais); 
                 filtrarPorStatus('todos');
                 
                 const screen = document.getElementById('loading-screen');
                 if(screen) screen.classList.add('loader-hidden');
+
             } catch(e) {
                 const tbody = document.getElementById('tabela-demandas');
-                if(tbody) tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-red-500 font-bold"><i class="fa-solid fa-triangle-exclamation mr-2 text-2xl"></i> Erro Crítico: Impossível conectar à Planilha. Recarregue a página.</td></tr>`;
+                if(tbody) tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-red-500 font-bold"><i class="fa-solid fa-triangle-exclamation mr-2 text-2xl"></i> Erro Crítico: Impossível conectar à Planilha.</td></tr>`;
+                
                 const screen = document.getElementById('loading-screen');
                 if(screen) screen.classList.add('loader-hidden');
             }
         }
-
-        document.getElementById('project-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btnSubmit = document.getElementById('submit-btn');
-            if(btnSubmit) btnSubmit.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Processando...`;
-            
-            const payload = {
-                projetoName: document.getElementById('projetoName').value,
-                jiraLink: document.getElementById('jiraLink').value,
-                sponsorName: document.getElementById('sponsorName').value,
-                additionalInfo: document.getElementById('additionalInfo').value
-            };
-            
-            try {
-                await fetch(googleAppUrl, { 
-                    method: 'POST', 
-                    mode: 'no-cors', 
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
-                    body: JSON.stringify(payload) 
-                });
-                
-                if(btnSubmit) {
-                    btnSubmit.classList.replace('bg-brisa-orange', 'bg-green-500');
-                    btnSubmit.innerHTML = `<i class="fa-solid fa-check mr-2"></i> Concluído!`;
-                }
-                
-                setTimeout(() => { 
-                    fecharModal('modal-novo'); 
-                    if(btnSubmit) {
-                        btnSubmit.classList.replace('bg-green-500', 'bg-brisa-orange');
-                        btnSubmit.innerHTML = `<i class="fa-solid fa-calendar-check mr-2"></i> Confirmar`;
-                    }
-                    document.getElementById('project-form').reset();
-                    const screen = document.getElementById('loading-screen');
-                    if(screen) screen.classList.remove('loader-hidden');
-                    carregarDemandas();
-                }, 1000);
-
-            } catch(error) {
-                if(btnSubmit) btnSubmit.innerHTML = `Erro de Conexão.`;
-            }
-        });
-
-        // Inicializa o sistema ao carregar a página
-        window.addEventListener('DOMContentLoaded', carregarDemandas);
     </script>
 </body>
 </html>
