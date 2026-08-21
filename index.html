@@ -1,187 +1,62 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fábrica de Conteúdo | Unibrisa</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 576 512%22><path fill=%22%23FF5A00%22 d=%22M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z%22/></svg>" type="image/svg+xml">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: { extend: { fontFamily: { sans: ['Montserrat', 'sans-serif'] }, colors: { brisa: { blue: '#09132E', orange: '#FF5A00', light: '#F8FAFC', card: '#111D42' } } } }
-        }
-    </script>
-    <style>
-        body { background-color: #F8FAFC; color: #1E293B; overflow-x: hidden; }
-        .header-bg { background-color: #09132E; background-image: radial-gradient(circle at right top, #111D42 0%, #09132E 100%); border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; padding-bottom: 6rem; box-shadow: 0 10px 30px rgba(9, 19, 46, 0.2); }
-        .stat-card { border-radius: 16px; color: white; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; }
-        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.3); }
-        .bg-card-blue { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
-        .bg-card-neutral { background: linear-gradient(135deg, #64748B, #475569); }
-        .bg-card-yellow { background: linear-gradient(135deg, #F59E0B, #D97706); }
-        .bg-card-green { background: linear-gradient(135deg, #10B981, #059669); }
-        .status-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; }
-        .modal { opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 100; padding: 10px; backdrop-filter: blur(5px); }
-        .modal.active { opacity: 1; visibility: visible; }
-        .modal-content { transform: scale(0.95) translateY(20px); opacity: 0; transition: all 0.3s ease; max-height: 95vh; display: flex; flex-direction: column;}
-        .modal.active .modal-content { transform: scale(1) translateY(0); opacity: 1; }
-        .team-card { transition: all 0.3s ease; border-left-width: 6px; }
-        .team-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); }
-    </style>
-</head>
-<body class="antialiased">
-
-    <!-- CABEÇALHO -->
-    <div class="header-bg pt-10 px-4 sm:px-8 relative">
-        <div class="max-w-[1300px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex flex-col items-center md:items-start gap-1">
-                <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Fábrica de Conteúdo" class="h-24 object-contain filter brightness-0 invert">
-                <h1 class="text-xl font-black text-white tracking-tight uppercase mt-2">Um jeito mais fácil de acompanhar seus vídeos</h1>
-            </div>
-        </div>
-    </div>
-
-    <main class="max-w-[1300px] mx-auto px-4 sm:px-8 relative z-10">
-        
-        <!-- CARTÕES DE STATUS -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 -mt-12 mb-8">
-            <div class="stat-card bg-card-blue p-6 ring-4 ring-white">
-                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-4"><i class="fa-solid fa-folder-open"></i></div>
-                <h3 class="text-4xl font-black">12</h3><p class="text-sm font-bold opacity-90 mt-1 uppercase">Total de Demandas</p>
-            </div>
-            <div class="stat-card bg-card-neutral p-6">
-                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-4"><i class="fa-solid fa-layer-group"></i></div>
-                <h3 class="text-4xl font-black">3</h3><p class="text-sm font-bold opacity-90 mt-1 uppercase">Na Fila</p>
-            </div>
-            <div class="stat-card bg-card-yellow p-6">
-                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-4"><i class="fa-solid fa-person-digging"></i></div>
-                <h3 class="text-4xl font-black">5</h3><p class="text-sm font-bold opacity-90 mt-1 uppercase">Em Produção</p>
-            </div>
-            <div class="stat-card bg-card-green p-6">
-                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-4"><i class="fa-solid fa-check-double"></i></div>
-                <h3 class="text-4xl font-black">4</h3><p class="text-sm font-bold opacity-90 mt-1 uppercase">Concluídos</p>
-            </div>
-        </div>
-
-        <!-- NOSSA EQUIPE -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 mb-8 p-6">
-            <h2 class="text-xl font-black text-brisa-blue uppercase tracking-tight mb-6"><i class="fa-solid fa-users text-brisa-orange mr-2"></i> Especialistas da Fábrica</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                <div class="team-card bg-white border border-gray-100 border-l-brisa-blue p-5 rounded-xl cursor-pointer">
-                    <span class="font-black text-gray-800 text-lg block mb-1"><i class="fa-solid fa-user-tie text-brisa-blue mr-2"></i>Gilnei Laurindo</span>
-                    <span class="text-xs font-black bg-blue-100 text-brisa-blue px-2 py-1 rounded uppercase">Apoio nas Demandas</span>
-                </div>
-                <div class="team-card bg-white border border-gray-100 border-l-brisa-orange p-5 rounded-xl cursor-pointer">
-                    <span class="font-black text-gray-800 text-lg block mb-1"><i class="fa-solid fa-video text-brisa-orange mr-2"></i>Marcos Guilherme</span>
-                    <span class="text-xs font-black bg-orange-100 text-brisa-orange px-2 py-1 rounded uppercase">Gravação e Cortes</span>
-                </div>
-                <div class="team-card bg-white border border-gray-100 border-l-purple-500 p-5 rounded-xl cursor-pointer">
-                    <span class="font-black text-gray-800 text-lg block mb-1"><i class="fa-solid fa-paint-roller text-purple-500 mr-2"></i>Erick Gustavo</span>
-                    <span class="text-xs font-black bg-purple-100 text-purple-600 px-2 py-1 rounded uppercase">Refinamentos e Designer</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- RELAÇÃO DE PROJETOS -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 mb-12 overflow-hidden p-8">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-black text-brisa-blue uppercase"><i class="fa-solid fa-table-list text-blue-600 mr-2"></i> Caixa de Entrada Compartilhada</h2>
-                <div class="flex gap-3">
-                    <button onclick="abrirModal('modal-templates')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-full transition-colors flex items-center gap-2">
-                        <i class="fa-solid fa-file-lines"></i> Guia e Templates
-                    </button>
-                    <button onclick="abrirModal('modal-novo')" class="bg-brisa-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full transition-colors flex items-center gap-2 shadow-md">
-                        <i class="fa-solid fa-video"></i> Agendar Gravação
-                    </button>
-                </div>
+<!-- VISÃO DE MATERIAIS DE APOIO E TEMPLATES (ABA 3 E ABA 4) -->
+        <div class="bg-white rounded-[16px] md:rounded-[24px] shadow-sm border border-gray-100 mb-8 p-6">
+            <div class="mb-6">
+                <h2 class="text-base md:text-xl font-black text-brisa-blue uppercase tracking-tight">
+                    <i class="fa-solid fa-folder-tree text-brisa-orange mr-2"></i> Templates e Padrões de Qualidade
+                </h2>
+                <p class="text-xs text-gray-500 mt-1 font-semibold">Baixe os materiais de apoio para planejar, roteirizar e gravar com excelência.</p>
             </div>
             
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-gray-50 text-gray-500 text-xs uppercase border-b border-gray-200">
-                        <th class="py-4 px-6 font-black">Demanda</th>
-                        <th class="py-4 px-6 font-black text-center">Status</th>
-                        <th class="py-4 px-6 font-black">Data Gravação</th>
-                    </tr>
-                </thead>
-                <tbody class="text-sm text-gray-700 divide-y divide-gray-100">
-                    <tr class="hover:bg-blue-50/40 cursor-pointer">
-                        <td class="py-4 px-6 font-black text-brisa-blue">Treinamento Vendas</td>
-                        <td class="py-4 px-6 text-center"><span class="bg-slate-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Na Fila</span></td>
-                        <td class="py-4 px-6 font-medium text-gray-400">A definir</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
-
-    <!-- MODAL DE AGENDAMENTO -->
-    <div id="modal-novo" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/90" onclick="if(event.target.id === 'modal-novo') document.getElementById('modal-novo').classList.remove('active')">
-        <div class="modal-content bg-white rounded-2xl w-full max-w-5xl h-[85vh] shadow-2xl relative flex overflow-hidden m-4">
-            <button onclick="document.getElementById('modal-novo').classList.remove('active')" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 text-gray-600 font-bold z-20 hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
-            <div class="w-1/3 p-8 bg-gray-50 flex flex-col overflow-y-auto border-r border-gray-200">
-                <h3 class="text-2xl font-black text-brisa-blue uppercase mb-4"><i class="fa-solid fa-video text-brisa-orange mr-2"></i> Solicitar Gravação</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 
-                <!-- CHECKLIST ALERT -->
-                <div class="bg-orange-100 border-l-4 border-brisa-orange p-4 rounded mb-6">
-                    <p class="text-xs font-bold text-orange-800 uppercase mb-2"><i class="fa-solid fa-triangle-exclamation"></i> Preparação Importante</p>
-                    <ul class="text-[11px] text-orange-900 space-y-1 font-medium">
-                        <li>• Defina o objetivo do treinamento.</li>
-                        <li>• Revise e aprove o roteiro.</li>
-                        <li>• <strong>Obrigatório:</strong> Use farda laranja no dia!</li>
-                    </ul>
+                <!-- 1. Checklist do Cliente -->
+                <div class="bg-gray-50 border border-gray-200 p-5 rounded-xl hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-brisa-blue"><i class="fa-solid fa-list-check"></i></div>
+                            <h3 class="font-black text-gray-800 text-sm uppercase tracking-wide">Checklist Cliente</h3>
+                        </div>
+                        <p class="text-[11px] text-gray-500 mb-4 font-medium">Guia para o dia da gravação: farda laranja, postura e ensaio.</p>
+                    </div>
+                    <button class="w-full bg-white border border-gray-200 hover:border-brisa-blue text-brisa-blue text-xs font-bold py-2 rounded-lg transition-colors"><i class="fa-solid fa-download mr-1"></i> Baixar PDF</button>
                 </div>
 
-                <form id="project-form" class="space-y-4">
-                    <div><label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Nome da Demanda</label><input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-xl"></div>
-                    <div><label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Solicitante</label><input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-xl"></div>
-                    <button type="button" class="w-full bg-brisa-orange hover:bg-orange-600 text-white font-black py-4 rounded-xl text-sm shadow-md uppercase mt-4">Confirmar Agendamento</button>
-                </form>
-            </div>
-            <div class="w-2/3 bg-white relative"><iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0ZxXo16zADmQ5cZDtfMXCUb3stCgT46ety0XOExviZh8sRXPMquIK5-EvClrxsqt4EzpRBWPcs?gv=true" class="w-full h-full border-none"></iframe></div>
-        </div>
-    </div>
+                <!-- 2. Template: Script de Treinamento -->
+                <div class="bg-gray-50 border border-gray-200 p-5 rounded-xl hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-brisa-orange"><i class="fa-solid fa-file-lines"></i></div>
+                            <h3 class="font-black text-gray-800 text-sm uppercase tracking-wide">Script Treinamento</h3>
+                        </div>
+                        <p class="text-[11px] text-gray-500 mb-4 font-medium">Estrutura completa: Abertura, Conteúdo, Interação e Encerramento.</p>
+                    </div>
+                    <button class="w-full bg-white border border-gray-200 hover:border-brisa-orange text-brisa-orange text-xs font-bold py-2 rounded-lg transition-colors"><i class="fa-solid fa-download mr-1"></i> Baixar Template</button>
+                </div>
 
-    <!-- MODAL DE TEMPLATES -->
-    <div id="modal-templates" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/90" onclick="if(event.target.id === 'modal-templates') document.getElementById('modal-templates').classList.remove('active')">
-        <div class="modal-content bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] shadow-2xl relative p-8 overflow-y-auto m-4">
-            <button onclick="document.getElementById('modal-templates').classList.remove('active')" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-gray-100 text-gray-600 font-bold"><i class="fa-solid fa-xmark"></i></button>
-            <h2 class="text-2xl font-black text-brisa-blue uppercase tracking-tight mb-6"><i class="fa-solid fa-file-signature text-brisa-orange"></i> Nossos Modelos Oficiais</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- SCRIPT DE TREINAMENTO -->
-                <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                    <h3 class="font-black text-brisa-blue mb-3 uppercase">Script de Treinamento</h3>
-                    <p class="text-xs text-gray-600 mb-4">Para conteúdos mais longos e estruturados.</p>
-                    <ul class="text-sm text-gray-700 space-y-2 font-medium">
-                        <li><strong>1. Abertura:</strong> Boas-vindas e apresentação.</li>
-                        <li><strong>2. Propósito:</strong> Reforçar Missão, Visão e Valores Unibrisa.</li>
-                        <li><strong>3. Objetivo:</strong> O que será aprendido.</li>
-                        <li><strong>4. Conteúdo:</strong> Explicações e exemplos práticos.</li>
-                        <li><strong>5. Encerramento:</strong> Resumo, dúvidas e próximos passos.</li>
-                    </ul>
+                <!-- 3. Template: Pílula de Conhecimento -->
+                <div class="bg-gray-50 border border-gray-200 p-5 rounded-xl hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-brisa-orange"><i class="fa-solid fa-capsules"></i></div>
+                            <h3 class="font-black text-gray-800 text-sm uppercase tracking-wide">Pílula Rápida</h3>
+                        </div>
+                        <p class="text-[11px] text-gray-500 mb-4 font-medium">Formato ágil de 5 a 7 minutos com dicas e erros comuns a evitar.</p>
+                    </div>
+                    <button class="w-full bg-white border border-gray-200 hover:border-brisa-orange text-brisa-orange text-xs font-bold py-2 rounded-lg transition-colors"><i class="fa-solid fa-download mr-1"></i> Baixar Template</button>
                 </div>
-                
-                <!-- PÍLULA DE CONHECIMENTO -->
-                <div class="bg-orange-50 p-6 rounded-xl border border-orange-200">
-                    <h3 class="font-black text-brisa-orange mb-3 uppercase">Pílula de Conhecimento</h3>
-                    <p class="text-xs text-gray-600 mb-4">Para vídeos rápidos e objetivos (até 10 min).</p>
-                    <ul class="text-sm text-gray-700 space-y-2 font-medium">
-                        <li><strong>1. Introdução:</strong> Tema e objetivo direto.</li>
-                        <li><strong>2. O que é?</strong> Definição breve.</li>
-                        <li><strong>3. Por que é importante?</strong> Impacto real.</li>
-                        <li><strong>4. Como aplicar?</strong> Dicas práticas.</li>
-                        <li><strong>5. Erros comuns:</strong> O que evitar.</li>
-                    </ul>
+
+                <!-- 4. Checklist de Produção (Equipe) -->
+                <div class="bg-brisa-blue border border-brisa-blue p-5 rounded-xl hover:shadow-md transition-shadow flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 opacity-10"><i class="fa-solid fa-video text-6xl text-white"></i></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white"><i class="fa-solid fa-clipboard-check"></i></div>
+                            <h3 class="font-black text-white text-sm uppercase tracking-wide">Checklist Produção</h3>
+                        </div>
+                        <p class="text-[11px] text-gray-300 mb-4 font-medium">Uso interno: Equipamentos, iluminação, áudio e enquadramento.</p>
+                    </div>
+                    <button class="relative z-10 w-full bg-brisa-orange hover:bg-orange-600 border-none text-white text-xs font-bold py-2 rounded-lg transition-colors"><i class="fa-solid fa-lock mr-1"></i> Área da Equipe</button>
                 </div>
+
             </div>
         </div>
-    </div>
-
-    <script>
-        function abrirModal(id) { document.getElementById(id).classList.add('active'); }
-    </script>
-</body>
-</html>
