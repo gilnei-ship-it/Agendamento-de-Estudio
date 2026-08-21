@@ -1,62 +1,375 @@
-<!-- VISÃO DE MATERIAIS DE APOIO E TEMPLATES (ABA 3 E ABA 4) -->
-        <div class="bg-white rounded-[16px] md:rounded-[24px] shadow-sm border border-gray-100 mb-8 p-6">
-            <div class="mb-6">
-                <h2 class="text-base md:text-xl font-black text-brisa-blue uppercase tracking-tight">
-                    <i class="fa-solid fa-folder-tree text-brisa-orange mr-2"></i> Templates e Padrões de Qualidade
-                </h2>
-                <p class="text-xs text-gray-500 mt-1 font-semibold">Baixe os materiais de apoio para planejar, roteirizar e gravar com excelência.</p>
-            </div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fábrica de Conteúdo</title>
+    <style>
+        /* Estilos Globais */
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* 🧭 Cabeçalho e Navegação */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .jira-badge {
+            background-color: #0052CC;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Navegação em Abas */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* Área de Conteúdo principal */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilos de Formulário (Aba 1) */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Estilos de Tabela (Aba 2) */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .status {
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status.doing { background-color: #fef08a; color: #854d0e; }
+        .status.done { background-color: #bbf7d0; color: #166534; }
+        .status.todo { background-color: #e5e7eb; color: #374151; }
+
+        /* Grade de Cards (Aba 3 e 4) */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* 📄 Rodapé */
+        footer {
+            background-color: var(--card-bg);
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-top">
+            <div class="logo">🏭 Fábrica de Conteúdo</div>
+            <div class="jira-badge">⚙️ Jira Sync Ativo</div>
+        </div>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab('aba1')">🎬 Solicitar Novo Conteúdo</button>
+            <button class="tab-btn" onclick="openTab('aba2')">🔍 Acompanhar Solicitações</button>
+            <button class="tab-btn" onclick="openTab('aba3')">📝 Templates e Ajuda</button>
+            <button class="tab-btn" onclick="openTab('aba4')">📚 Treinamento e Padrões</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="aba1" class="tab-content active">
+            <h2>Criar Nova Solicitação de Conteúdo</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Preencha os dados abaixo. Um card será criado automaticamente no Jira.</p>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <form onsubmit="event.preventDefault(); alert('Solicitação enviada e sincronizada com o Jira!');">
+                <div class="form-group">
+                    <label>Título do Conteúdo</label>
+                    <input type="text" placeholder="Ex: Artigo sobre Lançamento do Produto X" required>
+                </div>
                 
-                <!-- 1. Checklist do Cliente -->
-                <div class="bg-gray-50 border border-gray-200 p-5 rounded-xl hover:shadow-md transition-shadow flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-brisa-blue"><i class="fa-solid fa-list-check"></i></div>
-                            <h3 class="font-black text-gray-800 text-sm uppercase tracking-wide">Checklist Cliente</h3>
-                        </div>
-                        <p class="text-[11px] text-gray-500 mb-4 font-medium">Guia para o dia da gravação: farda laranja, postura e ensaio.</p>
-                    </div>
-                    <button class="w-full bg-white border border-gray-200 hover:border-brisa-blue text-brisa-blue text-xs font-bold py-2 rounded-lg transition-colors"><i class="fa-solid fa-download mr-1"></i> Baixar PDF</button>
+                <div class="form-group">
+                    <label>Formato / Tipo</label>
+                    <select required>
+                        <option value="">Selecione...</option>
+                        <option value="blog">Artigo para Blog</option>
+                        <option value="social">Post Redes Sociais</option>
+                        <option value="email">Email Marketing / Newsletter</option>
+                        <option value="video">Roteiro de Vídeo</option>
+                    </select>
                 </div>
 
-                <!-- 2. Template: Script de Treinamento -->
-                <div class="bg-gray-50 border border-gray-200 p-5 rounded-xl hover:shadow-md transition-shadow flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-brisa-orange"><i class="fa-solid fa-file-lines"></i></div>
-                            <h3 class="font-black text-gray-800 text-sm uppercase tracking-wide">Script Treinamento</h3>
-                        </div>
-                        <p class="text-[11px] text-gray-500 mb-4 font-medium">Estrutura completa: Abertura, Conteúdo, Interação e Encerramento.</p>
-                    </div>
-                    <button class="w-full bg-white border border-gray-200 hover:border-brisa-orange text-brisa-orange text-xs font-bold py-2 rounded-lg transition-colors"><i class="fa-solid fa-download mr-1"></i> Baixar Template</button>
+                <div class="form-group">
+                    <label>Data Limite (Deadline)</label>
+                    <input type="date" required>
                 </div>
 
-                <!-- 3. Template: Pílula de Conhecimento -->
-                <div class="bg-gray-50 border border-gray-200 p-5 rounded-xl hover:shadow-md transition-shadow flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-brisa-orange"><i class="fa-solid fa-capsules"></i></div>
-                            <h3 class="font-black text-gray-800 text-sm uppercase tracking-wide">Pílula Rápida</h3>
-                        </div>
-                        <p class="text-[11px] text-gray-500 mb-4 font-medium">Formato ágil de 5 a 7 minutos com dicas e erros comuns a evitar.</p>
-                    </div>
-                    <button class="w-full bg-white border border-gray-200 hover:border-brisa-orange text-brisa-orange text-xs font-bold py-2 rounded-lg transition-colors"><i class="fa-solid fa-download mr-1"></i> Baixar Template</button>
+                <div class="form-group">
+                    <label>Briefing / Descrição Detalhada</label>
+                    <textarea rows="5" placeholder="Público-alvo, objetivo principal, palavras-chave..." required></textarea>
                 </div>
 
-                <!-- 4. Checklist de Produção (Equipe) -->
-                <div class="bg-brisa-blue border border-brisa-blue p-5 rounded-xl hover:shadow-md transition-shadow flex flex-col justify-between relative overflow-hidden">
-                    <div class="absolute -right-4 -top-4 opacity-10"><i class="fa-solid fa-video text-6xl text-white"></i></div>
-                    <div class="relative z-10">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white"><i class="fa-solid fa-clipboard-check"></i></div>
-                            <h3 class="font-black text-white text-sm uppercase tracking-wide">Checklist Produção</h3>
-                        </div>
-                        <p class="text-[11px] text-gray-300 mb-4 font-medium">Uso interno: Equipamentos, iluminação, áudio e enquadramento.</p>
-                    </div>
-                    <button class="relative z-10 w-full bg-brisa-orange hover:bg-orange-600 border-none text-white text-xs font-bold py-2 rounded-lg transition-colors"><i class="fa-solid fa-lock mr-1"></i> Área da Equipe</button>
-                </div>
+                <button type="submit" class="btn">Enviar Solicitação</button>
+            </form>
+        </div>
 
+        <div id="aba2" class="tab-content">
+            <h2>Acompanhamento (Sincronizado com Jira)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Jira</th>
+                        <th>Título</th>
+                        <th>Formato</th>
+                        <th>Data Limite</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#">#CON-104</a></td>
+                        <td>Campanha de Black Friday</td>
+                        <td>Redes Sociais</td>
+                        <td>25/08/2026</td>
+                        <td><span class="status doing">Em Produção</span></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">#CON-103</a></td>
+                        <td>Newsletter de Agosto</td>
+                        <td>Email</td>
+                        <td>22/08/2026</td>
+                        <td><span class="status done">Finalizado</span></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">#CON-105</a></td>
+                        <td>Artigo: Futuro da IA</td>
+                        <td>Blog</td>
+                        <td>30/08/2026</td>
+                        <td><span class="status todo">Na Fila</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="aba3" class="tab-content">
+            <h2>Templates Oficiais</h2>
+            <p>Utilize as estruturas abaixo para facilitar a criação de materiais fora da esteira principal.</p>
+            
+            <div class="grid-cards">
+                <div class="card">
+                    <h3>📑 Template de Artigo (SEO)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Estrutura ideal para rankeamento no Google com H1, H2 e CTA.</p>
+                    <br>
+                    <button class="btn" style="width: 100%; font-size: 0.9rem;">Baixar Word (.docx)</button>
+                </div>
+                <div class="card">
+                    <h3>📱 Carrossel Instagram</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Template no Canva com as margens de segurança e identidade visual.</p>
+                    <br>
+                    <button class="btn" style="width: 100%; font-size: 0.9rem; background-color: #8b5cf6;">Abrir no Canva</button>
+                </div>
+                <div class="card">
+                    <h3>📧 E-mail Marketing</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Estrutura de copy (AIDA) para conversão em e-mails.</p>
+                    <br>
+                    <button class="btn" style="width: 100%; font-size: 0.9rem;">Ver Documento</button>
+                </div>
             </div>
         </div>
+
+        <div id="aba4" class="tab-content">
+            <h2>Manual de Tom e Voz da Marca</h2>
+            <div style="margin-top: 1.5rem; line-height: 1.6;">
+                <h3>Regras de Ouro:</h3>
+                <ul>
+                    <li><strong>Clareza em primeiro lugar:</strong> Evite jargões complexos que o usuário final não entenda.</li>
+                    <li><strong>Tom empático e direto:</strong> Nossa comunicação deve soar como uma conversa entre profissionais.</li>
+                    <li><strong>Formatação:</strong> Parágrafos curtos (máximo 4 linhas) e uso de <i>bullet points</i> para escaneabilidade.</li>
+                </ul>
+                <hr style="border: 0; border-top: 1px solid var(--border); margin: 2rem 0;">
+                <h3>Vídeo de Onboarding</h3>
+                <div style="background: #e5e7eb; height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                    <p style="color: var(--text-muted);">▶ Player de Vídeo Aqui</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Fábrica de Conteúdo &copy; 2026. Desenvolvido para gestão ágil e integração via API do Jira.</p>
+    </footer>
+
+    <script>
+        function openTab(tabId) {
+            // Esconde todo o conteúdo
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove a classe 'active' de todos os botões
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Mostra o conteúdo clicado e marca o botão como ativo
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
