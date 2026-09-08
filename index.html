@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Gerencial | DHO Produção Visual</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 576 512%22><path fill=%22%23FF5A00%22 d=%22M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z%22/></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 576 512%22><path fill=%22%232563EB%22 d=%22M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z%22/></svg>" type="image/svg+xml">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -64,7 +64,6 @@
             cursor: pointer;
         }
         .stat-card:hover { transform: translateY(-5px); box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.3); }
-        .stat-card.active-filter { box-shadow: 0 0 0 4px white, 0 0 0 6px #FF5A00; transform: translateY(-5px); }
 
         .bg-card-blue { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
         .bg-card-green { background: linear-gradient(135deg, #10B981, #059669); }
@@ -92,14 +91,14 @@
         /* Timeline (Modal Detalhes) */
         .timeline-container { position: relative; display: flex; justify-content: space-between; align-items: center; margin: 30px 0 20px 0; padding: 0 10px; }
         .timeline-line { position: absolute; top: 18px; left: 10px; right: 10px; height: 3px; background: #E2E8F0; z-index: 0; }
-        .timeline-line-fill { position: absolute; top: 18px; left: 10px; height: 3px; background: #FF5A00; z-index: 1; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .timeline-step { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 20%; cursor: pointer; }
+        .timeline-line-fill { position: absolute; top: 18px; left: 10px; height: 3px; background: #2563EB; z-index: 1; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .timeline-step { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 20%; }
         .timeline-circle { 
             width: 38px; height: 38px; border-radius: 50%; background: #FFF; border: 3px solid #E2E8F0; 
             display: flex; align-items: center; justify-content: center; font-size: 15px; color: #CBD5E1; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .timeline-step.completed .timeline-circle { background: #FF5A00; border-color: #FF5A00; color: white; }
-        .timeline-step.active .timeline-circle { background: #FF5A00; border-color: #FF5A00; color: white; box-shadow: 0 0 0 4px white, 0 0 0 7px #FF5A00; transform: scale(1.1); }
+        .timeline-step.completed .timeline-circle { background: #2563EB; border-color: #2563EB; color: white; }
+        .timeline-step.active .timeline-circle { background: #2563EB; border-color: #2563EB; color: white; box-shadow: 0 0 0 4px white, 0 0 0 7px #2563EB; transform: scale(1.1); }
         
         .team-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-left-width: 6px; position: relative; }
         .team-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); }
@@ -108,9 +107,9 @@
             display: flex; align-items: center; gap: 15px; background: white; padding: 15px 25px; border-radius: 100px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 2px solid #E2E8F0; position: relative; z-index: 2; transition: transform 0.3s ease;
         }
-        .workflow-node:hover { transform: scale(1.05); border-color: #FF5A00; cursor: pointer; }
+        .workflow-node:hover { transform: scale(1.05); border-color: #2563EB; cursor: pointer; }
         .workflow-avatar {
-            width: 60px; height: 60px; border-radius: 50%; border: 3px solid #FF5A00;
+            width: 60px; height: 60px; border-radius: 50%; border: 3px solid #2563EB;
             object-fit: cover; background: #f1f5f9; display: flex; align-items: center; justify-content: center;
             font-size: 24px; color: #CBD5E1;
         }
@@ -126,22 +125,27 @@
         .bar-mini-bg { background: #E2E8F0; border-radius: 4px; height: 6px; width: 100%; overflow: hidden; }
         .bar-mini-fill { height: 100%; border-radius: 4px; transition: width 0.8s ease; }
 
+        /* Estilo Dinâmico Linha Tabela */
+        .tr-status-concluido { border-left: 3px solid #10B981; }
+        .tr-status-andamento { border-left: 3px solid #F59E0B; }
+        .tr-status-fila { border-left: 3px solid #64748B; }
+
         .fade-in-section { animation: fadeInScale 0.3s ease-in-out forwards; }
         @keyframes fadeInScale { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- TELA DE INICIALIZAÇÃO -->
+    <!-- STREAMING_CHUNK:Loading Screen -->
     <div id="loading-screen" class="fixed inset-0 bg-brisa-blue flex flex-col items-center justify-center">
         <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-24 md:h-40 object-contain filter brightness-0 invert mb-8 animate-pulse px-4">
         <div class="flex flex-col items-center gap-3">
-            <i class="fa-solid fa-circle-notch fa-spin text-brisa-orange text-3xl md:text-4xl"></i>
+            <i class="fa-solid fa-circle-notch fa-spin text-blue-500 text-3xl md:text-4xl"></i>
             <span class="text-white font-black tracking-widest uppercase text-xs md:text-sm mt-2" id="loading-text">Coletando Dados Gerenciais...</span>
         </div>
     </div>
 
-    <!-- CABEÇALHO & NAVEGAÇÃO -->
+    <!-- STREAMING_CHUNK:Header Nav -->
     <div class="header-bg pt-6 md:pt-10 px-4 sm:px-8 relative">
         <div class="max-w-[1300px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
             <div class="flex flex-col items-center md:items-start gap-1">
@@ -149,49 +153,42 @@
             </div>
             
             <nav class="flex gap-2 bg-white/5 border border-white/10 p-1.5 rounded-full backdrop-blur-md w-full md:w-auto overflow-x-auto custom-scroll">
-                <button onclick="switchView('inicio')" id="tab-inicio" class="nav-tab active text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-house"></i> Visão Executiva</button>
-                <button onclick="switchView('demandas')" id="tab-demandas" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-table-list"></i> Gestão de Demandas</button>
-                <button onclick="switchView('relatorios')" id="tab-relatorios" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-chart-line"></i> Indicadores & Meses</button>
+                <button onclick="switchView('inicio')" id="tab-inicio" class="nav-tab active text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-chart-line"></i> Painel Executivo</button>
+                <button onclick="switchView('demandas')" id="tab-demandas" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-list-check"></i> Consultar Demandas</button>
+                <button onclick="switchView('relatorios')" id="tab-relatorios" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-chart-pie"></i> Relatório & Meses</button>
             </nav>
             
             <button onclick="abrirModal('modal-config')" class="text-white/30 hover:text-white transition-colors" title="Configurações do Sistema"><i class="fa-solid fa-gear"></i></button>
         </div>
     </div>
 
-    <!-- CONTAINER PRINCIPAL -->
     <main class="max-w-[1300px] mx-auto px-4 sm:px-8 relative z-10">
         
-        <!-- ========================================== -->
-        <!-- VIEW 1: INÍCIO E FLUXO                     -->
-        <!-- ========================================== -->
+        <!-- STREAMING_CHUNK:View Inicio -->
         <div id="view-inicio" class="view-section active -mt-8">
             <div class="bg-white rounded-[24px] shadow-sm border border-gray-100 p-8 md:p-12 mb-8">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     
                     <div>
                         <h1 class="text-3xl md:text-4xl font-black text-brisa-blue leading-tight mb-4">
-                            Painel Gerencial <br><span class="text-brisa-orange">DHO Produção Visual</span>
+                            Visão Geral da <br><span class="text-blue-600">Produção Visual (DHO)</span>
                         </h1>
                         <p class="text-gray-600 text-base md:text-lg font-medium mb-6 leading-relaxed">
-                            Sistema oficial de governança e controle de demandas. Acompanhe o volume de solicitações, distribuição mensal e status de entrega de toda a equipe em tempo real.
+                            Sistema centralizado de governança. Acompanhe a entrega colaborativa do time, o volume por áreas solicitantes e identifique gargalos operacionais em tempo real.
                         </p>
                         
-                        <!-- NOVO PLACAR EXECUTIVO (MÉTRICAS DA OPERAÇÃO) -->
                         <div class="mt-8 bg-slate-50 border border-slate-200 rounded-2xl p-6 shadow-sm mb-8">
                             <h3 class="text-slate-500 font-black text-xs uppercase tracking-widest mb-4 flex items-center gap-2">
-                                <i class="fa-solid fa-building-user text-slate-400"></i> Áreas com Maior Demanda Global
+                                <i class="fa-solid fa-building-user text-slate-400"></i> Áreas que mais solicitam (Global)
                             </h3>
                             <div class="space-y-3" id="top-areas-list">
-                                <!-- Injetado via JS -->
-                                <div class="animate-pulse flex space-x-4">
-                                    <div class="h-4 bg-slate-200 rounded w-3/4"></div>
-                                </div>
+                                <div class="animate-pulse flex space-x-4"><div class="h-4 bg-slate-200 rounded w-3/4"></div></div>
                             </div>
                         </div>
 
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <button onclick="abrirModal('modal-novo')" class="bg-brisa-orange hover:bg-orange-600 text-white font-black py-3 px-6 rounded-xl shadow-md transition-transform hover:-translate-y-1 flex justify-center items-center gap-2">
-                                <i class="fa-solid fa-video"></i> Solicitar Demanda
+                            <button onclick="abrirModal('modal-novo')" class="bg-blue-600 hover:bg-blue-700 text-white font-black py-3 px-6 rounded-xl shadow-md transition-transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                                <i class="fa-solid fa-video"></i> Nova Demanda
                             </button>
                             <button onclick="switchView('demandas')" class="bg-brisa-blue hover:bg-blue-900 text-white font-black py-3 px-6 rounded-xl shadow-sm transition-transform hover:-translate-y-1 flex justify-center items-center gap-2">
                                 <i class="fa-solid fa-magnifying-glass-chart"></i> Rastrear Operação
@@ -199,36 +196,36 @@
                         </div>
                     </div>
 
-                    <!-- Representação do Fluxo Operacional (Equipe) -->
+                    <!-- Representação da Equipe com link direto para filtro -->
                     <div class="bg-brisa-light rounded-[32px] p-8 border-2 border-dashed border-gray-200 relative overflow-hidden min-h-[400px] flex flex-col justify-center items-center">
-                        <h3 class="absolute top-6 left-8 text-sm font-black text-gray-400 uppercase tracking-widest">Capacidade e Equipe (DHO)</h3>
-                        <p class="absolute top-12 left-8 text-xs text-gray-500 font-medium">Clique em um membro para visualizar sua carga de trabalho.</p>
+                        <h3 class="absolute top-6 left-8 text-sm font-black text-gray-400 uppercase tracking-widest">Equipe Operacional</h3>
+                        <p class="absolute top-12 left-8 text-xs text-blue-500 font-bold bg-blue-50 px-3 py-1 rounded-full"><i class="fa-solid fa-filter"></i> Clique no membro para ver suas demandas</p>
 
                         <div class="relative w-full max-w-[400px] mt-14">
                             <div class="absolute top-[40px] left-[50px] w-[20px] h-[100px] border-l-3 border-b-3 border-dashed border-gray-300 rounded-bl-[20px] z-0"></div>
                             <div class="absolute top-[140px] right-[50px] w-[20px] h-[100px] border-r-3 border-b-3 border-dashed border-gray-300 rounded-br-[20px] z-0"></div>
 
-                            <div class="workflow-node ml-auto mb-8 w-max" onclick="abrirEstatisticasMembro('Gilnei', 'responsavel')">
+                            <div class="workflow-node ml-auto mb-8 w-max" onclick="verDemandasDireto('Gilnei')">
                                 <div class="workflow-avatar shadow-inner"><i class="fa-solid fa-user-tie"></i></div>
                                 <div>
                                     <h4 class="font-black text-brisa-blue text-lg">Gilnei Laurindo</h4>
-                                    <span class="bg-orange-100 text-brisa-orange text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Responsável / Gestão</span>
+                                    <span class="bg-slate-200 text-slate-600 text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Responsável / Gestão</span>
                                 </div>
                             </div>
 
-                            <div class="workflow-node mx-auto mb-8 w-max" onclick="abrirEstatisticasMembro('Erick', 'colaborador')">
+                            <div class="workflow-node mx-auto mb-8 w-max" onclick="verDemandasDireto('Erick')">
                                 <div class="workflow-avatar shadow-inner"><i class="fa-solid fa-pen-nib"></i></div>
                                 <div>
                                     <h4 class="font-black text-brisa-blue text-lg">Erick Gustavo</h4>
-                                    <span class="bg-blue-100 text-blue-600 text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Apoio / Refinamentos</span>
+                                    <span class="bg-slate-200 text-slate-600 text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Apoio / Refinamentos</span>
                                 </div>
                             </div>
 
-                            <div class="workflow-node mr-auto w-max" onclick="abrirEstatisticasMembro('Marcos', 'responsavel')">
+                            <div class="workflow-node mr-auto w-max" onclick="verDemandasDireto('Marcos')">
                                 <div class="workflow-avatar shadow-inner"><i class="fa-solid fa-camera"></i></div>
                                 <div>
                                     <h4 class="font-black text-brisa-blue text-lg">Marcos Guilherme</h4>
-                                    <span class="bg-green-100 text-green-600 text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Gravação e Cortes</span>
+                                    <span class="bg-slate-200 text-slate-600 text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Gravação e Cortes</span>
                                 </div>
                             </div>
                         </div>
@@ -237,64 +234,62 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- VIEW 2: DEMANDAS E GESTÃO                  -->
-        <!-- ========================================== -->
+        <!-- STREAMING_CHUNK:View Demandas -->
         <div id="view-demandas" class="view-section -mt-8 md:-mt-12">
             
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-8">
-                <div id="card-status-todos" class="stat-card bg-card-blue flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'todos', 'Visão Global de Demandas', 'bg-blue-600')">
+                <div class="stat-card bg-card-blue flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'todos', 'Raio-X Global', 'bg-blue-600')">
                     <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-folder-open text-white"></i></div><i class="fa-solid fa-chart-line text-white/30 text-xl" title="Ver Análise"></i></div>
                     <div><h3 class="text-3xl md:text-4xl font-black" id="count-total">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Demanda Total</p></div>
                 </div>
-                <div id="card-status-concluido" class="stat-card bg-card-green flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'concluido', 'Raio-X: Entregas Concluídas', 'bg-green-500')">
+                <div class="stat-card bg-card-green flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'concluido', 'Raio-X: Entregas', 'bg-green-500')">
                     <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-check-double text-white"></i></div><i class="fa-solid fa-chart-line text-white/30 text-xl" title="Ver Análise"></i></div>
                     <div><h3 class="text-3xl md:text-4xl font-black" id="count-concluido">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Concluídos</p></div>
                 </div>
-                <div id="card-status-andamento" class="stat-card bg-card-yellow flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'andamento', 'Raio-X: Em Produção', 'bg-[#FF5A00]')">
+                <div class="stat-card bg-card-yellow flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'andamento', 'Raio-X: Em Produção', 'bg-[#F59E0B]')">
                     <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-person-digging text-white"></i></div><i class="fa-solid fa-chart-line text-white/30 text-xl" title="Ver Análise"></i></div>
                     <div><h3 class="text-3xl md:text-4xl font-black" id="count-andamento">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Em Produção</p></div>
                 </div>
-                <div id="card-status-fila" class="stat-card bg-card-neutral flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'fila', 'Raio-X: Retidos na Fila', 'bg-slate-500')">
+                <div class="stat-card bg-card-neutral flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'fila', 'Raio-X: Retidos na Fila', 'bg-slate-500')">
                     <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-layer-group text-white"></i></div><i class="fa-solid fa-chart-line text-white/30 text-xl" title="Ver Análise"></i></div>
                     <div><h3 class="text-3xl md:text-4xl font-black" id="count-pendente">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Na Fila</p></div>
                 </div>
             </div>
 
-            <!-- FILTRO DE EQUIPE RÁPIDO -->
+            <!-- Filtros Rápidos -->
             <div class="flex justify-between items-center mb-4 flex-wrap gap-2 px-2">
-                <h2 class="text-sm font-black text-gray-500 uppercase tracking-widest flex items-center"><i class="fa-solid fa-filter mr-2"></i> Filtrar por Membro da Equipe</h2>
-                <button onclick="limparFiltros(true)" id="btn-limpar-filtros" class="hidden text-xs bg-red-100 text-red-600 px-4 py-2 rounded-full font-bold hover:bg-red-200 transition-colors"><i class="fa-solid fa-filter-circle-xmark mr-1"></i> Remover Filtros Ativos</button>
+                <h2 class="text-sm font-black text-gray-500 uppercase tracking-widest flex items-center"><i class="fa-solid fa-filter mr-2 text-blue-500"></i> Filtrar Demandas da Equipe</h2>
+                <button onclick="limparFiltros(true)" id="btn-limpar-filtros" class="hidden text-xs bg-red-100 text-red-600 px-4 py-2 rounded-full font-bold hover:bg-red-200 transition-colors shadow-sm"><i class="fa-solid fa-filter-circle-xmark mr-1"></i> Limpar Filtros</button>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                <div onclick="abrirEstatisticasMembro('Gilnei', 'responsavel')" class="team-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-brisa-blue cursor-pointer flex items-center justify-between transition-colors">
-                    <span class="font-bold text-gray-700 text-sm"><i class="fa-solid fa-user-tie text-brisa-blue mr-2"></i> Gilnei</span>
-                    <i class="fa-solid fa-chart-pie text-gray-300 hover:text-brisa-blue transition-colors"></i>
+                <div onclick="verDemandasDireto('Gilnei')" class="team-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-blue-500 cursor-pointer flex items-center justify-between transition-colors group">
+                    <span class="font-bold text-gray-700 text-sm group-hover:text-blue-600 transition-colors"><i class="fa-solid fa-user-tie text-blue-500 mr-2"></i> Demandas de Gilnei</span>
+                    <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-500 transition-colors"></i>
                 </div>
-                <div onclick="abrirEstatisticasMembro('Marcos', 'responsavel')" class="team-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-green-500 cursor-pointer flex items-center justify-between transition-colors">
-                    <span class="font-bold text-gray-700 text-sm"><i class="fa-solid fa-camera text-green-500 mr-2"></i> Marcos</span>
-                    <i class="fa-solid fa-chart-pie text-gray-300 hover:text-green-500 transition-colors"></i>
+                <div onclick="verDemandasDireto('Marcos')" class="team-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-blue-500 cursor-pointer flex items-center justify-between transition-colors group">
+                    <span class="font-bold text-gray-700 text-sm group-hover:text-blue-600 transition-colors"><i class="fa-solid fa-camera text-blue-500 mr-2"></i> Demandas de Marcos</span>
+                    <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-500 transition-colors"></i>
                 </div>
-                <div onclick="abrirEstatisticasMembro('Erick', 'colaborador')" class="team-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-brisa-orange cursor-pointer flex items-center justify-between transition-colors">
-                    <span class="font-bold text-gray-700 text-sm"><i class="fa-solid fa-pen-nib text-brisa-orange mr-2"></i> Erick</span>
-                    <i class="fa-solid fa-chart-pie text-gray-300 hover:text-brisa-orange transition-colors"></i>
+                <div onclick="verDemandasDireto('Erick')" class="team-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-blue-500 cursor-pointer flex items-center justify-between transition-colors group">
+                    <span class="font-bold text-gray-700 text-sm group-hover:text-blue-600 transition-colors"><i class="fa-solid fa-pen-nib text-blue-500 mr-2"></i> Demandas de Erick</span>
+                    <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-500 transition-colors"></i>
                 </div>
             </div>
 
-            <!-- TABELA E PESQUISA -->
-            <div class="bg-white rounded-[16px] md:rounded-[24px] shadow-sm border border-gray-100 mb-12 overflow-hidden">
+            <!-- Tabela Principal -->
+            <div class="bg-white rounded-[16px] md:rounded-[24px] shadow-sm border border-gray-100 mb-12 overflow-hidden" id="tabela-container">
                 <div class="p-5 md:p-8 border-b border-gray-100 bg-white">
                     <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
                         <h2 class="text-lg md:text-xl font-black text-brisa-blue w-full lg:w-auto text-left uppercase tracking-tight">
-                            <i class="fa-solid fa-table-list text-blue-600 mr-2"></i> Rastreamento de Demandas
+                            <i class="fa-solid fa-list-check text-blue-600 mr-2"></i> Lista de Demandas
                             <div id="area-legendas-filtros" class="flex gap-2 flex-wrap mt-2"></div>
                         </h2>
                         
                         <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-3 items-center">
                             <div class="relative w-full sm:w-72 md:w-96">
                                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                                <input type="text" id="inputPesquisa" placeholder="Busque projeto, solicitante, frente..." class="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-full text-sm font-semibold focus:outline-none focus:border-brisa-orange transition-colors bg-gray-50">
+                                <input type="text" id="inputPesquisa" placeholder="Buscar projeto, solicitante, área..." class="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-full text-sm font-semibold focus:outline-none focus:border-blue-500 transition-colors bg-gray-50">
                             </div>
                         </div>
                     </div>
@@ -303,38 +298,34 @@
                 <div class="overflow-x-auto w-full">
                     <table class="w-full text-left border-collapse whitespace-nowrap">
                         <thead>
-                            <tr class="bg-gray-50 text-gray-500 text-[10px] md:text-xs uppercase tracking-wider border-b border-gray-200">
+                            <tr class="bg-slate-50 text-slate-500 text-[10px] md:text-xs uppercase tracking-wider border-b border-slate-200">
                                 <th class="py-4 px-4 md:px-8 font-black">Demanda / Projeto</th>
-                                <th class="py-4 px-4 md:px-6 font-black">Frente Solicitante</th>
-                                <th class="py-4 px-4 md:px-6 font-black text-center">Status</th>
-                                <th class="py-4 px-4 md:px-6 font-black hidden md:table-cell"><i class="fa-solid fa-video mr-1"></i> Data Gravação</th>
-                                <th class="py-4 px-4 md:px-6 font-black hidden lg:table-cell"><i class="fa-regular fa-calendar mr-1"></i> Prazo Final</th>
-                                <th class="py-4 px-4 md:px-6 font-black text-center">Inspeção</th>
+                                <th class="py-4 px-4 md:px-6 font-black">Frente / Área</th>
+                                <th class="py-4 px-4 md:px-6 font-black text-center">Status Global</th>
+                                <th class="py-4 px-4 md:px-6 font-black hidden md:table-cell"><i class="fa-solid fa-user-tag mr-1"></i> Equipe (DHO)</th>
+                                <th class="py-4 px-4 md:px-6 font-black hidden lg:table-cell"><i class="fa-regular fa-calendar mr-1"></i> Previsão</th>
+                                <th class="py-4 px-4 md:px-6 font-black text-center">Inspecionar</th>
                             </tr>
                         </thead>
                         <tbody id="tabela-demandas" class="text-sm text-gray-700 divide-y divide-gray-100">
-                            <tr><td colspan="6" class="p-8 text-center text-gray-400 font-bold"><i class="fa-solid fa-spinner fa-spin mr-2 text-xl md:text-2xl"></i> Conectando à base de dados...</td></tr>
+                            <tr><td colspan="6" class="p-8 text-center text-gray-400 font-bold"><i class="fa-solid fa-spinner fa-spin mr-2 text-xl md:text-2xl"></i> Buscando na base de dados...</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- VIEW 3: RELATÓRIOS ESTRATÉGICOS E MESES    -->
-        <!-- ========================================== -->
+        <!-- STREAMING_CHUNK:View Relatorios -->
         <div id="view-relatorios" class="view-section -mt-8">
             
-            <!-- NOVO: VISÃO MENSAL -->
             <div class="col-span-1 md:col-span-2 bg-gradient-to-r from-brisa-blue to-blue-900 rounded-[24px] p-8 md:p-10 text-white shadow-md relative overflow-hidden mb-8 border border-blue-800">
                 <i class="fa-solid fa-chart-column absolute -right-10 -bottom-10 text-[200px] text-white opacity-5"></i>
                 <div class="relative z-10">
-                    <h3 class="text-sm md:text-base font-black uppercase tracking-widest mb-6 text-blue-200"><i class="fa-regular fa-calendar-days mr-2"></i> Histórico de Produção Mensal</h3>
-                    <p class="text-xs text-blue-300 font-medium mb-6">Volume total de demandas que entraram em cada mês e sua taxa de conclusão estruturada.</p>
+                    <h3 class="text-sm md:text-base font-black uppercase tracking-widest mb-6 text-blue-200"><i class="fa-regular fa-calendar-days mr-2"></i> Produção Mensal (Últimos Meses)</h3>
+                    <p class="text-xs text-blue-300 font-medium mb-6 max-w-xl">Acompanhe a curva de solicitações que entram na equipe de produção mês a mês e o volume de demandas concluídas deste montante.</p>
                     
-                    <div id="container-grafico-meses" class="flex gap-4 overflow-x-auto custom-scroll pb-4 items-end min-h-[160px]">
-                        <!-- Barras e meses injetados via JS -->
-                        <div class="flex items-center gap-2 text-blue-300"><i class="fa-solid fa-spinner fa-spin"></i> Processando timeline...</div>
+                    <div id="container-grafico-meses" class="flex gap-6 overflow-x-auto custom-scroll pb-4 items-end min-h-[160px]">
+                        <div class="flex items-center gap-2 text-blue-300"><i class="fa-solid fa-spinner fa-spin"></i> Processando dados históricos...</div>
                     </div>
                 </div>
             </div>
@@ -342,32 +333,32 @@
             <div class="bg-white rounded-[24px] shadow-sm border border-gray-100 p-8 md:p-12 mb-8">
                 <div class="mb-8 border-b border-gray-100 pb-4">
                     <h2 class="text-2xl md:text-3xl font-black text-brisa-blue uppercase tracking-tight flex items-center gap-3">
-                        <i class="fa-solid fa-chart-pie text-brisa-orange"></i> Impacto Organizacional
+                        <i class="fa-solid fa-chart-pie text-blue-600"></i> Relatório de Status e Frentes
                     </h2>
-                    <p class="text-gray-500 font-medium mt-2">Visão analítica de onde vem as demandas e como a equipe DHO está entregando. Clique nas frentes para realizar um Raio-X aprofundado.</p>
+                    <p class="text-gray-500 font-medium mt-2">Visão analítica de onde vem as demandas e como a equipe DHO está entregando. Clique nas áreas para realizar um Raio-X aprofundado.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div class="space-y-8 bg-gray-50 p-6 rounded-2xl border border-gray-100">
-                        <h3 class="text-sm font-black text-gray-400 uppercase tracking-widest mb-4">Taxa de Conclusão Geral</h3>
-                        <div class="cursor-pointer group" onclick="abrirRaioX('status', 'concluido', 'Raio-X: Entregas Concluídas', 'bg-green-500')">
-                            <div class="flex justify-between items-end mb-2"><span class="font-bold text-gray-700 uppercase text-xs tracking-wider group-hover:text-green-600 transition-colors">Projetos Concluídos</span><span class="font-black text-2xl text-green-500" id="chart-percent-concluido">0%</span></div>
+                    <div class="space-y-8 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                        <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-4">Taxa de Conversão Global</h3>
+                        <div class="cursor-pointer group" onclick="abrirRaioX('status', 'concluido', 'Análise: Concluídas', 'bg-green-600')">
+                            <div class="flex justify-between items-end mb-2"><span class="font-bold text-slate-600 uppercase text-xs tracking-wider group-hover:text-green-600 transition-colors">Entregas Concluídas</span><span class="font-black text-2xl text-green-500" id="chart-percent-concluido">0%</span></div>
                             <div class="bar-bg"><div class="bar-fill bg-green-500" id="chart-bar-concluido" style="width: 0%;"></div></div>
                         </div>
-                        <div class="cursor-pointer group" onclick="abrirRaioX('status', 'andamento', 'Raio-X: Em Produção', 'bg-[#FF5A00]')">
-                            <div class="flex justify-between items-end mb-2"><span class="font-bold text-gray-700 uppercase text-xs tracking-wider group-hover:text-brisa-orange transition-colors">Em Produção</span><span class="font-black text-2xl text-brisa-orange" id="chart-percent-andamento">0%</span></div>
-                            <div class="bar-bg"><div class="bar-fill bg-brisa-orange" id="chart-bar-andamento" style="width: 0%;"></div></div>
+                        <div class="cursor-pointer group" onclick="abrirRaioX('status', 'andamento', 'Análise: Em Produção', 'bg-[#F59E0B]')">
+                            <div class="flex justify-between items-end mb-2"><span class="font-bold text-slate-600 uppercase text-xs tracking-wider group-hover:text-[#F59E0B] transition-colors">Em Produção</span><span class="font-black text-2xl text-[#F59E0B]" id="chart-percent-andamento">0%</span></div>
+                            <div class="bar-bg"><div class="bar-fill bg-[#F59E0B]" id="chart-bar-andamento" style="width: 0%;"></div></div>
                         </div>
-                        <div class="cursor-pointer group" onclick="abrirRaioX('status', 'fila', 'Raio-X: Retidos na Fila', 'bg-slate-500')">
-                            <div class="flex justify-between items-end mb-2"><span class="font-bold text-gray-700 uppercase text-xs tracking-wider group-hover:text-slate-600 transition-colors">Na Fila</span><span class="font-black text-2xl text-slate-500" id="chart-percent-pendente">0%</span></div>
+                        <div class="cursor-pointer group" onclick="abrirRaioX('status', 'fila', 'Análise: Retidos', 'bg-slate-600')">
+                            <div class="flex justify-between items-end mb-2"><span class="font-bold text-slate-600 uppercase text-xs tracking-wider group-hover:text-slate-800 transition-colors">Na Fila (Aguardando)</span><span class="font-black text-2xl text-slate-500" id="chart-percent-pendente">0%</span></div>
                             <div class="bar-bg"><div class="bar-fill bg-slate-500" id="chart-bar-pendente" style="width: 0%;"></div></div>
                         </div>
                     </div>
 
                     <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-                        <h3 class="text-sm font-black text-gray-400 uppercase tracking-widest mb-6">Volume por Frente (Área)</h3>
+                        <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-6">Volume por Frente (Área)</h3>
                         <div class="flex flex-col gap-5" id="grafico-frentes">
-                            <div class="flex items-center text-gray-400"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Analisando dados estruturados...</div>
+                            <div class="flex items-center text-gray-400"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Analisando dados...</div>
                         </div>
                     </div>
                 </div>
@@ -376,11 +367,9 @@
 
     </main>
 
-    <!-- ========================================== -->
-    <!-- MODALS                                     -->
-    <!-- ========================================== -->
+    <!-- STREAMING_CHUNK:Modals -->
 
-    <!-- MODAL DE INTELIGÊNCIA ESTRATÉGICA (RAIO-X BI) -->
+    <!-- MODAL RAIO-X BI -->
     <div id="modal-raiox" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/95" style="z-index: 200;" onclick="fecharAoClicarFora(event, 'modal-raiox')">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-4xl shadow-2xl relative flex flex-col max-h-[90vh] m-4 overflow-hidden">
             <button onclick="fecharModal('modal-raiox')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 font-bold z-20 hover:bg-gray-200 transition-all"><i class="fa-solid fa-xmark"></i></button>
@@ -393,105 +382,41 @@
             </div>
             
             <div class="p-6 md:p-8 overflow-y-auto custom-scroll flex-grow bg-white grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Coluna 1: Rankings de Gestão -->
+                <!-- Coluna 1 -->
                 <div class="space-y-8">
                     <div>
-                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 border-b pb-2"><i class="fa-solid fa-users mr-1 text-brisa-blue"></i> Distribuição por Equipe (DHO)</h4>
+                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 border-b pb-2"><i class="fa-solid fa-users mr-1 text-blue-500"></i> Carga na Equipe (DHO)</h4>
                         <div id="raiox-lista-membros" class="space-y-3"></div>
                     </div>
                     <div>
-                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 border-b pb-2"><i class="fa-solid fa-building mr-1 text-brisa-blue"></i> Principais Frentes Envolvidas</h4>
+                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 border-b pb-2"><i class="fa-solid fa-building mr-1 text-blue-500"></i> Frentes Solicitantes Relacionadas</h4>
                         <div id="raiox-lista-frentes" class="space-y-3"></div>
                     </div>
                 </div>
 
-                <!-- Coluna 2: Timeline e Accountability -->
+                <!-- Coluna 2 (Surpresa: Análise de Gargalo) -->
                 <div class="space-y-8 border-l border-gray-100 pl-0 md:pl-8">
-                    <div>
-                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 border-b pb-2"><i class="fa-regular fa-calendar-days mr-1 text-brisa-orange"></i> Volume por Data de Entrada</h4>
-                        <div id="raiox-lista-meses" class="space-y-4 mt-4"></div>
+                    
+                    <!-- Novo Bloco: Saúde e Gargalos -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 shadow-sm">
+                        <h4 class="text-xs font-black text-slate-600 uppercase tracking-widest mb-4"><i class="fa-solid fa-stethoscope mr-1 text-blue-500"></i> Análise de Gargalo</h4>
+                        <div id="raiox-status-breakdown" class="space-y-4">
+                            <!-- Preenchido no JS -->
+                        </div>
                     </div>
 
-                    <!-- Bloco Dedo-duro para Não Classificados -->
+                    <!-- Bloco Alerta Não Classificados -->
                     <div id="raiox-alerta-n-classificado" class="hidden bg-red-50 border border-red-200 rounded-xl p-4">
                         <h4 class="text-xs font-black text-red-600 uppercase tracking-widest mb-2"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Atenção Gestão</h4>
-                        <p class="text-[10px] text-red-800 font-bold mb-3">As demandas abaixo estão sem identificação clara da frente solicitante. O controle de dados está comprometido nestas linhas.</p>
+                        <p class="text-[10px] text-red-800 font-bold mb-3">As demandas abaixo estão sem identificação clara da frente solicitante (Classificadas como 'Não Classificadas').</p>
                         <div id="raiox-lista-infratores" class="space-y-2"></div>
                     </div>
                 </div>
             </div>
             
             <div class="p-6 bg-gray-50 border-t border-gray-200 shrink-0">
-                <button id="btn-aplicar-raiox" class="w-full bg-brisa-blue hover:bg-blue-900 text-white font-black py-4 rounded-xl shadow-md transition-all uppercase tracking-widest flex justify-center items-center gap-2">
-                    <i class="fa-solid fa-magnifying-glass-arrow-right"></i> Mergulhar nestas Demandas (Ir para Tabela)
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- MODAL DASHBOARD DO MEMBRO COM DRILL-DOWN INLINE -->
-    <div id="modal-membro" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/95" onclick="fecharAoClicarFora(event, 'modal-membro')">
-        <div class="modal-content bg-white rounded-[24px] w-full max-w-3xl shadow-2xl relative flex flex-col max-h-[90vh] m-4 overflow-hidden">
-            <button onclick="fecharModal('modal-membro')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 font-bold z-20 hover:bg-gray-200 transition-all"><i class="fa-solid fa-xmark"></i></button>
-            
-            <!-- Header Fixo -->
-            <div class="p-8 border-b border-gray-200 bg-gray-50 flex items-center gap-4 shrink-0 relative overflow-hidden">
-                <div class="w-16 h-16 rounded-full bg-white border-4 border-brisa-blue flex items-center justify-center text-2xl text-brisa-blue shadow-sm" id="membro-icon">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="relative z-10">
-                    <h3 class="text-2xl font-black text-brisa-blue uppercase tracking-tight flex items-center gap-2" id="membro-nome">Nome</h3>
-                    <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mt-1" id="membro-cargo">Visão Individual de Produção</p>
-                </div>
-            </div>
-            
-            <div class="p-8 overflow-y-auto custom-scroll flex-grow bg-white relative">
-                
-                <!-- VISÃO 1: RESUMO -->
-                <div id="membro-view-resumo" class="fade-in-section block">
-                    <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4"><i class="fa-solid fa-hand-pointer mr-1"></i> Clique em um card para inspecionar os projetos</h4>
-                    <div class="grid grid-cols-3 gap-4 mb-8 text-center">
-                        <div onclick="verListaMembroStatus('fila')" class="bg-gray-50 hover:bg-gray-200 p-4 rounded-xl border border-gray-200 shadow-sm cursor-pointer transition-colors group">
-                            <div class="text-3xl font-black text-slate-500 group-hover:scale-110 transition-transform" id="membro-fila">0</div>
-                            <div class="text-[10px] font-bold text-gray-500 uppercase mt-2">Pendentes</div>
-                        </div>
-                        <div onclick="verListaMembroStatus('andamento')" class="bg-orange-50 hover:bg-orange-100 p-4 rounded-xl border border-orange-200 shadow-sm cursor-pointer transition-colors group">
-                            <div class="text-3xl font-black text-brisa-orange group-hover:scale-110 transition-transform" id="membro-andamento">0</div>
-                            <div class="text-[10px] font-bold text-orange-600 uppercase mt-2">Em Processo</div>
-                        </div>
-                        <div onclick="verListaMembroStatus('concluido')" class="bg-green-50 hover:bg-green-100 p-4 rounded-xl border border-green-200 shadow-sm cursor-pointer transition-colors group">
-                            <div class="text-3xl font-black text-green-500 group-hover:scale-110 transition-transform" id="membro-concluido">0</div>
-                            <div class="text-[10px] font-bold text-green-700 uppercase mt-2">Realizadas</div>
-                        </div>
-                    </div>
-
-                    <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4 border-b pb-2"><i class="fa-solid fa-hand-pointer mr-1"></i> Clique na frente para ver as demandas associadas</h4>
-                    <div class="space-y-3 mt-4" id="membro-frentes-lista">
-                        <!-- Preenchido via JS com onClick -->
-                    </div>
-                </div>
-
-                <!-- VISÃO 2: LISTA DETALHADA -->
-                <div id="membro-view-lista" class="fade-in-section hidden">
-                    <div class="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
-                        <div>
-                            <button onclick="voltarResumoMembro()" class="text-xs font-bold text-gray-500 hover:text-brisa-orange transition-colors mb-1"><i class="fa-solid fa-arrow-left mr-1"></i> Voltar ao Resumo de <span id="membro-lista-back-nome">Nome</span></button>
-                            <h4 id="membro-lista-titulo" class="text-lg font-black text-brisa-blue uppercase tracking-tight mt-1">Carregando...</h4>
-                        </div>
-                        <span id="membro-lista-contador" class="bg-brisa-light text-brisa-blue font-black px-3 py-1 rounded-full text-xs border border-gray-200">0</span>
-                    </div>
-                    
-                    <div id="membro-lista-conteudo" class="space-y-3">
-                        <!-- Cards dinâmicos injetados aqui -->
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="p-6 bg-gray-50 border-t border-gray-200 shrink-0">
-                <button id="btn-filtrar-tabela-membro" class="w-full bg-brisa-blue hover:bg-blue-900 text-white font-black py-4 rounded-xl shadow-md transition-all uppercase tracking-widest flex justify-center items-center gap-2">
-                    <i class="fa-solid fa-table"></i> Aplicar Filtro na Tabela Principal
+                <button id="btn-aplicar-raiox" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-xl shadow-md transition-all uppercase tracking-widest flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass-arrow-right"></i> Listar todas as demandas desta análise
                 </button>
             </div>
         </div>
@@ -503,8 +428,8 @@
         <div class="modal-content bg-white rounded-[24px] w-full max-w-4xl shadow-2xl relative flex flex-col max-h-[95vh] md:max-h-[90vh] m-4">
             <button onclick="fecharModal('modal-detalhes')" class="absolute top-5 right-5 text-gray-400 hover:text-white z-10 text-2xl font-bold hover:scale-110 transition-transform"><i class="fa-solid fa-xmark"></i></button>
             
-            <div class="p-6 md:p-8 pb-4 md:pb-6 bg-brisa-blue rounded-t-[24px] shrink-0 border-b-4 border-brisa-orange">
-                <p class="text-brisa-orange font-black text-[10px] md:text-xs mb-2 uppercase tracking-widest">Inspeção de Projeto</p>
+            <div class="p-6 md:p-8 pb-4 md:pb-6 bg-brisa-blue rounded-t-[24px] shrink-0 border-b-4 border-blue-500">
+                <p class="text-blue-400 font-black text-[10px] md:text-xs mb-2 uppercase tracking-widest">Inspeção de Demanda</p>
                 <h2 class="text-xl md:text-3xl font-black text-white tracking-tight leading-tight pr-8" id="modal-titulo">-</h2>
             </div>
             
@@ -517,7 +442,7 @@
                     <div class="timeline-step step-1"><div class="timeline-tooltip">Na Fila</div><div class="timeline-circle"><i class="fa-solid fa-layer-group"></i></div></div>
                     <div class="timeline-step step-2"><div class="timeline-tooltip">Preparação</div><div class="timeline-circle"><i class="fa-solid fa-list-check"></i></div></div>
                     <div class="timeline-step step-3"><div class="timeline-tooltip">Gravação</div><div class="timeline-circle"><i class="fa-solid fa-video"></i></div></div>
-                    <div class="timeline-step step-4"><div class="timeline-tooltip">Edição/Revisão</div><div class="timeline-circle"><i class="fa-solid fa-laptop-file"></i></div></div>
+                    <div class="timeline-step step-4"><div class="timeline-tooltip">Edição</div><div class="timeline-circle"><i class="fa-solid fa-laptop-file"></i></div></div>
                     <div class="timeline-step step-5"><div class="timeline-tooltip">Concluído</div><div class="timeline-circle"><i class="fa-solid fa-check-double"></i></div></div>
                 </div>
 
@@ -527,16 +452,16 @@
                         <p class="font-bold text-gray-800 text-sm truncate" id="modal-sponsor">-</p>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-building mr-1"></i> Frente de Origem</p>
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-building mr-1"></i> Frente / Área</p>
                         <p class="font-bold text-sm truncate w-full" id="modal-frente">-</p>
                     </div>
-                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm border-l-4 border-l-brisa-blue relative overflow-hidden">
-                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1 relative z-10"><i class="fa-solid fa-headset mr-1"></i> Execução (DHO)</p>
-                        <p class="font-black text-brisa-blue text-sm truncate relative z-10" id="modal-responsavel">-</p>
+                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm border-l-4 border-l-blue-500 relative overflow-hidden">
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1 relative z-10"><i class="fa-solid fa-headset mr-1"></i> Equipe (DHO)</p>
+                        <p class="font-black text-blue-600 text-sm truncate relative z-10" id="modal-responsavel">-</p>
                     </div>
-                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm border-l-4 border-l-brisa-orange">
-                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-flag-checkered mr-1"></i> Previsão Entrega</p>
-                        <p class="font-black text-brisa-orange text-sm" id="modal-prazo">-</p>
+                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm border-l-4 border-l-slate-400">
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-regular fa-calendar-check mr-1"></i> Previsão Entrega</p>
+                        <p class="font-black text-slate-600 text-sm" id="modal-prazo">-</p>
                     </div>
                     
                     <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm md:col-span-2">
@@ -544,11 +469,11 @@
                         <p class="text-sm text-gray-600 font-medium line-clamp-2" id="modal-observacoes">-</p>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-video mr-1"></i> Agend. Estúdio</p>
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-video mr-1"></i> Agendamento</p>
                         <p class="font-bold text-gray-800 text-sm" id="modal-gravacao">-</p>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-calendar-plus mr-1"></i> Data Entrada</p>
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-calendar-plus mr-1"></i> Recebido em</p>
                         <p class="font-bold text-gray-800 text-sm" id="modal-recebimento">-</p>
                     </div>
                 </div>
@@ -557,44 +482,26 @@
         </div>
     </div>
 
-    <!-- MODAL: GERADOR DE E-MAIL ESTRATÉGICO -->
-    <div id="modal-email" class="modal fixed inset-0 flex items-center justify-center bg-gray-900/80" style="z-index: 400;" onclick="fecharAoClicarFora(event, 'modal-email')">
-        <div class="modal-content bg-white rounded-2xl w-full max-w-2xl shadow-2xl relative flex flex-col m-4">
-            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-2xl">
-                <h3 class="text-lg font-black text-brisa-blue uppercase tracking-tight"><i class="fa-solid fa-paper-plane text-brisa-orange mr-2"></i> Notificação de Entrega</h3>
-                <button onclick="fecharModal('modal-email')" class="text-gray-400 hover:text-red-500 font-bold transition-colors"><i class="fa-solid fa-xmark text-xl"></i></button>
-            </div>
-            <div class="p-6">
-                <p class="text-xs text-gray-500 font-medium mb-4">Texto gerado de forma inteligente. Copie ou abra direto no seu cliente de e-mail.</p>
-                <textarea id="email-textarea" class="w-full h-[220px] p-4 border border-gray-300 rounded-xl text-sm font-medium text-gray-700 bg-gray-50 focus:outline-none focus:border-brisa-orange custom-scroll resize-none"></textarea>
-            </div>
-            <div class="p-6 border-t border-gray-100 flex justify-end gap-3 bg-gray-50 rounded-b-2xl">
-                <button onclick="fecharModal('modal-email')" class="px-6 py-2.5 rounded-xl font-bold text-gray-600 bg-white border border-gray-300 hover:bg-gray-100 transition-colors">Fechar</button>
-                <button onclick="copiarEmail()" id="btn-copy-email" class="px-6 py-2.5 rounded-xl font-bold text-white bg-brisa-blue hover:bg-blue-900 transition-colors shadow-sm flex items-center gap-2"><i class="fa-regular fa-copy"></i> Copiar</button>
-                <a id="btn-mailto" href="#" class="px-6 py-2.5 rounded-xl font-bold text-white bg-brisa-orange hover:bg-orange-600 transition-colors shadow-sm flex items-center gap-2"><i class="fa-solid fa-envelope"></i> Abrir no E-mail</a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- MODAL DE AGENDAMENTO E CONFIG -->
+    <!-- MODAL DE AGENDAMENTO / CONFIG -->
     <div id="modal-novo" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/90" onclick="fecharAoClicarFora(event, 'modal-novo')">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-lg shadow-2xl relative flex flex-col overflow-hidden m-4 p-8 text-center">
             <button onclick="fecharModal('modal-novo')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 font-bold hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
-            <i class="fa-solid fa-video text-5xl text-brisa-orange mb-4"></i>
+            <i class="fa-solid fa-video text-5xl text-blue-500 mb-4"></i>
             <h3 class="text-2xl font-black text-brisa-blue uppercase">Solicitar Demanda</h3>
-            <p class="text-sm text-gray-500 mt-2 font-medium">O formulário de agendamento pode ser integrado aqui com iframe do Google Calendar.</p>
+            <p class="text-sm text-gray-500 mt-2 font-medium">Link para formulário/Forms de entrada da equipe.</p>
         </div>
     </div>
     
     <div id="modal-config" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/90" onclick="fecharAoClicarFora(event, 'modal-config')">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-lg shadow-2xl relative flex flex-col overflow-hidden m-4 p-8 text-center">
             <button onclick="fecharModal('modal-config')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 font-bold hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
-            <i class="fa-solid fa-database text-5xl text-brisa-orange mb-4"></i>
+            <i class="fa-solid fa-database text-5xl text-blue-500 mb-4"></i>
             <h3 class="text-2xl font-black text-brisa-blue uppercase">Conexão Ativa</h3>
             <p class="text-sm text-gray-500 mt-2 font-medium">Lendo dados operacionais do Google Apps Script.</p>
         </div>
     </div>
 
+    <!-- STREAMING_CHUNK:Javascript Logic -->
     <script>
         const googleAppUrl = "https://script.google.com/macros/s/AKfycbyh9nCwfuvhBjzuopA6s9qzZdgoR41jQX1Ws-qKPdzsh2OW4f_PPSUt66_-3qUOTfoDEg/exec";
 
@@ -603,9 +510,8 @@
         let filtroEquipeNome = '';
         let filtroStatusNome = 'todos';
         let filtroFrenteNome = '';
-        let membroContextoDrilldown = '';
 
-        // 0. FUNÇÃO DE SEGURANÇA (PREVENÇÃO DE XSS)
+        // Prevenção de XSS
         function escapeHTML(str) {
             if (str === null || str === undefined) return '';
             return str.toString()
@@ -620,13 +526,13 @@
             return (texto || '').toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
         }
 
-        // 1. CLASSIFICADOR DE FRENTES (BASEADO EM REGRAS/ARRAY FACILMENTE ESCALÁVEL)
+        // 1. CLASSIFICADOR DE FRENTES ATUALIZADO (Exigência do Usuário)
         const CONFIG_FRENTES = [
-            { termos: ['jaci', 'thaynara', 'vitor', 'matheus.oliveira', 'eduarda.neto', 'natalia', 'tcr'], nome: "TCR - Comercial", css: "frente-tcr" },
+            { termos: ['jaci', 'thaynara', 'vitor', 'matheus', 'eduarda.neto', 'natalia', 'tcr', 'comercial'], nome: "TCR - Comercial", css: "frente-tcr" },
             { termos: ['ozeias', 'eliane', 'emailiane', 'luisa', 'naira', 'administrativo', 'adm'], nome: "DO - Administrativo", css: "frente-adm" },
-            { termos: ['vanessa.bortoli', 'eduarda.souza', 'engajamento'], nome: "Engajamento", css: "frente-eng" },
-            { termos: ['tto', 'tecnico', 'técnico'], nome: "TTO - Técnico", css: "frente-tto" },
-            { termos: ['henrique', 'renato', 'beatriz', 'emanuely', 'beatriz.alencar', 'anderson.silva', 'geral'], nome: "Geral / Outros", css: "frente-outros" }
+            { termos: ['vanessa', 'eduarda.souza', 'engajamento'], nome: "Engajamento", css: "frente-eng" },
+            { termos: ['tto', 'tecnico', 'técnico', 'anderson', 'andarson', 'bia', 'beatriz', 'alencar', 'henrique', 'morais'], nome: "TTO - Técnico", css: "frente-tto" },
+            { termos: ['renato', 'emanuely', 'geral'], nome: "Geral / Outros", css: "frente-outros" }
         ];
 
         function classificarFrente(nome, nomeProjeto = "") {
@@ -640,7 +546,7 @@
         }
 
         // ==========================================
-        // CÁLCULO DE MÉTRICAS MENSAIS E GESTÃO
+        // CÁLCULO MENSAL E DASHBOARD (Sem Coroas)
         // ==========================================
         const MAPA_MESES = {"Jan":1, "Fev":2, "Mar":3, "Abr":4, "Mai":5, "Jun":6, "Jul":7, "Ago":8, "Set":9, "Out":10, "Nov":11, "Dez":12};
         
@@ -687,7 +593,7 @@
                 }
             });
 
-            // --- 1. Atualizar Frentes (Tela Inicial) ---
+            // Frentes Listadas (Início)
             const containerAreas = document.getElementById('top-areas-list');
             let frentesOrdenadas = Object.entries(countsFrente).sort((a,b) => b[1] - a[1]).slice(0, 3);
             
@@ -696,7 +602,7 @@
             } else {
                 let htmlAreas = '';
                 frentesOrdenadas.forEach(([nome, qtd], index) => {
-                    const bgBar = index === 0 ? 'bg-brisa-blue' : (index === 1 ? 'bg-slate-500' : 'bg-slate-400');
+                    const bgBar = index === 0 ? 'bg-blue-600' : (index === 1 ? 'bg-slate-500' : 'bg-slate-400');
                     htmlAreas += `
                         <div class="flex items-center gap-3 bg-white p-2.5 rounded-lg border border-slate-100 shadow-sm cursor-pointer hover:border-slate-300 transition-colors" onclick="abrirRaioX('frente', '${nome}', 'Raio-X da Área: ${nome}', 'bg-slate-700')">
                             <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center font-black text-xs shrink-0">${index + 1}º</div>
@@ -715,17 +621,17 @@
                 containerAreas.innerHTML = htmlAreas;
             }
 
-            // --- 2. Atualizar Gráfico de Meses (Relatório Estratégico) ---
+            // Gráfico Mensal Visual
             const containerMeses = document.getElementById('container-grafico-meses');
-            let chavesMeses = Object.keys(meses).sort(sortMesAnoKeys).slice(-6); // Pega últimos 6 meses com dados
+            let chavesMeses = Object.keys(meses).sort(sortMesAnoKeys).slice(-6);
             
             if(chavesMeses.length === 0) {
-                containerMeses.innerHTML = '<p class="text-sm text-blue-300">Não há dados temporais estruturados para exibição.</p>';
+                containerMeses.innerHTML = '<p class="text-sm text-blue-300">Não há dados temporais estruturados.</p>';
             } else {
                 let htmlMeses = '';
                 chavesMeses.forEach(mesChave => {
                     const dadosMes = meses[mesChave];
-                    const alturaTotal = Math.max((dadosMes.total / maxTotalPorMes) * 120, 20); // max 120px height
+                    const alturaTotal = Math.max((dadosMes.total / maxTotalPorMes) * 120, 20); 
                     const alturaConcluido = dadosMes.total > 0 ? (dadosMes.concluidos / dadosMes.total) * alturaTotal : 0;
                     
                     htmlMeses += `
@@ -734,7 +640,7 @@
                             <span class="text-[10px] font-black text-white block">${dadosMes.total}</span>
                         </div>
                         <div class="relative w-8 bg-blue-900/50 rounded-t-sm" style="height: ${alturaTotal}px;">
-                            <div class="absolute bottom-0 w-full bg-brisa-orange rounded-t-sm transition-all duration-700" style="height: ${alturaConcluido}px;"></div>
+                            <div class="absolute bottom-0 w-full bg-blue-400 rounded-t-sm transition-all duration-700 shadow-[0_-2px_10px_rgba(59,130,246,0.5)]" style="height: ${alturaConcluido}px;"></div>
                         </div>
                         <span class="text-[10px] font-bold text-blue-200 uppercase">${mesChave.split('/')[0]}</span>
                     </div>`;
@@ -743,8 +649,7 @@
             }
         }
 
-
-        // 2. FUNÇÕES BASE (Navegação e Modais)
+        // FUNÇÕES BASE E NAVEGAÇÃO
         function switchView(viewId) {
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             const tab = document.getElementById(`tab-${viewId}`);
@@ -766,10 +671,10 @@
             const combinado = status + " " + fase;
             
             if(combinado.includes('conclu')) return { bg: 'bg-green-500', icon: 'fa-check', label: 'Concluído', step: 5 };
-            if(combinado.includes('andamento') || combinado.includes('edicao') || combinado.includes('gravacao')) return { bg: 'bg-[#FF5A00]', icon: 'fa-person-digging', label: 'Em Produção', step: 4 };
-            if(combinado.includes('planejamento')) return { bg: 'bg-[#FF5A00]', icon: 'fa-list-check', label: 'Em Produção', step: 2 };
-            if(combinado.includes('revisao')) return { bg: 'bg-[#FF5A00]', icon: 'fa-eye', label: 'Em Produção', step: 4 };
-            if(combinado.includes('pausado')) return { bg: 'bg-gray-800', icon: 'fa-pause', label: 'Na Fila', step: 1 };
+            if(combinado.includes('andamento') || combinado.includes('edicao') || combinado.includes('gravacao')) return { bg: 'bg-[#F59E0B]', icon: 'fa-person-digging', label: 'Em Produção', step: 4 };
+            if(combinado.includes('planejamento')) return { bg: 'bg-[#F59E0B]', icon: 'fa-list-check', label: 'Em Produção', step: 2 };
+            if(combinado.includes('revisao')) return { bg: 'bg-[#F59E0B]', icon: 'fa-eye', label: 'Em Produção', step: 4 };
+            if(combinado.includes('pausado')) return { bg: 'bg-slate-600', icon: 'fa-pause', label: 'Na Fila', step: 1 };
             
             return { bg: 'bg-slate-500', icon: 'fa-layer-group', label: 'Na Fila', step: 1 }; 
         }
@@ -784,7 +689,20 @@
             };
         }
 
-        // 3. INTELIGÊNCIA ESTRATÉGICA (RAIO-X BI)
+        // ==========================================
+        // ACESSO DIRETO ("MINHAS DEMANDAS")
+        // ==========================================
+        function verDemandasDireto(nome) {
+            limparFiltros(false);
+            filtroEquipeNome = nome;
+            aplicarFiltrosCombinados();
+            switchView('demandas');
+            setTimeout(() => {
+                document.getElementById('tabela-container').scrollIntoView({behavior: 'smooth', block: 'start'});
+            }, 100);
+        }
+
+        // 3. INTELIGÊNCIA ESTRATÉGICA (RAIO-X BI COM GARGALOS)
         function abrirRaioX(tipoFiltro, valor, tituloModal, corHeaderClass) {
             let dadosAlvo = [];
             let contextoAnalise = '';
@@ -801,19 +719,22 @@
                         if (valor === 'fila') return st.label === 'Na Fila';
                         return false;
                     });
-                    contextoAnalise = `Análise de Status: ${valor.toUpperCase()}`;
+                    contextoAnalise = `Análise do Status: ${valor.toUpperCase()}`;
                 }
             } else if (tipoFiltro === 'frente') {
                 dadosAlvo = dadosGlobais.filter(p => classificarFrente(p.sponsor, p.demanda).nome === valor);
-                contextoAnalise = `Análise de Área Solicitante: ${valor}`;
+                contextoAnalise = `Análise da Área: ${valor}`;
             }
 
             let countsResp = {};
             let countsFrente = {};
-            let countsMes = {};
+            let countStatusObj = { 'Concluído': 0, 'Em Produção': 0, 'Na Fila': 0 };
             let infratoresClassificacao = {}; 
 
             dadosAlvo.forEach(p => {
+                const st = obterDadosStatus(p.status, p.etapaAtual);
+                countStatusObj[st.label]++;
+
                 const resp = p.responsavel ? p.responsavel.trim() : 'Não Atribuído';
                 countsResp[resp] = (countsResp[resp] || 0) + 1;
 
@@ -822,11 +743,6 @@
 
                 if(f.nome === 'Não Classificada') {
                     infratoresClassificacao[resp] = (infratoresClassificacao[resp] || 0) + 1;
-                }
-
-                const mes = extrairMesAno(p.dataRecebimento);
-                if(mes !== 'Data Inválida') {
-                    countsMes[mes] = (countsMes[mes] || 0) + 1;
                 }
             });
 
@@ -854,22 +770,37 @@
                 return html;
             };
 
-            document.getElementById('raiox-lista-membros').innerHTML = buildListHtml(sortDict(countsResp), 4, 'fa-solid fa-user', 'bg-brisa-blue');
+            document.getElementById('raiox-lista-membros').innerHTML = buildListHtml(sortDict(countsResp), 4, 'fa-solid fa-user', 'bg-blue-600');
             
-            if(tipoFiltro === 'frente') {
-                let countStatus = {'Concluído':0, 'Em Produção':0, 'Na Fila':0};
-                dadosAlvo.forEach(p => countStatus[obterDadosStatus(p.status, p.etapaAtual).label]++);
-                document.getElementById('raiox-lista-frentes').innerHTML = buildListHtml(sortDict(countStatus), 3, 'fa-solid fa-chart-pie', 'bg-indigo-500');
-                document.getElementById('raiox-lista-frentes').previousElementSibling.innerHTML = '<i class="fa-solid fa-chart-pie mr-1 text-indigo-500"></i> Distribuição de Status';
-            } else {
-                document.getElementById('raiox-lista-frentes').innerHTML = buildListHtml(sortDict(countsFrente), 5, 'fa-solid fa-building', 'bg-purple-500');
-                document.getElementById('raiox-lista-frentes').previousElementSibling.innerHTML = '<i class="fa-solid fa-building mr-1 text-brisa-blue"></i> Principais Frentes Envolvidas';
-            }
+            // Frentes Relacionadas
+            document.getElementById('raiox-lista-frentes').innerHTML = buildListHtml(sortDict(countsFrente), 5, 'fa-solid fa-building', 'bg-indigo-500');
 
-            // Ordena os meses de forma temporal
-            let mesesOrdenadosTemp = Object.entries(countsMes).sort((a,b) => sortMesAnoKeys(a[0], b[0]));
-            document.getElementById('raiox-lista-meses').innerHTML = buildListHtml(mesesOrdenadosTemp.reverse(), 4, 'fa-regular fa-calendar', 'bg-brisa-orange');
+            // SURPRESA: Análise de Gargalos (Status Breakdown)
+            let htmlBreakdown = '';
+            const statusConfig = [
+                { label: 'Concluído', color: 'bg-green-500', icon: 'fa-check-double' },
+                { label: 'Em Produção', color: 'bg-[#F59E0B]', icon: 'fa-person-digging' },
+                { label: 'Na Fila', color: 'bg-slate-500', icon: 'fa-layer-group' }
+            ];
+            
+            statusConfig.forEach(cfg => {
+                const num = countStatusObj[cfg.label];
+                const perc = Math.round((num / totalAlvo) * 100);
+                htmlBreakdown += `
+                <div class="flex items-center justify-between border-b border-slate-200 pb-2 last:border-0 last:pb-0">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full ${cfg.color}"></div>
+                        <span class="text-sm font-bold text-slate-700">${cfg.label}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-black text-slate-800 text-base">${num}</span>
+                        <span class="text-[10px] text-slate-400 font-normal ml-1">(${perc}%)</span>
+                    </div>
+                </div>`;
+            });
+            document.getElementById('raiox-status-breakdown').innerHTML = htmlBreakdown;
 
+            // Infratores
             const alertaInf = document.getElementById('raiox-alerta-n-classificado');
             if(Object.keys(infratoresClassificacao).length > 0) {
                 alertaInf.classList.remove('hidden');
@@ -895,156 +826,6 @@
             abrirModal('modal-raiox');
         }
 
-        // 4. DASHBOARD DO MEMBRO (DRILL-DOWN INLINE)
-        function abrirEstatisticasMembro(nome, cargo) {
-            membroContextoDrilldown = nome; 
-            filtroEquipeNome = nome;
-            
-            voltarResumoMembro();
-
-            let dadosAlvo = dadosGlobais.filter(projeto => {
-                const txtAlvo = (projeto.responsavel || '') + " " + (projeto.colaborador || '');
-                return normalizarTexto(txtAlvo).includes(normalizarTexto(nome)) || (nome === 'Marcos' && normalizarTexto(txtAlvo).includes('guilherme'));
-            });
-
-            let frentesCount = {};
-            let statusCount = {fila:0, andamento:0, concluido:0};
-            
-            dadosAlvo.forEach(p => {
-                const st = obterDadosStatus(p.status, p.etapaAtual);
-                if(st.label === 'Concluído') statusCount.concluido++;
-                else if(st.label === 'Em Produção') statusCount.andamento++;
-                else statusCount.fila++;
-
-                const f = classificarFrente(p.sponsor, p.demanda);
-                frentesCount[f.nome] = (frentesCount[f.nome] || 0) + 1;
-            });
-
-            document.getElementById('membro-nome').textContent = nome;
-            document.getElementById('membro-lista-back-nome').textContent = nome;
-            
-            let iconeHtml = '<i class="fa-solid fa-user"></i>';
-            if(nome === 'Gilnei') iconeHtml = '<i class="fa-solid fa-user-tie text-brisa-blue"></i>';
-            if(nome === 'Marcos') iconeHtml = '<i class="fa-solid fa-camera text-green-500"></i>';
-            if(nome === 'Erick') iconeHtml = '<i class="fa-solid fa-pen-nib text-brisa-orange"></i>';
-            document.getElementById('membro-icon').innerHTML = iconeHtml;
-
-            document.getElementById('membro-fila').textContent = statusCount.fila;
-            document.getElementById('membro-andamento').textContent = statusCount.andamento;
-            document.getElementById('membro-concluido').textContent = statusCount.concluido;
-
-            const divFrentes = document.getElementById('membro-frentes-lista');
-            divFrentes.innerHTML = '';
-            let frentesOrdenadas = Object.entries(frentesCount).sort((a,b) => b[1] - a[1]);
-            
-            if(frentesOrdenadas.length === 0) {
-                divFrentes.innerHTML = '<p class="text-xs text-gray-400">Nenhum dado encontrado.</p>';
-            } else {
-                frentesOrdenadas.slice(0, 4).forEach(item => {
-                    divFrentes.innerHTML += `
-                        <div onclick="verListaMembroFrente('${escapeHTML(item[0])}')" class="flex justify-between items-center bg-gray-50 hover:bg-gray-100 p-3 rounded-lg border border-gray-200 cursor-pointer transition-colors group">
-                            <span class="text-sm font-bold text-gray-700 group-hover:text-brisa-orange transition-colors">${escapeHTML(item[0])}</span>
-                            <div class="flex items-center">
-                                <span class="text-sm font-black text-brisa-blue group-hover:text-brisa-orange transition-colors">${item[1]} <span class="text-[10px] font-normal mr-2">entregas</span></span>
-                                <i class="fa-solid fa-chevron-right text-[10px] text-gray-400 group-hover:text-brisa-orange"></i>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
-
-            document.getElementById('btn-filtrar-tabela-membro').onclick = () => {
-                limparFiltros(false);
-                filtroEquipeNome = nome;
-                aplicarFiltrosCombinados();
-                fecharModal('modal-membro');
-                switchView('demandas');
-            };
-
-            abrirModal('modal-membro');
-        }
-
-        function voltarResumoMembro() {
-            document.getElementById('membro-view-lista').classList.add('hidden');
-            document.getElementById('membro-view-resumo').classList.remove('hidden');
-        }
-
-        function verListaMembroStatus(statusValue) {
-            let label = statusValue === 'concluido' ? 'Concluídas' : (statusValue === 'andamento' ? 'Em Processo' : 'Pendentes');
-            document.getElementById('membro-lista-titulo').innerHTML = `<span class="text-gray-400 text-sm">Status:</span> ${label}`;
-            
-            let dadosFiltrados = dadosGlobais.filter(projeto => {
-                const txtAlvo = (projeto.responsavel || '') + " " + (projeto.colaborador || '');
-                const ehDoMembro = normalizarTexto(txtAlvo).includes(normalizarTexto(membroContextoDrilldown)) || (membroContextoDrilldown === 'Marcos' && normalizarTexto(txtAlvo).includes('guilherme'));
-                if(!ehDoMembro) return false;
-
-                const statusInfo = obterDadosStatus(projeto.status, projeto.etapaAtual);
-                if(statusValue === 'concluido') return statusInfo.label === 'Concluído';
-                if(statusValue === 'andamento') return statusInfo.label === 'Em Produção';
-                if(statusValue === 'fila') return statusInfo.label === 'Na Fila';
-                return false;
-            });
-            renderizarMiniLista(dadosFiltrados);
-        }
-
-        function verListaMembroFrente(frenteNome) {
-            document.getElementById('membro-lista-titulo').innerHTML = `<span class="text-gray-400 text-sm">Frente:</span> ${escapeHTML(frenteNome)}`;
-            
-            let dadosFiltrados = dadosGlobais.filter(projeto => {
-                const txtAlvo = (projeto.responsavel || '') + " " + (projeto.colaborador || '');
-                const ehDoMembro = normalizarTexto(txtAlvo).includes(normalizarTexto(membroContextoDrilldown)) || (membroContextoDrilldown === 'Marcos' && normalizarTexto(txtAlvo).includes('guilherme'));
-                if(!ehDoMembro) return false;
-
-                const f = classificarFrente(projeto.sponsor, projeto.demanda);
-                return f.nome === frenteNome;
-            });
-            renderizarMiniLista(dadosFiltrados);
-        }
-
-        function renderizarMiniLista(dadosMini) {
-            const container = document.getElementById('membro-lista-conteudo');
-            document.getElementById('membro-lista-contador').textContent = dadosMini.length;
-            container.innerHTML = '';
-
-            if(dadosMini.length === 0) {
-                container.innerHTML = '<div class="p-6 text-center text-gray-400 font-bold bg-gray-50 rounded-xl border border-gray-100">Nenhuma demanda encontrada.</div>';
-            } else {
-                dadosMini.forEach(p => {
-                    const originalIndex = dadosGlobais.indexOf(p);
-                    const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
-                    const frenteInfo = classificarFrente(p.sponsor, p.demanda);
-                    const infosLink = extrairLinks(p.linkAcesso);
-                    
-                    let dataText = p.prazoFinal && p.prazoFinal !== '-' ? `Prazo: ${escapeHTML(p.prazoFinal)}` : 'Prazo a definir';
-                    let jiraButton = infosLink.jira ? `<a href="${infosLink.jira}" target="_blank" onclick="event.stopPropagation()" class="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg text-xs font-black hover:bg-blue-600 hover:text-white transition-colors border border-blue-100 shadow-sm flex items-center"><i class="fa-brands fa-jira mr-1"></i> Jira</a>` : '';
-
-                    container.innerHTML += `
-                        <div onclick="abrirDetalhes(${originalIndex})" class="bg-white border border-gray-200 rounded-xl p-4 flex justify-between items-center cursor-pointer hover:border-brisa-orange shadow-sm transition-all group">
-                            <div class="flex-grow pr-4 overflow-hidden">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <div class="w-2.5 h-2.5 rounded-full ${statusInfo.bg}"></div>
-                                    <h5 class="font-black text-brisa-blue text-sm truncate group-hover:text-brisa-orange transition-colors">${escapeHTML(p.demanda) || 'Sem Nome'}</h5>
-                                </div>
-                                <div class="flex items-center gap-2 text-[10px] font-bold text-gray-500 mt-1.5">
-                                    <span class="badge-frente ${frenteInfo.class} scale-90 origin-left">${frenteInfo.nome}</span>
-                                    <span><i class="fa-regular fa-calendar mr-1"></i>${dataText}</span>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-2 shrink-0">
-                                ${jiraButton}
-                                <button class="w-8 h-8 rounded-full bg-gray-100 text-gray-400 group-hover:bg-brisa-orange group-hover:text-white transition-colors flex items-center justify-center">
-                                    <i class="fa-solid fa-chevron-right text-xs"></i>
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
-
-            document.getElementById('membro-view-resumo').classList.add('hidden');
-            document.getElementById('membro-view-lista').classList.remove('hidden');
-        }
-
 
         // 5. FILTROS E TABELA PRINCIPAL
         function limparFiltros(aplicarNaTabela = true) {
@@ -1053,13 +834,6 @@
             filtroStatusNome = 'todos';
             document.getElementById('btn-limpar-filtros').classList.add('hidden');
             if(aplicarNaTabela) aplicarFiltrosCombinados();
-        }
-
-        function filtrarPorStatus(status) {
-            limparFiltros(false);
-            filtroStatusNome = status;
-            aplicarFiltrosCombinados();
-            switchView('demandas');
         }
 
         function aplicarFiltrosCombinados() {
@@ -1072,7 +846,7 @@
                 filtrosAtivos = true;
             }
             if(filtroFrenteNome) {
-                areaLegendas.innerHTML += `<span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-[10px]"><i class="fa-solid fa-building mr-1"></i>${escapeHTML(filtroFrenteNome)}</span>`;
+                areaLegendas.innerHTML += `<span class="bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded text-[10px]"><i class="fa-solid fa-building mr-1"></i>${escapeHTML(filtroFrenteNome)}</span>`;
                 filtrosAtivos = true;
             }
             if(filtroStatusNome !== 'todos') {
@@ -1125,7 +899,7 @@
             const cores = {
                 "TCR - Comercial": "bg-sky-500",
                 "DO - Administrativo": "bg-amber-500",
-                "Engajamento": "bg-pink-600",
+                "Engajamento": "bg-pink-500",
                 "TTO - Técnico": "bg-teal-500",
                 "Geral / Outros": "bg-slate-500",
                 "Não Classificada": "bg-red-500"
@@ -1143,15 +917,15 @@
                 const corBarra = cores[label] || "bg-gray-400";
                 
                 html += `
-                <div class="cursor-pointer group hover:bg-gray-50 p-2 -mx-2 rounded-lg transition-colors" onclick="abrirRaioX('frente', '${label}', 'Raio-X da Área: ${label}', '${corBarra.replace('bg-', 'bg-')}')">
+                <div class="cursor-pointer group hover:bg-slate-50 p-2 -mx-2 rounded-lg transition-colors" onclick="abrirRaioX('frente', '${label}', 'Raio-X da Área: ${label}', '${corBarra.replace('bg-', 'bg-')}')">
                     <div class="flex justify-between items-end mb-2">
-                        <span class="font-bold text-gray-700 text-xs md:text-sm group-hover:text-brisa-blue">${label} <i class="fa-solid fa-arrow-right-to-bracket text-[10px] ml-1 opacity-0 group-hover:opacity-100 transition-opacity text-brisa-orange"></i></span>
+                        <span class="font-bold text-slate-600 text-xs md:text-sm group-hover:text-blue-600">${label} <i class="fa-solid fa-arrow-right-to-bracket text-[10px] ml-1 opacity-0 group-hover:opacity-100 transition-opacity text-blue-500"></i></span>
                         <div class="text-right">
-                            <span class="font-black text-lg text-gray-800">${qtd}</span>
-                            <span class="text-xs text-gray-400 ml-1">(${perc}%)</span>
+                            <span class="font-black text-lg text-slate-700">${qtd}</span>
+                            <span class="text-xs text-slate-400 ml-1">(${perc}%)</span>
                         </div>
                     </div>
-                    <div class="w-full bg-gray-100 rounded-full h-3">
+                    <div class="w-full bg-slate-100 rounded-full h-3">
                         <div class="${corBarra} h-3 rounded-full transition-all duration-1000 shadow-sm" style="width: ${perc}%"></div>
                     </div>
                 </div>`;
@@ -1191,59 +965,10 @@
             }, 50);
 
             renderizarGraficoFrentes(dados);
-            
-            // Chama motor Visão Executiva e Timeline
             atualizarDashboardGestao(dados);
         }
 
-        // 7. GERADOR DE E-MAIL
-        function abrirModalEmail(index) {
-            const p = dadosGlobais[index];
-            const infos = extrairLinks(p.linkAcesso);
-            const hora = new Date().getHours();
-            
-            let saudacao = 'Bom dia';
-            if (hora >= 12 && hora < 18) saudacao = 'Boa tarde';
-            else if (hora >= 18) saudacao = 'Boa noite';
-
-            const textosAbertura = [
-                "Passando para comunicar que o projeto solicitado pelo seu time já foi concluído.",
-                "Sua demanda de vídeo acaba de passar pela nossa etapa final de revisão e já está pronta.",
-                "A entrega referente à sua solicitação foi finalizada com sucesso."
-            ];
-            const abertura = textosAbertura[Math.floor(Math.random() * textosAbertura.length)];
-
-            const textosFechamento = [
-                "Qualquer necessidade de ajuste ou ponto de melhoria, peço que responda este e-mail em até 48 horas.",
-                "Estamos à disposição caso seja necessário realizar alguma pequena alteração no arquivo final.",
-                "Por favor, valide o material. Havendo ajustes pertinentes ao escopo inicial, nossa equipe está pronta para atender."
-            ];
-            const fechamento = textosFechamento[Math.floor(Math.random() * textosFechamento.length)];
-
-            const linkAcesso = infos.video ? infos.video : "Favor verificar os anexos ou a pasta de entrega do setor.";
-            const nomeDemanda = p.demanda || 'Solicitação de Vídeo / DHO';
-            
-            const txtEmail = `${saudacao} time,\n\n${abertura}\n\n🎬 Projeto/Demanda: ${nomeDemanda}\n🔗 Link de Acesso: ${linkAcesso}\n\n${fechamento}\n\nAtenciosamente,\nEquipe de Produção Visual DHO`;
-            
-            document.getElementById('email-textarea').value = txtEmail;
-            
-            const mailtoLink = `mailto:?subject=${encodeURIComponent("Entrega Oficial (DHO): " + nomeDemanda)}&body=${encodeURIComponent(txtEmail)}`;
-            document.getElementById('btn-mailto').href = mailtoLink;
-
-            fecharModal('modal-detalhes');
-            abrirModal('modal-email');
-        }
-
-        function copiarEmail() {
-            const txt = document.getElementById('email-textarea');
-            txt.select();
-            document.execCommand('copy');
-            const btn = document.getElementById('btn-copy-email');
-            btn.innerHTML = `<i class="fa-solid fa-check"></i> Copiado!`;
-            setTimeout(() => { btn.innerHTML = `<i class="fa-regular fa-copy"></i> Copiar`; }, 2000);
-        }
-
-        // 8. RENDERIZAÇÃO DA TABELA E MODAL DE DETALHES
+        // 7. RENDERIZAÇÃO DA TABELA E MODAL DE DETALHES
         function abrirDetalhes(index) {
             const p = dadosGlobais[index];
             const infosLink = extrairLinks(p.linkAcesso);
@@ -1282,22 +1007,12 @@
                 botoesHtml += `<a href="${escapeHTML(infosLink.jira)}" target="_blank" class="w-full sm:w-auto px-6 py-3 bg-white hover:bg-gray-50 text-gray-800 font-black rounded-xl border-2 border-gray-200 shadow-sm flex justify-center items-center gap-2 transition-transform hover:-translate-y-1"><i class="fa-brands fa-jira text-blue-600 text-lg"></i> Rastrear no Jira</a>`;
             }
 
-            if(statusInfo.label === 'Concluído') {
-                if(infosLink.video) {
-                    botoesHtml += `<a href="${escapeHTML(infosLink.video)}" target="_blank" class="w-full sm:w-auto px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-black rounded-xl shadow-md flex justify-center items-center gap-2 transition-transform hover:-translate-y-1"><i class="fa-solid fa-play-circle text-lg"></i> Abrir Entrega</a>`;
-                }
-                botoesHtml += `<button onclick="abrirModalEmail(${index})" class="w-full sm:w-auto px-6 py-3 bg-[#09132E] hover:bg-blue-900 text-white font-black rounded-xl shadow-md flex justify-center items-center gap-2 transition-transform hover:-translate-y-1"><i class="fa-solid fa-envelope-open-text text-lg"></i> Emitir Notificação (E-mail)</button>`;
-            } else {
-                botoesHtml += `<button disabled class="w-full sm:w-auto px-6 py-3 bg-gray-100 text-gray-400 font-bold rounded-xl border-2 border-gray-200 cursor-not-allowed flex justify-center items-center gap-2"><i class="fa-solid fa-lock"></i> Validação Bloqueada (Em Processo)</button>`;
+            if(statusInfo.label === 'Concluído' && infosLink.video) {
+                botoesHtml += `<a href="${escapeHTML(infosLink.video)}" target="_blank" class="w-full sm:w-auto px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-black rounded-xl shadow-md flex justify-center items-center gap-2 transition-transform hover:-translate-y-1"><i class="fa-solid fa-play-circle text-lg"></i> Abrir Entrega</a>`;
             }
 
             areaEntrega.innerHTML = botoesHtml;
             abrirModal('modal-detalhes');
-        }
-
-        // Correção de ordenação sem dependência externa
-        function ordernarProjetos(arrayDados) {
-            return arrayDados; // Pode implementar ordenação por data aqui futuramente
         }
 
         function renderizarTabela(dadosParaRenderizar) {
@@ -1307,33 +1022,34 @@
             tbody.innerHTML = '';
 
             if (dadosParaRenderizar.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-10 text-center text-gray-400 font-bold"><i class="fa-solid fa-folder-open text-3xl mb-3 block"></i> Nenhum registro localizado com estes filtros.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-10 text-center text-slate-400 font-bold"><i class="fa-solid fa-folder-open text-3xl mb-3 block"></i> Nenhum registro localizado com estes filtros.</td></tr>`;
                 return;
             }
 
-            const dadosOrdenados = ordernarProjetos(dadosParaRenderizar);
-
-            dadosOrdenados.forEach((p) => {
+            dadosParaRenderizar.forEach((p) => {
                 const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
                 const originalIndex = dadosGlobais.indexOf(p);
                 const frenteInfo = classificarFrente(p.sponsor, p.demanda);
 
+                // Highlight Row based on Status
+                let trClassStatus = statusInfo.label === 'Concluído' ? 'tr-status-concluido' : (statusInfo.label === 'Em Produção' ? 'tr-status-andamento' : 'tr-status-fila');
+
                 let badgeGravacao = p.dataGravacao && p.dataGravacao.toLowerCase() !== 'a combinar' && p.dataGravacao !== '-' 
-                    ? `<span class="bg-orange-50 text-brisa-orange font-bold px-2 py-1 rounded-md text-[10px] md:text-[11px] whitespace-nowrap"><i class="fa-solid fa-video mr-1"></i>${escapeHTML(p.dataGravacao)}</span>` 
-                    : `<span class="text-gray-400 font-medium text-[10px] md:text-[11px]">Pendente</span>`;
+                    ? `<span class="bg-blue-50 text-blue-600 font-bold px-2 py-1 rounded-md text-[10px] md:text-[11px] whitespace-nowrap"><i class="fa-solid fa-video mr-1"></i>${escapeHTML(p.dataGravacao)}</span>` 
+                    : `<span class="text-slate-400 font-medium text-[10px] md:text-[11px]">Pendente</span>`;
                     
                 let badgePrazo = p.prazoFinal && p.prazoFinal.toLowerCase() !== 'a combinar' && p.prazoFinal !== '-' 
-                    ? `<span class="bg-blue-50 text-blue-700 font-bold px-2 py-1 rounded-md text-[10px] md:text-[11px] whitespace-nowrap"><i class="fa-regular fa-calendar mr-1"></i>${escapeHTML(p.prazoFinal)}</span>` 
-                    : `<span class="text-gray-400 font-medium text-[10px] md:text-[11px]">Pendente</span>`;
+                    ? `<span class="bg-slate-100 text-slate-600 font-bold px-2 py-1 rounded-md text-[10px] md:text-[11px] whitespace-nowrap"><i class="fa-regular fa-calendar mr-1"></i>${escapeHTML(p.prazoFinal)}</span>` 
+                    : `<span class="text-slate-400 font-medium text-[10px] md:text-[11px]">Pendente</span>`;
 
                 tbody.innerHTML += `
-                    <tr class="hover:bg-blue-50/40 transition-colors cursor-pointer group" onclick="abrirDetalhes(${originalIndex})">
-                        <td class="py-4 px-4 md:px-6">
+                    <tr class="hover:bg-slate-50 transition-colors cursor-pointer group ${trClassStatus}" onclick="abrirDetalhes(${originalIndex})">
+                        <td class="py-4 px-4 md:px-6 pl-4">
                             <div class="flex items-center">
-                                <i class="fa-solid fa-angle-right text-[#FF5A00] text-[10px] md:text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <i class="fa-solid fa-angle-right text-blue-500 text-[10px] md:text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
                                 <div>
                                     <span class="font-black text-brisa-blue truncate max-w-[150px] sm:max-w-[200px] block">${escapeHTML(p.demanda) || 'Sem título cadastrado'}</span>
-                                    <span class="text-[9px] font-bold text-gray-400 block"><i class="fa-solid fa-user-tag mr-1"></i>${escapeHTML(p.sponsor) || 'Não informado'}</span>
+                                    <span class="text-[9px] font-bold text-slate-400 block mt-0.5"><i class="fa-solid fa-user-tag mr-1"></i>${escapeHTML(p.sponsor) || 'Não informado'}</span>
                                 </div>
                             </div>
                         </td>
@@ -1341,13 +1057,15 @@
                         <td class="py-4 px-4 md:px-6 text-center">
                             <div class="flex justify-center flex-col items-center gap-1">
                                 <div class="status-dot ${statusInfo.bg}" title="${statusInfo.label}"><i class="fa-solid ${statusInfo.icon}"></i></div>
-                                <span class="text-[9px] md:text-[10px] font-black text-gray-400 uppercase tracking-wider">${statusInfo.label}</span>
+                                <span class="text-[9px] md:text-[10px] font-black text-slate-500 uppercase tracking-wider">${statusInfo.label}</span>
                             </div>
                         </td>
-                        <td class="py-4 px-4 md:px-6 hidden md:table-cell">${badgeGravacao}</td>
+                        <td class="py-4 px-4 md:px-6 hidden md:table-cell">
+                            <span class="font-bold text-blue-600 text-xs truncate block max-w-[120px]"><i class="fa-solid fa-headset mr-1"></i>${escapeHTML(p.responsavel) || 'Equipe'}</span>
+                        </td>
                         <td class="py-4 px-4 md:px-6 hidden lg:table-cell">${badgePrazo}</td>
                         <td class="py-4 px-4 md:px-6 text-center">
-                            <button class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex justify-center items-center text-xs shadow-sm hover:bg-gray-800 hover:text-white transition-colors group-hover:bg-brisa-orange group-hover:text-white"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex justify-center items-center text-xs shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-colors"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </td>
                     </tr>
                 `;
