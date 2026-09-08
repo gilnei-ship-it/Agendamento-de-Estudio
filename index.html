@@ -18,14 +18,6 @@
                     fontFamily: { sans: ['Montserrat', 'sans-serif'] },
                     colors: {
                         fabrica: { blue: '#0B41CD', orange: '#FF6B00', bg: '#F6F5F2' }
-                    },
-                    animation: {
-                        'float': 'float 3s ease-in-out infinite',
-                        'wiggle': 'wiggle 1s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
-                        wiggle: { '0%, 100%': { transform: 'rotate(-3deg)' }, '50%': { transform: 'rotate(3deg)' } },
                     }
                 }
             }
@@ -33,7 +25,7 @@
     </script>
 
     <style>
-        body { background-color: #F6F5F2; color: #1E293B; overflow-x: hidden; scroll-behavior: smooth; }
+        body { background-color: #F8FAFC; color: #1E293B; overflow-x: hidden; scroll-behavior: smooth; }
         
         #loading-screen { transition: opacity 0.3s ease, visibility 0.3s; z-index: 9999; }
         .loader-hidden { opacity: 0; visibility: hidden; }
@@ -106,7 +98,6 @@
         .tr-status-fila { border-left: 4px solid #64748B; }
         .tr-status-cancelado { border-left: 4px solid #EF4444; opacity: 0.7; }
 
-        /* Filtros Animações */
         .filtro-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
         .filtro-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.05); }
         .filtro-btn.active-equipe { background-color: #FF6B00; border-color: #FF6B00; color: white; box-shadow: 0 6px 15px rgba(255,107,0,0.3); transform: scale(1.02); }
@@ -117,27 +108,23 @@
         .filtro-btn.active-status.concluido { background-color: #10B981; border-color: #10B981; color: white; box-shadow: 0 6px 15px rgba(16,185,129,0.3); }
         .filtro-btn.active-frente { background-color: #0B41CD; border-color: #0B41CD; color: white; box-shadow: 0 6px 15px rgba(11,65,205,0.3); transform: scale(1.02); }
 
-        /* Design Fluxo Diagonal Igual a Imagem */
-        .fluxo-container { position: relative; width: 100%; height: 350px; background-image: radial-gradient(#CBD5E1 1px, transparent 1px); background-size: 30px 30px; border-radius: 24px; padding: 20px;}
-        .fluxo-node { position: absolute; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: all 0.3s; z-index: 10; }
-        .fluxo-node:hover { transform: scale(1.1) translateY(-10px); z-index: 20; }
-        .fluxo-avatar-wrapper { position: relative; padding: 4px; background: linear-gradient(135deg, #FF6B00 0%, transparent 50%, #FF6B00 100%); border-radius: 50%; animation: spin-slow 10s linear infinite; }
-        .fluxo-avatar { width: 70px; height: 70px; border-radius: 50%; background: white; border: 4px solid white; display: flex; align-items: center; justify-content: center; font-size: 30px; color: #0B41CD; box-shadow: 0 10px 20px rgba(0,0,0,0.1); animation: spin-reverse 10s linear infinite; }
-        .fluxo-label { margin-top: 12px; font-weight: 900; color: #0B41CD; font-size: 14px; text-shadow: 0 2px 4px rgba(255,255,255,0.8); }
-        .fluxo-cargo { margin-top: 6px; background-color: #FF6B00; color: white; padding: 6px 12px; border-radius: 8px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(255,107,0,0.3); }
-        
-        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
-        @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+        .workflow-node { display: flex; align-items: center; gap: 15px; background: white; padding: 15px 25px; border-radius: 100px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 2px solid #E2E8F0; position: relative; z-index: 2; transition: transform 0.3s ease; cursor: pointer; }
+        .workflow-node:hover { transform: scale(1.05); border-color: #FF6B00; }
+        .workflow-avatar { width: 60px; height: 60px; border-radius: 50%; border: 3px solid #0B41CD; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #0B41CD; background: #F8FAFC; position: relative;}
+        .workflow-node:hover .workflow-avatar { border-color: #FF6B00; color: #FF6B00; }
+
+        .fade-in-section { animation: fadeInScale 0.3s ease-in-out forwards; }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body class="antialiased">
 
     <!-- Loading Screen -->
     <div id="loading-screen" class="fixed inset-0 bg-fabrica-blue flex flex-col items-center justify-center z-[9999]">
-        <i class="fa-solid fa-industry fa-bounce text-6xl text-white mb-6"></i>
+        <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-24 md:h-40 object-contain filter brightness-0 invert mb-8 animate-pulse px-4">
         <div class="flex flex-col items-center gap-3">
             <i class="fa-solid fa-cog fa-spin text-fabrica-orange text-4xl"></i>
-            <span class="text-white font-black tracking-widest uppercase text-sm mt-2" id="loading-text">Conectando Engrenagens...</span>
+            <span class="text-white font-black tracking-widest uppercase text-xs md:text-sm mt-2" id="loading-text">Conectando Engrenagens...</span>
         </div>
     </div>
 
@@ -145,14 +132,11 @@
     <div class="header-bg pt-6 md:pt-10 px-4 sm:px-8 relative">
         <div class="max-w-[1300px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex flex-col items-center md:items-start gap-1">
-                <h1 class="text-3xl md:text-4xl font-black text-white flex items-center gap-3">
-                    <i class="fa-solid fa-photo-film text-fabrica-orange animate-pulse"></i> Fábrica de <span class="text-fabrica-orange">Conteúdo</span>
-                </h1>
-                <p class="text-blue-200 text-xs font-bold tracking-widest uppercase ml-12">Produção Visual DHO</p>
+                <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Fábrica de Conteúdo" class="h-16 md:h-28 object-contain filter brightness-0 invert drop-shadow-md mb-2">
             </div>
             
             <nav class="flex gap-2 bg-white/10 border border-white/20 p-2 rounded-full backdrop-blur-lg shadow-xl w-full md:w-auto overflow-x-auto custom-scroll">
-                <button onclick="switchView('inicio')" id="tab-inicio" class="nav-tab active text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2 hover:bg-white/5"><i class="fa-solid fa-rocket fa-beat-fade"></i> Fluxo & Dashboard</button>
+                <button onclick="switchView('inicio')" id="tab-inicio" class="nav-tab active text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2 hover:bg-white/5"><i class="fa-solid fa-rocket"></i> Fluxo & Dashboard</button>
                 <button onclick="switchView('demandas')" id="tab-demandas" class="nav-tab text-blue-200 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2 hover:bg-white/5"><i class="fa-solid fa-clipboard-list"></i> Controle Geral</button>
                 <button onclick="switchView('relatorios')" id="tab-relatorios" class="nav-tab text-blue-200 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2 hover:bg-white/5"><i class="fa-solid fa-chart-line"></i> Desempenho Mensal</button>
             </nav>
@@ -169,7 +153,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     
                     <div>
-                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 text-fabrica-orange font-black text-[10px] uppercase tracking-widest mb-6 border border-orange-200 animate-float">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 text-fabrica-orange font-black text-[10px] uppercase tracking-widest mb-6 border border-orange-200">
                             <i class="fa-solid fa-bolt text-yellow-500"></i> Sistema Oficial DHO
                         </div>
                         <h2 class="text-4xl md:text-5xl font-black text-fabrica-blue leading-tight mb-4">
@@ -181,52 +165,57 @@
 
                         <div class="flex flex-col sm:flex-row gap-4">
                             <button onclick="abrirModal('modal-novo')" class="bg-fabrica-orange hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/40 text-white font-black py-4 px-8 rounded-2xl transition-all hover:-translate-y-1 flex justify-center items-center gap-3 text-lg group">
-                                <i class="fa-solid fa-video group-hover:animate-bounce"></i> Nova Demanda
+                                <i class="fa-solid fa-video"></i> Nova Demanda
                             </button>
                             <button onclick="switchView('demandas')" class="bg-fabrica-blue hover:bg-blue-800 hover:shadow-lg hover:shadow-blue-600/40 text-white font-black py-4 px-8 rounded-2xl transition-all hover:-translate-y-1 flex justify-center items-center gap-3 text-lg group">
-                                <i class="fa-solid fa-search group-hover:fa-spin"></i> Rastrear Projetos
+                                <i class="fa-solid fa-search"></i> Rastrear Projetos
                             </button>
                         </div>
                     </div>
 
-                    <!-- Representação Visual Diagonal (Igual Imagem Referência) -->
-                    <div class="fluxo-container shadow-inner border-2 border-slate-100">
-                        <!-- Linha de conexão pontilhada -->
-                        <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 1;">
-                            <path d="M 60 250 L 180 150 L 300 50" fill="none" stroke="#FF6B00" stroke-width="3" stroke-dasharray="8 8" class="animate-pulse"/>
-                        </svg>
+                    <!-- Representação da Equipe com Números e Destaques -->
+                    <div class="bg-slate-50 rounded-[32px] p-8 border-2 border-dashed border-gray-200 relative overflow-hidden min-h-[400px] flex flex-col justify-center items-center">
+                        <h3 class="absolute top-6 left-8 text-sm font-black text-fabrica-blue uppercase tracking-widest">Equipe Operacional</h3>
+                        <p class="absolute top-12 left-8 text-xs text-fabrica-orange font-bold bg-orange-50 px-3 py-1 rounded-full"><i class="fa-solid fa-filter"></i> Clique para filtrar demandas na mesa</p>
 
-                        <!-- Node 1: Marcos (Bottom Left) -->
-                        <div class="fluxo-node" style="bottom: 40px; left: 10%;" onclick="verDemandasDireto('Marcos')">
-                            <div class="relative">
-                                <div class="fluxo-avatar-wrapper"><div class="fluxo-avatar"><i class="fa-solid fa-camera-retro"></i></div></div>
-                                <div class="absolute -top-1 -right-1 bg-fabrica-blue text-white text-xs font-black w-8 h-8 rounded-full flex items-center justify-center border-2 border-white shadow-lg animate-bounce" id="badge-home-marcos">0</div>
-                            </div>
-                            <span class="fluxo-label">Marcos Guilherme</span>
-                            <span class="fluxo-cargo"><i class="fa-solid fa-scissors mr-1"></i> Gravação e cortes</span>
-                        </div>
+                        <div class="relative w-full max-w-[400px] mt-14">
+                            <div class="absolute top-[40px] left-[50px] w-[20px] h-[100px] border-l-3 border-b-3 border-dashed border-gray-300 rounded-bl-[20px] z-0"></div>
+                            <div class="absolute top-[140px] right-[50px] w-[20px] h-[100px] border-r-3 border-b-3 border-dashed border-gray-300 rounded-br-[20px] z-0"></div>
 
-                        <!-- Node 2: Erick (Middle Center) -->
-                        <div class="fluxo-node" style="bottom: 140px; left: 40%;" onclick="verDemandasDireto('Erick')">
-                            <div class="relative">
-                                <div class="fluxo-avatar-wrapper" style="background: linear-gradient(135deg, #0B41CD 0%, transparent 50%, #0B41CD 100%);"><div class="fluxo-avatar text-fabrica-orange"><i class="fa-solid fa-pen-nib"></i></div></div>
-                                <div class="absolute -top-1 -right-1 bg-fabrica-orange text-white text-xs font-black w-8 h-8 rounded-full flex items-center justify-center border-2 border-white shadow-lg animate-bounce" style="animation-delay: 0.2s;" id="badge-home-erick">0</div>
+                            <div class="workflow-node ml-auto mb-8 w-max group" onclick="verDemandasDireto('Gilnei')">
+                                <div class="relative">
+                                    <div class="workflow-avatar shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-user-tie"></i></div>
+                                    <div class="absolute -top-2 -right-2 bg-gradient-to-br from-fabrica-orange to-orange-600 text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-gilnei">0</div>
+                                </div>
+                                <div>
+                                    <h4 class="font-black text-fabrica-blue text-lg group-hover:text-fabrica-orange transition-colors">Gilnei Laurindo</h4>
+                                    <span class="bg-slate-200 text-fabrica-blue text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Responsável / Gestão</span>
+                                </div>
                             </div>
-                            <span class="fluxo-label">Erick Gustavo</span>
-                            <span class="fluxo-cargo bg-fabrica-blue"><i class="fa-solid fa-hands-holding-circle mr-1"></i> Apoio nas Demandas</span>
-                        </div>
 
-                        <!-- Node 3: Gilnei (Top Right) -->
-                        <div class="fluxo-node" style="bottom: 240px; left: 70%;" onclick="verDemandasDireto('Gilnei')">
-                            <div class="relative">
-                                <div class="fluxo-avatar-wrapper"><div class="fluxo-avatar"><i class="fa-solid fa-wand-magic-sparkles"></i></div></div>
-                                <div class="absolute -top-1 -right-1 bg-fabrica-blue text-white text-xs font-black w-8 h-8 rounded-full flex items-center justify-center border-2 border-white shadow-lg animate-bounce" style="animation-delay: 0.4s;" id="badge-home-gilnei">0</div>
+                            <div class="workflow-node mx-auto mb-8 w-max group" onclick="verDemandasDireto('Erick')">
+                                <div class="relative">
+                                    <div class="workflow-avatar shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-pen-nib"></i></div>
+                                    <div class="absolute -top-2 -right-2 bg-gradient-to-br from-fabrica-orange to-orange-600 text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-erick">0</div>
+                                </div>
+                                <div>
+                                    <h4 class="font-black text-fabrica-blue text-lg group-hover:text-fabrica-orange transition-colors">Erick Gustavo</h4>
+                                    <span class="bg-slate-200 text-fabrica-blue text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Apoio / Refinamentos</span>
+                                </div>
                             </div>
-                            <span class="fluxo-label">Gilnei Laurindo</span>
-                            <span class="fluxo-cargo"><i class="fa-solid fa-palette mr-1"></i> Refinamentos e Designer</span>
+
+                            <div class="workflow-node mr-auto w-max group" onclick="verDemandasDireto('Marcos')">
+                                <div class="relative">
+                                    <div class="workflow-avatar shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-camera"></i></div>
+                                    <div class="absolute -top-2 -right-2 bg-gradient-to-br from-fabrica-orange to-orange-600 text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-marcos">0</div>
+                                </div>
+                                <div>
+                                    <h4 class="font-black text-fabrica-blue text-lg group-hover:text-fabrica-orange transition-colors">Marcos Guilherme</h4>
+                                    <span class="bg-slate-200 text-fabrica-blue text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Gravação e Cortes</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -257,7 +246,7 @@
             <div class="bg-white p-6 md:p-8 rounded-[32px] border border-gray-100 shadow-xl mb-8 relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-fabrica-orange rounded-full mix-blend-multiply filter blur-3xl opacity-10 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
                 <div class="flex justify-between items-center mb-6 border-b border-gray-100 pb-4 relative z-10">
-                    <h3 class="text-sm font-black text-fabrica-blue uppercase tracking-widest"><i class="fa-solid fa-gamepad text-fabrica-orange mr-2 fa-shake"></i> Painel de Controle de Filtros</h3>
+                    <h3 class="text-sm font-black text-fabrica-blue uppercase tracking-widest"><i class="fa-solid fa-gamepad text-fabrica-orange mr-2"></i> Painel de Controle de Filtros</h3>
                     <button onclick="limparFiltros(true)" id="btn-limpar-filtros" class="hidden text-xs bg-red-100 text-red-600 px-5 py-2.5 rounded-full font-bold hover:bg-red-500 hover:text-white transition-all shadow-sm flex items-center gap-2"><i class="fa-solid fa-trash-can"></i> Limpar Tudo</button>
                 </div>
                 
@@ -287,7 +276,7 @@
                             <p class="text-[10px] font-black text-slate-400 uppercase mb-4"><i class="fa-solid fa-traffic-light mr-2 text-lg"></i> Filtrar por Status</p>
                             <div class="flex flex-col gap-3">
                                 <button onclick="aplicarFiltroRapido('status', 'fila')" data-valor="fila" class="filtro-btn filtro-status px-5 py-3.5 rounded-2xl text-xs font-bold border-2 border-slate-100 text-slate-600 bg-white shadow-sm w-full text-left flex items-center"><div class="w-3 h-3 rounded-full bg-slate-500 mr-3 shadow-sm"></div> Na Fila / Aguardando</button>
-                                <button onclick="aplicarFiltroRapido('status', 'andamento')" data-valor="andamento" class="filtro-btn filtro-status px-5 py-3.5 rounded-2xl text-xs font-bold border-2 border-slate-100 text-slate-600 bg-white shadow-sm w-full text-left flex items-center"><div class="w-3 h-3 rounded-full bg-fabrica-orange mr-3 shadow-sm animate-pulse"></div> Em Produção / Revisão</button>
+                                <button onclick="aplicarFiltroRapido('status', 'andamento')" data-valor="andamento" class="filtro-btn filtro-status px-5 py-3.5 rounded-2xl text-xs font-bold border-2 border-slate-100 text-slate-600 bg-white shadow-sm w-full text-left flex items-center"><div class="w-3 h-3 rounded-full bg-fabrica-orange mr-3 shadow-sm"></div> Em Produção / Revisão</button>
                                 <button onclick="aplicarFiltroRapido('status', 'concluido')" data-valor="concluido" class="filtro-btn filtro-status px-5 py-3.5 rounded-2xl text-xs font-bold border-2 border-slate-100 text-slate-600 bg-white shadow-sm w-full text-left flex items-center"><div class="w-3 h-3 rounded-full bg-green-500 mr-3 shadow-sm"></div> Projetos Concluídos</button>
                             </div>
                         </div>
@@ -329,7 +318,7 @@
                             <tr class="bg-white text-slate-400 text-[10px] md:text-xs uppercase tracking-widest border-b-2 border-slate-100">
                                 <th class="py-5 px-6 md:px-8 font-black">Demanda / Projeto</th>
                                 <th class="py-5 px-6 font-black">Frente / Área</th>
-                                <th class="py-5 px-6 font-black text-center">Status</th>
+                                <th class="py-5 px-6 font-black text-center">Status Global</th>
                                 <th class="py-5 px-6 font-black hidden md:table-cell"><i class="fa-solid fa-user-ninja mr-1"></i> Equipe (DHO)</th>
                                 <th class="py-5 px-6 font-black hidden lg:table-cell"><i class="fa-regular fa-calendar-check mr-1"></i> Previsão</th>
                                 <th class="py-5 px-6 font-black text-center">Ação</th>
@@ -347,9 +336,9 @@
         <div id="view-relatorios" class="view-section -mt-8">
             
             <div class="col-span-1 md:col-span-2 bg-gradient-to-br from-fabrica-blue to-blue-900 rounded-[32px] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden mb-8 border-4 border-white">
-                <i class="fa-solid fa-chart-area absolute -right-10 -bottom-10 text-[250px] text-white opacity-5 animate-pulse"></i>
+                <i class="fa-solid fa-chart-area absolute -right-10 -bottom-10 text-[250px] text-white opacity-5"></i>
                 <div class="relative z-10">
-                    <h3 class="text-sm md:text-base font-black uppercase tracking-widest mb-4 text-orange-400 flex items-center gap-3"><i class="fa-solid fa-calendar-days fa-bounce"></i> Produção Mensal Consolidada</h3>
+                    <h3 class="text-sm md:text-base font-black uppercase tracking-widest mb-4 text-orange-400 flex items-center gap-3"><i class="fa-solid fa-calendar-days"></i> Produção Mensal Consolidada</h3>
                     <p class="text-xs text-blue-200 font-medium mb-10 max-w-xl leading-relaxed">Acompanhe o volume histórico. Barras representam o total de solicitações que deram entrada, e o preenchimento laranja marca as já entregues com sucesso.</p>
                     
                     <div id="container-grafico-meses" class="flex gap-8 overflow-x-auto custom-scroll pb-6 items-end min-h-[200px]">
@@ -361,7 +350,7 @@
             <div class="bg-white rounded-[32px] shadow-xl border border-gray-100 p-8 md:p-12 mb-8">
                 <div class="mb-10 border-b border-gray-100 pb-6">
                     <h2 class="text-2xl md:text-3xl font-black text-fabrica-blue uppercase tracking-tight flex items-center gap-4">
-                        <i class="fa-solid fa-chart-pie text-fabrica-orange fa-spin-pulse" style="--fa-animation-duration: 3s;"></i> Relatórios & Frentes
+                        <i class="fa-solid fa-chart-pie text-fabrica-orange"></i> Relatórios & Frentes
                     </h2>
                     <p class="text-gray-500 font-medium mt-2">Visão analítica de conversão. Clique nos itens para um drill-down completo (Raio-X).</p>
                 </div>
@@ -374,7 +363,7 @@
                             <div class="bar-bg h-3"><div class="bar-fill bg-green-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" id="chart-bar-concluido" style="width: 0%;"></div></div>
                         </div>
                         <div class="cursor-pointer group bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition-all border border-transparent hover:border-orange-200" onclick="abrirRaioX('status', 'andamento', 'Análise: Em Produção', 'bg-fabrica-orange')">
-                            <div class="flex justify-between items-end mb-3"><span class="font-bold text-slate-600 uppercase text-xs tracking-wider group-hover:text-fabrica-orange transition-colors flex items-center gap-2"><i class="fa-solid fa-cog fa-spin text-fabrica-orange"></i> Em Produção</span><span class="font-black text-3xl text-fabrica-orange" id="chart-percent-andamento">0%</span></div>
+                            <div class="flex justify-between items-end mb-3"><span class="font-bold text-slate-600 uppercase text-xs tracking-wider group-hover:text-fabrica-orange transition-colors flex items-center gap-2"><i class="fa-solid fa-cog text-fabrica-orange"></i> Em Produção</span><span class="font-black text-3xl text-fabrica-orange" id="chart-percent-andamento">0%</span></div>
                             <div class="bar-bg h-3"><div class="bar-fill bg-fabrica-orange shadow-[0_0_10px_rgba(255,107,0,0.5)]" id="chart-bar-andamento" style="width: 0%;"></div></div>
                         </div>
                         <div class="cursor-pointer group bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition-all border border-transparent hover:border-slate-300" onclick="abrirRaioX('status', 'fila', 'Análise: Retidos', 'bg-slate-600')">
@@ -423,14 +412,14 @@
 
                 <div class="space-y-12 border-l-2 border-slate-50 pl-0 md:pl-12">
                     <div>
-                        <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 border-b-2 border-slate-100 pb-3 flex items-center gap-2"><i class="fa-solid fa-heart-pulse text-red-500 text-lg fa-beat"></i> Termômetro de Gargalos</h4>
+                        <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 border-b-2 border-slate-100 pb-3 flex items-center gap-2"><i class="fa-solid fa-heart-pulse text-red-500 text-lg"></i> Termômetro de Gargalos</h4>
                         <div id="raiox-status-breakdown" class="space-y-2">
                             <!-- Preenchido no JS -->
                         </div>
                     </div>
 
                     <div id="raiox-alerta-n-classificado" class="hidden bg-red-50 border-2 border-red-100 rounded-2xl p-6 shadow-inner">
-                        <h4 class="text-sm font-black text-red-600 uppercase tracking-widest mb-3 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation fa-fade text-lg"></i> Atenção Gestão</h4>
+                        <h4 class="text-sm font-black text-red-600 uppercase tracking-widest mb-3 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation text-lg"></i> Atenção Gestão</h4>
                         <p class="text-xs text-red-800 font-bold mb-5 leading-relaxed">As demandas abaixo estão sem identificação clara da frente solicitante. O controle do funil está comprometido.</p>
                         <div id="raiox-lista-infratores" class="space-y-3"></div>
                     </div>
@@ -439,7 +428,7 @@
             
             <div class="p-8 bg-slate-50 border-t border-slate-100 shrink-0">
                 <button id="btn-aplicar-raiox" class="w-full bg-fabrica-blue hover:bg-blue-800 hover:shadow-blue-500/30 text-white font-black py-5 rounded-2xl shadow-xl transition-all uppercase tracking-widest flex justify-center items-center gap-3 text-sm">
-                    <i class="fa-solid fa-filter"></i> Aplicar filtros e ir para Tabela Principal
+                    <i class="fa-solid fa-filter"></i> Aplicar filtros e ir para Tabela
                 </button>
             </div>
         </div>
@@ -480,7 +469,7 @@
                         <p class="font-bold text-sm truncate w-full" id="modal-frente">-</p>
                     </div>
                     <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-md border-l-4 border-l-fabrica-blue relative overflow-hidden group">
-                        <i class="fa-solid fa-user-ninja absolute right-2 bottom-2 text-4xl text-slate-50 group-hover:scale-125 transition-transform pointer-events-none"></i>
+                        <i class="fa-solid fa-user-ninja absolute right-2 bottom-2 text-4xl text-slate-50 transition-transform pointer-events-none"></i>
                         <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 relative z-10"><i class="fa-solid fa-headset mr-1 text-fabrica-orange"></i> Equipe (DHO)</p>
                         <p class="font-black text-fabrica-blue text-sm truncate relative z-10" id="modal-responsavel">-</p>
                     </div>
@@ -511,15 +500,25 @@
     <div id="modal-novo" class="modal fixed inset-0 flex items-center justify-center bg-fabrica-blue/95" onclick="fecharAoClicarFora(event, 'modal-novo')" style="z-index: 500;">
         <div class="modal-content bg-white rounded-[32px] w-full max-w-5xl shadow-2xl relative flex flex-col overflow-hidden m-4 h-[90vh] border-4 border-white">
             <div class="p-6 md:p-8 border-b border-gray-100 flex justify-between items-center bg-slate-50 shrink-0">
-                <h3 class="text-xl md:text-2xl font-black text-fabrica-blue uppercase tracking-tight flex items-center gap-3"><i class="fa-solid fa-calendar-check text-fabrica-orange fa-bounce"></i> Reserva de Estúdio / Gravação</h3>
+                <h3 class="text-xl md:text-2xl font-black text-fabrica-blue uppercase tracking-tight flex items-center gap-3"><i class="fa-solid fa-calendar-check text-fabrica-orange"></i> Reserva de Estúdio / Gravação</h3>
                 <button onclick="fecharModal('modal-novo')" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-200 text-slate-600 font-black hover:bg-red-500 hover:text-white transition-all text-xl"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="flex-grow w-full relative bg-white">
-                <iframe src="https://calendar.app.google/ppfBoMMm1i9AHHi48" class="w-full h-full border-0 absolute inset-0" title="Agendamento Fábrica de Conteúdo"></iframe>
+            <div class="flex-grow w-full relative bg-white p-4">
+                <iframe src="https://calendar.app.google/ppfBoMMm1i9AHHi48" class="w-full h-full border-0 rounded-2xl" title="Agendamento Fábrica de Conteúdo"></iframe>
             </div>
         </div>
     </div>
+    
+    <div id="modal-config" class="modal fixed inset-0 flex items-center justify-center bg-fabrica-blue/90" onclick="fecharAoClicarFora(event, 'modal-config')">
+        <div class="modal-content bg-white rounded-[24px] w-full max-w-lg shadow-2xl relative flex flex-col overflow-hidden m-4 p-8 text-center">
+            <button onclick="fecharModal('modal-config')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 font-bold hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
+            <i class="fa-solid fa-database text-5xl text-fabrica-orange mb-4"></i>
+            <h3 class="text-2xl font-black text-fabrica-blue uppercase">Conexão Ativa</h3>
+            <p class="text-sm text-gray-500 mt-2 font-medium">Lendo dados operacionais do Google Apps Script.</p>
+        </div>
+    </div>
 
+    <!-- STREAMING_CHUNK:Javascript Logic -->
     <script>
         const googleAppUrl = "https://script.google.com/macros/s/AKfycbyh9nCwfuvhBjzuopA6s9qzZdgoR41jQX1Ws-qKPdzsh2OW4f_PPSUt66_-3qUOTfoDEg/exec";
 
@@ -543,7 +542,7 @@
             { termos: ['ozeias', 'eliane', 'emailiane', 'luisa', 'naira', 'administrativo', 'adm'], nome: "DO - Administrativo", css: "frente-adm", modalColor: "bg-[#F59E0B]" }, 
             { termos: ['vanessa', 'eduarda.souza', 'engajamento'], nome: "Engajamento", css: "frente-eng", modalColor: "bg-pink-500" },
             { termos: ['tto', 'tecnico', 'técnico', 'anderson', 'andarson', 'bia', 'beatriz', 'alencar', 'henrique', 'morais'], nome: "TTO - Técnico", css: "frente-tto", modalColor: "bg-teal-500" },
-            { termos: ['renato', 'emanuely', 'geral', 'sipat', 'udemy'], nome: "Geral / Outros", css: "frente-outros", modalColor: "bg-slate-500" } 
+            { termos: ['renato', 'emanuely', 'geral', 'sipat', 'udemy', 'camila', 'vitoria', 'maria eduarda'], nome: "Geral / Outros", css: "frente-outros", modalColor: "bg-slate-500" } 
         ];
 
         function classificarFrente(nome, nomeProjeto = "") {
@@ -553,6 +552,22 @@
                 if (matchEncontrado) return { nome: frente.nome, class: frente.css, modalColor: frente.modalColor };
             }
             return { nome: "Não Classificada", class: "frente-nao", modalColor: "bg-red-500" }; 
+        }
+
+        // Função robusta para extrair as variáveis independente de como vêm do Google Apps Script
+        function normalizarProjeto(p) {
+            return {
+                demanda: p.demanda || p.Demanda || p['Demanda'] || '',
+                sponsor: p.informado || p.Informado || p.aprovador || p.Aprovador || p.sponsor || '',
+                responsavel: p.responsavel || p.Responsável || p['Responsável'] || '',
+                colaborador: p.colaborador || p.Colaborador || '',
+                etapaAtual: p.etapaAtual || p['Etapa atual'] || p.status || '',
+                fase: p.fase || p.Fase || '',
+                prazoFinal: p.prazoFinal || p.prazo || p.Prazo || '-',
+                dataGravacao: p.dataGravacao || p['Data de gração'] || p['Data de gravação'] || '-',
+                dataRecebimento: p.dataRecebimento || p['Data de recebimento'] || '-',
+                linkAcesso: p.linkAcesso || p['Links e Obs'] || p.Obs || ''
+            };
         }
 
         function atualizarNumerosIndividuais(dados) {
@@ -917,8 +932,6 @@
             abrirModal('modal-raiox');
         }
 
-
-        // 5. FILTROS E TABELA PRINCIPAL
         function limparFiltros(aplicarNaTabela = true) {
             filtroEquipeNome = '';
             filtroFrenteNome = '';
@@ -977,7 +990,6 @@
             renderizarTabela(dadosFiltrados);
         }
 
-        // 6. ABA RELATÓRIOS E INDICADORES
         function renderizarGraficoFrentes(dados) {
             let counts = {};
             let totalValido = 0;
@@ -1056,7 +1068,6 @@
             atualizarNumerosIndividuais(dados);
         }
 
-        // 7. RENDERIZAÇÃO DA TABELA E MODAL DE DETALHES
         function abrirDetalhes(index) {
             const p = dadosGlobais[index];
             const infosLink = extrairLinks(p.linkAcesso);
@@ -1165,7 +1176,6 @@
             });
         }
 
-        // INIT
         document.addEventListener('DOMContentLoaded', () => {
             const elInput = document.getElementById('inputPesquisa');
             if(elInput) {
@@ -1184,7 +1194,10 @@
                 
                 if(!response.ok) throw new Error("Falha na rede");
                 
-                dadosGlobais = await response.json();
+                let dadosPuros = await response.json();
+                
+                // Mapeamento Robusto para evitar erros independente dos headers da planilha
+                dadosGlobais = dadosPuros.map(normalizarProjeto);
                 
                 if(dadosGlobais && dadosGlobais.length > 0) {
                     atualizarIndicadores(dadosGlobais);
