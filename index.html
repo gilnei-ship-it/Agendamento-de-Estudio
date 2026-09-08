@@ -17,12 +17,7 @@
                 extend: {
                     fontFamily: { sans: ['Montserrat', 'sans-serif'] },
                     colors: {
-                        brisa: {
-                            blue: '#09132E',
-                            orange: '#FF5A00',
-                            light: '#F8FAFC',
-                            card: '#111D42'
-                        }
+                        brisa: { blue: '#09132E', orange: '#FF5A00', light: '#F8FAFC' }
                     }
                 }
             }
@@ -45,7 +40,6 @@
             position: relative;
         }
 
-        /* Nav Tabs */
         .nav-tab { position: relative; transition: all 0.3s ease; }
         .nav-tab.active { color: #FF5A00; background: rgba(255, 255, 255, 0.1); }
         .nav-tab.active::after {
@@ -57,7 +51,6 @@
         .view-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Stat Cards */
         .stat-card {
             border-radius: 16px; color: white; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
@@ -70,15 +63,10 @@
         .bg-card-yellow { background: linear-gradient(135deg, #F59E0B, #D97706); }
         .bg-card-neutral { background: linear-gradient(135deg, #64748B, #475569); }
 
-        .status-dot {
-            width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            color: white; font-size: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-        }
-
+        .status-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
         .bar-bg { background: #E2E8F0; border-radius: 999px; height: 12px; width: 100%; overflow: hidden; position: relative; }
         .bar-fill { height: 100%; border-radius: 999px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
 
-        /* Modals */
         .modal { opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100; padding: 10px; backdrop-filter: blur(5px); }
         .modal.active { opacity: 1; visibility: visible; }
         .modal-content { transform: scale(0.95) translateY(20px); opacity: 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); max-height: 95vh; display: flex; flex-direction: column;}
@@ -88,31 +76,17 @@
         .custom-scroll::-webkit-scrollbar-track { background: #F1F5F9; border-radius: 4px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
 
-        /* Timeline (Modal Detalhes) */
         .timeline-container { position: relative; display: flex; justify-content: space-between; align-items: center; margin: 30px 0 20px 0; padding: 0 10px; }
         .timeline-line { position: absolute; top: 18px; left: 10px; right: 10px; height: 3px; background: #E2E8F0; z-index: 0; }
         .timeline-line-fill { position: absolute; top: 18px; left: 10px; height: 3px; background: #2563EB; z-index: 1; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .timeline-step { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 20%; }
-        .timeline-circle { 
-            width: 38px; height: 38px; border-radius: 50%; background: #FFF; border: 3px solid #E2E8F0; 
-            display: flex; align-items: center; justify-content: center; font-size: 15px; color: #CBD5E1; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .timeline-circle { width: 38px; height: 38px; border-radius: 50%; background: #FFF; border: 3px solid #E2E8F0; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #CBD5E1; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .timeline-step.completed .timeline-circle { background: #2563EB; border-color: #2563EB; color: white; }
         .timeline-step.active .timeline-circle { background: #2563EB; border-color: #2563EB; color: white; box-shadow: 0 0 0 4px white, 0 0 0 7px #2563EB; transform: scale(1.1); }
         
-        .team-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-left-width: 6px; position: relative; }
-        .team-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); }
-
-        .workflow-node {
-            display: flex; align-items: center; gap: 15px; background: white; padding: 15px 25px; border-radius: 100px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 2px solid #E2E8F0; position: relative; z-index: 2; transition: transform 0.3s ease;
-        }
-        .workflow-node:hover { transform: scale(1.05); border-color: #2563EB; cursor: pointer; }
-        .workflow-avatar {
-            width: 60px; height: 60px; border-radius: 50%; border: 3px solid #2563EB;
-            object-fit: cover; background: #f1f5f9; display: flex; align-items: center; justify-content: center;
-            font-size: 24px; color: #CBD5E1;
-        }
+        .workflow-node { display: flex; align-items: center; gap: 15px; background: white; padding: 15px 25px; border-radius: 100px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 2px solid #E2E8F0; position: relative; z-index: 2; transition: transform 0.3s ease; cursor: pointer; }
+        .workflow-node:hover { transform: scale(1.05); border-color: #2563EB; }
+        .workflow-avatar { width: 60px; height: 60px; border-radius: 50%; border: 3px solid #2563EB; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #CBD5E1; }
 
         .badge-frente { font-size: 9px; padding: 4px 10px; border-radius: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         .frente-tcr { background-color: #E0F2FE; color: #0284C7; border: 1px solid #BAE6FD; }
@@ -122,13 +96,16 @@
         .frente-outros { background-color: #F3F4F6; color: #4B5563; border: 1px solid #E5E7EB; }
         .frente-nao { background-color: #FEE2E2; color: #B91C1C; border: 1px solid #FECACA; }
 
-        .bar-mini-bg { background: #E2E8F0; border-radius: 4px; height: 6px; width: 100%; overflow: hidden; }
-        .bar-mini-fill { height: 100%; border-radius: 4px; transition: width 0.8s ease; }
-
-        /* Estilo Dinâmico Linha Tabela */
         .tr-status-concluido { border-left: 3px solid #10B981; }
         .tr-status-andamento { border-left: 3px solid #F59E0B; }
         .tr-status-fila { border-left: 3px solid #64748B; }
+
+        /* Estilos dos botões de Filtro Ativo */
+        .filtro-btn.active-equipe { background-color: #DBEAFE; border-color: #3B82F6; color: #1D4ED8; }
+        .filtro-btn.active-status { background-color: #F1F5F9; border-color: #64748B; color: #334155; }
+        .filtro-btn.active-status.andamento { background-color: #FEF3C7; border-color: #F59E0B; color: #B45309; }
+        .filtro-btn.active-status.concluido { background-color: #D1FAE5; border-color: #10B981; color: #047857; }
+        .filtro-btn.active-frente { background-color: #E0E7FF; border-color: #6366F1; color: #4338CA; }
 
         .fade-in-section { animation: fadeInScale 0.3s ease-in-out forwards; }
         @keyframes fadeInScale { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
@@ -141,7 +118,7 @@
         <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-24 md:h-40 object-contain filter brightness-0 invert mb-8 animate-pulse px-4">
         <div class="flex flex-col items-center gap-3">
             <i class="fa-solid fa-circle-notch fa-spin text-blue-500 text-3xl md:text-4xl"></i>
-            <span class="text-white font-black tracking-widest uppercase text-xs md:text-sm mt-2" id="loading-text">Coletando Dados Gerenciais...</span>
+            <span class="text-white font-black tracking-widest uppercase text-xs md:text-sm mt-2" id="loading-text">Sincronizando com Base de Dados...</span>
         </div>
     </div>
 
@@ -154,11 +131,11 @@
             
             <nav class="flex gap-2 bg-white/5 border border-white/10 p-1.5 rounded-full backdrop-blur-md w-full md:w-auto overflow-x-auto custom-scroll">
                 <button onclick="switchView('inicio')" id="tab-inicio" class="nav-tab active text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-chart-line"></i> Painel Executivo</button>
-                <button onclick="switchView('demandas')" id="tab-demandas" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-list-check"></i> Consultar Demandas</button>
-                <button onclick="switchView('relatorios')" id="tab-relatorios" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-chart-pie"></i> Relatório & Meses</button>
+                <button onclick="switchView('demandas')" id="tab-demandas" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-list-check"></i> Controle de Demandas</button>
+                <button onclick="switchView('relatorios')" id="tab-relatorios" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-chart-pie"></i> Relatório Temporal</button>
             </nav>
             
-            <button onclick="abrirModal('modal-config')" class="text-white/30 hover:text-white transition-colors" title="Configurações do Sistema"><i class="fa-solid fa-gear"></i></button>
+            <button onclick="abrirModal('modal-config')" class="text-white/30 hover:text-white transition-colors" title="Configurações"><i class="fa-solid fa-gear"></i></button>
         </div>
     </div>
 
@@ -187,8 +164,8 @@
                         </div>
 
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <button onclick="abrirModal('modal-novo')" class="bg-blue-600 hover:bg-blue-700 text-white font-black py-3 px-6 rounded-xl shadow-md transition-transform hover:-translate-y-1 flex justify-center items-center gap-2">
-                                <i class="fa-solid fa-video"></i> Nova Demanda
+                            <button onclick="abrirModal('modal-novo')" class="bg-brisa-orange hover:bg-orange-600 text-white font-black py-3 px-6 rounded-xl shadow-md transition-transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                                <i class="fa-solid fa-calendar-plus"></i> Agendar Demanda
                             </button>
                             <button onclick="switchView('demandas')" class="bg-brisa-blue hover:bg-blue-900 text-white font-black py-3 px-6 rounded-xl shadow-sm transition-transform hover:-translate-y-1 flex justify-center items-center gap-2">
                                 <i class="fa-solid fa-magnifying-glass-chart"></i> Rastrear Operação
@@ -199,32 +176,32 @@
                     <!-- Representação da Equipe com link direto para filtro -->
                     <div class="bg-brisa-light rounded-[32px] p-8 border-2 border-dashed border-gray-200 relative overflow-hidden min-h-[400px] flex flex-col justify-center items-center">
                         <h3 class="absolute top-6 left-8 text-sm font-black text-gray-400 uppercase tracking-widest">Equipe Operacional</h3>
-                        <p class="absolute top-12 left-8 text-xs text-blue-500 font-bold bg-blue-50 px-3 py-1 rounded-full"><i class="fa-solid fa-filter"></i> Clique no membro para ver suas demandas</p>
+                        <p class="absolute top-12 left-8 text-xs text-blue-500 font-bold bg-blue-50 px-3 py-1 rounded-full"><i class="fa-solid fa-filter"></i> Clique para ver as demandas associadas</p>
 
                         <div class="relative w-full max-w-[400px] mt-14">
                             <div class="absolute top-[40px] left-[50px] w-[20px] h-[100px] border-l-3 border-b-3 border-dashed border-gray-300 rounded-bl-[20px] z-0"></div>
                             <div class="absolute top-[140px] right-[50px] w-[20px] h-[100px] border-r-3 border-b-3 border-dashed border-gray-300 rounded-br-[20px] z-0"></div>
 
-                            <div class="workflow-node ml-auto mb-8 w-max" onclick="verDemandasDireto('Gilnei')">
-                                <div class="workflow-avatar shadow-inner"><i class="fa-solid fa-user-tie"></i></div>
+                            <div class="workflow-node ml-auto mb-8 w-max group" onclick="aplicarFiltroRapido('equipe', 'Gilnei')">
+                                <div class="workflow-avatar shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-user-tie"></i></div>
                                 <div>
-                                    <h4 class="font-black text-brisa-blue text-lg">Gilnei Laurindo</h4>
+                                    <h4 class="font-black text-brisa-blue text-lg group-hover:text-blue-600">Gilnei Laurindo</h4>
                                     <span class="bg-slate-200 text-slate-600 text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Responsável / Gestão</span>
                                 </div>
                             </div>
 
-                            <div class="workflow-node mx-auto mb-8 w-max" onclick="verDemandasDireto('Erick')">
-                                <div class="workflow-avatar shadow-inner"><i class="fa-solid fa-pen-nib"></i></div>
+                            <div class="workflow-node mx-auto mb-8 w-max group" onclick="aplicarFiltroRapido('equipe', 'Erick')">
+                                <div class="workflow-avatar shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-pen-nib"></i></div>
                                 <div>
-                                    <h4 class="font-black text-brisa-blue text-lg">Erick Gustavo</h4>
+                                    <h4 class="font-black text-brisa-blue text-lg group-hover:text-blue-600">Erick Gustavo</h4>
                                     <span class="bg-slate-200 text-slate-600 text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Apoio / Refinamentos</span>
                                 </div>
                             </div>
 
-                            <div class="workflow-node mr-auto w-max" onclick="verDemandasDireto('Marcos')">
-                                <div class="workflow-avatar shadow-inner"><i class="fa-solid fa-camera"></i></div>
+                            <div class="workflow-node mr-auto w-max group" onclick="aplicarFiltroRapido('equipe', 'Marcos')">
+                                <div class="workflow-avatar shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-camera"></i></div>
                                 <div>
-                                    <h4 class="font-black text-brisa-blue text-lg">Marcos Guilherme</h4>
+                                    <h4 class="font-black text-brisa-blue text-lg group-hover:text-blue-600">Marcos Guilherme</h4>
                                     <span class="bg-slate-200 text-slate-600 text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Gravação e Cortes</span>
                                 </div>
                             </div>
@@ -237,7 +214,7 @@
         <!-- STREAMING_CHUNK:View Demandas -->
         <div id="view-demandas" class="view-section -mt-8 md:-mt-12">
             
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-6">
                 <div class="stat-card bg-card-blue flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'todos', 'Raio-X Global', 'bg-blue-600')">
                     <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-folder-open text-white"></i></div><i class="fa-solid fa-chart-line text-white/30 text-xl" title="Ver Análise"></i></div>
                     <div><h3 class="text-3xl md:text-4xl font-black" id="count-total">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Demanda Total</p></div>
@@ -256,24 +233,42 @@
                 </div>
             </div>
 
-            <!-- Filtros Rápidos -->
-            <div class="flex justify-between items-center mb-4 flex-wrap gap-2 px-2">
-                <h2 class="text-sm font-black text-gray-500 uppercase tracking-widest flex items-center"><i class="fa-solid fa-filter mr-2 text-blue-500"></i> Filtrar Demandas da Equipe</h2>
-                <button onclick="limparFiltros(true)" id="btn-limpar-filtros" class="hidden text-xs bg-red-100 text-red-600 px-4 py-2 rounded-full font-bold hover:bg-red-200 transition-colors shadow-sm"><i class="fa-solid fa-filter-circle-xmark mr-1"></i> Limpar Filtros</button>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                <div onclick="verDemandasDireto('Gilnei')" class="team-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-blue-500 cursor-pointer flex items-center justify-between transition-colors group">
-                    <span class="font-bold text-gray-700 text-sm group-hover:text-blue-600 transition-colors"><i class="fa-solid fa-user-tie text-blue-500 mr-2"></i> Demandas de Gilnei</span>
-                    <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-500 transition-colors"></i>
+            <!-- PAINEL DE CONTROLE ASSERTIVO (FILTROS RÁPIDOS) -->
+            <div class="bg-white p-5 md:p-6 rounded-[24px] border border-gray-200 shadow-sm mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-sm font-black text-slate-600 uppercase tracking-widest"><i class="fa-solid fa-sliders text-blue-500 mr-2"></i> Painel de Filtros</h3>
+                    <button onclick="limparFiltros(true)" id="btn-limpar-filtros" class="hidden text-[10px] md:text-xs bg-red-50 text-red-600 px-4 py-2 rounded-full font-bold hover:bg-red-100 transition-colors border border-red-100 shadow-sm"><i class="fa-solid fa-eraser mr-1"></i> Limpar Filtros</button>
                 </div>
-                <div onclick="verDemandasDireto('Marcos')" class="team-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-blue-500 cursor-pointer flex items-center justify-between transition-colors group">
-                    <span class="font-bold text-gray-700 text-sm group-hover:text-blue-600 transition-colors"><i class="fa-solid fa-camera text-blue-500 mr-2"></i> Demandas de Marcos</span>
-                    <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-500 transition-colors"></i>
-                </div>
-                <div onclick="verDemandasDireto('Erick')" class="team-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-blue-500 cursor-pointer flex items-center justify-between transition-colors group">
-                    <span class="font-bold text-gray-700 text-sm group-hover:text-blue-600 transition-colors"><i class="fa-solid fa-pen-nib text-blue-500 mr-2"></i> Demandas de Erick</span>
-                    <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-500 transition-colors"></i>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Filtro Equipe -->
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-user-group mr-1"></i> Equipe (DHO)</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="aplicarFiltroRapido('equipe', 'Gilnei')" data-valor="Gilnei" class="filtro-btn filtro-equipe px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-blue-400 hover:text-blue-600 transition-colors bg-slate-50 shadow-sm">Gilnei</button>
+                            <button onclick="aplicarFiltroRapido('equipe', 'Marcos')" data-valor="Marcos" class="filtro-btn filtro-equipe px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-blue-400 hover:text-blue-600 transition-colors bg-slate-50 shadow-sm">Marcos</button>
+                            <button onclick="aplicarFiltroRapido('equipe', 'Erick')" data-valor="Erick" class="filtro-btn filtro-equipe px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-blue-400 hover:text-blue-600 transition-colors bg-slate-50 shadow-sm">Erick</button>
+                        </div>
+                    </div>
+                    <!-- Filtro Status -->
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-bars-progress mr-1"></i> Status</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="aplicarFiltroRapido('status', 'fila')" data-valor="fila" class="filtro-btn filtro-status px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-slate-400 transition-colors bg-slate-50 shadow-sm">Na Fila</button>
+                            <button onclick="aplicarFiltroRapido('status', 'andamento')" data-valor="andamento" class="filtro-btn filtro-status px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-orange-400 transition-colors bg-slate-50 shadow-sm">Em Produção</button>
+                            <button onclick="aplicarFiltroRapido('status', 'concluido')" data-valor="concluido" class="filtro-btn filtro-status px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-green-400 transition-colors bg-slate-50 shadow-sm">Concluído</button>
+                        </div>
+                    </div>
+                    <!-- Filtro Frente -->
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-building mr-1"></i> Frentes Solicitantes</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="aplicarFiltroRapido('frente', 'TTO - Técnico')" data-valor="TTO - Técnico" class="filtro-btn filtro-frente px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-teal-400 transition-colors bg-slate-50 shadow-sm">TTO</button>
+                            <button onclick="aplicarFiltroRapido('frente', 'TCR - Comercial')" data-valor="TCR - Comercial" class="filtro-btn filtro-frente px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-sky-400 transition-colors bg-slate-50 shadow-sm">TCR</button>
+                            <button onclick="aplicarFiltroRapido('frente', 'DO - Administrativo')" data-valor="DO - Administrativo" class="filtro-btn filtro-frente px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-amber-400 transition-colors bg-slate-50 shadow-sm">DO (Adm)</button>
+                            <button onclick="aplicarFiltroRapido('frente', 'Engajamento')" data-valor="Engajamento" class="filtro-btn filtro-frente px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-pink-400 transition-colors bg-slate-50 shadow-sm">Engajamento</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -281,15 +276,15 @@
             <div class="bg-white rounded-[16px] md:rounded-[24px] shadow-sm border border-gray-100 mb-12 overflow-hidden" id="tabela-container">
                 <div class="p-5 md:p-8 border-b border-gray-100 bg-white">
                     <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
-                        <h2 class="text-lg md:text-xl font-black text-brisa-blue w-full lg:w-auto text-left uppercase tracking-tight">
-                            <i class="fa-solid fa-list-check text-blue-600 mr-2"></i> Lista de Demandas
-                            <div id="area-legendas-filtros" class="flex gap-2 flex-wrap mt-2"></div>
+                        <h2 class="text-lg md:text-xl font-black text-brisa-blue w-full lg:w-auto text-left uppercase tracking-tight flex items-center gap-2 flex-wrap">
+                            <i class="fa-solid fa-list-check text-blue-600"></i> Lista de Demandas
+                            <div id="area-legendas-filtros" class="flex gap-2 flex-wrap"></div>
                         </h2>
                         
                         <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-3 items-center">
                             <div class="relative w-full sm:w-72 md:w-96">
                                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                                <input type="text" id="inputPesquisa" placeholder="Buscar projeto, solicitante, área..." class="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-full text-sm font-semibold focus:outline-none focus:border-blue-500 transition-colors bg-gray-50">
+                                <input type="text" id="inputPesquisa" placeholder="Buscar projeto, solicitante, área..." class="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-full text-sm font-semibold focus:outline-none focus:border-blue-500 transition-colors bg-gray-50 shadow-inner">
                             </div>
                         </div>
                     </div>
@@ -385,21 +380,21 @@
                 <!-- Coluna 1 -->
                 <div class="space-y-8">
                     <div>
-                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 border-b pb-2"><i class="fa-solid fa-users mr-1 text-blue-500"></i> Carga na Equipe (DHO)</h4>
-                        <div id="raiox-lista-membros" class="space-y-3"></div>
+                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-5 border-b border-gray-100 pb-2"><i class="fa-solid fa-users mr-1 text-blue-500"></i> Distribuição por Equipe (DHO)</h4>
+                        <div id="raiox-lista-membros" class="space-y-2"></div>
                     </div>
                     <div>
-                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 border-b pb-2"><i class="fa-solid fa-building mr-1 text-blue-500"></i> Frentes Solicitantes Relacionadas</h4>
-                        <div id="raiox-lista-frentes" class="space-y-3"></div>
+                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-5 border-b border-gray-100 pb-2"><i class="fa-solid fa-building mr-1 text-blue-500"></i> Principais Frentes Envolvidas</h4>
+                        <div id="raiox-lista-frentes" class="space-y-2"></div>
                     </div>
                 </div>
 
-                <!-- Coluna 2 (Surpresa: Análise de Gargalo) -->
+                <!-- Coluna 2 -->
                 <div class="space-y-8 border-l border-gray-100 pl-0 md:pl-8">
                     
                     <!-- Novo Bloco: Saúde e Gargalos -->
                     <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 shadow-sm">
-                        <h4 class="text-xs font-black text-slate-600 uppercase tracking-widest mb-4"><i class="fa-solid fa-stethoscope mr-1 text-blue-500"></i> Análise de Gargalo</h4>
+                        <h4 class="text-xs font-black text-slate-600 uppercase tracking-widest mb-4"><i class="fa-solid fa-stethoscope mr-1 text-blue-500"></i> Análise de Gargalo da Seleção</h4>
                         <div id="raiox-status-breakdown" class="space-y-4">
                             <!-- Preenchido no JS -->
                         </div>
@@ -482,13 +477,17 @@
         </div>
     </div>
 
-    <!-- MODAL DE AGENDAMENTO / CONFIG -->
-    <div id="modal-novo" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/90" onclick="fecharAoClicarFora(event, 'modal-novo')">
-        <div class="modal-content bg-white rounded-[24px] w-full max-w-lg shadow-2xl relative flex flex-col overflow-hidden m-4 p-8 text-center">
-            <button onclick="fecharModal('modal-novo')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 font-bold hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
-            <i class="fa-solid fa-video text-5xl text-blue-500 mb-4"></i>
-            <h3 class="text-2xl font-black text-brisa-blue uppercase">Solicitar Demanda</h3>
-            <p class="text-sm text-gray-500 mt-2 font-medium">Link para formulário/Forms de entrada da equipe.</p>
+    <!-- MODAL: AGENDAMENTO INTEGRADO GOOGLE CALENDAR -->
+    <div id="modal-novo" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/95" onclick="fecharAoClicarFora(event, 'modal-novo')" style="z-index: 500;">
+        <div class="modal-content bg-white rounded-[24px] w-full max-w-5xl shadow-2xl relative flex flex-col overflow-hidden m-4 h-[90vh]">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 shrink-0">
+                <h3 class="text-lg md:text-xl font-black text-brisa-blue uppercase tracking-tight flex items-center"><i class="fa-solid fa-calendar-check text-brisa-orange mr-2"></i> Reserva de Estúdio</h3>
+                <button onclick="fecharModal('modal-novo')" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 font-bold hover:bg-gray-300 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="flex-grow w-full relative bg-white">
+                <!-- IFRAME DO GOOGLE APPOINTMENT SCHEDULER -->
+                <iframe src="https://calendar.app.google/ppfBoMMm1i9AHHi48" class="w-full h-full border-0 absolute inset-0" title="Agendamento Fábrica de Conteúdo"></iframe>
+            </div>
         </div>
     </div>
     
@@ -514,25 +513,20 @@
         // Prevenção de XSS
         function escapeHTML(str) {
             if (str === null || str === undefined) return '';
-            return str.toString()
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
+            return str.toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
         }
 
         function normalizarTexto(texto) {
             return (texto || '').toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
         }
 
-        // 1. CLASSIFICADOR DE FRENTES ATUALIZADO (Exigência do Usuário)
+        // 1. CLASSIFICADOR DE FRENTES ATUALIZADO 
         const CONFIG_FRENTES = [
-            { termos: ['jaci', 'thaynara', 'vitor', 'matheus', 'eduarda.neto', 'natalia', 'tcr', 'comercial'], nome: "TCR - Comercial", css: "frente-tcr" },
-            { termos: ['ozeias', 'eliane', 'emailiane', 'luisa', 'naira', 'administrativo', 'adm'], nome: "DO - Administrativo", css: "frente-adm" },
-            { termos: ['vanessa', 'eduarda.souza', 'engajamento'], nome: "Engajamento", css: "frente-eng" },
-            { termos: ['tto', 'tecnico', 'técnico', 'anderson', 'andarson', 'bia', 'beatriz', 'alencar', 'henrique', 'morais'], nome: "TTO - Técnico", css: "frente-tto" },
-            { termos: ['renato', 'emanuely', 'geral'], nome: "Geral / Outros", css: "frente-outros" }
+            { termos: ['jaci', 'thaynara', 'vitor', 'matheus', 'eduarda.neto', 'natalia', 'tcr', 'comercial'], nome: "TCR - Comercial", css: "frente-tcr", modalColor: "bg-sky-500" },
+            { termos: ['ozeias', 'eliane', 'emailiane', 'luisa', 'naira', 'administrativo', 'adm'], nome: "DO - Administrativo", css: "frente-adm", modalColor: "bg-amber-500" },
+            { termos: ['vanessa', 'eduarda.souza', 'engajamento'], nome: "Engajamento", css: "frente-eng", modalColor: "bg-pink-500" },
+            { termos: ['tto', 'tecnico', 'técnico', 'anderson', 'andarson', 'bia', 'beatriz', 'alencar', 'henrique', 'morais'], nome: "TTO - Técnico", css: "frente-tto", modalColor: "bg-teal-500" },
+            { termos: ['renato', 'emanuely', 'geral'], nome: "Geral / Outros", css: "frente-outros", modalColor: "bg-slate-400" }
         ];
 
         function classificarFrente(nome, nomeProjeto = "") {
@@ -540,9 +534,9 @@
             
             for (const frente of CONFIG_FRENTES) {
                 const matchEncontrado = frente.termos.some(termo => busca.includes(termo));
-                if (matchEncontrado) return { nome: frente.nome, class: frente.css };
+                if (matchEncontrado) return { nome: frente.nome, class: frente.css, modalColor: frente.modalColor };
             }
-            return { nome: "Não Classificada", class: "frente-nao" };
+            return { nome: "Não Classificada", class: "frente-nao", modalColor: "bg-purple-500" };
         }
 
         // ==========================================
@@ -593,7 +587,6 @@
                 }
             });
 
-            // Frentes Listadas (Início)
             const containerAreas = document.getElementById('top-areas-list');
             let frentesOrdenadas = Object.entries(countsFrente).sort((a,b) => b[1] - a[1]).slice(0, 3);
             
@@ -604,10 +597,10 @@
                 frentesOrdenadas.forEach(([nome, qtd], index) => {
                     const bgBar = index === 0 ? 'bg-blue-600' : (index === 1 ? 'bg-slate-500' : 'bg-slate-400');
                     htmlAreas += `
-                        <div class="flex items-center gap-3 bg-white p-2.5 rounded-lg border border-slate-100 shadow-sm cursor-pointer hover:border-slate-300 transition-colors" onclick="abrirRaioX('frente', '${nome}', 'Raio-X da Área: ${nome}', 'bg-slate-700')">
+                        <div class="flex items-center gap-3 bg-white p-2.5 rounded-lg border border-slate-100 shadow-sm cursor-pointer hover:border-slate-300 transition-colors" onclick="abrirRaioX('frente', '${escapeHTML(nome)}', 'Raio-X da Área: ${escapeHTML(nome)}', 'bg-slate-700')">
                             <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center font-black text-xs shrink-0">${index + 1}º</div>
                             <div class="flex-grow">
-                                <p class="text-xs font-bold text-slate-700 truncate">${nome}</p>
+                                <p class="text-xs font-bold text-slate-700 truncate">${escapeHTML(nome)}</p>
                                 <div class="w-full bg-slate-100 h-1.5 rounded-full mt-1">
                                     <div class="${bgBar} h-1.5 rounded-full" style="width: ${Math.min((qtd / frentesOrdenadas[0][1]) * 100, 100)}%"></div>
                                 </div>
@@ -621,7 +614,6 @@
                 containerAreas.innerHTML = htmlAreas;
             }
 
-            // Gráfico Mensal Visual
             const containerMeses = document.getElementById('container-grafico-meses');
             let chavesMeses = Object.keys(meses).sort(sortMesAnoKeys).slice(-6);
             
@@ -690,11 +682,21 @@
         }
 
         // ==========================================
-        // ACESSO DIRETO ("MINHAS DEMANDAS")
+        // ACESSO DIRETO ("MINHAS DEMANDAS") & FILTROS RÁPIDOS
         // ==========================================
+        function aplicarFiltroRapido(tipo, valor) {
+            if(tipo === 'equipe') filtroEquipeNome = (filtroEquipeNome === valor) ? '' : valor;
+            if(tipo === 'status') filtroStatusNome = (filtroStatusNome === valor) ? 'todos' : valor;
+            if(tipo === 'frente') filtroFrenteNome = (filtroFrenteNome === valor) ? '' : valor;
+            
+            atualizarBotoesFiltroRapido();
+            aplicarFiltrosCombinados();
+        }
+
         function verDemandasDireto(nome) {
             limparFiltros(false);
             filtroEquipeNome = nome;
+            atualizarBotoesFiltroRapido();
             aplicarFiltrosCombinados();
             switchView('demandas');
             setTimeout(() => {
@@ -702,7 +704,35 @@
             }, 100);
         }
 
-        // 3. INTELIGÊNCIA ESTRATÉGICA (RAIO-X BI COM GARGALOS)
+        function atualizarBotoesFiltroRapido() {
+            // Reset Team
+            document.querySelectorAll('.filtro-equipe').forEach(b => { b.classList.remove('active-equipe'); });
+            if(filtroEquipeNome) {
+                const btn = document.querySelector(`.filtro-equipe[data-valor="${filtroEquipeNome}"]`);
+                if(btn) btn.classList.add('active-equipe');
+            }
+
+            // Reset Status
+            document.querySelectorAll('.filtro-status').forEach(b => { b.classList.remove('active-status', 'andamento', 'concluido'); });
+            if(filtroStatusNome && filtroStatusNome !== 'todos') {
+                const btn = document.querySelector(`.filtro-status[data-valor="${filtroStatusNome}"]`);
+                if(btn) {
+                    btn.classList.add('active-status');
+                    if(filtroStatusNome === 'andamento') btn.classList.add('andamento');
+                    if(filtroStatusNome === 'concluido') btn.classList.add('concluido');
+                }
+            }
+
+            // Reset Frente
+            document.querySelectorAll('.filtro-frente').forEach(b => { b.classList.remove('active-frente'); });
+            if(filtroFrenteNome) {
+                const btn = document.querySelector(`.filtro-frente[data-valor="${filtroFrenteNome}"]`);
+                if(btn) btn.classList.add('active-frente');
+            }
+        }
+
+
+        // 3. INTELIGÊNCIA ESTRATÉGICA (RAIO-X BI COM VISUAL EXATO DAS IMAGENS)
         function abrirRaioX(tipoFiltro, valor, tituloModal, corHeaderClass) {
             let dadosAlvo = [];
             let contextoAnalise = '';
@@ -726,7 +756,7 @@
                 contextoAnalise = `Análise da Área: ${valor}`;
             }
 
-            let countsResp = {};
+            let countsResp = { 'Gilnei': 0, 'Marcos Guilherme': 0, 'Marcos e Gilnei': 0, 'Erick': 0 };
             let countsFrente = {};
             let countStatusObj = { 'Concluído': 0, 'Em Produção': 0, 'Na Fila': 0 };
             let infratoresClassificacao = {}; 
@@ -735,14 +765,31 @@
                 const st = obterDadosStatus(p.status, p.etapaAtual);
                 countStatusObj[st.label]++;
 
-                const resp = p.responsavel ? p.responsavel.trim() : 'Não Atribuído';
-                countsResp[resp] = (countsResp[resp] || 0) + 1;
+                // Mapeamento específico da imagem para "Gilnei", "Marcos Guilherme", "Marcos e Gilnei", "Erick"
+                const txtAlvo = (p.responsavel || '') + " " + (p.colaborador || '');
+                const nText = normalizarTexto(txtAlvo);
+                
+                let classifiedResp = false;
+                if (nText.includes('gilnei') && (nText.includes('marcos') || nText.includes('guilherme'))) {
+                    countsResp['Marcos e Gilnei']++; classifiedResp = true;
+                } else if (nText.includes('gilnei')) {
+                    countsResp['Gilnei']++; classifiedResp = true;
+                } else if (nText.includes('marcos') || nText.includes('guilherme')) {
+                    countsResp['Marcos Guilherme']++; classifiedResp = true;
+                } else if (nText.includes('erick')) {
+                    countsResp['Erick']++; classifiedResp = true;
+                }
+
+                if (!classifiedResp && p.responsavel && p.responsavel.trim() !== '-') {
+                    countsResp[p.responsavel.trim()] = (countsResp[p.responsavel.trim()] || 0) + 1;
+                }
 
                 const f = classificarFrente(p.sponsor, p.demanda);
                 countsFrente[f.nome] = (countsFrente[f.nome] || 0) + 1;
 
                 if(f.nome === 'Não Classificada') {
-                    infratoresClassificacao[resp] = (infratoresClassificacao[resp] || 0) + 1;
+                    const respName = p.responsavel ? p.responsavel.trim() : 'Não Atribuído';
+                    infratoresClassificacao[respName] = (infratoresClassificacao[respName] || 0) + 1;
                 }
             });
 
@@ -753,27 +800,44 @@
             document.getElementById('raiox-titulo').className = `text-2xl font-black text-white uppercase tracking-tight px-4 py-1 rounded-lg shadow-sm ${corHeaderClass}`;
             document.getElementById('raiox-subtitulo').textContent = `${contextoAnalise} (${dadosAlvo.length} projetos).`;
 
-            const buildListHtml = (sortedArray, maxItems, iconClass, colorClass) => {
-                if(sortedArray.length === 0) return '<p class="text-xs text-gray-400">Dados insuficientes.</p>';
+            // NOVA RENDERIZAÇÃO ESTILO "IMAGENS"
+            const buildListHtml = (sortedArray, maxItems, iconClass, useDynamicColor = false, fallbackColor = "bg-blue-900") => {
+                if(sortedArray.length === 0) return '<p class="text-xs text-slate-400">Dados insuficientes.</p>';
                 let html = '';
                 sortedArray.slice(0, maxItems).forEach(item => {
-                    const perc = Math.round((item[1] / totalAlvo) * 100);
+                    const itemName = item[0];
+                    const itemQtd = item[1];
+                    if (itemQtd === 0) return;
+
+                    const perc = Math.round((itemQtd / totalAlvo) * 100);
+                    
+                    let barColor = fallbackColor;
+                    if (useDynamicColor) {
+                        const conf = CONFIG_FRENTES.find(c => c.nome === itemName);
+                        if (conf) barColor = conf.modalColor;
+                        else if (itemName === 'Não Classificada') barColor = 'bg-purple-500';
+                    }
+
                     html += `
-                    <div class="flex flex-col gap-1 mb-3">
-                        <div class="flex justify-between items-center text-sm font-bold text-gray-700">
-                            <span class="truncate pr-2"><i class="${iconClass} text-gray-300 mr-2 text-xs"></i>${escapeHTML(item[0])}</span>
-                            <span>${item[1]} <span class="text-[10px] text-gray-400 font-normal">(${perc}%)</span></span>
+                    <div class="mb-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-bold text-slate-700 flex items-center gap-2"><i class="${iconClass} text-slate-300 w-4 text-center text-xs"></i> ${escapeHTML(itemName)}</span>
+                            <div class="text-right leading-none">
+                                <span class="font-black text-slate-800 text-base">${itemQtd}</span>
+                                <span class="text-[10px] text-slate-400 font-medium ml-1">(${perc}%)</span>
+                            </div>
                         </div>
-                        <div class="bar-mini-bg"><div class="bar-mini-fill ${colorClass}" style="width: ${perc}%;"></div></div>
+                        <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                            <div class="${barColor} h-1.5 rounded-full" style="width: ${perc}%;"></div>
+                        </div>
                     </div>`;
                 });
                 return html;
             };
 
-            document.getElementById('raiox-lista-membros').innerHTML = buildListHtml(sortDict(countsResp), 4, 'fa-solid fa-user', 'bg-blue-600');
+            document.getElementById('raiox-lista-membros').innerHTML = buildListHtml(sortDict(countsResp), 6, 'fa-solid fa-user', false, 'bg-[#1e293b]');
             
-            // Frentes Relacionadas
-            document.getElementById('raiox-lista-frentes').innerHTML = buildListHtml(sortDict(countsFrente), 5, 'fa-solid fa-building', 'bg-indigo-500');
+            document.getElementById('raiox-lista-frentes').innerHTML = buildListHtml(sortDict(countsFrente), 6, 'fa-solid fa-building', true);
 
             // SURPRESA: Análise de Gargalos (Status Breakdown)
             let htmlBreakdown = '';
@@ -787,12 +851,12 @@
                 const num = countStatusObj[cfg.label];
                 const perc = Math.round((num / totalAlvo) * 100);
                 htmlBreakdown += `
-                <div class="flex items-center justify-between border-b border-slate-200 pb-2 last:border-0 last:pb-0">
-                    <div class="flex items-center gap-2">
+                <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-3 last:border-0 last:pb-0 last:mb-0">
+                    <div class="flex items-center gap-3">
                         <div class="w-3 h-3 rounded-full ${cfg.color}"></div>
                         <span class="text-sm font-bold text-slate-700">${cfg.label}</span>
                     </div>
-                    <div class="text-right">
+                    <div class="text-right leading-none">
                         <span class="font-black text-slate-800 text-base">${num}</span>
                         <span class="text-[10px] text-slate-400 font-normal ml-1">(${perc}%)</span>
                     </div>
@@ -800,13 +864,12 @@
             });
             document.getElementById('raiox-status-breakdown').innerHTML = htmlBreakdown;
 
-            // Infratores
             const alertaInf = document.getElementById('raiox-alerta-n-classificado');
             if(Object.keys(infratoresClassificacao).length > 0) {
                 alertaInf.classList.remove('hidden');
                 let htmlInf = '';
                 sortDict(infratoresClassificacao).forEach(item => {
-                    htmlInf += `<div class="flex justify-between text-xs text-red-900 border-b border-red-100 pb-1"><strong>${escapeHTML(item[0])}</strong><span>${item[1]} projetos</span></div>`;
+                    htmlInf += `<div class="flex justify-between text-xs text-red-900 border-b border-red-100 pb-1 mb-1 last:border-0 last:pb-0 last:mb-0"><strong>${escapeHTML(item[0])}</strong><span>${item[1]} projetos</span></div>`;
                 });
                 document.getElementById('raiox-lista-infratores').innerHTML = htmlInf;
             } else {
@@ -818,6 +881,7 @@
                 if(tipoFiltro === 'status') filtroStatusNome = valor;
                 if(tipoFiltro === 'frente') filtroFrenteNome = valor;
                 
+                atualizarBotoesFiltroRapido();
                 aplicarFiltrosCombinados();
                 fecharModal('modal-raiox');
                 switchView('demandas');
@@ -833,6 +897,7 @@
             filtroFrenteNome = '';
             filtroStatusNome = 'todos';
             document.getElementById('btn-limpar-filtros').classList.add('hidden');
+            atualizarBotoesFiltroRapido();
             if(aplicarNaTabela) aplicarFiltrosCombinados();
         }
 
@@ -896,15 +961,6 @@
                 totalValido++;
             });
 
-            const cores = {
-                "TCR - Comercial": "bg-sky-500",
-                "DO - Administrativo": "bg-amber-500",
-                "Engajamento": "bg-pink-500",
-                "TTO - Técnico": "bg-teal-500",
-                "Geral / Outros": "bg-slate-500",
-                "Não Classificada": "bg-red-500"
-            };
-
             let html = '';
             let ordenado = Object.entries(counts).sort((a,b) => b[1] - a[1]);
 
@@ -914,19 +970,23 @@
                 if(qtd === 0) return;
 
                 const perc = totalValido > 0 ? Math.round((qtd / totalValido) * 100) : 0;
-                const corBarra = cores[label] || "bg-gray-400";
+                
+                let corBarra = "bg-slate-400";
+                const conf = CONFIG_FRENTES.find(c => c.nome === label);
+                if(conf) corBarra = conf.modalColor;
+                else if (label === 'Não Classificada') corBarra = 'bg-purple-500';
                 
                 html += `
-                <div class="cursor-pointer group hover:bg-slate-50 p-2 -mx-2 rounded-lg transition-colors" onclick="abrirRaioX('frente', '${label}', 'Raio-X da Área: ${label}', '${corBarra.replace('bg-', 'bg-')}')">
+                <div class="cursor-pointer group hover:bg-slate-50 p-2 -mx-2 rounded-lg transition-colors" onclick="abrirRaioX('frente', '${escapeHTML(label)}', 'Raio-X da Área: ${escapeHTML(label)}', '${corBarra.replace('bg-', 'bg-')}')">
                     <div class="flex justify-between items-end mb-2">
-                        <span class="font-bold text-slate-600 text-xs md:text-sm group-hover:text-blue-600">${label} <i class="fa-solid fa-arrow-right-to-bracket text-[10px] ml-1 opacity-0 group-hover:opacity-100 transition-opacity text-blue-500"></i></span>
-                        <div class="text-right">
+                        <span class="font-bold text-slate-600 text-xs md:text-sm group-hover:text-blue-600">${escapeHTML(label)} <i class="fa-solid fa-arrow-right-to-bracket text-[10px] ml-1 opacity-0 group-hover:opacity-100 transition-opacity text-blue-500"></i></span>
+                        <div class="text-right leading-none">
                             <span class="font-black text-lg text-slate-700">${qtd}</span>
                             <span class="text-xs text-slate-400 ml-1">(${perc}%)</span>
                         </div>
                     </div>
-                    <div class="w-full bg-slate-100 rounded-full h-3">
-                        <div class="${corBarra} h-3 rounded-full transition-all duration-1000 shadow-sm" style="width: ${perc}%"></div>
+                    <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                        <div class="${corBarra} h-1.5 rounded-full transition-all duration-1000 shadow-sm" style="width: ${perc}%"></div>
                     </div>
                 </div>`;
             });
@@ -1015,6 +1075,10 @@
             abrirModal('modal-detalhes');
         }
 
+        function ordernarProjetos(arrayDados) {
+            return arrayDados; 
+        }
+
         function renderizarTabela(dadosParaRenderizar) {
             const tbody = document.getElementById('tabela-demandas');
             if(!tbody) return;
@@ -1026,12 +1090,13 @@
                 return;
             }
 
-            dadosParaRenderizar.forEach((p) => {
+            const dadosOrdenados = ordernarProjetos(dadosParaRenderizar);
+
+            dadosOrdenados.forEach((p) => {
                 const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
                 const originalIndex = dadosGlobais.indexOf(p);
                 const frenteInfo = classificarFrente(p.sponsor, p.demanda);
 
-                // Highlight Row based on Status
                 let trClassStatus = statusInfo.label === 'Concluído' ? 'tr-status-concluido' : (statusInfo.label === 'Em Produção' ? 'tr-status-andamento' : 'tr-status-fila');
 
                 let badgeGravacao = p.dataGravacao && p.dataGravacao.toLowerCase() !== 'a combinar' && p.dataGravacao !== '-' 
@@ -1095,7 +1160,7 @@
                 
                 if(dadosGlobais && dadosGlobais.length > 0) {
                     atualizarIndicadores(dadosGlobais);
-                    filtrarPorStatus('todos');
+                    limparFiltros(true);
                 }
                 
                 const screen = document.getElementById('loading-screen');
