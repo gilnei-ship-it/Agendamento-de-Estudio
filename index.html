@@ -100,13 +100,18 @@
         .tr-status-concluido { border-left: 3px solid #10B981; }
         .tr-status-andamento { border-left: 3px solid #FF5A00; }
         .tr-status-fila { border-left: 3px solid #64748B; }
+        .tr-status-cancelado { border-left: 3px solid #EF4444; opacity: 0.7; }
 
-        /* Estilos dos botões de Filtro Ativo (Cores Brisa) */
-        .filtro-btn.active-equipe { background-color: #FFF0E6; border-color: #FF5A00; color: #FF5A00; }
-        .filtro-btn.active-status { background-color: #F1F5F9; border-color: #64748B; color: #334155; }
-        .filtro-btn.active-status.andamento { background-color: #FFF0E6; border-color: #FF5A00; color: #D94A00; }
-        .filtro-btn.active-status.concluido { background-color: #D1FAE5; border-color: #10B981; color: #047857; }
-        .filtro-btn.active-frente { background-color: #E0E7FF; border-color: #09132E; color: #09132E; }
+        /* Estilos dos botões de Filtro Ativo (Mais Assertivos) */
+        .filtro-btn { transition: all 0.2s; position: relative; overflow: hidden; }
+        .filtro-btn.active-equipe { background-color: #FF5A00; border-color: #FF5A00; color: white; box-shadow: 0 4px 10px rgba(255,90,0,0.3); }
+        .filtro-btn.active-equipe .badge-filtro { background-color: white; color: #FF5A00; }
+        
+        .filtro-btn.active-status { background-color: #64748B; border-color: #64748B; color: white; box-shadow: 0 4px 10px rgba(100,116,139,0.3); }
+        .filtro-btn.active-status.andamento { background-color: #FF5A00; border-color: #FF5A00; color: white; box-shadow: 0 4px 10px rgba(255,90,0,0.3); }
+        .filtro-btn.active-status.concluido { background-color: #10B981; border-color: #10B981; color: white; box-shadow: 0 4px 10px rgba(16,185,129,0.3); }
+        
+        .filtro-btn.active-frente { background-color: #09132E; border-color: #09132E; color: white; box-shadow: 0 4px 10px rgba(9,19,46,0.3); }
 
         .fade-in-section { animation: fadeInScale 0.3s ease-in-out forwards; }
         @keyframes fadeInScale { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
@@ -166,7 +171,7 @@
 
                         <div class="flex flex-col sm:flex-row gap-4">
                             <button onclick="abrirModal('modal-novo')" class="bg-brisa-orange hover:bg-orange-600 text-white font-black py-3 px-6 rounded-xl shadow-md transition-transform hover:-translate-y-1 flex justify-center items-center gap-2">
-                                <i class="fa-solid fa-calendar-plus"></i> Agendar Demanda
+                                <i class="fa-regular fa-calendar-check"></i> Agendar Gravação
                             </button>
                             <button onclick="switchView('demandas')" class="bg-brisa-blue hover:bg-blue-900 text-white font-black py-3 px-6 rounded-xl shadow-sm transition-transform hover:-translate-y-1 flex justify-center items-center gap-2">
                                 <i class="fa-solid fa-magnifying-glass-chart"></i> Rastrear Operação
@@ -174,7 +179,7 @@
                         </div>
                     </div>
 
-                    <!-- Representação da Equipe com Números e Cores Oficiais -->
+                    <!-- Representação da Equipe com Números Corrigidos -->
                     <div class="bg-brisa-light rounded-[32px] p-8 border-2 border-dashed border-gray-200 relative overflow-hidden min-h-[400px] flex flex-col justify-center items-center">
                         <h3 class="absolute top-6 left-8 text-sm font-black text-brisa-blue uppercase tracking-widest">Equipe Operacional</h3>
                         <p class="absolute top-12 left-8 text-xs text-brisa-orange font-bold bg-orange-50 px-3 py-1 rounded-full"><i class="fa-solid fa-filter"></i> Clique para filtrar demandas na mesa</p>
@@ -186,7 +191,7 @@
                             <div class="workflow-node ml-auto mb-8 w-max group" onclick="verDemandasDireto('Gilnei')">
                                 <div class="relative">
                                     <div class="workflow-avatar shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-user-tie"></i></div>
-                                    <div class="absolute -top-2 -right-2 bg-brisa-orange text-white text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-gilnei">0</div>
+                                    <div class="absolute -top-2 -right-2 bg-brisa-orange text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-gilnei">0</div>
                                 </div>
                                 <div>
                                     <h4 class="font-black text-brisa-blue text-lg group-hover:text-brisa-orange transition-colors">Gilnei Laurindo</h4>
@@ -197,7 +202,7 @@
                             <div class="workflow-node mx-auto mb-8 w-max group" onclick="verDemandasDireto('Erick')">
                                 <div class="relative">
                                     <div class="workflow-avatar shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-pen-nib"></i></div>
-                                    <div class="absolute -top-2 -right-2 bg-brisa-orange text-white text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-erick">0</div>
+                                    <div class="absolute -top-2 -right-2 bg-brisa-orange text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-erick">0</div>
                                 </div>
                                 <div>
                                     <h4 class="font-black text-brisa-blue text-lg group-hover:text-brisa-orange transition-colors">Erick Gustavo</h4>
@@ -208,7 +213,7 @@
                             <div class="workflow-node mr-auto w-max group" onclick="verDemandasDireto('Marcos')">
                                 <div class="relative">
                                     <div class="workflow-avatar shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-camera"></i></div>
-                                    <div class="absolute -top-2 -right-2 bg-brisa-orange text-white text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-marcos">0</div>
+                                    <div class="absolute -top-2 -right-2 bg-brisa-orange text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-marcos">0</div>
                                 </div>
                                 <div>
                                     <h4 class="font-black text-brisa-blue text-lg group-hover:text-brisa-orange transition-colors">Marcos Guilherme</h4>
@@ -243,60 +248,51 @@
                 </div>
             </div>
 
-            <!-- PAINEL DE CONTROLE ASSERTIVO (FILTROS RÁPIDOS) -->
+            <!-- PAINEL DE CONTROLE ASSERTIVO (FILTROS RÁPIDOS NA CARA) -->
             <div class="bg-white p-5 md:p-6 rounded-[24px] border border-gray-200 shadow-sm mb-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-sm font-black text-brisa-blue uppercase tracking-widest"><i class="fa-solid fa-sliders text-brisa-orange mr-2"></i> Painel de Filtros Rápidos</h3>
+                <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-3">
+                    <h3 class="text-sm font-black text-brisa-blue uppercase tracking-widest"><i class="fa-solid fa-sliders text-brisa-orange mr-2"></i> Filtros de Operação</h3>
                     <button onclick="limparFiltros(true)" id="btn-limpar-filtros" class="hidden text-[10px] md:text-xs bg-red-50 text-red-600 px-4 py-2 rounded-full font-bold hover:bg-red-100 transition-colors border border-red-100 shadow-sm"><i class="fa-solid fa-eraser mr-1"></i> Limpar Filtros</button>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Filtro Equipe com Números na Cara -->
+                    <!-- Filtro Equipe com Números Assertivos -->
                     <div class="col-span-1 md:col-span-3 lg:col-span-1">
                         <p class="text-[10px] font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-user-group mr-1"></i> Membro / Mesa de Trabalho</p>
                         <div class="flex flex-col gap-2">
-                            <div onclick="verDemandasDireto('Gilnei')" data-valor="Gilnei" class="filtro-btn filtro-equipe bg-white p-3 rounded-xl border border-gray-200 hover:border-brisa-orange cursor-pointer flex items-center justify-between transition-colors group">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-slate-100 text-brisa-blue flex items-center justify-center text-sm group-hover:bg-brisa-orange group-hover:text-white transition-colors"><i class="fa-solid fa-user-tie"></i></div>
-                                    <span class="font-bold text-gray-700 text-sm group-hover:text-brisa-orange transition-colors">Gilnei Laurindo</span>
-                                </div>
-                                <span class="bg-brisa-blue text-white text-xs font-black px-2 py-0.5 rounded-full" id="badge-card-gilnei">0</span>
-                            </div>
-                            <div onclick="verDemandasDireto('Marcos')" data-valor="Marcos" class="filtro-btn filtro-equipe bg-white p-3 rounded-xl border border-gray-200 hover:border-brisa-orange cursor-pointer flex items-center justify-between transition-colors group">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-slate-100 text-brisa-blue flex items-center justify-center text-sm group-hover:bg-brisa-orange group-hover:text-white transition-colors"><i class="fa-solid fa-camera"></i></div>
-                                    <span class="font-bold text-gray-700 text-sm group-hover:text-brisa-orange transition-colors">Marcos Guilherme</span>
-                                </div>
-                                <span class="bg-brisa-blue text-white text-xs font-black px-2 py-0.5 rounded-full" id="badge-card-marcos">0</span>
-                            </div>
-                            <div onclick="verDemandasDireto('Erick')" data-valor="Erick" class="filtro-btn filtro-equipe bg-white p-3 rounded-xl border border-gray-200 hover:border-brisa-orange cursor-pointer flex items-center justify-between transition-colors group">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-slate-100 text-brisa-blue flex items-center justify-center text-sm group-hover:bg-brisa-orange group-hover:text-white transition-colors"><i class="fa-solid fa-pen-nib"></i></div>
-                                    <span class="font-bold text-gray-700 text-sm group-hover:text-brisa-orange transition-colors">Erick Gustavo</span>
-                                </div>
-                                <span class="bg-brisa-blue text-white text-xs font-black px-2 py-0.5 rounded-full" id="badge-card-erick">0</span>
-                            </div>
+                            <button onclick="aplicarFiltroRapido('equipe', 'Gilnei')" data-valor="Gilnei" class="filtro-btn filtro-equipe bg-white border border-slate-200 text-slate-600 hover:border-brisa-orange hover:text-brisa-orange rounded-xl px-4 py-3 flex justify-between items-center w-full text-left font-bold transition-all shadow-sm">
+                                <span><i class="fa-solid fa-user-tie mr-2"></i> Gilnei Laurindo</span>
+                                <span class="badge-filtro bg-slate-100 text-slate-600 text-[10px] px-2.5 py-1 rounded-full font-black" id="badge-card-gilnei">0</span>
+                            </button>
+                            <button onclick="aplicarFiltroRapido('equipe', 'Marcos')" data-valor="Marcos" class="filtro-btn filtro-equipe bg-white border border-slate-200 text-slate-600 hover:border-brisa-orange hover:text-brisa-orange rounded-xl px-4 py-3 flex justify-between items-center w-full text-left font-bold transition-all shadow-sm">
+                                <span><i class="fa-solid fa-camera mr-2"></i> Marcos Guilherme</span>
+                                <span class="badge-filtro bg-slate-100 text-slate-600 text-[10px] px-2.5 py-1 rounded-full font-black" id="badge-card-marcos">0</span>
+                            </button>
+                            <button onclick="aplicarFiltroRapido('equipe', 'Erick')" data-valor="Erick" class="filtro-btn filtro-equipe bg-white border border-slate-200 text-slate-600 hover:border-brisa-orange hover:text-brisa-orange rounded-xl px-4 py-3 flex justify-between items-center w-full text-left font-bold transition-all shadow-sm">
+                                <span><i class="fa-solid fa-pen-nib mr-2"></i> Erick Gustavo</span>
+                                <span class="badge-filtro bg-slate-100 text-slate-600 text-[10px] px-2.5 py-1 rounded-full font-black" id="badge-card-erick">0</span>
+                            </button>
                         </div>
                     </div>
                     
                     <div class="col-span-1 md:col-span-3 lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <!-- Filtro Status -->
                         <div>
-                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-bars-progress mr-1"></i> Status</p>
-                            <div class="flex flex-wrap gap-2">
-                                <button onclick="aplicarFiltroRapido('status', 'fila')" data-valor="fila" class="filtro-btn filtro-status px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-slate-400 transition-colors bg-slate-50 shadow-sm w-full text-left">Na Fila</button>
-                                <button onclick="aplicarFiltroRapido('status', 'andamento')" data-valor="andamento" class="filtro-btn filtro-status px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-brisa-orange transition-colors bg-slate-50 shadow-sm w-full text-left">Em Produção</button>
-                                <button onclick="aplicarFiltroRapido('status', 'concluido')" data-valor="concluido" class="filtro-btn filtro-status px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-green-400 transition-colors bg-slate-50 shadow-sm w-full text-left">Concluído</button>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-bars-progress mr-1"></i> Status da Produção</p>
+                            <div class="flex flex-col gap-2">
+                                <button onclick="aplicarFiltroRapido('status', 'fila')" data-valor="fila" class="filtro-btn filtro-status px-4 py-3 rounded-xl text-xs font-bold border border-slate-200 text-slate-600 hover:border-slate-400 hover:bg-slate-50 transition-all bg-white shadow-sm w-full text-left flex items-center"><div class="w-2.5 h-2.5 rounded-full bg-slate-500 mr-3"></div> Na Fila / Aguardando</button>
+                                <button onclick="aplicarFiltroRapido('status', 'andamento')" data-valor="andamento" class="filtro-btn filtro-status px-4 py-3 rounded-xl text-xs font-bold border border-slate-200 text-slate-600 hover:border-brisa-orange hover:bg-orange-50 transition-all bg-white shadow-sm w-full text-left flex items-center"><div class="w-2.5 h-2.5 rounded-full bg-brisa-orange mr-3"></div> Em Produção / Revisão</button>
+                                <button onclick="aplicarFiltroRapido('status', 'concluido')" data-valor="concluido" class="filtro-btn filtro-status px-4 py-3 rounded-xl text-xs font-bold border border-slate-200 text-slate-600 hover:border-green-400 hover:bg-green-50 transition-all bg-white shadow-sm w-full text-left flex items-center"><div class="w-2.5 h-2.5 rounded-full bg-green-500 mr-3"></div> Projetos Concluídos</button>
                             </div>
                         </div>
                         <!-- Filtro Frente -->
                         <div>
                             <p class="text-[10px] font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-building mr-1"></i> Frentes Solicitantes</p>
                             <div class="flex flex-wrap gap-2">
-                                <button onclick="aplicarFiltroRapido('frente', 'TTO - Técnico')" data-valor="TTO - Técnico" class="filtro-btn filtro-frente px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-teal-400 transition-colors bg-slate-50 shadow-sm w-full text-left">TTO - Técnico</button>
-                                <button onclick="aplicarFiltroRapido('frente', 'TCR - Comercial')" data-valor="TCR - Comercial" class="filtro-btn filtro-frente px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-sky-400 transition-colors bg-slate-50 shadow-sm w-full text-left">TCR - Comercial</button>
-                                <button onclick="aplicarFiltroRapido('frente', 'DO - Administrativo')" data-valor="DO - Administrativo" class="filtro-btn filtro-frente px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-amber-400 transition-colors bg-slate-50 shadow-sm w-full text-left">DO - Administrativo</button>
-                                <button onclick="aplicarFiltroRapido('frente', 'Engajamento')" data-valor="Engajamento" class="filtro-btn filtro-frente px-3 py-1.5 rounded-lg text-[11px] md:text-xs font-bold border border-slate-200 text-slate-600 hover:border-pink-400 transition-colors bg-slate-50 shadow-sm w-full text-left">Engajamento</button>
+                                <button onclick="aplicarFiltroRapido('frente', 'TTO - Técnico')" data-valor="TTO - Técnico" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[11px] font-bold border border-slate-200 text-slate-600 hover:border-teal-500 hover:text-teal-600 transition-all bg-white shadow-sm w-full text-left">TTO - Técnico</button>
+                                <button onclick="aplicarFiltroRapido('frente', 'TCR - Comercial')" data-valor="TCR - Comercial" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[11px] font-bold border border-slate-200 text-slate-600 hover:border-sky-500 hover:text-sky-600 transition-all bg-white shadow-sm w-full text-left">TCR - Comercial</button>
+                                <button onclick="aplicarFiltroRapido('frente', 'DO - Administrativo')" data-valor="DO - Administrativo" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[11px] font-bold border border-slate-200 text-slate-600 hover:border-amber-500 hover:text-amber-600 transition-all bg-white shadow-sm w-full text-left">DO - Administrativo</button>
+                                <button onclick="aplicarFiltroRapido('frente', 'Engajamento')" data-valor="Engajamento" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[11px] font-bold border border-slate-200 text-slate-600 hover:border-pink-500 hover:text-pink-600 transition-all bg-white shadow-sm w-full text-left">Engajamento</button>
                             </div>
                         </div>
                     </div>
@@ -395,46 +391,45 @@
 
     <!-- STREAMING_CHUNK:Modals -->
 
-    <!-- MODAL RAIO-X BI -->
+    <!-- MODAL RAIO-X BI (Layout Idêntico às Imagens Requisitadas) -->
     <div id="modal-raiox" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/95" style="z-index: 200;" onclick="fecharAoClicarFora(event, 'modal-raiox')">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-4xl shadow-2xl relative flex flex-col max-h-[90vh] m-4 overflow-hidden">
             <button onclick="fecharModal('modal-raiox')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 font-bold z-20 hover:bg-gray-200 transition-all"><i class="fa-solid fa-xmark"></i></button>
             
-            <div id="raiox-header" class="p-8 border-b border-gray-200 bg-gray-50 flex items-center gap-4">
+            <div id="raiox-header" class="p-8 border-b border-gray-200 bg-gray-50 flex items-center gap-4 shrink-0">
                 <div>
-                    <h3 class="text-2xl font-black text-white uppercase tracking-tight px-4 py-1 rounded-lg shadow-sm" id="raiox-titulo">Análise</h3>
-                    <p class="text-gray-500 text-sm font-bold mt-3" id="raiox-subtitulo">Detalhamento dos dados filtrados.</p>
+                    <h3 class="text-2xl font-black text-white uppercase tracking-tight px-5 py-2 rounded-lg shadow-sm" id="raiox-titulo">Análise</h3>
+                    <p class="text-slate-600 text-sm font-bold mt-4" id="raiox-subtitulo">Detalhamento dos dados filtrados.</p>
                 </div>
             </div>
             
-            <div class="p-6 md:p-8 overflow-y-auto custom-scroll flex-grow bg-white grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="p-6 md:p-10 overflow-y-auto custom-scroll flex-grow bg-white grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- Coluna 1 -->
-                <div class="space-y-8">
+                <div class="space-y-10">
                     <div>
-                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-5 border-b border-gray-100 pb-2"><i class="fa-solid fa-users mr-1 text-brisa-blue"></i> Distribuição por Equipe (DHO)</h4>
-                        <div id="raiox-lista-membros" class="space-y-2"></div>
+                        <h4 class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-6 border-b border-gray-100 pb-2"><i class="fa-solid fa-users mr-2"></i> Distribuição por Equipe (DHO)</h4>
+                        <div id="raiox-lista-membros" class="space-y-1"></div>
                     </div>
                     <div>
-                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-5 border-b border-gray-100 pb-2"><i class="fa-solid fa-building mr-1 text-brisa-blue"></i> Principais Frentes Envolvidas</h4>
-                        <div id="raiox-lista-frentes" class="space-y-2"></div>
+                        <h4 class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-6 border-b border-gray-100 pb-2"><i class="fa-solid fa-building mr-2"></i> Principais Frentes Envolvidas</h4>
+                        <div id="raiox-lista-frentes" class="space-y-1"></div>
                     </div>
                 </div>
 
                 <!-- Coluna 2 -->
-                <div class="space-y-8 border-l border-gray-100 pl-0 md:pl-8">
-                    
-                    <!-- Novo Bloco: Saúde e Gargalos -->
-                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 shadow-sm">
-                        <h4 class="text-xs font-black text-slate-600 uppercase tracking-widest mb-4"><i class="fa-solid fa-stethoscope mr-1 text-brisa-blue"></i> Análise de Gargalo da Seleção</h4>
-                        <div id="raiox-status-breakdown" class="space-y-4">
+                <div class="space-y-10 border-l border-gray-100 pl-0 md:pl-10">
+                    <!-- Bloco: Saúde e Gargalos -->
+                    <div>
+                        <h4 class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-6 border-b border-gray-100 pb-2"><i class="fa-solid fa-stethoscope mr-2"></i> Análise de Gargalo da Seleção</h4>
+                        <div id="raiox-status-breakdown" class="space-y-1">
                             <!-- Preenchido no JS -->
                         </div>
                     </div>
 
                     <!-- Bloco Alerta Não Classificados -->
-                    <div id="raiox-alerta-n-classificado" class="hidden bg-red-50 border border-red-200 rounded-xl p-4">
+                    <div id="raiox-alerta-n-classificado" class="hidden bg-red-50 border border-red-200 rounded-xl p-5">
                         <h4 class="text-xs font-black text-red-600 uppercase tracking-widest mb-2"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Atenção Gestão</h4>
-                        <p class="text-[10px] text-red-800 font-bold mb-3">As demandas abaixo estão sem identificação clara da frente solicitante (Classificadas como 'Não Classificadas').</p>
+                        <p class="text-xs text-red-800 font-bold mb-4">As demandas abaixo estão sem identificação clara da frente solicitante (Classificadas como 'Não Classificadas').</p>
                         <div id="raiox-lista-infratores" class="space-y-2"></div>
                     </div>
                 </div>
@@ -511,12 +506,12 @@
     <!-- MODAL: AGENDAMENTO INTEGRADO GOOGLE CALENDAR -->
     <div id="modal-novo" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/95" onclick="fecharAoClicarFora(event, 'modal-novo')" style="z-index: 500;">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-5xl shadow-2xl relative flex flex-col overflow-hidden m-4 h-[90vh]">
-            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 shrink-0">
-                <h3 class="text-lg md:text-xl font-black text-brisa-blue uppercase tracking-tight flex items-center"><i class="fa-solid fa-calendar-check text-brisa-orange mr-2"></i> Reserva de Estúdio</h3>
+            <div class="p-4 md:p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 shrink-0">
+                <h3 class="text-lg md:text-xl font-black text-brisa-blue uppercase tracking-tight flex items-center"><i class="fa-solid fa-calendar-check text-brisa-orange mr-2"></i> Reserva de Estúdio / Gravação</h3>
                 <button onclick="fecharModal('modal-novo')" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 font-bold hover:bg-gray-300 transition-colors"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="flex-grow w-full relative bg-white">
-                <!-- IFRAME DO GOOGLE APPOINTMENT SCHEDULER ATUALIZADO -->
+                <!-- IFRAME DO GOOGLE APPOINTMENT SCHEDULER CONFORME SCREENSHOTS -->
                 <iframe src="https://calendar.app.google/ppfBoMMm1i9AHHi48" class="w-full h-full border-0 absolute inset-0" title="Agendamento Fábrica de Conteúdo"></iframe>
             </div>
         </div>
@@ -553,11 +548,11 @@
 
         // 1. CLASSIFICADOR DE FRENTES ATUALIZADO 
         const CONFIG_FRENTES = [
-            { termos: ['jaci', 'thaynara', 'vitor', 'matheus', 'eduarda.neto', 'natalia', 'tcr', 'comercial'], nome: "TCR - Comercial", css: "frente-tcr", modalColor: "bg-sky-500" },
-            { termos: ['ozeias', 'eliane', 'emailiane', 'luisa', 'naira', 'administrativo', 'adm'], nome: "DO - Administrativo", css: "frente-adm", modalColor: "bg-amber-500" },
+            { termos: ['jaci', 'thaynara', 'vitor', 'matheus', 'eduarda.neto', 'natalia', 'tcr', 'comercial'], nome: "TCR - Comercial", css: "frente-tcr", modalColor: "bg-[#8B5CF6]" }, // Purple for TCR in Modal
+            { termos: ['ozeias', 'eliane', 'emailiane', 'luisa', 'naira', 'administrativo', 'adm'], nome: "DO - Administrativo", css: "frente-adm", modalColor: "bg-[#A855F7]" }, // Lighter Purple
             { termos: ['vanessa', 'eduarda.souza', 'engajamento'], nome: "Engajamento", css: "frente-eng", modalColor: "bg-pink-500" },
             { termos: ['tto', 'tecnico', 'técnico', 'anderson', 'andarson', 'bia', 'beatriz', 'alencar', 'henrique', 'morais'], nome: "TTO - Técnico", css: "frente-tto", modalColor: "bg-teal-500" },
-            { termos: ['renato', 'emanuely', 'geral'], nome: "Geral / Outros", css: "frente-outros", modalColor: "bg-slate-400" }
+            { termos: ['renato', 'emanuely', 'geral', 'sipat', 'udemy'], nome: "Geral / Outros", css: "frente-outros", modalColor: "bg-[#C084FC]" } // Pale purple
         ];
 
         function classificarFrente(nome, nomeProjeto = "") {
@@ -567,11 +562,47 @@
                 const matchEncontrado = frente.termos.some(termo => busca.includes(termo));
                 if (matchEncontrado) return { nome: frente.nome, class: frente.css, modalColor: frente.modalColor };
             }
-            return { nome: "Não Classificada", class: "frente-nao", modalColor: "bg-purple-500" };
+            return { nome: "Não Classificada", class: "frente-nao", modalColor: "bg-[#A855F7]" }; // Default purple from image
         }
 
         // ==========================================
-        // CÁLCULO MENSAL, DASHBOARD E NÚMEROS INDIVIDUAIS
+        // LÓGICA DE NÚMEROS INDIVIDUAIS ROBUSTA
+        // ==========================================
+        function atualizarNumerosIndividuais(dados) {
+            let counts = { 'Gilnei': 0, 'Marcos': 0, 'Erick': 0 };
+            
+            dados.forEach(p => {
+                // Junta responsavel e colaborador para varredura completa independentemente de onde foi preenchido
+                const txt = normalizarTexto((p.responsavel || '') + " " + (p.colaborador || ''));
+                
+                if (txt.includes('gilnei') || txt.includes('jose gilnei')) counts['Gilnei']++;
+                if (txt.includes('marcos') || txt.includes('guilherme')) counts['Marcos']++;
+                if (txt.includes('erick') || txt.includes('gustavo')) counts['Erick']++;
+            });
+            
+            // Updates com animação
+            const elements = [
+                {id: 'badge-home-gilnei', count: counts['Gilnei']},
+                {id: 'badge-home-marcos', count: counts['Marcos']},
+                {id: 'badge-home-erick', count: counts['Erick']},
+                {id: 'badge-card-gilnei', count: counts['Gilnei']},
+                {id: 'badge-card-marcos', count: counts['Marcos']},
+                {id: 'badge-card-erick', count: counts['Erick']}
+            ];
+
+            elements.forEach(el => {
+                const node = document.getElementById(el.id);
+                if(node) {
+                    node.textContent = el.count;
+                    node.classList.add('animate-pulse');
+                    setTimeout(() => node.classList.remove('animate-pulse'), 1000);
+                }
+            });
+        }
+
+
+        // ==========================================
+        // CÁLCULO MENSAL E DASHBOARD
         // ==========================================
         const MAPA_MESES = {"Jan":1, "Fev":2, "Mar":3, "Abr":4, "Mai":5, "Jun":6, "Jul":7, "Ago":8, "Set":9, "Out":10, "Nov":11, "Dez":12};
         
@@ -594,26 +625,6 @@
             let dataA = new Date(parseInt(yA), MAPA_MESES[mA] - 1, 1);
             let dataB = new Date(parseInt(yB), MAPA_MESES[mB] - 1, 1);
             return dataA - dataB;
-        }
-
-        function atualizarNumerosIndividuais(dados) {
-            let counts = { 'Gilnei': 0, 'Marcos': 0, 'Erick': 0 };
-            dados.forEach(p => {
-                const txtAlvo = normalizarTexto((p.responsavel || '') + " " + (p.colaborador || ''));
-                if (txtAlvo.includes('gilnei')) counts['Gilnei']++;
-                if (txtAlvo.includes('marcos') || txtAlvo.includes('guilherme')) counts['Marcos']++;
-                if (txtAlvo.includes('erick')) counts['Erick']++;
-            });
-            
-            // Nodes na tela inicial
-            if(document.getElementById('badge-home-gilnei')) document.getElementById('badge-home-gilnei').textContent = counts['Gilnei'];
-            if(document.getElementById('badge-home-marcos')) document.getElementById('badge-home-marcos').textContent = counts['Marcos'];
-            if(document.getElementById('badge-home-erick')) document.getElementById('badge-home-erick').textContent = counts['Erick'];
-            
-            // Cards no Painel de Filtros Rápidos
-            if(document.getElementById('badge-card-gilnei')) document.getElementById('badge-card-gilnei').textContent = counts['Gilnei'];
-            if(document.getElementById('badge-card-marcos')) document.getElementById('badge-card-marcos').textContent = counts['Marcos'];
-            if(document.getElementById('badge-card-erick')) document.getElementById('badge-card-erick').textContent = counts['Erick'];
         }
 
         function atualizarDashboardGestao(dados) {
@@ -713,11 +724,11 @@
             const fase = normalizarTexto(faseTexto);
             const combinado = status + " " + fase;
             
+            if(combinado.includes('cancelado')) return { bg: 'bg-red-500', icon: 'fa-ban', label: 'Cancelado', step: 5 };
             if(combinado.includes('conclu')) return { bg: 'bg-green-500', icon: 'fa-check', label: 'Concluído', step: 5 };
             if(combinado.includes('andamento') || combinado.includes('edicao') || combinado.includes('gravacao')) return { bg: 'bg-[#FF5A00]', icon: 'fa-person-digging', label: 'Em Produção', step: 4 };
-            if(combinado.includes('planejamento')) return { bg: 'bg-[#FF5A00]', icon: 'fa-list-check', label: 'Em Produção', step: 2 };
-            if(combinado.includes('revisao')) return { bg: 'bg-[#FF5A00]', icon: 'fa-eye', label: 'Em Produção', step: 4 };
-            if(combinado.includes('pausado')) return { bg: 'bg-slate-600', icon: 'fa-pause', label: 'Na Fila', step: 1 };
+            if(combinado.includes('planejamento') || combinado.includes('revisao')) return { bg: 'bg-[#FF5A00]', icon: 'fa-eye', label: 'Em Produção', step: 2 };
+            if(combinado.includes('pausado') || combinado.includes('pendente')) return { bg: 'bg-slate-600', icon: 'fa-pause', label: 'Na Fila', step: 1 };
             
             return { bg: 'bg-slate-500', icon: 'fa-layer-group', label: 'Na Fila', step: 1 }; 
         }
@@ -733,7 +744,7 @@
         }
 
         // ==========================================
-        // ACESSO DIRETO ("MINHAS DEMANDAS") & FILTROS RÁPIDOS
+        // ACESSO DIRETO E FILTROS RÁPIDOS (ASSERTIVOS)
         // ==========================================
         function aplicarFiltroRapido(tipo, valor) {
             if(tipo === 'equipe') filtroEquipeNome = (filtroEquipeNome === valor) ? '' : valor;
@@ -756,14 +767,12 @@
         }
 
         function atualizarBotoesFiltroRapido() {
-            // Reset Team
             document.querySelectorAll('.filtro-equipe').forEach(b => { b.classList.remove('active-equipe'); });
             if(filtroEquipeNome) {
                 const btn = document.querySelector(`.filtro-equipe[data-valor="${filtroEquipeNome}"]`);
                 if(btn) btn.classList.add('active-equipe');
             }
 
-            // Reset Status
             document.querySelectorAll('.filtro-status').forEach(b => { b.classList.remove('active-status', 'andamento', 'concluido'); });
             if(filtroStatusNome && filtroStatusNome !== 'todos') {
                 const btn = document.querySelector(`.filtro-status[data-valor="${filtroStatusNome}"]`);
@@ -774,7 +783,6 @@
                 }
             }
 
-            // Reset Frente
             document.querySelectorAll('.filtro-frente').forEach(b => { b.classList.remove('active-frente'); });
             if(filtroFrenteNome) {
                 const btn = document.querySelector(`.filtro-frente[data-valor="${filtroFrenteNome}"]`);
@@ -814,15 +822,16 @@
 
             dadosAlvo.forEach(p => {
                 const st = obterDadosStatus(p.status, p.etapaAtual);
-                countStatusObj[st.label]++;
+                if(countStatusObj[st.label] !== undefined) countStatusObj[st.label]++;
 
+                // Mapeamento específico da imagem para "Gilnei", "Marcos Guilherme", "Marcos e Gilnei", "Erick"
                 const txtAlvo = (p.responsavel || '') + " " + (p.colaborador || '');
                 const nText = normalizarTexto(txtAlvo);
                 
                 let classifiedResp = false;
-                if (nText.includes('gilnei') && (nText.includes('marcos') || nText.includes('guilherme'))) {
+                if ((nText.includes('gilnei') || nText.includes('jose gilnei')) && (nText.includes('marcos') || nText.includes('guilherme'))) {
                     countsResp['Marcos e Gilnei']++; classifiedResp = true;
-                } else if (nText.includes('gilnei')) {
+                } else if (nText.includes('gilnei') || nText.includes('jose gilnei')) {
                     countsResp['Gilnei']++; classifiedResp = true;
                 } else if (nText.includes('marcos') || nText.includes('guilherme')) {
                     countsResp['Marcos Guilherme']++; classifiedResp = true;
@@ -830,7 +839,8 @@
                     countsResp['Erick']++; classifiedResp = true;
                 }
 
-                if (!classifiedResp && p.responsavel && p.responsavel.trim() !== '-') {
+                // If someone else entirely
+                if (!classifiedResp && p.responsavel && p.responsavel.trim() !== '-' && !nText.includes('combinar')) {
                     countsResp[p.responsavel.trim()] = (countsResp[p.responsavel.trim()] || 0) + 1;
                 }
 
@@ -847,11 +857,11 @@
             const totalAlvo = dadosAlvo.length || 1;
 
             document.getElementById('raiox-titulo').textContent = tituloModal;
-            document.getElementById('raiox-titulo').className = `text-2xl font-black text-white uppercase tracking-tight px-4 py-1 rounded-lg shadow-sm ${corHeaderClass}`;
+            document.getElementById('raiox-titulo').className = `text-2xl font-black text-white uppercase tracking-tight px-5 py-2 rounded-lg shadow-sm ${corHeaderClass}`;
             document.getElementById('raiox-subtitulo').textContent = `${contextoAnalise} (${dadosAlvo.length} projetos).`;
 
-            // RENDERIZAÇÃO ESTILO "IMAGENS"
-            const buildListHtml = (sortedArray, maxItems, iconClass, useDynamicColor = false, fallbackColor = "bg-brisa-blue") => {
+            // RENDERIZAÇÃO ESTILO IMAGEM 2
+            const buildListHtml = (sortedArray, maxItems, iconClass, useDynamicColor = false, fallbackColor = "bg-[#0f172a]") => {
                 if(sortedArray.length === 0) return '<p class="text-xs text-slate-400">Dados insuficientes.</p>';
                 let html = '';
                 sortedArray.slice(0, maxItems).forEach(item => {
@@ -865,7 +875,7 @@
                     if (useDynamicColor) {
                         const conf = CONFIG_FRENTES.find(c => c.nome === itemName);
                         if (conf) barColor = conf.modalColor;
-                        else if (itemName === 'Não Classificada') barColor = 'bg-purple-500';
+                        else if (itemName === 'Não Classificada') barColor = 'bg-[#A855F7]';
                     }
 
                     html += `
@@ -885,16 +895,15 @@
                 return html;
             };
 
-            document.getElementById('raiox-lista-membros').innerHTML = buildListHtml(sortDict(countsResp), 6, 'fa-solid fa-user', false, 'bg-brisa-blue');
-            
-            document.getElementById('raiox-lista-frentes').innerHTML = buildListHtml(sortDict(countsFrente), 6, 'fa-solid fa-building', true);
+            document.getElementById('raiox-lista-membros').innerHTML = buildListHtml(sortDict(countsResp), 6, 'fa-solid fa-user', false, 'bg-[#0f172a]'); // Dark slate for users
+            document.getElementById('raiox-lista-frentes').innerHTML = buildListHtml(sortDict(countsFrente), 6, 'fa-solid fa-building', true); // Dynamic purples for areas
 
             // Análise de Gargalos (Status Breakdown)
             let htmlBreakdown = '';
             const statusConfig = [
-                { label: 'Concluído', color: 'bg-green-500', icon: 'fa-check-double' },
-                { label: 'Em Produção', color: 'bg-[#FF5A00]', icon: 'fa-person-digging' },
-                { label: 'Na Fila', color: 'bg-slate-500', icon: 'fa-layer-group' }
+                { label: 'Concluído', color: 'bg-green-500' },
+                { label: 'Em Produção', color: 'bg-[#FF5A00]' },
+                { label: 'Na Fila', color: 'bg-slate-500' }
             ];
             
             statusConfig.forEach(cfg => {
@@ -1148,7 +1157,7 @@
                 const originalIndex = dadosGlobais.indexOf(p);
                 const frenteInfo = classificarFrente(p.sponsor, p.demanda);
 
-                let trClassStatus = statusInfo.label === 'Concluído' ? 'tr-status-concluido' : (statusInfo.label === 'Em Produção' ? 'tr-status-andamento' : 'tr-status-fila');
+                let trClassStatus = statusInfo.label === 'Concluído' ? 'tr-status-concluido' : (statusInfo.label === 'Em Produção' ? 'tr-status-andamento' : (statusInfo.label === 'Cancelado' ? 'tr-status-cancelado' : 'tr-status-fila'));
 
                 let badgeGravacao = p.dataGravacao && p.dataGravacao.toLowerCase() !== 'a combinar' && p.dataGravacao !== '-' 
                     ? `<span class="bg-blue-50 text-brisa-blue font-bold px-2 py-1 rounded-md text-[10px] md:text-[11px] whitespace-nowrap"><i class="fa-solid fa-video mr-1"></i>${escapeHTML(p.dataGravacao)}</span>` 
