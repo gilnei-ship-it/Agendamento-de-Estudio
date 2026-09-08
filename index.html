@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema | Fábrica de Conteúdo</title>
+    <title>Painel Gerencial | DHO Produção Visual</title>
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 576 512%22><path fill=%22%23FF5A00%22 d=%22M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z%22/></svg>" type="image/svg+xml">
     
@@ -118,7 +118,7 @@
         .badge-frente { font-size: 9px; padding: 4px 10px; border-radius: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         .frente-tcr { background-color: #E0F2FE; color: #0284C7; border: 1px solid #BAE6FD; }
         .frente-adm { background-color: #FEF3C7; color: #D97706; border: 1px solid #FDE68A; }
-        .frente-eng { background-color: #FCE7F3; color: #BE185D; border: 1px solid #FBCFE8; } /* Engajamento (Rosa) */
+        .frente-eng { background-color: #FCE7F3; color: #BE185D; border: 1px solid #FBCFE8; }
         .frente-tto { background-color: #CCFBF1; color: #0F766E; border: 1px solid #5EEAD4; }
         .frente-outros { background-color: #F3F4F6; color: #4B5563; border: 1px solid #E5E7EB; }
         .frente-nao { background-color: #FEE2E2; color: #B91C1C; border: 1px solid #FECACA; }
@@ -126,7 +126,6 @@
         .bar-mini-bg { background: #E2E8F0; border-radius: 4px; height: 6px; width: 100%; overflow: hidden; }
         .bar-mini-fill { height: 100%; border-radius: 4px; transition: width 0.8s ease; }
 
-        /* Animação Drill-down */
         .fade-in-section { animation: fadeInScale 0.3s ease-in-out forwards; }
         @keyframes fadeInScale { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
     </style>
@@ -138,7 +137,7 @@
         <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-24 md:h-40 object-contain filter brightness-0 invert mb-8 animate-pulse px-4">
         <div class="flex flex-col items-center gap-3">
             <i class="fa-solid fa-circle-notch fa-spin text-brisa-orange text-3xl md:text-4xl"></i>
-            <span class="text-white font-black tracking-widest uppercase text-xs md:text-sm mt-2" id="loading-text">Coletando Dados de Governança...</span>
+            <span class="text-white font-black tracking-widest uppercase text-xs md:text-sm mt-2" id="loading-text">Coletando Dados Gerenciais...</span>
         </div>
     </div>
 
@@ -150,9 +149,9 @@
             </div>
             
             <nav class="flex gap-2 bg-white/5 border border-white/10 p-1.5 rounded-full backdrop-blur-md w-full md:w-auto overflow-x-auto custom-scroll">
-                <button onclick="switchView('inicio')" id="tab-inicio" class="nav-tab active text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-house"></i> Início</button>
-                <button onclick="switchView('demandas')" id="tab-demandas" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-table-list"></i> Demandas</button>
-                <button onclick="switchView('relatorios')" id="tab-relatorios" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-chart-pie"></i> Relatório Estratégico</button>
+                <button onclick="switchView('inicio')" id="tab-inicio" class="nav-tab active text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-house"></i> Visão Executiva</button>
+                <button onclick="switchView('demandas')" id="tab-demandas" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-table-list"></i> Gestão de Demandas</button>
+                <button onclick="switchView('relatorios')" id="tab-relatorios" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-chart-line"></i> Indicadores & Meses</button>
             </nav>
             
             <button onclick="abrirModal('modal-config')" class="text-white/30 hover:text-white transition-colors" title="Configurações do Sistema"><i class="fa-solid fa-gear"></i></button>
@@ -171,33 +170,21 @@
                     
                     <div>
                         <h1 class="text-3xl md:text-4xl font-black text-brisa-blue leading-tight mb-4">
-                            Portal de Transparência <br><span class="text-brisa-orange">DHO Produção Visual</span>
+                            Painel Gerencial <br><span class="text-brisa-orange">DHO Produção Visual</span>
                         </h1>
                         <p class="text-gray-600 text-base md:text-lg font-medium mb-6 leading-relaxed">
-                            Bem-vindo ao sistema oficial de governança e controle de demandas. Esta ferramenta garante que toda a liderança e clientes internos possam rastrear exatamente quem está responsável pelo seu projeto, qual o prazo de entrega e o status atual.
+                            Sistema oficial de governança e controle de demandas. Acompanhe o volume de solicitações, distribuição mensal e status de entrega de toda a equipe em tempo real.
                         </p>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center gap-3 text-gray-700 font-bold"><i class="fa-solid fa-check-circle text-green-500 text-xl"></i> SLA e prazos documentados</li>
-                            <li class="flex items-center gap-3 text-gray-700 font-bold"><i class="fa-solid fa-check-circle text-green-500 text-xl"></i> Inteligência e organização de filas</li>
-                            <li class="flex items-center gap-3 text-gray-700 font-bold"><i class="fa-solid fa-check-circle text-green-500 text-xl"></i> Dados analíticos de entrega</li>
-                        </ul>
                         
-                        <!-- NOVO PLACAR DE DESTAQUES (INÍCIO) -->
-                        <div class="mt-8 bg-gradient-to-br from-yellow-50 to-orange-50 border border-yellow-200 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between shadow-sm relative overflow-hidden mb-8">
-                            <i class="fa-solid fa-crown absolute -right-4 -bottom-4 text-7xl text-yellow-500 opacity-10"></i>
-                            <div class="relative z-10 w-full">
-                                <h3 class="text-yellow-800 font-black text-xs uppercase tracking-widest mb-4"><i class="fa-solid fa-star text-yellow-500 mr-1"></i> Ranking / Alta Performance</h3>
-                                <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 w-full">
-                                    <div class="flex-1 bg-white/60 p-3 rounded-xl border border-yellow-100">
-                                        <p class="text-[10px] font-bold text-yellow-600 uppercase"><i class="fa-solid fa-medal mr-1"></i> Quem mais Entregou</p>
-                                        <p class="text-lg font-black text-yellow-900 top-produtor-nome truncate">-</p>
-                                        <p class="text-xs text-yellow-700"><span class="font-bold top-produtor-num">0</span> concluídas</p>
-                                    </div>
-                                    <div class="flex-1 bg-white/60 p-3 rounded-xl border border-yellow-100">
-                                        <p class="text-[10px] font-bold text-yellow-600 uppercase"><i class="fa-solid fa-fire mr-1"></i> Área mais Solicitante</p>
-                                        <p class="text-lg font-black text-yellow-900 top-frente-nome truncate">-</p>
-                                        <p class="text-xs text-yellow-700"><span class="font-bold top-frente-num">0</span> pedidos feitos</p>
-                                    </div>
+                        <!-- NOVO PLACAR EXECUTIVO (MÉTRICAS DA OPERAÇÃO) -->
+                        <div class="mt-8 bg-slate-50 border border-slate-200 rounded-2xl p-6 shadow-sm mb-8">
+                            <h3 class="text-slate-500 font-black text-xs uppercase tracking-widest mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-building-user text-slate-400"></i> Áreas com Maior Demanda Global
+                            </h3>
+                            <div class="space-y-3" id="top-areas-list">
+                                <!-- Injetado via JS -->
+                                <div class="animate-pulse flex space-x-4">
+                                    <div class="h-4 bg-slate-200 rounded w-3/4"></div>
                                 </div>
                             </div>
                         </div>
@@ -206,15 +193,15 @@
                             <button onclick="abrirModal('modal-novo')" class="bg-brisa-orange hover:bg-orange-600 text-white font-black py-3 px-6 rounded-xl shadow-md transition-transform hover:-translate-y-1 flex justify-center items-center gap-2">
                                 <i class="fa-solid fa-video"></i> Solicitar Demanda
                             </button>
-                            <button onclick="switchView('demandas')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-black py-3 px-6 rounded-xl shadow-sm transition-transform hover:-translate-y-1 flex justify-center items-center gap-2">
-                                <i class="fa-solid fa-magnifying-glass"></i> Consultar Status
+                            <button onclick="switchView('demandas')" class="bg-brisa-blue hover:bg-blue-900 text-white font-black py-3 px-6 rounded-xl shadow-sm transition-transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                                <i class="fa-solid fa-magnifying-glass-chart"></i> Rastrear Operação
                             </button>
                         </div>
                     </div>
 
-                    <!-- Representação do Fluxo Operacional -->
+                    <!-- Representação do Fluxo Operacional (Equipe) -->
                     <div class="bg-brisa-light rounded-[32px] p-8 border-2 border-dashed border-gray-200 relative overflow-hidden min-h-[400px] flex flex-col justify-center items-center">
-                        <h3 class="absolute top-6 left-8 text-sm font-black text-gray-400 uppercase tracking-widest">Fluxo Operacional (DHO)</h3>
+                        <h3 class="absolute top-6 left-8 text-sm font-black text-gray-400 uppercase tracking-widest">Capacidade e Equipe (DHO)</h3>
                         <p class="absolute top-12 left-8 text-xs text-gray-500 font-medium">Clique em um membro para visualizar sua carga de trabalho.</p>
 
                         <div class="relative w-full max-w-[400px] mt-14">
@@ -250,7 +237,6 @@
             </div>
         </div>
 
-
         <!-- ========================================== -->
         <!-- VIEW 2: DEMANDAS E GESTÃO                  -->
         <!-- ========================================== -->
@@ -277,28 +263,22 @@
 
             <!-- FILTRO DE EQUIPE RÁPIDO -->
             <div class="flex justify-between items-center mb-4 flex-wrap gap-2 px-2">
-                <h2 class="text-sm font-black text-gray-500 uppercase tracking-widest flex items-center"><i class="fa-solid fa-users mr-2"></i> Inspeção de Membro (DHO) 
-                    <span class="ml-3 text-[10px] bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full font-bold flex items-center gap-1"><i class="fa-solid fa-crown text-yellow-500"></i> = Top Entregas</span>
-                </h2>
+                <h2 class="text-sm font-black text-gray-500 uppercase tracking-widest flex items-center"><i class="fa-solid fa-filter mr-2"></i> Filtrar por Membro da Equipe</h2>
                 <button onclick="limparFiltros(true)" id="btn-limpar-filtros" class="hidden text-xs bg-red-100 text-red-600 px-4 py-2 rounded-full font-bold hover:bg-red-200 transition-colors"><i class="fa-solid fa-filter-circle-xmark mr-1"></i> Remover Filtros Ativos</button>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                <!-- Cards de Membro com Coroa Dinâmica -->
                 <div onclick="abrirEstatisticasMembro('Gilnei', 'responsavel')" class="team-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-brisa-blue cursor-pointer flex items-center justify-between transition-colors">
-                    <div id="crown-Gilnei" class="absolute -top-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full border-2 border-white flex items-center justify-center text-white shadow-md hidden z-10" title="Top Produtor"><i class="fa-solid fa-crown text-xs"></i></div>
                     <span class="font-bold text-gray-700 text-sm"><i class="fa-solid fa-user-tie text-brisa-blue mr-2"></i> Gilnei</span>
-                    <i class="fa-solid fa-arrow-right text-brisa-blue/40 hover:text-brisa-blue transition-colors"></i>
+                    <i class="fa-solid fa-chart-pie text-gray-300 hover:text-brisa-blue transition-colors"></i>
                 </div>
                 <div onclick="abrirEstatisticasMembro('Marcos', 'responsavel')" class="team-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-green-500 cursor-pointer flex items-center justify-between transition-colors">
-                    <div id="crown-Marcos" class="absolute -top-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full border-2 border-white flex items-center justify-center text-white shadow-md hidden z-10" title="Top Produtor"><i class="fa-solid fa-crown text-xs"></i></div>
                     <span class="font-bold text-gray-700 text-sm"><i class="fa-solid fa-camera text-green-500 mr-2"></i> Marcos</span>
-                    <i class="fa-solid fa-arrow-right text-green-500/40 hover:text-green-500 transition-colors"></i>
+                    <i class="fa-solid fa-chart-pie text-gray-300 hover:text-green-500 transition-colors"></i>
                 </div>
                 <div onclick="abrirEstatisticasMembro('Erick', 'colaborador')" class="team-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-brisa-orange cursor-pointer flex items-center justify-between transition-colors">
-                    <div id="crown-Erick" class="absolute -top-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full border-2 border-white flex items-center justify-center text-white shadow-md hidden z-10" title="Top Produtor"><i class="fa-solid fa-crown text-xs"></i></div>
                     <span class="font-bold text-gray-700 text-sm"><i class="fa-solid fa-pen-nib text-brisa-orange mr-2"></i> Erick</span>
-                    <i class="fa-solid fa-arrow-right text-brisa-orange/40 hover:text-brisa-orange transition-colors"></i>
+                    <i class="fa-solid fa-chart-pie text-gray-300 hover:text-brisa-orange transition-colors"></i>
                 </div>
             </div>
 
@@ -341,26 +321,20 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- VIEW 3: RELATÓRIOS ESTRATÉGICOS            -->
+        <!-- VIEW 3: RELATÓRIOS ESTRATÉGICOS E MESES    -->
         <!-- ========================================== -->
         <div id="view-relatorios" class="view-section -mt-8">
             
-            <!-- NOVO: HALL DA FAMA (MÊS) -->
-            <div class="col-span-1 md:col-span-2 bg-gradient-to-r from-amber-400 to-orange-500 rounded-[24px] p-8 md:p-10 text-white shadow-md relative overflow-hidden mb-8">
-                <i class="fa-solid fa-crown absolute -right-10 -bottom-10 text-[200px] text-white opacity-20"></i>
+            <!-- NOVO: VISÃO MENSAL -->
+            <div class="col-span-1 md:col-span-2 bg-gradient-to-r from-brisa-blue to-blue-900 rounded-[24px] p-8 md:p-10 text-white shadow-md relative overflow-hidden mb-8 border border-blue-800">
+                <i class="fa-solid fa-chart-column absolute -right-10 -bottom-10 text-[200px] text-white opacity-5"></i>
                 <div class="relative z-10">
-                    <h3 class="text-sm md:text-base font-black uppercase tracking-widest mb-6 text-orange-100"><i class="fa-solid fa-ranking-star mr-2"></i> Hall da Fama Operacional</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-colors">
-                            <p class="text-[10px] md:text-xs font-bold text-orange-200 uppercase mb-2">🏅 Quem mais entregou projetos</p>
-                            <p class="text-3xl md:text-4xl font-black top-produtor-nome">-</p>
-                            <p class="text-sm font-medium text-orange-100 mt-2"><span class="font-black top-produtor-num text-xl md:text-2xl text-white">0</span> vídeos concluídos</p>
-                        </div>
-                        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-colors">
-                            <p class="text-[10px] md:text-xs font-bold text-orange-200 uppercase mb-2">📈 Área que mais solicitou</p>
-                            <p class="text-3xl md:text-4xl font-black top-frente-nome">-</p>
-                            <p class="text-sm font-medium text-orange-100 mt-2"><span class="font-black top-frente-num text-xl md:text-2xl text-white">0</span> demandas geradas</p>
-                        </div>
+                    <h3 class="text-sm md:text-base font-black uppercase tracking-widest mb-6 text-blue-200"><i class="fa-regular fa-calendar-days mr-2"></i> Histórico de Produção Mensal</h3>
+                    <p class="text-xs text-blue-300 font-medium mb-6">Volume total de demandas que entraram em cada mês e sua taxa de conclusão estruturada.</p>
+                    
+                    <div id="container-grafico-meses" class="flex gap-4 overflow-x-auto custom-scroll pb-4 items-end min-h-[160px]">
+                        <!-- Barras e meses injetados via JS -->
+                        <div class="flex items-center gap-2 text-blue-300"><i class="fa-solid fa-spinner fa-spin"></i> Processando timeline...</div>
                     </div>
                 </div>
             </div>
@@ -419,10 +393,10 @@
             </div>
             
             <div class="p-6 md:p-8 overflow-y-auto custom-scroll flex-grow bg-white grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Coluna 1: Rankings -->
+                <!-- Coluna 1: Rankings de Gestão -->
                 <div class="space-y-8">
                     <div>
-                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 border-b pb-2"><i class="fa-solid fa-trophy mr-1 text-yellow-500"></i> Top Responsáveis (DHO)</h4>
+                        <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 border-b pb-2"><i class="fa-solid fa-users mr-1 text-brisa-blue"></i> Distribuição por Equipe (DHO)</h4>
                         <div id="raiox-lista-membros" class="space-y-3"></div>
                     </div>
                     <div>
@@ -441,7 +415,7 @@
                     <!-- Bloco Dedo-duro para Não Classificados -->
                     <div id="raiox-alerta-n-classificado" class="hidden bg-red-50 border border-red-200 rounded-xl p-4">
                         <h4 class="text-xs font-black text-red-600 uppercase tracking-widest mb-2"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Atenção Gestão</h4>
-                        <p class="text-[10px] text-red-800 font-bold mb-3">Os responsáveis abaixo aceitaram demandas sem identificar a frente do solicitante. Cobrar preenchimento correto na planilha.</p>
+                        <p class="text-[10px] text-red-800 font-bold mb-3">As demandas abaixo estão sem identificação clara da frente solicitante. O controle de dados está comprometido nestas linhas.</p>
                         <div id="raiox-lista-infratores" class="space-y-2"></div>
                     </div>
                 </div>
@@ -463,16 +437,12 @@
             
             <!-- Header Fixo -->
             <div class="p-8 border-b border-gray-200 bg-gray-50 flex items-center gap-4 shrink-0 relative overflow-hidden">
-                <i class="fa-solid fa-crown absolute -right-2 -top-2 text-7xl text-yellow-400 opacity-20 hidden" id="membro-header-crown"></i>
-                <div class="w-16 h-16 rounded-full bg-white border-4 border-brisa-orange flex items-center justify-center text-2xl text-gray-400 shadow-sm" id="membro-icon">
+                <div class="w-16 h-16 rounded-full bg-white border-4 border-brisa-blue flex items-center justify-center text-2xl text-brisa-blue shadow-sm" id="membro-icon">
                     <i class="fa-solid fa-user"></i>
                 </div>
                 <div class="relative z-10">
-                    <h3 class="text-2xl font-black text-brisa-blue uppercase tracking-tight flex items-center gap-2">
-                        <span id="membro-nome">Nome</span> 
-                        <i id="membro-title-crown" class="fa-solid fa-crown text-yellow-500 text-lg hidden" title="Top Produtor"></i>
-                    </h3>
-                    <p class="text-brisa-orange text-xs font-bold uppercase tracking-widest mt-1" id="membro-cargo">Cargo</p>
+                    <h3 class="text-2xl font-black text-brisa-blue uppercase tracking-tight flex items-center gap-2" id="membro-nome">Nome</h3>
+                    <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mt-1" id="membro-cargo">Visão Individual de Produção</p>
                 </div>
             </div>
             
@@ -561,7 +531,6 @@
                         <p class="font-bold text-sm truncate w-full" id="modal-frente">-</p>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm border-l-4 border-l-brisa-blue relative overflow-hidden">
-                        <i class="fa-solid fa-crown absolute right-2 top-2 text-yellow-300 opacity-20 text-3xl hidden" id="modal-resp-crown"></i>
                         <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1 relative z-10"><i class="fa-solid fa-headset mr-1"></i> Execução (DHO)</p>
                         <p class="font-black text-brisa-blue text-sm truncate relative z-10" id="modal-responsavel">-</p>
                     </div>
@@ -626,7 +595,6 @@
         </div>
     </div>
 
-
     <script>
         const googleAppUrl = "https://script.google.com/macros/s/AKfycbyh9nCwfuvhBjzuopA6s9qzZdgoR41jQX1Ws-qKPdzsh2OW4f_PPSUt66_-3qUOTfoDEg/exec";
 
@@ -637,97 +605,146 @@
         let filtroFrenteNome = '';
         let membroContextoDrilldown = '';
 
-        // Variáveis Globais de Destaques
-        let nomeDoTopProdutor = '';
+        // 0. FUNÇÃO DE SEGURANÇA (PREVENÇÃO DE XSS)
+        function escapeHTML(str) {
+            if (str === null || str === undefined) return '';
+            return str.toString()
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
 
-        // 1. CLASSIFICADOR DE FRENTES (REGEX AVANÇADO)
+        function normalizarTexto(texto) {
+            return (texto || '').toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+        }
+
+        // 1. CLASSIFICADOR DE FRENTES (BASEADO EM REGRAS/ARRAY FACILMENTE ESCALÁVEL)
+        const CONFIG_FRENTES = [
+            { termos: ['jaci', 'thaynara', 'vitor', 'matheus.oliveira', 'eduarda.neto', 'natalia', 'tcr'], nome: "TCR - Comercial", css: "frente-tcr" },
+            { termos: ['ozeias', 'eliane', 'emailiane', 'luisa', 'naira', 'administrativo', 'adm'], nome: "DO - Administrativo", css: "frente-adm" },
+            { termos: ['vanessa.bortoli', 'eduarda.souza', 'engajamento'], nome: "Engajamento", css: "frente-eng" },
+            { termos: ['tto', 'tecnico', 'técnico'], nome: "TTO - Técnico", css: "frente-tto" },
+            { termos: ['henrique', 'renato', 'beatriz', 'emanuely', 'beatriz.alencar', 'anderson.silva', 'geral'], nome: "Geral / Outros", css: "frente-outros" }
+        ];
+
         function classificarFrente(nome, nomeProjeto = "") {
-            const n = normalizarTexto(nome);
-            const p = normalizarTexto(nomeProjeto);
-            const busca = n + " " + p; 
-
-            if (/(jaci|thaynara|vitor|matheus\.oliveira|eduarda\.neto|natalia|tcr)/.test(busca)) {
-                return { nome: "TCR - Comercial", class: "frente-tcr" };
+            const busca = (normalizarTexto(nome) + " " + normalizarTexto(nomeProjeto)).toLowerCase();
+            
+            for (const frente of CONFIG_FRENTES) {
+                const matchEncontrado = frente.termos.some(termo => busca.includes(termo));
+                if (matchEncontrado) return { nome: frente.nome, class: frente.css };
             }
-            if (/(ozeias|eliane|emailiane|luisa|naira|administrativo|adm)/.test(busca)) {
-                return { nome: "DO - Administrativo", class: "frente-adm" };
-            }
-            if (/(vanessa\.bortoli|eduarda\.souza|engajamento)/.test(busca)) {
-                return { nome: "Engajamento", class: "frente-eng" };
-            }
-            if (/(tto|tecnico|técnico)/.test(busca)) {
-                return { nome: "TTO - Técnico", class: "frente-tto" };
-            }
-            if (/(henrique|renato|beatriz|emanuely|beatriz\.alencar|anderson\.silva|geral)/.test(busca)) {
-                return { nome: "Geral / Outros", class: "frente-outros" };
-            }
-
             return { nome: "Não Classificada", class: "frente-nao" };
         }
 
         // ==========================================
-        // CÁLCULO E RENDERIZAÇÃO DOS DESTAQUES (COROAS)
+        // CÁLCULO DE MÉTRICAS MENSAIS E GESTÃO
         // ==========================================
-        function atualizarDestaques(dados) {
-            let countsResp = {};
-            let countsFrente = {};
-            
-            // Tentativa de filtrar apenas dados operacionais recentes (Fallback pra geral)
-            let dadosAlvo = dados; 
-            
-            dadosAlvo.forEach(p => {
-                // Produtor (Responsável que concluiu)
-                const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
-                if(statusInfo.label === 'Concluído') {
-                    const resp = p.responsavel ? p.responsavel.trim() : '';
-                    if(resp && resp !== '-' && !resp.toLowerCase().includes('definir')) {
-                        countsResp[resp] = (countsResp[resp] || 0) + 1;
-                    }
-                }
+        const MAPA_MESES = {"Jan":1, "Fev":2, "Mar":3, "Abr":4, "Mai":5, "Jun":6, "Jul":7, "Ago":8, "Set":9, "Out":10, "Nov":11, "Dez":12};
+        
+        function extrairMesAno(dataString) {
+            if(!dataString || dataString === '-' || dataString.toLowerCase().includes('combinar')) return 'Data Inválida';
+            const partes = dataString.split(/[\/\-]/);
+            if(partes.length >= 3) {
+                const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+                let mesIndex = -1, ano = "";
+                if(partes[0].length === 4) { ano = partes[0]; mesIndex = parseInt(partes[1]) - 1; }
+                else { ano = partes[2].substring(0,4); mesIndex = parseInt(partes[1]) - 1; }
+                if(mesIndex >= 0 && mesIndex < 12 && ano.length === 4) return `${meses[mesIndex]}/${ano}`;
+            }
+            return 'Data Inválida';
+        }
 
-                // Solicitante (Frente que gerou qualquer demanda)
+        function sortMesAnoKeys(a, b) {
+            let [mA, yA] = a.split('/');
+            let [mB, yB] = b.split('/');
+            let dataA = new Date(parseInt(yA), MAPA_MESES[mA] - 1, 1);
+            let dataB = new Date(parseInt(yB), MAPA_MESES[mB] - 1, 1);
+            return dataA - dataB;
+        }
+
+        function atualizarDashboardGestao(dados) {
+            let countsFrente = {};
+            let meses = {};
+            let maxTotalPorMes = 0;
+            
+            dados.forEach(p => {
+                const st = obterDadosStatus(p.status, p.etapaAtual);
+
                 const f = classificarFrente(p.sponsor, p.demanda);
                 if(f.nome !== 'Não Classificada' && f.nome !== 'Geral / Outros') {
                     countsFrente[f.nome] = (countsFrente[f.nome] || 0) + 1;
                 }
-            });
 
-            // Encontra Top Produtor
-            let topProdNome = '-';
-            let topProdNum = 0;
-            Object.entries(countsResp).forEach(([nome, num]) => {
-                if(num > topProdNum) { topProdNum = num; topProdNome = nome; }
-            });
-            nomeDoTopProdutor = topProdNome; // Salva globalmente
-
-            // Encontra Top Frente
-            let topFrenteNome = '-';
-            let topFrenteNum = 0;
-            Object.entries(countsFrente).forEach(([nome, num]) => {
-                if(num > topFrenteNum) { topFrenteNum = num; topFrenteNome = nome; }
-            });
-
-            // Atualiza UI em TODAS as abas
-            document.querySelectorAll('.top-produtor-nome').forEach(el => el.textContent = topProdNome);
-            document.querySelectorAll('.top-produtor-num').forEach(el => el.textContent = topProdNum);
-            document.querySelectorAll('.top-frente-nome').forEach(el => el.textContent = topFrenteNome);
-            document.querySelectorAll('.top-frente-num').forEach(el => el.textContent = topFrenteNum);
-
-            // Atualizar Coroas nos Cards de Membro
-            ['Gilnei', 'Marcos', 'Erick'].forEach(membro => {
-                const crown = document.getElementById(`crown-${membro}`);
-                if(crown) {
-                    if(topProdNome.toLowerCase().includes(membro.toLowerCase()) && topProdNum > 0) {
-                        crown.classList.remove('hidden');
-                    } else {
-                        crown.classList.add('hidden');
-                    }
+                const mes = extrairMesAno(p.dataRecebimento);
+                if(mes !== 'Data Inválida') {
+                    if(!meses[mes]) meses[mes] = { total: 0, concluidos: 0 };
+                    meses[mes].total++;
+                    if(st.label === 'Concluído') meses[mes].concluidos++;
+                    if(meses[mes].total > maxTotalPorMes) maxTotalPorMes = meses[mes].total;
                 }
             });
+
+            // --- 1. Atualizar Frentes (Tela Inicial) ---
+            const containerAreas = document.getElementById('top-areas-list');
+            let frentesOrdenadas = Object.entries(countsFrente).sort((a,b) => b[1] - a[1]).slice(0, 3);
+            
+            if (frentesOrdenadas.length === 0) {
+                containerAreas.innerHTML = '<p class="text-xs text-gray-400">Dados insuficientes.</p>';
+            } else {
+                let htmlAreas = '';
+                frentesOrdenadas.forEach(([nome, qtd], index) => {
+                    const bgBar = index === 0 ? 'bg-brisa-blue' : (index === 1 ? 'bg-slate-500' : 'bg-slate-400');
+                    htmlAreas += `
+                        <div class="flex items-center gap-3 bg-white p-2.5 rounded-lg border border-slate-100 shadow-sm cursor-pointer hover:border-slate-300 transition-colors" onclick="abrirRaioX('frente', '${nome}', 'Raio-X da Área: ${nome}', 'bg-slate-700')">
+                            <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center font-black text-xs shrink-0">${index + 1}º</div>
+                            <div class="flex-grow">
+                                <p class="text-xs font-bold text-slate-700 truncate">${nome}</p>
+                                <div class="w-full bg-slate-100 h-1.5 rounded-full mt-1">
+                                    <div class="${bgBar} h-1.5 rounded-full" style="width: ${Math.min((qtd / frentesOrdenadas[0][1]) * 100, 100)}%"></div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-black text-slate-800 text-sm">${qtd}</span>
+                                <span class="text-[9px] text-slate-400 block uppercase">pedidos</span>
+                            </div>
+                        </div>`;
+                });
+                containerAreas.innerHTML = htmlAreas;
+            }
+
+            // --- 2. Atualizar Gráfico de Meses (Relatório Estratégico) ---
+            const containerMeses = document.getElementById('container-grafico-meses');
+            let chavesMeses = Object.keys(meses).sort(sortMesAnoKeys).slice(-6); // Pega últimos 6 meses com dados
+            
+            if(chavesMeses.length === 0) {
+                containerMeses.innerHTML = '<p class="text-sm text-blue-300">Não há dados temporais estruturados para exibição.</p>';
+            } else {
+                let htmlMeses = '';
+                chavesMeses.forEach(mesChave => {
+                    const dadosMes = meses[mesChave];
+                    const alturaTotal = Math.max((dadosMes.total / maxTotalPorMes) * 120, 20); // max 120px height
+                    const alturaConcluido = dadosMes.total > 0 ? (dadosMes.concluidos / dadosMes.total) * alturaTotal : 0;
+                    
+                    htmlMeses += `
+                    <div class="flex flex-col items-center gap-2 group cursor-pointer w-16" title="Total Entrou: ${dadosMes.total} | Concluídos: ${dadosMes.concluidos}">
+                        <div class="text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-[10px] font-black text-white block">${dadosMes.total}</span>
+                        </div>
+                        <div class="relative w-8 bg-blue-900/50 rounded-t-sm" style="height: ${alturaTotal}px;">
+                            <div class="absolute bottom-0 w-full bg-brisa-orange rounded-t-sm transition-all duration-700" style="height: ${alturaConcluido}px;"></div>
+                        </div>
+                        <span class="text-[10px] font-bold text-blue-200 uppercase">${mesChave.split('/')[0]}</span>
+                    </div>`;
+                });
+                containerMeses.innerHTML = htmlMeses;
+            }
         }
 
 
-        // 2. FUNÇÕES BASE
+        // 2. FUNÇÕES BASE (Navegação e Modais)
         function switchView(viewId) {
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             const tab = document.getElementById(`tab-${viewId}`);
@@ -742,23 +759,6 @@
         function fecharAoClicarFora(event, id) { if (event.target.id === id) fecharModal(id); }
         function abrirModal(id) { const el = document.getElementById(id); if(el) el.classList.add('active'); }
         function fecharModal(id) { const el = document.getElementById(id); if(el) el.classList.remove('active'); }
-
-        function normalizarTexto(texto) {
-            return (texto || '').toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-        }
-
-        function extrairMesAno(dataString) {
-            if(!dataString || dataString === '-' || dataString.toLowerCase().includes('combinar')) return 'Data Inválida';
-            const partes = dataString.split(/[\/\-]/);
-            if(partes.length >= 3) {
-                const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
-                let mesIndex = -1, ano = "";
-                if(partes[0].length === 4) { ano = partes[0]; mesIndex = parseInt(partes[1]) - 1; }
-                else { ano = partes[2].substring(0,4); mesIndex = parseInt(partes[1]) - 1; }
-                if(mesIndex >= 0 && mesIndex < 12 && ano.length === 4) return `${meses[mesIndex]}/${ano}`;
-            }
-            return 'Data Inválida';
-        }
 
         function obterDadosStatus(statusTexto, faseTexto) {
             const status = normalizarTexto(statusTexto);
@@ -783,7 +783,6 @@
                 obs: partes[1] ? partes[1].trim() : 'Sem diretrizes informadas.'
             };
         }
-
 
         // 3. INTELIGÊNCIA ESTRATÉGICA (RAIO-X BI)
         function abrirRaioX(tipoFiltro, valor, tituloModal, corHeaderClass) {
@@ -846,7 +845,7 @@
                     html += `
                     <div class="flex flex-col gap-1 mb-3">
                         <div class="flex justify-between items-center text-sm font-bold text-gray-700">
-                            <span class="truncate pr-2"><i class="${iconClass} text-gray-300 mr-2 text-xs"></i>${item[0]}</span>
+                            <span class="truncate pr-2"><i class="${iconClass} text-gray-300 mr-2 text-xs"></i>${escapeHTML(item[0])}</span>
                             <span>${item[1]} <span class="text-[10px] text-gray-400 font-normal">(${perc}%)</span></span>
                         </div>
                         <div class="bar-mini-bg"><div class="bar-mini-fill ${colorClass}" style="width: ${perc}%;"></div></div>
@@ -867,14 +866,16 @@
                 document.getElementById('raiox-lista-frentes').previousElementSibling.innerHTML = '<i class="fa-solid fa-building mr-1 text-brisa-blue"></i> Principais Frentes Envolvidas';
             }
 
-            document.getElementById('raiox-lista-meses').innerHTML = buildListHtml(sortDict(countsMes), 4, 'fa-regular fa-calendar', 'bg-brisa-orange');
+            // Ordena os meses de forma temporal
+            let mesesOrdenadosTemp = Object.entries(countsMes).sort((a,b) => sortMesAnoKeys(a[0], b[0]));
+            document.getElementById('raiox-lista-meses').innerHTML = buildListHtml(mesesOrdenadosTemp.reverse(), 4, 'fa-regular fa-calendar', 'bg-brisa-orange');
 
             const alertaInf = document.getElementById('raiox-alerta-n-classificado');
             if(Object.keys(infratoresClassificacao).length > 0) {
                 alertaInf.classList.remove('hidden');
                 let htmlInf = '';
                 sortDict(infratoresClassificacao).forEach(item => {
-                    htmlInf += `<div class="flex justify-between text-xs text-red-900 border-b border-red-100 pb-1"><strong>${item[0]}</strong><span>${item[1]} projetos</span></div>`;
+                    htmlInf += `<div class="flex justify-between text-xs text-red-900 border-b border-red-100 pb-1"><strong>${escapeHTML(item[0])}</strong><span>${item[1]} projetos</span></div>`;
                 });
                 document.getElementById('raiox-lista-infratores').innerHTML = htmlInf;
             } else {
@@ -921,24 +922,12 @@
 
             document.getElementById('membro-nome').textContent = nome;
             document.getElementById('membro-lista-back-nome').textContent = nome;
-            document.getElementById('membro-cargo').textContent = 'Equipe de Produção (DHO)';
             
             let iconeHtml = '<i class="fa-solid fa-user"></i>';
             if(nome === 'Gilnei') iconeHtml = '<i class="fa-solid fa-user-tie text-brisa-blue"></i>';
             if(nome === 'Marcos') iconeHtml = '<i class="fa-solid fa-camera text-green-500"></i>';
             if(nome === 'Erick') iconeHtml = '<i class="fa-solid fa-pen-nib text-brisa-orange"></i>';
             document.getElementById('membro-icon').innerHTML = iconeHtml;
-
-            // Logica Coroa no Header do Modal
-            const headerCrown1 = document.getElementById('membro-header-crown');
-            const headerCrown2 = document.getElementById('membro-title-crown');
-            if(nomeDoTopProdutor.toLowerCase().includes(nome.toLowerCase()) && statusCount.concluido > 0) {
-                headerCrown1.classList.remove('hidden');
-                headerCrown2.classList.remove('hidden');
-            } else {
-                headerCrown1.classList.add('hidden');
-                headerCrown2.classList.add('hidden');
-            }
 
             document.getElementById('membro-fila').textContent = statusCount.fila;
             document.getElementById('membro-andamento').textContent = statusCount.andamento;
@@ -953,8 +942,8 @@
             } else {
                 frentesOrdenadas.slice(0, 4).forEach(item => {
                     divFrentes.innerHTML += `
-                        <div onclick="verListaMembroFrente('${item[0]}')" class="flex justify-between items-center bg-gray-50 hover:bg-gray-100 p-3 rounded-lg border border-gray-200 cursor-pointer transition-colors group">
-                            <span class="text-sm font-bold text-gray-700 group-hover:text-brisa-orange transition-colors">${item[0]}</span>
+                        <div onclick="verListaMembroFrente('${escapeHTML(item[0])}')" class="flex justify-between items-center bg-gray-50 hover:bg-gray-100 p-3 rounded-lg border border-gray-200 cursor-pointer transition-colors group">
+                            <span class="text-sm font-bold text-gray-700 group-hover:text-brisa-orange transition-colors">${escapeHTML(item[0])}</span>
                             <div class="flex items-center">
                                 <span class="text-sm font-black text-brisa-blue group-hover:text-brisa-orange transition-colors">${item[1]} <span class="text-[10px] font-normal mr-2">entregas</span></span>
                                 <i class="fa-solid fa-chevron-right text-[10px] text-gray-400 group-hover:text-brisa-orange"></i>
@@ -999,7 +988,7 @@
         }
 
         function verListaMembroFrente(frenteNome) {
-            document.getElementById('membro-lista-titulo').innerHTML = `<span class="text-gray-400 text-sm">Frente:</span> ${frenteNome}`;
+            document.getElementById('membro-lista-titulo').innerHTML = `<span class="text-gray-400 text-sm">Frente:</span> ${escapeHTML(frenteNome)}`;
             
             let dadosFiltrados = dadosGlobais.filter(projeto => {
                 const txtAlvo = (projeto.responsavel || '') + " " + (projeto.colaborador || '');
@@ -1026,7 +1015,7 @@
                     const frenteInfo = classificarFrente(p.sponsor, p.demanda);
                     const infosLink = extrairLinks(p.linkAcesso);
                     
-                    let dataText = p.prazoFinal && p.prazoFinal !== '-' ? `Prazo: ${p.prazoFinal}` : 'Prazo a definir';
+                    let dataText = p.prazoFinal && p.prazoFinal !== '-' ? `Prazo: ${escapeHTML(p.prazoFinal)}` : 'Prazo a definir';
                     let jiraButton = infosLink.jira ? `<a href="${infosLink.jira}" target="_blank" onclick="event.stopPropagation()" class="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg text-xs font-black hover:bg-blue-600 hover:text-white transition-colors border border-blue-100 shadow-sm flex items-center"><i class="fa-brands fa-jira mr-1"></i> Jira</a>` : '';
 
                     container.innerHTML += `
@@ -1034,7 +1023,7 @@
                             <div class="flex-grow pr-4 overflow-hidden">
                                 <div class="flex items-center gap-2 mb-1">
                                     <div class="w-2.5 h-2.5 rounded-full ${statusInfo.bg}"></div>
-                                    <h5 class="font-black text-brisa-blue text-sm truncate group-hover:text-brisa-orange transition-colors">${p.demanda || 'Sem Nome'}</h5>
+                                    <h5 class="font-black text-brisa-blue text-sm truncate group-hover:text-brisa-orange transition-colors">${escapeHTML(p.demanda) || 'Sem Nome'}</h5>
                                 </div>
                                 <div class="flex items-center gap-2 text-[10px] font-bold text-gray-500 mt-1.5">
                                     <span class="badge-frente ${frenteInfo.class} scale-90 origin-left">${frenteInfo.nome}</span>
@@ -1079,11 +1068,11 @@
             let filtrosAtivos = false;
 
             if(filtroEquipeNome) {
-                areaLegendas.innerHTML += `<span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-[10px]"><i class="fa-solid fa-user mr-1"></i>${filtroEquipeNome}</span>`;
+                areaLegendas.innerHTML += `<span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-[10px]"><i class="fa-solid fa-user mr-1"></i>${escapeHTML(filtroEquipeNome)}</span>`;
                 filtrosAtivos = true;
             }
             if(filtroFrenteNome) {
-                areaLegendas.innerHTML += `<span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-[10px]"><i class="fa-solid fa-building mr-1"></i>${filtroFrenteNome}</span>`;
+                areaLegendas.innerHTML += `<span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-[10px]"><i class="fa-solid fa-building mr-1"></i>${escapeHTML(filtroFrenteNome)}</span>`;
                 filtrosAtivos = true;
             }
             if(filtroStatusNome !== 'todos') {
@@ -1095,7 +1084,6 @@
             const btnLimpar = document.getElementById('btn-limpar-filtros');
             if(filtrosAtivos) btnLimpar.classList.remove('hidden');
             else btnLimpar.classList.add('hidden');
-
 
             const dadosFiltrados = dadosGlobais.filter(projeto => {
                 const frenteInfo = classificarFrente(projeto.sponsor, projeto.demanda);
@@ -1204,8 +1192,8 @@
 
             renderizarGraficoFrentes(dados);
             
-            // Chama motor de Coroas e Destaques!
-            atualizarDestaques(dados);
+            // Chama motor Visão Executiva e Timeline
+            atualizarDashboardGestao(dados);
         }
 
         // 7. GERADOR DE E-MAIL
@@ -1262,26 +1250,18 @@
             const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
             const frenteInfo = classificarFrente(p.sponsor, p.demanda);
 
-            document.getElementById('modal-titulo').textContent = p.demanda || 'Demanda sem título';
-            document.getElementById('modal-prazo').textContent = p.prazoFinal || '-';
-            document.getElementById('modal-gravacao').textContent = p.dataGravacao || '-';
+            document.getElementById('modal-titulo').textContent = escapeHTML(p.demanda) || 'Demanda sem título';
+            document.getElementById('modal-prazo').textContent = escapeHTML(p.prazoFinal) || '-';
+            document.getElementById('modal-gravacao').textContent = escapeHTML(p.dataGravacao) || '-';
             
-            document.getElementById('modal-sponsor').textContent = p.sponsor || '-';
+            document.getElementById('modal-sponsor').textContent = escapeHTML(p.sponsor) || '-';
             const badgeFrente = document.getElementById('modal-frente');
             badgeFrente.textContent = frenteInfo.nome;
             badgeFrente.className = `badge-frente ${frenteInfo.class} inline-block mt-1`;
 
-            document.getElementById('modal-responsavel').textContent = p.responsavel || 'Aguardando atribuição';
-            document.getElementById('modal-observacoes').textContent = infosLink.obs;
-            document.getElementById('modal-recebimento').textContent = p.dataRecebimento || '-';
-
-            // Coroa Responsavel no Modal
-            const respCrown = document.getElementById('modal-resp-crown');
-            if(p.responsavel && nomeDoTopProdutor.toLowerCase().includes(p.responsavel.toLowerCase())) {
-                respCrown.classList.remove('hidden');
-            } else {
-                respCrown.classList.add('hidden');
-            }
+            document.getElementById('modal-responsavel').textContent = escapeHTML(p.responsavel) || 'Aguardando atribuição';
+            document.getElementById('modal-observacoes').textContent = escapeHTML(infosLink.obs);
+            document.getElementById('modal-recebimento').textContent = escapeHTML(p.dataRecebimento) || '-';
 
             const stepIndex = statusInfo.step;
             document.getElementById('timeline-progress').style.width = `${((stepIndex - 1) / 4) * 100}%`;
@@ -1299,12 +1279,12 @@
             let botoesHtml = '';
             
             if(infosLink.jira) {
-                botoesHtml += `<a href="${infosLink.jira}" target="_blank" class="w-full sm:w-auto px-6 py-3 bg-white hover:bg-gray-50 text-gray-800 font-black rounded-xl border-2 border-gray-200 shadow-sm flex justify-center items-center gap-2 transition-transform hover:-translate-y-1"><i class="fa-brands fa-jira text-blue-600 text-lg"></i> Rastrear no Jira</a>`;
+                botoesHtml += `<a href="${escapeHTML(infosLink.jira)}" target="_blank" class="w-full sm:w-auto px-6 py-3 bg-white hover:bg-gray-50 text-gray-800 font-black rounded-xl border-2 border-gray-200 shadow-sm flex justify-center items-center gap-2 transition-transform hover:-translate-y-1"><i class="fa-brands fa-jira text-blue-600 text-lg"></i> Rastrear no Jira</a>`;
             }
 
             if(statusInfo.label === 'Concluído') {
                 if(infosLink.video) {
-                    botoesHtml += `<a href="${infosLink.video}" target="_blank" class="w-full sm:w-auto px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-black rounded-xl shadow-md flex justify-center items-center gap-2 transition-transform hover:-translate-y-1"><i class="fa-solid fa-play-circle text-lg"></i> Abrir Entrega</a>`;
+                    botoesHtml += `<a href="${escapeHTML(infosLink.video)}" target="_blank" class="w-full sm:w-auto px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-black rounded-xl shadow-md flex justify-center items-center gap-2 transition-transform hover:-translate-y-1"><i class="fa-solid fa-play-circle text-lg"></i> Abrir Entrega</a>`;
                 }
                 botoesHtml += `<button onclick="abrirModalEmail(${index})" class="w-full sm:w-auto px-6 py-3 bg-[#09132E] hover:bg-blue-900 text-white font-black rounded-xl shadow-md flex justify-center items-center gap-2 transition-transform hover:-translate-y-1"><i class="fa-solid fa-envelope-open-text text-lg"></i> Emitir Notificação (E-mail)</button>`;
             } else {
@@ -1313,6 +1293,11 @@
 
             areaEntrega.innerHTML = botoesHtml;
             abrirModal('modal-detalhes');
+        }
+
+        // Correção de ordenação sem dependência externa
+        function ordernarProjetos(arrayDados) {
+            return arrayDados; // Pode implementar ordenação por data aqui futuramente
         }
 
         function renderizarTabela(dadosParaRenderizar) {
@@ -1334,11 +1319,11 @@
                 const frenteInfo = classificarFrente(p.sponsor, p.demanda);
 
                 let badgeGravacao = p.dataGravacao && p.dataGravacao.toLowerCase() !== 'a combinar' && p.dataGravacao !== '-' 
-                    ? `<span class="bg-orange-50 text-brisa-orange font-bold px-2 py-1 rounded-md text-[10px] md:text-[11px] whitespace-nowrap"><i class="fa-solid fa-video mr-1"></i>${p.dataGravacao}</span>` 
+                    ? `<span class="bg-orange-50 text-brisa-orange font-bold px-2 py-1 rounded-md text-[10px] md:text-[11px] whitespace-nowrap"><i class="fa-solid fa-video mr-1"></i>${escapeHTML(p.dataGravacao)}</span>` 
                     : `<span class="text-gray-400 font-medium text-[10px] md:text-[11px]">Pendente</span>`;
                     
                 let badgePrazo = p.prazoFinal && p.prazoFinal.toLowerCase() !== 'a combinar' && p.prazoFinal !== '-' 
-                    ? `<span class="bg-blue-50 text-blue-700 font-bold px-2 py-1 rounded-md text-[10px] md:text-[11px] whitespace-nowrap"><i class="fa-regular fa-calendar mr-1"></i>${p.prazoFinal}</span>` 
+                    ? `<span class="bg-blue-50 text-blue-700 font-bold px-2 py-1 rounded-md text-[10px] md:text-[11px] whitespace-nowrap"><i class="fa-regular fa-calendar mr-1"></i>${escapeHTML(p.prazoFinal)}</span>` 
                     : `<span class="text-gray-400 font-medium text-[10px] md:text-[11px]">Pendente</span>`;
 
                 tbody.innerHTML += `
@@ -1347,8 +1332,8 @@
                             <div class="flex items-center">
                                 <i class="fa-solid fa-angle-right text-[#FF5A00] text-[10px] md:text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
                                 <div>
-                                    <span class="font-black text-brisa-blue truncate max-w-[150px] sm:max-w-[200px] block">${p.demanda || 'Sem título cadastrado'}</span>
-                                    <span class="text-[9px] font-bold text-gray-400 block"><i class="fa-solid fa-user-tag mr-1"></i>${p.sponsor || 'Não informado'}</span>
+                                    <span class="font-black text-brisa-blue truncate max-w-[150px] sm:max-w-[200px] block">${escapeHTML(p.demanda) || 'Sem título cadastrado'}</span>
+                                    <span class="text-[9px] font-bold text-gray-400 block"><i class="fa-solid fa-user-tag mr-1"></i>${escapeHTML(p.sponsor) || 'Não informado'}</span>
                                 </div>
                             </div>
                         </td>
