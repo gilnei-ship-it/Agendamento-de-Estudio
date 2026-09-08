@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fábrica de Conteúdo | Produção Visual</title>
+    <title>Painel Gerencial Premium | DHO Produção Visual</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 576 512%22><path fill=%22%23FF6B00%22 d=%22M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z%22/></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 576 512%22><path fill=%22%23D4AF37%22 d=%22M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z%22/></svg>" type="image/svg+xml">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -17,7 +17,8 @@
                 extend: {
                     fontFamily: { sans: ['Montserrat', 'sans-serif'] },
                     colors: {
-                        fabrica: { blue: '#0B41CD', orange: '#FF6B00', bg: '#F6F5F2' }
+                        brisa: { blue: '#09132E', light: '#F8FAFC' },
+                        ouro: { DEFAULT: '#D4AF37', light: '#FDF4D9', dark: '#AA771C' }
                     }
                 }
             }
@@ -31,61 +32,66 @@
         .loader-hidden { opacity: 0; visibility: hidden; }
 
         .header-bg {
-            background-color: #0B41CD;
-            background-image: linear-gradient(135deg, #0B41CD 0%, #1E3A8A 100%);
+            background-color: #09132E;
+            background-image: radial-gradient(circle at right top, #111D42 0%, #09132E 100%);
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
             padding-bottom: 6rem;
-            box-shadow: 0 10px 30px rgba(11, 65, 205, 0.3);
+            box-shadow: 0 10px 30px rgba(9, 19, 46, 0.3);
             position: relative;
         }
 
         .nav-tab { position: relative; transition: all 0.3s ease; }
-        .nav-tab.active { color: #FF6B00; background: rgba(255, 107, 0, 0.15); }
+        .nav-tab.active { color: #D4AF37; background: rgba(212, 175, 55, 0.1); }
         .nav-tab.active::after {
             content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%);
-            width: 50%; height: 4px; background-color: #FF6B00; border-radius: 4px;
-            box-shadow: 0 -2px 10px rgba(255,107,0,0.5);
+            width: 40%; height: 3px; background-color: #D4AF37; border-radius: 4px;
+            box-shadow: 0 -2px 10px rgba(212,175,55,0.5);
         }
 
         .view-section { display: none; animation: fadeIn 0.4s ease-in-out forwards; }
         .view-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
         .stat-card {
-            border-radius: 20px; color: white; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; border: 2px solid transparent;
+            border-radius: 16px; color: white; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
             cursor: pointer;
         }
-        .stat-card:hover { transform: translateY(-8px) scale(1.02); border-color: rgba(255,255,255,0.4); box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.2); }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.3); }
 
-        .bg-card-blue { background: linear-gradient(135deg, #0B41CD, #3B82F6); }
+        .bg-card-blue { background: linear-gradient(135deg, #09132E, #111D42); }
         .bg-card-green { background: linear-gradient(135deg, #10B981, #059669); }
-        .bg-card-orange { background: linear-gradient(135deg, #FF6B00, #EA580C); }
+        .bg-card-gold { background: linear-gradient(135deg, #D4AF37, #AA771C); box-shadow: 0 10px 25px -5px rgba(212,175,55,0.4); border: 1px solid #E5C158; }
         .bg-card-neutral { background: linear-gradient(135deg, #64748B, #475569); }
 
         .status-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
         .bar-bg { background: #E2E8F0; border-radius: 999px; height: 12px; width: 100%; overflow: hidden; position: relative; }
         .bar-fill { height: 100%; border-radius: 999px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
 
-        .modal { opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100; padding: 10px; backdrop-filter: blur(8px); }
+        .modal { opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100; padding: 10px; backdrop-filter: blur(5px); }
         .modal.active { opacity: 1; visibility: visible; }
-        .modal-content { transform: scale(0.9) translateY(30px); opacity: 0; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); max-height: 95vh; display: flex; flex-direction: column;}
+        .modal-content { transform: scale(0.95) translateY(20px); opacity: 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); max-height: 95vh; display: flex; flex-direction: column;}
         .modal.active .modal-content { transform: scale(1) translateY(0); opacity: 1; }
         
-        .custom-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
-        .custom-scroll::-webkit-scrollbar-track { background: #F1F5F9; border-radius: 8px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 8px; border: 2px solid #F1F5F9; }
+        .custom-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #F1F5F9; border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
 
         .timeline-container { position: relative; display: flex; justify-content: space-between; align-items: center; margin: 30px 0 20px 0; padding: 0 10px; }
-        .timeline-line { position: absolute; top: 18px; left: 10px; right: 10px; height: 4px; background: #E2E8F0; z-index: 0; border-radius: 4px;}
-        .timeline-line-fill { position: absolute; top: 18px; left: 10px; height: 4px; background: #FF6B00; z-index: 1; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 4px; box-shadow: 0 0 10px rgba(255,107,0,0.5); }
+        .timeline-line { position: absolute; top: 18px; left: 10px; right: 10px; height: 3px; background: #E2E8F0; z-index: 0; }
+        .timeline-line-fill { position: absolute; top: 18px; left: 10px; height: 3px; background: #D4AF37; z-index: 1; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 8px rgba(212,175,55,0.5); }
         .timeline-step { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 20%; }
-        .timeline-circle { width: 42px; height: 42px; border-radius: 50%; background: #FFF; border: 4px solid #E2E8F0; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #CBD5E1; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .timeline-step.completed .timeline-circle { background: #FF6B00; border-color: #FF6B00; color: white; }
-        .timeline-step.active .timeline-circle { background: #FF6B00; border-color: #FF6B00; color: white; box-shadow: 0 0 0 5px rgba(255,107,0,0.2); transform: scale(1.15); animation: pulse 2s infinite; }
+        .timeline-circle { width: 38px; height: 38px; border-radius: 50%; background: #FFF; border: 3px solid #E2E8F0; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #CBD5E1; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .timeline-step.completed .timeline-circle { background: #D4AF37; border-color: #D4AF37; color: white; }
+        .timeline-step.active .timeline-circle { background: #D4AF37; border-color: #D4AF37; color: white; box-shadow: 0 0 0 4px white, 0 0 0 7px #D4AF37; transform: scale(1.1); }
         
-        .badge-frente { font-size: 9px; padding: 5px 12px; border-radius: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .workflow-node { display: flex; align-items: center; gap: 15px; background: white; padding: 15px 25px; border-radius: 100px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 2px solid #E2E8F0; position: relative; z-index: 2; transition: transform 0.3s ease, border-color 0.3s; cursor: pointer; }
+        .workflow-node:hover { transform: scale(1.05); border-color: #D4AF37; box-shadow: 0 10px 25px rgba(212,175,55,0.2); }
+        .workflow-avatar { width: 60px; height: 60px; border-radius: 50%; border: 3px solid #09132E; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #09132E; background: #F8FAFC; position: relative; transition: all 0.3s;}
+        .workflow-node:hover .workflow-avatar { border-color: #D4AF37; color: #D4AF37; }
+
+        .badge-frente { font-size: 9px; padding: 4px 10px; border-radius: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         .frente-tcr { background-color: #E0F2FE; color: #0284C7; border: 1px solid #BAE6FD; }
         .frente-adm { background-color: #FEF3C7; color: #D97706; border: 1px solid #FDE68A; }
         .frente-eng { background-color: #FCE7F3; color: #BE185D; border: 1px solid #FBCFE8; }
@@ -93,55 +99,59 @@
         .frente-outros { background-color: #F3F4F6; color: #4B5563; border: 1px solid #E5E7EB; }
         .frente-nao { background-color: #FEE2E2; color: #B91C1C; border: 1px solid #FECACA; }
 
-        .tr-status-concluido { border-left: 4px solid #10B981; }
-        .tr-status-andamento { border-left: 4px solid #FF6B00; }
-        .tr-status-fila { border-left: 4px solid #64748B; }
-        .tr-status-cancelado { border-left: 4px solid #EF4444; opacity: 0.7; }
+        .tr-status-concluido { border-left: 3px solid #10B981; }
+        .tr-status-andamento { border-left: 3px solid #D4AF37; }
+        .tr-status-fila { border-left: 3px solid #64748B; }
+        .tr-status-cancelado { border-left: 3px solid #EF4444; opacity: 0.7; }
 
-        .filtro-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
-        .filtro-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.05); }
-        .filtro-btn.active-equipe { background-color: #FF6B00; border-color: #FF6B00; color: white; box-shadow: 0 6px 15px rgba(255,107,0,0.3); transform: scale(1.02); }
-        .filtro-btn.active-equipe .badge-filtro { background-color: white; color: #FF6B00; }
+        /* Estilos dos botões de Filtro Ativo (Cores Premium Ouro) */
+        .filtro-btn { transition: all 0.2s; position: relative; overflow: hidden; }
+        .filtro-btn.active-equipe { background-color: #FDF4D9; border-color: #D4AF37; color: #AA771C; box-shadow: 0 4px 10px rgba(212,175,55,0.2); }
+        .filtro-btn.active-equipe .badge-filtro { background-color: white; color: #D4AF37; border: 1px solid #FDF4D9; }
         
-        .filtro-btn.active-status { background-color: #64748B; border-color: #64748B; color: white; box-shadow: 0 6px 15px rgba(100,116,139,0.3); transform: scale(1.02); }
-        .filtro-btn.active-status.andamento { background: linear-gradient(135deg, #FF6B00, #EA580C); border-color: #FF6B00; color: white; box-shadow: 0 6px 15px rgba(255,107,0,0.4); }
-        .filtro-btn.active-status.concluido { background-color: #10B981; border-color: #10B981; color: white; box-shadow: 0 6px 15px rgba(16,185,129,0.3); }
-        .filtro-btn.active-frente { background-color: #0B41CD; border-color: #0B41CD; color: white; box-shadow: 0 6px 15px rgba(11,65,205,0.3); transform: scale(1.02); }
-
-        .workflow-node { display: flex; align-items: center; gap: 15px; background: white; padding: 15px 25px; border-radius: 100px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 2px solid #E2E8F0; position: relative; z-index: 2; transition: transform 0.3s ease; cursor: pointer; }
-        .workflow-node:hover { transform: scale(1.05); border-color: #FF6B00; }
-        .workflow-avatar { width: 60px; height: 60px; border-radius: 50%; border: 3px solid #0B41CD; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #0B41CD; background: #F8FAFC; position: relative;}
-        .workflow-node:hover .workflow-avatar { border-color: #FF6B00; color: #FF6B00; }
+        .filtro-btn.active-status { background-color: #64748B; border-color: #64748B; color: white; box-shadow: 0 4px 10px rgba(100,116,139,0.3); }
+        .filtro-btn.active-status.andamento { background: linear-gradient(135deg, #D4AF37, #AA771C); border-color: #D4AF37; color: white; box-shadow: 0 4px 15px rgba(212,175,55,0.4); }
+        .filtro-btn.active-status.concluido { background-color: #10B981; border-color: #10B981; color: white; box-shadow: 0 4px 10px rgba(16,185,129,0.3); }
+        
+        .filtro-btn.active-frente { background-color: #09132E; border-color: #09132E; color: white; box-shadow: 0 4px 10px rgba(9,19,46,0.3); }
 
         .fade-in-section { animation: fadeInScale 0.3s ease-in-out forwards; }
         @keyframes fadeInScale { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        
+        /* Gold Gradient Text */
+        .text-gradient-gold {
+            background: linear-gradient(to right, #D4AF37, #E5C158, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 2px 10px rgba(212,175,55,0.2);
+        }
     </style>
 </head>
 <body class="antialiased">
 
     <!-- Loading Screen -->
-    <div id="loading-screen" class="fixed inset-0 bg-fabrica-blue flex flex-col items-center justify-center z-[9999]">
+    <div id="loading-screen" class="fixed inset-0 bg-brisa-blue flex flex-col items-center justify-center z-[9999]">
         <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-24 md:h-40 object-contain filter brightness-0 invert mb-8 animate-pulse px-4">
         <div class="flex flex-col items-center gap-3">
-            <i class="fa-solid fa-cog fa-spin text-fabrica-orange text-4xl"></i>
-            <span class="text-white font-black tracking-widest uppercase text-xs md:text-sm mt-2" id="loading-text">Conectando Engrenagens...</span>
+            <i class="fa-solid fa-circle-notch fa-spin text-ouro text-3xl md:text-4xl"></i>
+            <span class="text-white font-black tracking-widest uppercase text-xs md:text-sm mt-2" id="loading-text">Sincronizando Base de Dados...</span>
         </div>
     </div>
 
     <!-- Header Nav -->
     <div class="header-bg pt-6 md:pt-10 px-4 sm:px-8 relative">
-        <div class="max-w-[1300px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="max-w-[1300px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
             <div class="flex flex-col items-center md:items-start gap-1">
                 <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Fábrica de Conteúdo" class="h-16 md:h-28 object-contain filter brightness-0 invert drop-shadow-md mb-2">
             </div>
             
-            <nav class="flex gap-2 bg-white/10 border border-white/20 p-2 rounded-full backdrop-blur-lg shadow-xl w-full md:w-auto overflow-x-auto custom-scroll">
-                <button onclick="switchView('inicio')" id="tab-inicio" class="nav-tab active text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2 hover:bg-white/5"><i class="fa-solid fa-rocket"></i> Fluxo & Dashboard</button>
-                <button onclick="switchView('demandas')" id="tab-demandas" class="nav-tab text-blue-200 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2 hover:bg-white/5"><i class="fa-solid fa-clipboard-list"></i> Controle Geral</button>
-                <button onclick="switchView('relatorios')" id="tab-relatorios" class="nav-tab text-blue-200 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2 hover:bg-white/5"><i class="fa-solid fa-chart-line"></i> Desempenho Mensal</button>
+            <nav class="flex gap-2 bg-white/5 border border-white/10 p-1.5 rounded-full backdrop-blur-md w-full md:w-auto overflow-x-auto custom-scroll">
+                <button onclick="switchView('inicio')" id="tab-inicio" class="nav-tab active text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-crown"></i> Painel Executivo</button>
+                <button onclick="switchView('demandas')" id="tab-demandas" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-list-check"></i> Controle de Demandas</button>
+                <button onclick="switchView('relatorios')" id="tab-relatorios" class="nav-tab text-white/70 hover:text-white font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-chart-pie"></i> Relatório Temporal</button>
             </nav>
             
-            <button onclick="abrirModal('modal-config')" class="text-white/40 hover:text-fabrica-orange hover:rotate-90 transition-all duration-300 text-xl" title="Configurações"><i class="fa-solid fa-gear"></i></button>
+            <button onclick="abrirModal('modal-config')" class="text-white/30 hover:text-ouro transition-colors" title="Configurações"><i class="fa-solid fa-gear"></i></button>
         </div>
     </div>
 
@@ -149,34 +159,40 @@
         
         <!-- VIEW: INÍCIO -->
         <div id="view-inicio" class="view-section active -mt-8">
-            <div class="bg-white rounded-[32px] shadow-xl border border-gray-100 p-8 md:p-12 mb-8">
+            <div class="bg-white rounded-[24px] shadow-sm border border-gray-100 p-8 md:p-12 mb-8">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     
                     <div>
-                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 text-fabrica-orange font-black text-[10px] uppercase tracking-widest mb-6 border border-orange-200">
-                            <i class="fa-solid fa-bolt text-yellow-500"></i> Sistema Oficial DHO
-                        </div>
-                        <h2 class="text-4xl md:text-5xl font-black text-fabrica-blue leading-tight mb-4">
-                            Novo Fluxo de <br><span class="text-fabrica-orange">Produção</span>
-                        </h2>
-                        <p class="text-slate-500 text-base md:text-lg font-medium mb-8 leading-relaxed">
-                            Organização, visibilidade e colaboração extrema. Acompanhe a entrega de valor de cada membro e acesse todo o funil de produção visual com apenas um clique.
+                        <h1 class="text-3xl md:text-4xl font-black text-brisa-blue leading-tight mb-4">
+                            Visão Premium da <br><span class="text-gradient-gold">Produção Visual (DHO)</span>
+                        </h1>
+                        <p class="text-gray-600 text-base md:text-lg font-medium mb-6 leading-relaxed">
+                            Sistema centralizado de governança. Acompanhe a entrega colaborativa do time, o volume por áreas solicitantes e identifique gargalos operacionais em tempo real.
                         </p>
+                        
+                        <div class="mt-8 bg-ouro-light/30 border border-ouro-light rounded-2xl p-6 shadow-sm mb-8">
+                            <h3 class="text-ouro-dark font-black text-xs uppercase tracking-widest mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-building-user text-ouro"></i> Áreas que mais solicitam (Global)
+                            </h3>
+                            <div class="space-y-3" id="top-areas-list">
+                                <div class="animate-pulse flex space-x-4"><div class="h-4 bg-slate-200 rounded w-3/4"></div></div>
+                            </div>
+                        </div>
 
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <button onclick="abrirModal('modal-novo')" class="bg-fabrica-orange hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/40 text-white font-black py-4 px-8 rounded-2xl transition-all hover:-translate-y-1 flex justify-center items-center gap-3 text-lg group">
-                                <i class="fa-solid fa-video"></i> Nova Demanda
+                            <button onclick="abrirModal('modal-novo')" class="bg-gradient-to-r from-ouro to-ouro-dark hover:shadow-lg hover:shadow-ouro/30 text-white font-black py-3 px-6 rounded-xl shadow-md transition-all hover:-translate-y-1 flex justify-center items-center gap-2">
+                                <i class="fa-regular fa-calendar-check"></i> Agendar Gravação
                             </button>
-                            <button onclick="switchView('demandas')" class="bg-fabrica-blue hover:bg-blue-800 hover:shadow-lg hover:shadow-blue-600/40 text-white font-black py-4 px-8 rounded-2xl transition-all hover:-translate-y-1 flex justify-center items-center gap-3 text-lg group">
-                                <i class="fa-solid fa-search"></i> Rastrear Projetos
+                            <button onclick="switchView('demandas')" class="bg-brisa-blue hover:bg-blue-900 text-white font-black py-3 px-6 rounded-xl shadow-sm transition-transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                                <i class="fa-solid fa-magnifying-glass-chart"></i> Rastrear Operação
                             </button>
                         </div>
                     </div>
 
-                    <!-- Representação da Equipe com Números e Destaques -->
-                    <div class="bg-slate-50 rounded-[32px] p-8 border-2 border-dashed border-gray-200 relative overflow-hidden min-h-[400px] flex flex-col justify-center items-center">
-                        <h3 class="absolute top-6 left-8 text-sm font-black text-fabrica-blue uppercase tracking-widest">Equipe Operacional</h3>
-                        <p class="absolute top-12 left-8 text-xs text-fabrica-orange font-bold bg-orange-50 px-3 py-1 rounded-full"><i class="fa-solid fa-filter"></i> Clique para filtrar demandas na mesa</p>
+                    <!-- Representação da Equipe -->
+                    <div class="bg-brisa-light rounded-[32px] p-8 border-2 border-dashed border-gray-200 relative overflow-hidden min-h-[400px] flex flex-col justify-center items-center">
+                        <h3 class="absolute top-6 left-8 text-sm font-black text-brisa-blue uppercase tracking-widest">Equipe Operacional</h3>
+                        <p class="absolute top-12 left-8 text-xs text-ouro-dark font-bold bg-ouro-light px-3 py-1 rounded-full"><i class="fa-solid fa-filter"></i> Clique para filtrar demandas na mesa</p>
 
                         <div class="relative w-full max-w-[400px] mt-14">
                             <div class="absolute top-[40px] left-[50px] w-[20px] h-[100px] border-l-3 border-b-3 border-dashed border-gray-300 rounded-bl-[20px] z-0"></div>
@@ -185,33 +201,33 @@
                             <div class="workflow-node ml-auto mb-8 w-max group" onclick="verDemandasDireto('Gilnei')">
                                 <div class="relative">
                                     <div class="workflow-avatar shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-user-tie"></i></div>
-                                    <div class="absolute -top-2 -right-2 bg-gradient-to-br from-fabrica-orange to-orange-600 text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-gilnei">0</div>
+                                    <div class="absolute -top-2 -right-2 bg-gradient-to-br from-ouro to-ouro-dark text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-gilnei">0</div>
                                 </div>
                                 <div>
-                                    <h4 class="font-black text-fabrica-blue text-lg group-hover:text-fabrica-orange transition-colors">Gilnei Laurindo</h4>
-                                    <span class="bg-slate-200 text-fabrica-blue text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Responsável / Gestão</span>
+                                    <h4 class="font-black text-brisa-blue text-lg group-hover:text-ouro-dark transition-colors">Gilnei Laurindo</h4>
+                                    <span class="bg-slate-200 text-brisa-blue text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Responsável / Gestão</span>
                                 </div>
                             </div>
 
                             <div class="workflow-node mx-auto mb-8 w-max group" onclick="verDemandasDireto('Erick')">
                                 <div class="relative">
                                     <div class="workflow-avatar shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-pen-nib"></i></div>
-                                    <div class="absolute -top-2 -right-2 bg-gradient-to-br from-fabrica-orange to-orange-600 text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-erick">0</div>
+                                    <div class="absolute -top-2 -right-2 bg-gradient-to-br from-ouro to-ouro-dark text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-erick">0</div>
                                 </div>
                                 <div>
-                                    <h4 class="font-black text-fabrica-blue text-lg group-hover:text-fabrica-orange transition-colors">Erick Gustavo</h4>
-                                    <span class="bg-slate-200 text-fabrica-blue text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Apoio / Refinamentos</span>
+                                    <h4 class="font-black text-brisa-blue text-lg group-hover:text-ouro-dark transition-colors">Erick Gustavo</h4>
+                                    <span class="bg-slate-200 text-brisa-blue text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Apoio / Refinamentos</span>
                                 </div>
                             </div>
 
                             <div class="workflow-node mr-auto w-max group" onclick="verDemandasDireto('Marcos')">
                                 <div class="relative">
                                     <div class="workflow-avatar shadow-inner group-hover:scale-110 transition-transform"><i class="fa-solid fa-camera"></i></div>
-                                    <div class="absolute -top-2 -right-2 bg-gradient-to-br from-fabrica-orange to-orange-600 text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-marcos">0</div>
+                                    <div class="absolute -top-2 -right-2 bg-gradient-to-br from-ouro to-ouro-dark text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-md" id="badge-home-marcos">0</div>
                                 </div>
                                 <div>
-                                    <h4 class="font-black text-fabrica-blue text-lg group-hover:text-fabrica-orange transition-colors">Marcos Guilherme</h4>
-                                    <span class="bg-slate-200 text-fabrica-blue text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Gravação e Cortes</span>
+                                    <h4 class="font-black text-brisa-blue text-lg group-hover:text-ouro-dark transition-colors">Marcos Guilherme</h4>
+                                    <span class="bg-slate-200 text-brisa-blue text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">Gravação e Cortes</span>
                                 </div>
                             </div>
                         </div>
@@ -223,71 +239,68 @@
         <!-- VIEW: DEMANDAS -->
         <div id="view-demandas" class="view-section -mt-8 md:-mt-12">
             
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
-                <div class="stat-card bg-card-blue flex flex-col justify-between p-5 md:p-6 group" onclick="abrirRaioX('status', 'todos', 'Raio-X Global', 'bg-fabrica-blue')">
-                    <div class="flex justify-between items-start mb-4"><div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl group-hover:scale-110 group-hover:rotate-12 transition-all"><i class="fa-solid fa-globe text-white"></i></div><i class="fa-solid fa-arrow-trend-up text-white/50 text-2xl group-hover:text-white transition-colors"></i></div>
-                    <div><h3 class="text-4xl font-black" id="count-total">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Total de Projetos</p></div>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-6">
+                <div class="stat-card bg-card-blue flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'todos', 'Raio-X Global', 'bg-brisa-blue')">
+                    <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-folder-open text-white"></i></div><i class="fa-solid fa-chart-line text-white/30 text-xl" title="Ver Análise"></i></div>
+                    <div><h3 class="text-3xl md:text-4xl font-black" id="count-total">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Demanda Total</p></div>
                 </div>
-                <div class="stat-card bg-card-green flex flex-col justify-between p-5 md:p-6 group" onclick="abrirRaioX('status', 'concluido', 'Raio-X: Entregas', 'bg-green-500')">
-                    <div class="flex justify-between items-start mb-4"><div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl group-hover:scale-110 group-hover:-rotate-12 transition-all"><i class="fa-solid fa-trophy text-white"></i></div><i class="fa-solid fa-arrow-trend-up text-white/50 text-2xl group-hover:text-white transition-colors"></i></div>
-                    <div><h3 class="text-4xl font-black" id="count-concluido">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Concluídos</p></div>
+                <div class="stat-card bg-card-green flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'concluido', 'Raio-X: Entregas', 'bg-green-500')">
+                    <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-check-double text-white"></i></div><i class="fa-solid fa-chart-line text-white/30 text-xl" title="Ver Análise"></i></div>
+                    <div><h3 class="text-3xl md:text-4xl font-black" id="count-concluido">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Concluídos</p></div>
                 </div>
-                <div class="stat-card bg-card-orange flex flex-col justify-between p-5 md:p-6 group" onclick="abrirRaioX('status', 'andamento', 'Raio-X: Em Produção', 'bg-fabrica-orange')">
-                    <div class="flex justify-between items-start mb-4"><div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl group-hover:scale-110 group-hover:rotate-180 transition-all duration-500"><i class="fa-solid fa-cog text-white"></i></div><i class="fa-solid fa-arrow-trend-up text-white/50 text-2xl group-hover:text-white transition-colors"></i></div>
-                    <div><h3 class="text-4xl font-black" id="count-andamento">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 text-white uppercase tracking-wider">Em Produção</p></div>
+                <div class="stat-card bg-card-gold flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'andamento', 'Raio-X: Em Produção', 'bg-ouro')">
+                    <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-person-digging text-white"></i></div><i class="fa-solid fa-chart-line text-white/30 text-xl" title="Ver Análise"></i></div>
+                    <div><h3 class="text-3xl md:text-4xl font-black" id="count-andamento">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 text-white uppercase tracking-wider">Em Produção</p></div>
                 </div>
-                <div class="stat-card bg-card-neutral flex flex-col justify-between p-5 md:p-6 group" onclick="abrirRaioX('status', 'fila', 'Raio-X: Retidos na Fila', 'bg-slate-500')">
-                    <div class="flex justify-between items-start mb-4"><div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl group-hover:scale-110 group-hover:-translate-y-2 transition-all"><i class="fa-solid fa-hourglass-half text-white"></i></div><i class="fa-solid fa-arrow-trend-up text-white/50 text-2xl group-hover:text-white transition-colors"></i></div>
-                    <div><h3 class="text-4xl font-black" id="count-pendente">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Na Fila</p></div>
+                <div class="stat-card bg-card-neutral flex flex-col justify-between p-4 md:p-6" onclick="abrirRaioX('status', 'fila', 'Raio-X: Retidos na Fila', 'bg-slate-500')">
+                    <div class="flex justify-between items-start mb-2 md:mb-4"><div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center text-sm md:text-lg"><i class="fa-solid fa-layer-group text-white"></i></div><i class="fa-solid fa-chart-line text-white/30 text-xl" title="Ver Análise"></i></div>
+                    <div><h3 class="text-3xl md:text-4xl font-black" id="count-pendente">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Na Fila</p></div>
                 </div>
             </div>
 
             <!-- PAINEL DE CONTROLE ASSERTIVO (FILTROS RÁPIDOS) -->
-            <div class="bg-white p-6 md:p-8 rounded-[32px] border border-gray-100 shadow-xl mb-8 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-fabrica-orange rounded-full mix-blend-multiply filter blur-3xl opacity-10 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-                <div class="flex justify-between items-center mb-6 border-b border-gray-100 pb-4 relative z-10">
-                    <h3 class="text-sm font-black text-fabrica-blue uppercase tracking-widest"><i class="fa-solid fa-gamepad text-fabrica-orange mr-2"></i> Painel de Controle de Filtros</h3>
-                    <button onclick="limparFiltros(true)" id="btn-limpar-filtros" class="hidden text-xs bg-red-100 text-red-600 px-5 py-2.5 rounded-full font-bold hover:bg-red-500 hover:text-white transition-all shadow-sm flex items-center gap-2"><i class="fa-solid fa-trash-can"></i> Limpar Tudo</button>
+            <div class="bg-white p-5 md:p-6 rounded-[24px] border border-gray-200 shadow-sm mb-6 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-ouro-light rounded-full mix-blend-multiply filter blur-3xl opacity-30 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+                <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-3 relative z-10">
+                    <h3 class="text-sm font-black text-brisa-blue uppercase tracking-widest"><i class="fa-solid fa-sliders text-ouro mr-2"></i> Filtros de Operação</h3>
+                    <button onclick="limparFiltros(true)" id="btn-limpar-filtros" class="hidden text-[10px] md:text-xs bg-red-50 text-red-600 px-4 py-2 rounded-full font-bold hover:bg-red-100 transition-colors border border-red-100 shadow-sm"><i class="fa-solid fa-eraser mr-1"></i> Limpar Filtros</button>
                 </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
-                    <!-- Filtro Equipe -->
-                    <div class="col-span-1 border-r border-dashed border-gray-200 pr-0 lg:pr-6">
-                        <p class="text-[10px] font-black text-slate-400 uppercase mb-4"><i class="fa-solid fa-users-viewfinder mr-2 text-lg"></i> Inspecionar Membro</p>
-                        <div class="flex flex-col gap-3">
-                            <button onclick="aplicarFiltroRapido('equipe', 'Gilnei')" data-valor="Gilnei" class="filtro-btn filtro-equipe bg-white border-2 border-slate-100 text-slate-600 rounded-2xl px-5 py-3.5 flex justify-between items-center w-full text-left font-bold transition-all shadow-sm">
-                                <span class="flex items-center gap-3"><i class="fa-solid fa-wand-magic-sparkles text-xl text-slate-300"></i> Gilnei Laurindo</span>
-                                <span class="badge-filtro bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full font-black shadow-inner" id="badge-card-gilnei">0</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+                    <div class="col-span-1 md:col-span-3 lg:col-span-1">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-user-group mr-1"></i> Membro / Mesa de Trabalho</p>
+                        <div class="flex flex-col gap-2">
+                            <button onclick="aplicarFiltroRapido('equipe', 'Gilnei')" data-valor="Gilnei" class="filtro-btn filtro-equipe bg-white border border-slate-200 text-slate-600 hover:border-ouro hover:text-ouro-dark rounded-xl px-4 py-3 flex justify-between items-center w-full text-left font-bold transition-all shadow-sm">
+                                <span><i class="fa-solid fa-user-tie mr-2"></i> Gilnei Laurindo</span>
+                                <span class="badge-filtro bg-slate-100 text-slate-600 text-[10px] px-2.5 py-1 rounded-full font-black transition-colors" id="badge-card-gilnei">0</span>
                             </button>
-                            <button onclick="aplicarFiltroRapido('equipe', 'Marcos')" data-valor="Marcos" class="filtro-btn filtro-equipe bg-white border-2 border-slate-100 text-slate-600 rounded-2xl px-5 py-3.5 flex justify-between items-center w-full text-left font-bold transition-all shadow-sm">
-                                <span class="flex items-center gap-3"><i class="fa-solid fa-camera-retro text-xl text-slate-300"></i> Marcos Guilherme</span>
-                                <span class="badge-filtro bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full font-black shadow-inner" id="badge-card-marcos">0</span>
+                            <button onclick="aplicarFiltroRapido('equipe', 'Marcos')" data-valor="Marcos" class="filtro-btn filtro-equipe bg-white border border-slate-200 text-slate-600 hover:border-ouro hover:text-ouro-dark rounded-xl px-4 py-3 flex justify-between items-center w-full text-left font-bold transition-all shadow-sm">
+                                <span><i class="fa-solid fa-camera mr-2"></i> Marcos Guilherme</span>
+                                <span class="badge-filtro bg-slate-100 text-slate-600 text-[10px] px-2.5 py-1 rounded-full font-black transition-colors" id="badge-card-marcos">0</span>
                             </button>
-                            <button onclick="aplicarFiltroRapido('equipe', 'Erick')" data-valor="Erick" class="filtro-btn filtro-equipe bg-white border-2 border-slate-100 text-slate-600 rounded-2xl px-5 py-3.5 flex justify-between items-center w-full text-left font-bold transition-all shadow-sm">
-                                <span class="flex items-center gap-3"><i class="fa-solid fa-pen-nib text-xl text-slate-300"></i> Erick Gustavo</span>
-                                <span class="badge-filtro bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full font-black shadow-inner" id="badge-card-erick">0</span>
+                            <button onclick="aplicarFiltroRapido('equipe', 'Erick')" data-valor="Erick" class="filtro-btn filtro-equipe bg-white border border-slate-200 text-slate-600 hover:border-ouro hover:text-ouro-dark rounded-xl px-4 py-3 flex justify-between items-center w-full text-left font-bold transition-all shadow-sm">
+                                <span><i class="fa-solid fa-pen-nib mr-2"></i> Erick Gustavo</span>
+                                <span class="badge-filtro bg-slate-100 text-slate-600 text-[10px] px-2.5 py-1 rounded-full font-black transition-colors" id="badge-card-erick">0</span>
                             </button>
                         </div>
                     </div>
                     
-                    <div class="col-span-1 lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
-                        <!-- Filtro Status -->
+                    <div class="col-span-1 md:col-span-3 lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <p class="text-[10px] font-black text-slate-400 uppercase mb-4"><i class="fa-solid fa-traffic-light mr-2 text-lg"></i> Filtrar por Status</p>
-                            <div class="flex flex-col gap-3">
-                                <button onclick="aplicarFiltroRapido('status', 'fila')" data-valor="fila" class="filtro-btn filtro-status px-5 py-3.5 rounded-2xl text-xs font-bold border-2 border-slate-100 text-slate-600 bg-white shadow-sm w-full text-left flex items-center"><div class="w-3 h-3 rounded-full bg-slate-500 mr-3 shadow-sm"></div> Na Fila / Aguardando</button>
-                                <button onclick="aplicarFiltroRapido('status', 'andamento')" data-valor="andamento" class="filtro-btn filtro-status px-5 py-3.5 rounded-2xl text-xs font-bold border-2 border-slate-100 text-slate-600 bg-white shadow-sm w-full text-left flex items-center"><div class="w-3 h-3 rounded-full bg-fabrica-orange mr-3 shadow-sm"></div> Em Produção / Revisão</button>
-                                <button onclick="aplicarFiltroRapido('status', 'concluido')" data-valor="concluido" class="filtro-btn filtro-status px-5 py-3.5 rounded-2xl text-xs font-bold border-2 border-slate-100 text-slate-600 bg-white shadow-sm w-full text-left flex items-center"><div class="w-3 h-3 rounded-full bg-green-500 mr-3 shadow-sm"></div> Projetos Concluídos</button>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-bars-progress mr-1"></i> Status da Produção</p>
+                            <div class="flex flex-col gap-2">
+                                <button onclick="aplicarFiltroRapido('status', 'fila')" data-valor="fila" class="filtro-btn filtro-status px-4 py-3 rounded-xl text-xs font-bold border border-slate-200 text-slate-600 hover:border-slate-400 hover:bg-slate-50 transition-all bg-white shadow-sm w-full text-left flex items-center"><div class="w-2.5 h-2.5 rounded-full bg-slate-500 mr-3"></div> Na Fila / Aguardando</button>
+                                <button onclick="aplicarFiltroRapido('status', 'andamento')" data-valor="andamento" class="filtro-btn filtro-status px-4 py-3 rounded-xl text-xs font-bold border border-slate-200 text-slate-600 hover:border-ouro hover:bg-ouro-light/30 transition-all bg-white shadow-sm w-full text-left flex items-center"><div class="w-2.5 h-2.5 rounded-full bg-ouro mr-3"></div> Em Produção / Revisão</button>
+                                <button onclick="aplicarFiltroRapido('status', 'concluido')" data-valor="concluido" class="filtro-btn filtro-status px-4 py-3 rounded-xl text-xs font-bold border border-slate-200 text-slate-600 hover:border-green-400 hover:bg-green-50 transition-all bg-white shadow-sm w-full text-left flex items-center"><div class="w-2.5 h-2.5 rounded-full bg-green-500 mr-3"></div> Projetos Concluídos</button>
                             </div>
                         </div>
-                        <!-- Filtro Frente -->
                         <div>
-                            <p class="text-[10px] font-black text-slate-400 uppercase mb-4"><i class="fa-solid fa-city mr-2 text-lg"></i> Frentes Solicitantes</p>
-                            <div class="flex flex-wrap gap-3">
-                                <button onclick="aplicarFiltroRapido('frente', 'TTO - Técnico')" data-valor="TTO - Técnico" class="filtro-btn filtro-frente px-5 py-3 rounded-2xl text-xs font-bold border-2 border-slate-100 text-slate-600 bg-white shadow-sm w-full text-left flex justify-between items-center group">TTO - Técnico <i class="fa-solid fa-satellite-dish text-slate-300 group-hover:text-white"></i></button>
-                                <button onclick="aplicarFiltroRapido('frente', 'TCR - Comercial')" data-valor="TCR - Comercial" class="filtro-btn filtro-frente px-5 py-3 rounded-2xl text-xs font-bold border-2 border-slate-100 text-slate-600 bg-white shadow-sm w-full text-left flex justify-between items-center group">TCR - Comercial <i class="fa-solid fa-store text-slate-300 group-hover:text-white"></i></button>
-                                <button onclick="aplicarFiltroRapido('frente', 'DO - Administrativo')" data-valor="DO - Administrativo" class="filtro-btn filtro-frente px-5 py-3 rounded-2xl text-xs font-bold border-2 border-slate-100 text-slate-600 bg-white shadow-sm w-full text-left flex justify-between items-center group">DO - Adm <i class="fa-solid fa-briefcase text-slate-300 group-hover:text-white"></i></button>
-                                <button onclick="aplicarFiltroRapido('frente', 'Engajamento')" data-valor="Engajamento" class="filtro-btn filtro-frente px-5 py-3 rounded-2xl text-xs font-bold border-2 border-slate-100 text-slate-600 bg-white shadow-sm w-full text-left flex justify-between items-center group">Engajamento <i class="fa-solid fa-heart text-slate-300 group-hover:text-white"></i></button>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-building mr-1"></i> Frentes Solicitantes</p>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="aplicarFiltroRapido('frente', 'TTO - Técnico')" data-valor="TTO - Técnico" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[11px] font-bold border border-slate-200 text-slate-600 hover:border-teal-500 hover:text-teal-600 transition-all bg-white shadow-sm w-full text-left">TTO - Técnico</button>
+                                <button onclick="aplicarFiltroRapido('frente', 'TCR - Comercial')" data-valor="TCR - Comercial" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[11px] font-bold border border-slate-200 text-slate-600 hover:border-sky-500 hover:text-sky-600 transition-all bg-white shadow-sm w-full text-left">TCR - Comercial</button>
+                                <button onclick="aplicarFiltroRapido('frente', 'DO - Administrativo')" data-valor="DO - Administrativo" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[11px] font-bold border border-slate-200 text-slate-600 hover:border-amber-500 hover:text-amber-600 transition-all bg-white shadow-sm w-full text-left">DO - Administrativo</button>
+                                <button onclick="aplicarFiltroRapido('frente', 'Engajamento')" data-valor="Engajamento" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[11px] font-bold border border-slate-200 text-slate-600 hover:border-pink-500 hover:text-pink-600 transition-all bg-white shadow-sm w-full text-left">Engajamento</button>
                             </div>
                         </div>
                     </div>
@@ -295,18 +308,18 @@
             </div>
 
             <!-- Tabela Principal -->
-            <div class="bg-white rounded-[32px] shadow-xl border border-gray-100 mb-12 overflow-hidden" id="tabela-container">
-                <div class="p-6 md:p-8 border-b border-gray-100 bg-slate-50">
-                    <div class="flex flex-col lg:flex-row justify-between items-center gap-6">
-                        <h2 class="text-xl md:text-2xl font-black text-fabrica-blue w-full lg:w-auto text-left uppercase tracking-tight flex items-center gap-3 flex-wrap">
-                            <i class="fa-solid fa-bars-staggered text-fabrica-orange"></i> Base de Demandas
+            <div class="bg-white rounded-[16px] md:rounded-[24px] shadow-sm border border-gray-100 mb-12 overflow-hidden" id="tabela-container">
+                <div class="p-5 md:p-8 border-b border-gray-100 bg-white">
+                    <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
+                        <h2 class="text-lg md:text-xl font-black text-brisa-blue w-full lg:w-auto text-left uppercase tracking-tight flex items-center gap-2 flex-wrap">
+                            <i class="fa-solid fa-list-check text-ouro"></i> Lista de Demandas
                             <div id="area-legendas-filtros" class="flex gap-2 flex-wrap"></div>
                         </h2>
                         
                         <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-3 items-center">
-                            <div class="relative w-full sm:w-72 md:w-96 group">
-                                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-hover:text-fabrica-orange transition-colors"></i>
-                                <input type="text" id="inputPesquisa" placeholder="Buscar projeto, solicitante, área..." class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-2xl text-sm font-semibold focus:outline-none focus:border-fabrica-orange focus:ring-4 focus:ring-orange-100 transition-all bg-white shadow-sm">
+                            <div class="relative w-full sm:w-72 md:w-96">
+                                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" id="inputPesquisa" placeholder="Buscar projeto, solicitante, área..." class="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-full text-sm font-semibold focus:outline-none focus:border-ouro transition-colors bg-gray-50 shadow-inner">
                             </div>
                         </div>
                     </div>
@@ -315,17 +328,17 @@
                 <div class="overflow-x-auto w-full">
                     <table class="w-full text-left border-collapse whitespace-nowrap">
                         <thead>
-                            <tr class="bg-white text-slate-400 text-[10px] md:text-xs uppercase tracking-widest border-b-2 border-slate-100">
-                                <th class="py-5 px-6 md:px-8 font-black">Demanda / Projeto</th>
-                                <th class="py-5 px-6 font-black">Frente / Área</th>
-                                <th class="py-5 px-6 font-black text-center">Status Global</th>
-                                <th class="py-5 px-6 font-black hidden md:table-cell"><i class="fa-solid fa-user-ninja mr-1"></i> Equipe (DHO)</th>
-                                <th class="py-5 px-6 font-black hidden lg:table-cell"><i class="fa-regular fa-calendar-check mr-1"></i> Previsão</th>
-                                <th class="py-5 px-6 font-black text-center">Ação</th>
+                            <tr class="bg-slate-50 text-slate-500 text-[10px] md:text-xs uppercase tracking-wider border-b border-slate-200">
+                                <th class="py-4 px-4 md:px-8 font-black">Demanda / Projeto</th>
+                                <th class="py-4 px-4 md:px-6 font-black">Frente / Área</th>
+                                <th class="py-4 px-4 md:px-6 font-black text-center">Status Global</th>
+                                <th class="py-4 px-4 md:px-6 font-black hidden md:table-cell"><i class="fa-solid fa-user-tag mr-1"></i> Equipe (DHO)</th>
+                                <th class="py-4 px-4 md:px-6 font-black hidden lg:table-cell"><i class="fa-regular fa-calendar mr-1"></i> Previsão</th>
+                                <th class="py-4 px-4 md:px-6 font-black text-center">Inspecionar</th>
                             </tr>
                         </thead>
-                        <tbody id="tabela-demandas" class="text-sm text-gray-700 divide-y divide-gray-50">
-                            <tr><td colspan="6" class="p-12 text-center text-gray-400 font-bold"><i class="fa-solid fa-cog fa-spin mr-2 text-2xl text-fabrica-orange"></i> Buscando na base de dados...</td></tr>
+                        <tbody id="tabela-demandas" class="text-sm text-gray-700 divide-y divide-gray-100">
+                            <tr><td colspan="6" class="p-8 text-center text-gray-400 font-bold"><i class="fa-solid fa-spinner fa-spin mr-2 text-xl md:text-2xl"></i> Buscando na base de dados...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -335,47 +348,47 @@
         <!-- STREAMING_CHUNK:View Relatorios -->
         <div id="view-relatorios" class="view-section -mt-8">
             
-            <div class="col-span-1 md:col-span-2 bg-gradient-to-br from-fabrica-blue to-blue-900 rounded-[32px] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden mb-8 border-4 border-white">
-                <i class="fa-solid fa-chart-area absolute -right-10 -bottom-10 text-[250px] text-white opacity-5"></i>
+            <div class="col-span-1 md:col-span-2 bg-gradient-to-r from-brisa-blue to-blue-900 rounded-[24px] p-8 md:p-10 text-white shadow-md relative overflow-hidden mb-8 border border-brisa-blue">
+                <i class="fa-solid fa-chart-column absolute -right-10 -bottom-10 text-[200px] text-ouro opacity-10"></i>
                 <div class="relative z-10">
-                    <h3 class="text-sm md:text-base font-black uppercase tracking-widest mb-4 text-orange-400 flex items-center gap-3"><i class="fa-solid fa-calendar-days"></i> Produção Mensal Consolidada</h3>
-                    <p class="text-xs text-blue-200 font-medium mb-10 max-w-xl leading-relaxed">Acompanhe o volume histórico. Barras representam o total de solicitações que deram entrada, e o preenchimento laranja marca as já entregues com sucesso.</p>
+                    <h3 class="text-sm md:text-base font-black uppercase tracking-widest mb-6 text-ouro-light"><i class="fa-regular fa-calendar-days mr-2"></i> Produção Mensal (Últimos Meses)</h3>
+                    <p class="text-xs text-blue-200 font-medium mb-6 max-w-xl">Acompanhe a curva de solicitações que entram na equipe de produção mês a mês e o volume de demandas concluídas deste montante.</p>
                     
-                    <div id="container-grafico-meses" class="flex gap-8 overflow-x-auto custom-scroll pb-6 items-end min-h-[200px]">
-                        <div class="flex items-center gap-3 text-blue-300 font-bold"><i class="fa-solid fa-circle-notch fa-spin text-2xl"></i> Renderizando histórico...</div>
+                    <div id="container-grafico-meses" class="flex gap-6 overflow-x-auto custom-scroll pb-4 items-end min-h-[160px]">
+                        <div class="flex items-center gap-2 text-blue-300"><i class="fa-solid fa-spinner fa-spin"></i> Processando dados históricos...</div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-[32px] shadow-xl border border-gray-100 p-8 md:p-12 mb-8">
-                <div class="mb-10 border-b border-gray-100 pb-6">
-                    <h2 class="text-2xl md:text-3xl font-black text-fabrica-blue uppercase tracking-tight flex items-center gap-4">
-                        <i class="fa-solid fa-chart-pie text-fabrica-orange"></i> Relatórios & Frentes
+            <div class="bg-white rounded-[24px] shadow-sm border border-gray-100 p-8 md:p-12 mb-8">
+                <div class="mb-8 border-b border-gray-100 pb-4">
+                    <h2 class="text-2xl md:text-3xl font-black text-brisa-blue uppercase tracking-tight flex items-center gap-3">
+                        <i class="fa-solid fa-chart-pie text-ouro"></i> Relatório de Status e Frentes
                     </h2>
-                    <p class="text-gray-500 font-medium mt-2">Visão analítica de conversão. Clique nos itens para um drill-down completo (Raio-X).</p>
+                    <p class="text-gray-500 font-medium mt-2">Visão analítica de onde vem as demandas e como a equipe DHO está entregando. Clique nas áreas para realizar um Raio-X aprofundado.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div class="space-y-8 bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-inner">
-                        <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2"><i class="fa-solid fa-percent"></i> Taxa de Conversão</h3>
-                        <div class="cursor-pointer group bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition-all border border-transparent hover:border-green-200" onclick="abrirRaioX('status', 'concluido', 'Análise: Concluídas', 'bg-green-600')">
-                            <div class="flex justify-between items-end mb-3"><span class="font-bold text-slate-600 uppercase text-xs tracking-wider group-hover:text-green-600 transition-colors flex items-center gap-2"><i class="fa-solid fa-check-double text-green-500"></i> Entregas Concluídas</span><span class="font-black text-3xl text-green-500" id="chart-percent-concluido">0%</span></div>
-                            <div class="bar-bg h-3"><div class="bar-fill bg-green-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" id="chart-bar-concluido" style="width: 0%;"></div></div>
+                    <div class="space-y-8 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                        <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-4">Taxa de Conversão Global</h3>
+                        <div class="cursor-pointer group" onclick="abrirRaioX('status', 'concluido', 'Análise: Concluídas', 'bg-green-600')">
+                            <div class="flex justify-between items-end mb-2"><span class="font-bold text-slate-600 uppercase text-xs tracking-wider group-hover:text-green-600 transition-colors">Entregas Concluídas</span><span class="font-black text-2xl text-green-500" id="chart-percent-concluido">0%</span></div>
+                            <div class="bar-bg"><div class="bar-fill bg-green-500" id="chart-bar-concluido" style="width: 0%;"></div></div>
                         </div>
-                        <div class="cursor-pointer group bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition-all border border-transparent hover:border-orange-200" onclick="abrirRaioX('status', 'andamento', 'Análise: Em Produção', 'bg-fabrica-orange')">
-                            <div class="flex justify-between items-end mb-3"><span class="font-bold text-slate-600 uppercase text-xs tracking-wider group-hover:text-fabrica-orange transition-colors flex items-center gap-2"><i class="fa-solid fa-cog text-fabrica-orange"></i> Em Produção</span><span class="font-black text-3xl text-fabrica-orange" id="chart-percent-andamento">0%</span></div>
-                            <div class="bar-bg h-3"><div class="bar-fill bg-fabrica-orange shadow-[0_0_10px_rgba(255,107,0,0.5)]" id="chart-bar-andamento" style="width: 0%;"></div></div>
+                        <div class="cursor-pointer group" onclick="abrirRaioX('status', 'andamento', 'Análise: Em Produção', 'bg-ouro')">
+                            <div class="flex justify-between items-end mb-2"><span class="font-bold text-slate-600 uppercase text-xs tracking-wider group-hover:text-ouro transition-colors">Em Produção</span><span class="font-black text-2xl text-ouro" id="chart-percent-andamento">0%</span></div>
+                            <div class="bar-bg"><div class="bar-fill bg-ouro" id="chart-bar-andamento" style="width: 0%;"></div></div>
                         </div>
-                        <div class="cursor-pointer group bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition-all border border-transparent hover:border-slate-300" onclick="abrirRaioX('status', 'fila', 'Análise: Retidos', 'bg-slate-600')">
-                            <div class="flex justify-between items-end mb-3"><span class="font-bold text-slate-600 uppercase text-xs tracking-wider group-hover:text-slate-800 transition-colors flex items-center gap-2"><i class="fa-solid fa-layer-group text-slate-400"></i> Na Fila (Aguardando)</span><span class="font-black text-3xl text-slate-500" id="chart-percent-pendente">0%</span></div>
-                            <div class="bar-bg h-3"><div class="bar-fill bg-slate-500" id="chart-bar-pendente" style="width: 0%;"></div></div>
+                        <div class="cursor-pointer group" onclick="abrirRaioX('status', 'fila', 'Análise: Retidos', 'bg-slate-600')">
+                            <div class="flex justify-between items-end mb-2"><span class="font-bold text-slate-600 uppercase text-xs tracking-wider group-hover:text-slate-800 transition-colors">Na Fila (Aguardando)</span><span class="font-black text-2xl text-slate-500" id="chart-percent-pendente">0%</span></div>
+                            <div class="bar-bg"><div class="bar-fill bg-slate-500" id="chart-bar-pendente" style="width: 0%;"></div></div>
                         </div>
                     </div>
 
-                    <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-lg">
-                        <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-8 flex items-center gap-2"><i class="fa-solid fa-chart-bar"></i> Volume por Área</h3>
-                        <div class="flex flex-col gap-6" id="grafico-frentes">
-                            <div class="flex items-center text-fabrica-orange font-bold"><i class="fa-solid fa-cog fa-spin mr-3 text-2xl"></i> Analisando dados...</div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+                        <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-6">Volume por Frente (Área)</h3>
+                        <div class="flex flex-col gap-5" id="grafico-frentes">
+                            <div class="flex items-center text-gray-400"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Analisando dados...</div>
                         </div>
                     </div>
                 </div>
@@ -387,139 +400,135 @@
     <!-- STREAMING_CHUNK:Modals -->
 
     <!-- MODAL RAIO-X BI -->
-    <div id="modal-raiox" class="modal fixed inset-0 flex items-center justify-center bg-fabrica-blue/95" style="z-index: 200;" onclick="fecharAoClicarFora(event, 'modal-raiox')">
-        <div class="modal-content bg-white rounded-[32px] w-full max-w-4xl shadow-2xl relative flex flex-col max-h-[90vh] m-4 overflow-hidden border-4 border-white">
-            <button onclick="fecharModal('modal-raiox')" class="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 text-slate-600 font-black z-20 hover:bg-red-500 hover:text-white transition-all text-xl shadow-sm"><i class="fa-solid fa-xmark"></i></button>
+    <div id="modal-raiox" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/95" style="z-index: 200;" onclick="fecharAoClicarFora(event, 'modal-raiox')">
+        <div class="modal-content bg-white rounded-[24px] w-full max-w-4xl shadow-2xl relative flex flex-col max-h-[90vh] m-4 overflow-hidden border border-ouro/20">
+            <button onclick="fecharModal('modal-raiox')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 font-bold z-20 hover:bg-gray-200 transition-all"><i class="fa-solid fa-xmark"></i></button>
             
-            <div id="raiox-header" class="p-10 border-b border-gray-100 bg-slate-50 flex items-center gap-4 shrink-0">
+            <div id="raiox-header" class="p-8 border-b border-gray-200 bg-gray-50 flex items-center gap-4 shrink-0">
                 <div>
-                    <h3 class="text-3xl font-black text-white uppercase tracking-tight px-6 py-2 rounded-xl shadow-md flex items-center gap-3" id="raiox-titulo"><i class="fa-solid fa-microscope"></i> Análise</h3>
-                    <p class="text-slate-500 text-sm font-bold mt-4 uppercase tracking-widest" id="raiox-subtitulo">Detalhamento dos dados.</p>
+                    <h3 class="text-2xl font-black text-white uppercase tracking-tight px-5 py-2 rounded-lg shadow-sm" id="raiox-titulo">Análise</h3>
+                    <p class="text-slate-600 text-sm font-bold mt-4" id="raiox-subtitulo">Detalhamento dos dados filtrados.</p>
                 </div>
             </div>
             
-            <div class="p-8 md:p-12 overflow-y-auto custom-scroll flex-grow bg-white grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="space-y-12">
+            <div class="p-6 md:p-10 overflow-y-auto custom-scroll flex-grow bg-white grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="space-y-10">
                     <div>
-                        <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 border-b-2 border-slate-100 pb-3 flex items-center gap-2"><i class="fa-solid fa-users text-fabrica-blue text-lg"></i> Distribuição por Equipe</h4>
-                        <div id="raiox-lista-membros" class="space-y-2"></div>
+                        <h4 class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-6 border-b border-gray-100 pb-2"><i class="fa-solid fa-users mr-2"></i> Distribuição por Equipe (DHO)</h4>
+                        <div id="raiox-lista-membros" class="space-y-1"></div>
                     </div>
                     <div>
-                        <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 border-b-2 border-slate-100 pb-3 flex items-center gap-2"><i class="fa-solid fa-building text-fabrica-orange text-lg"></i> Frentes Envolvidas</h4>
-                        <div id="raiox-lista-frentes" class="space-y-2"></div>
+                        <h4 class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-6 border-b border-gray-100 pb-2"><i class="fa-solid fa-building mr-2"></i> Principais Frentes Envolvidas</h4>
+                        <div id="raiox-lista-frentes" class="space-y-1"></div>
                     </div>
                 </div>
 
-                <div class="space-y-12 border-l-2 border-slate-50 pl-0 md:pl-12">
+                <div class="space-y-10 border-l border-gray-100 pl-0 md:pl-10">
                     <div>
-                        <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 border-b-2 border-slate-100 pb-3 flex items-center gap-2"><i class="fa-solid fa-heart-pulse text-red-500 text-lg"></i> Termômetro de Gargalos</h4>
-                        <div id="raiox-status-breakdown" class="space-y-2">
-                            <!-- Preenchido no JS -->
-                        </div>
+                        <h4 class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-6 border-b border-gray-100 pb-2"><i class="fa-solid fa-stethoscope mr-2"></i> Análise de Gargalo da Seleção</h4>
+                        <div id="raiox-status-breakdown" class="space-y-1"></div>
                     </div>
 
-                    <div id="raiox-alerta-n-classificado" class="hidden bg-red-50 border-2 border-red-100 rounded-2xl p-6 shadow-inner">
-                        <h4 class="text-sm font-black text-red-600 uppercase tracking-widest mb-3 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation text-lg"></i> Atenção Gestão</h4>
-                        <p class="text-xs text-red-800 font-bold mb-5 leading-relaxed">As demandas abaixo estão sem identificação clara da frente solicitante. O controle do funil está comprometido.</p>
-                        <div id="raiox-lista-infratores" class="space-y-3"></div>
+                    <div id="raiox-alerta-n-classificado" class="hidden bg-red-50 border border-red-200 rounded-xl p-5">
+                        <h4 class="text-xs font-black text-red-600 uppercase tracking-widest mb-2"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Atenção Gestão</h4>
+                        <p class="text-xs text-red-800 font-bold mb-4">As demandas abaixo estão sem identificação clara da frente solicitante (Classificadas como 'Não Classificadas').</p>
+                        <div id="raiox-lista-infratores" class="space-y-2"></div>
                     </div>
                 </div>
             </div>
             
-            <div class="p-8 bg-slate-50 border-t border-slate-100 shrink-0">
-                <button id="btn-aplicar-raiox" class="w-full bg-fabrica-blue hover:bg-blue-800 hover:shadow-blue-500/30 text-white font-black py-5 rounded-2xl shadow-xl transition-all uppercase tracking-widest flex justify-center items-center gap-3 text-sm">
-                    <i class="fa-solid fa-filter"></i> Aplicar filtros e ir para Tabela
+            <div class="p-6 bg-gray-50 border-t border-gray-200 shrink-0">
+                <button id="btn-aplicar-raiox" class="w-full bg-brisa-blue hover:bg-blue-900 text-white font-black py-4 rounded-xl shadow-md transition-all uppercase tracking-widest flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass-arrow-right"></i> Listar todas as demandas desta análise
                 </button>
             </div>
         </div>
     </div>
 
-
     <!-- MODAL DETALHES COMPLETO -->
-    <div id="modal-detalhes" class="modal fixed inset-0 flex items-center justify-center bg-fabrica-blue/95" onclick="fecharAoClicarFora(event, 'modal-detalhes')" style="z-index: 300;">
-        <div class="modal-content bg-white rounded-[32px] w-full max-w-4xl shadow-2xl relative flex flex-col max-h-[95vh] md:max-h-[90vh] m-4 border-4 border-white overflow-hidden">
-            <button onclick="fecharModal('modal-detalhes')" class="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-white/20 text-white font-black z-20 hover:bg-white hover:text-fabrica-blue transition-all text-xl shadow-sm backdrop-blur-sm"><i class="fa-solid fa-xmark"></i></button>
+    <div id="modal-detalhes" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/90" onclick="fecharAoClicarFora(event, 'modal-detalhes')" style="z-index: 300;">
+        <div class="modal-content bg-white rounded-[24px] w-full max-w-4xl shadow-2xl relative flex flex-col max-h-[95vh] md:max-h-[90vh] m-4 border border-ouro/20">
+            <button onclick="fecharModal('modal-detalhes')" class="absolute top-5 right-5 text-gray-400 hover:text-white z-10 text-2xl font-bold hover:scale-110 transition-transform"><i class="fa-solid fa-xmark"></i></button>
             
-            <div class="p-8 md:p-10 pb-6 md:pb-8 bg-gradient-to-r from-fabrica-blue to-blue-800 shrink-0 relative overflow-hidden">
-                <i class="fa-solid fa-clapperboard absolute -right-4 -bottom-4 text-9xl text-white/10 -rotate-12 pointer-events-none"></i>
-                <p class="text-fabrica-orange font-black text-xs mb-3 uppercase tracking-widest flex items-center gap-2"><i class="fa-solid fa-search"></i> Inspeção de Demanda</p>
-                <h2 class="text-2xl md:text-4xl font-black text-white tracking-tight leading-tight pr-12 relative z-10" id="modal-titulo">-</h2>
+            <div class="p-6 md:p-8 pb-4 md:pb-6 bg-brisa-blue rounded-t-[24px] shrink-0 border-b-4 border-ouro">
+                <p class="text-ouro font-black text-[10px] md:text-xs mb-2 uppercase tracking-widest">Inspeção de Demanda</p>
+                <h2 class="text-xl md:text-3xl font-black text-white tracking-tight leading-tight pr-8" id="modal-titulo">-</h2>
             </div>
             
-            <div class="px-8 md:px-12 py-8 overflow-y-auto custom-scroll bg-slate-50 flex-grow">
+            <div class="px-6 md:px-8 py-6 overflow-y-auto custom-scroll bg-brisa-light flex-grow">
                 
-                <h3 class="text-xs font-black text-slate-400 mb-8 uppercase text-center tracking-widest flex items-center justify-center gap-2"><i class="fa-solid fa-route"></i> Esteira de Produção</h3>
-                <div class="timeline-container pb-10 max-w-2xl mx-auto mb-6">
+                <h3 class="text-xs md:text-sm font-black text-gray-400 mb-6 uppercase text-center tracking-widest mt-2">Esteira de Produção</h3>
+                <div class="timeline-container pb-8 max-w-2xl mx-auto mb-4">
                     <div class="timeline-line"></div>
                     <div class="timeline-line-fill" id="timeline-progress"></div>
-                    <div class="timeline-step step-1"><div class="timeline-circle"><i class="fa-solid fa-layer-group"></i></div></div>
-                    <div class="timeline-step step-2"><div class="timeline-circle"><i class="fa-solid fa-list-check"></i></div></div>
-                    <div class="timeline-step step-3"><div class="timeline-circle"><i class="fa-solid fa-video"></i></div></div>
-                    <div class="timeline-step step-4"><div class="timeline-circle"><i class="fa-solid fa-laptop-file"></i></div></div>
-                    <div class="timeline-step step-5"><div class="timeline-circle"><i class="fa-solid fa-check-double"></i></div></div>
+                    <div class="timeline-step step-1"><div class="timeline-tooltip">Na Fila</div><div class="timeline-circle"><i class="fa-solid fa-layer-group"></i></div></div>
+                    <div class="timeline-step step-2"><div class="timeline-tooltip">Preparação</div><div class="timeline-circle"><i class="fa-solid fa-list-check"></i></div></div>
+                    <div class="timeline-step step-3"><div class="timeline-tooltip">Gravação</div><div class="timeline-circle"><i class="fa-solid fa-video"></i></div></div>
+                    <div class="timeline-step step-4"><div class="timeline-tooltip">Edição</div><div class="timeline-circle"><i class="fa-solid fa-laptop-file"></i></div></div>
+                    <div class="timeline-step step-5"><div class="timeline-tooltip">Concluído</div><div class="timeline-circle"><i class="fa-solid fa-check-double"></i></div></div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2"><i class="fa-solid fa-user-tag mr-1 text-fabrica-blue"></i> Solicitante</p>
-                        <p class="font-bold text-slate-800 text-sm truncate" id="modal-sponsor">-</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-user-tag mr-1"></i> Solicitante</p>
+                        <p class="font-bold text-gray-800 text-sm truncate" id="modal-sponsor">-</p>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2"><i class="fa-solid fa-building mr-1 text-fabrica-blue"></i> Frente / Área</p>
+                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-building mr-1"></i> Frente / Área</p>
                         <p class="font-bold text-sm truncate w-full" id="modal-frente">-</p>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-md border-l-4 border-l-fabrica-blue relative overflow-hidden group">
-                        <i class="fa-solid fa-user-ninja absolute right-2 bottom-2 text-4xl text-slate-50 transition-transform pointer-events-none"></i>
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 relative z-10"><i class="fa-solid fa-headset mr-1 text-fabrica-orange"></i> Equipe (DHO)</p>
-                        <p class="font-black text-fabrica-blue text-sm truncate relative z-10" id="modal-responsavel">-</p>
+                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm border-l-4 border-l-brisa-blue relative overflow-hidden">
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1 relative z-10"><i class="fa-solid fa-headset mr-1"></i> Equipe (DHO)</p>
+                        <p class="font-black text-brisa-blue text-sm truncate relative z-10" id="modal-responsavel">-</p>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm border-l-4 border-l-slate-400">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2"><i class="fa-regular fa-calendar-check mr-1 text-slate-500"></i> Previsão Entrega</p>
-                        <p class="font-black text-slate-700 text-sm" id="modal-prazo">-</p>
+                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm border-l-4 border-l-slate-400">
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-regular fa-calendar-check mr-1"></i> Previsão Entrega</p>
+                        <p class="font-black text-slate-600 text-sm" id="modal-prazo">-</p>
                     </div>
                     
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm md:col-span-2">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2"><i class="fa-solid fa-align-left mr-1 text-fabrica-blue"></i> Diretrizes / Escopo</p>
-                        <p class="text-sm text-slate-600 font-medium line-clamp-3 leading-relaxed" id="modal-observacoes">-</p>
+                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm md:col-span-2">
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-align-left mr-1"></i> Diretrizes / Escopo</p>
+                        <p class="text-sm text-gray-600 font-medium line-clamp-2" id="modal-observacoes">-</p>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2"><i class="fa-solid fa-video mr-1 text-fabrica-orange"></i> Agendamento</p>
-                        <p class="font-bold text-slate-800 text-sm" id="modal-gravacao">-</p>
+                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-video mr-1"></i> Agendamento</p>
+                        <p class="font-bold text-gray-800 text-sm" id="modal-gravacao">-</p>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2"><i class="fa-solid fa-calendar-plus mr-1 text-fabrica-blue"></i> Recebido em</p>
-                        <p class="font-bold text-slate-800 text-sm" id="modal-recebimento">-</p>
+                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-calendar-plus mr-1"></i> Recebido em</p>
+                        <p class="font-bold text-gray-800 text-sm" id="modal-recebimento">-</p>
                     </div>
                 </div>
             </div>
-            <div class="p-6 md:p-8 bg-white border-t border-slate-100 flex flex-col sm:flex-row gap-4 justify-center items-center shrink-0" id="modal-area-entrega"></div>
+            <div class="p-6 bg-white border-t border-gray-200 rounded-b-[24px] flex flex-col sm:flex-row gap-4 justify-center items-center shrink-0" id="modal-area-entrega"></div>
         </div>
     </div>
 
     <!-- MODAL: AGENDAMENTO INTEGRADO GOOGLE CALENDAR -->
-    <div id="modal-novo" class="modal fixed inset-0 flex items-center justify-center bg-fabrica-blue/95" onclick="fecharAoClicarFora(event, 'modal-novo')" style="z-index: 500;">
-        <div class="modal-content bg-white rounded-[32px] w-full max-w-5xl shadow-2xl relative flex flex-col overflow-hidden m-4 h-[90vh] border-4 border-white">
-            <div class="p-6 md:p-8 border-b border-gray-100 flex justify-between items-center bg-slate-50 shrink-0">
-                <h3 class="text-xl md:text-2xl font-black text-fabrica-blue uppercase tracking-tight flex items-center gap-3"><i class="fa-solid fa-calendar-check text-fabrica-orange"></i> Reserva de Estúdio / Gravação</h3>
-                <button onclick="fecharModal('modal-novo')" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-200 text-slate-600 font-black hover:bg-red-500 hover:text-white transition-all text-xl"><i class="fa-solid fa-xmark"></i></button>
+    <div id="modal-novo" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/95" onclick="fecharAoClicarFora(event, 'modal-novo')" style="z-index: 500;">
+        <div class="modal-content bg-white rounded-[24px] w-full max-w-5xl shadow-2xl relative flex flex-col overflow-hidden m-4 h-[90vh] border-4 border-white">
+            <div class="p-4 md:p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 shrink-0">
+                <h3 class="text-lg md:text-xl font-black text-brisa-blue uppercase tracking-tight flex items-center"><i class="fa-solid fa-calendar-check text-ouro mr-2"></i> Reserva de Estúdio / Gravação</h3>
+                <button onclick="fecharModal('modal-novo')" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 font-bold hover:bg-gray-300 transition-colors"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="flex-grow w-full relative bg-white p-4">
-                <iframe src="https://calendar.app.google/ppfBoMMm1i9AHHi48" class="w-full h-full border-0 rounded-2xl" title="Agendamento Fábrica de Conteúdo"></iframe>
+            <div class="flex-grow w-full relative bg-white">
+                <iframe src="https://calendar.app.google/ppfBoMMm1i9AHHi48" class="w-full h-full border-0 absolute inset-0" title="Agendamento Fábrica de Conteúdo"></iframe>
             </div>
         </div>
     </div>
     
-    <div id="modal-config" class="modal fixed inset-0 flex items-center justify-center bg-fabrica-blue/90" onclick="fecharAoClicarFora(event, 'modal-config')">
+    <div id="modal-config" class="modal fixed inset-0 flex items-center justify-center bg-brisa-blue/90" onclick="fecharAoClicarFora(event, 'modal-config')">
         <div class="modal-content bg-white rounded-[24px] w-full max-w-lg shadow-2xl relative flex flex-col overflow-hidden m-4 p-8 text-center">
             <button onclick="fecharModal('modal-config')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 font-bold hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
-            <i class="fa-solid fa-database text-5xl text-fabrica-orange mb-4"></i>
-            <h3 class="text-2xl font-black text-fabrica-blue uppercase">Conexão Ativa</h3>
-            <p class="text-sm text-gray-500 mt-2 font-medium">Lendo dados operacionais do Google Apps Script.</p>
+            <i class="fa-solid fa-database text-5xl text-ouro mb-4"></i>
+            <h3 class="text-2xl font-black text-brisa-blue uppercase">Conexão Ativa</h3>
+            <p class="text-sm text-gray-500 mt-2 font-medium">Você precisa aprovar a Implantação no Google Apps Script como 'Qualquer Pessoa'.</p>
         </div>
     </div>
 
     <!-- STREAMING_CHUNK:Javascript Logic -->
     <script>
+        // ======= IMPORTANTE: Substitua por sua URL gerada no passo 2 =======
         const googleAppUrl = "https://script.google.com/macros/s/AKfycbyh9nCwfuvhBjzuopA6s9qzZdgoR41jQX1Ws-qKPdzsh2OW4f_PPSUt66_-3qUOTfoDEg/exec";
 
         let dadosGlobais = [];
@@ -538,8 +547,8 @@
         }
 
         const CONFIG_FRENTES = [
-            { termos: ['jaci', 'thaynara', 'vitor', 'matheus', 'eduarda.neto', 'natalia', 'tcr', 'comercial'], nome: "TCR - Comercial", css: "frente-tcr", modalColor: "bg-[#0B41CD]" }, 
-            { termos: ['ozeias', 'eliane', 'emailiane', 'luisa', 'naira', 'administrativo', 'adm'], nome: "DO - Administrativo", css: "frente-adm", modalColor: "bg-[#F59E0B]" }, 
+            { termos: ['jaci', 'thaynara', 'vitor', 'matheus', 'eduarda.neto', 'natalia', 'tcr', 'comercial'], nome: "TCR - Comercial", css: "frente-tcr", modalColor: "bg-[#8B5CF6]" }, 
+            { termos: ['ozeias', 'eliane', 'emailiane', 'luisa', 'naira', 'administrativo', 'adm'], nome: "DO - Administrativo", css: "frente-adm", modalColor: "bg-[#A855F7]" }, 
             { termos: ['vanessa', 'eduarda.souza', 'engajamento'], nome: "Engajamento", css: "frente-eng", modalColor: "bg-pink-500" },
             { termos: ['tto', 'tecnico', 'técnico', 'anderson', 'andarson', 'bia', 'beatriz', 'alencar', 'henrique', 'morais'], nome: "TTO - Técnico", css: "frente-tto", modalColor: "bg-teal-500" },
             { termos: ['renato', 'emanuely', 'geral', 'sipat', 'udemy', 'camila', 'vitoria', 'maria eduarda'], nome: "Geral / Outros", css: "frente-outros", modalColor: "bg-slate-500" } 
@@ -554,7 +563,7 @@
             return { nome: "Não Classificada", class: "frente-nao", modalColor: "bg-red-500" }; 
         }
 
-        // Função robusta para extrair as variáveis independente de como vêm do Google Apps Script
+        // Mapeamento Robusto com a sua Planilha
         function normalizarProjeto(p) {
             return {
                 demanda: p.demanda || p.Demanda || p['Demanda'] || '',
@@ -651,19 +660,19 @@
             } else {
                 let htmlAreas = '';
                 frentesOrdenadas.forEach(([nome, qtd], index) => {
-                    const bgBar = index === 0 ? 'bg-fabrica-blue' : (index === 1 ? 'bg-slate-500' : 'bg-slate-400');
+                    const bgBar = index === 0 ? 'bg-ouro' : (index === 1 ? 'bg-slate-500' : 'bg-slate-400');
                     htmlAreas += `
-                        <div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-slate-100 shadow-sm cursor-pointer hover:border-fabrica-orange hover:shadow-md transition-all group" onclick="abrirRaioX('frente', '${escapeHTML(nome)}', 'Raio-X da Área: ${escapeHTML(nome)}', 'bg-fabrica-blue')">
-                            <div class="w-10 h-10 rounded-full bg-slate-50 text-fabrica-blue flex items-center justify-center font-black text-sm shrink-0 group-hover:bg-fabrica-orange group-hover:text-white transition-colors shadow-inner">${index + 1}º</div>
+                        <div class="flex items-center gap-3 bg-white p-2.5 rounded-lg border border-slate-100 shadow-sm cursor-pointer hover:border-ouro transition-colors group" onclick="abrirRaioX('frente', '${escapeHTML(nome)}', 'Raio-X da Área: ${escapeHTML(nome)}', 'bg-brisa-blue')">
+                            <div class="w-8 h-8 rounded-full bg-slate-100 text-ouro-dark flex items-center justify-center font-black text-xs shrink-0 group-hover:bg-ouro group-hover:text-white transition-colors">${index + 1}º</div>
                             <div class="flex-grow">
-                                <p class="text-xs font-bold text-slate-700 truncate group-hover:text-fabrica-orange transition-colors">${escapeHTML(nome)}</p>
-                                <div class="w-full bg-slate-100 h-2 rounded-full mt-1.5 overflow-hidden">
-                                    <div class="${bgBar} h-2 rounded-full transition-all" style="width: ${Math.min((qtd / frentesOrdenadas[0][1]) * 100, 100)}%"></div>
+                                <p class="text-xs font-bold text-slate-700 truncate group-hover:text-ouro-dark transition-colors">${escapeHTML(nome)}</p>
+                                <div class="w-full bg-slate-100 h-1.5 rounded-full mt-1">
+                                    <div class="${bgBar} h-1.5 rounded-full transition-all" style="width: ${Math.min((qtd / frentesOrdenadas[0][1]) * 100, 100)}%"></div>
                                 </div>
                             </div>
                             <div class="text-right shrink-0">
-                                <span class="font-black text-slate-800 text-lg">${qtd}</span>
-                                <span class="text-[9px] text-slate-400 block uppercase tracking-widest">pedidos</span>
+                                <span class="font-black text-slate-800 text-sm">${qtd}</span>
+                                <span class="text-[9px] text-slate-400 block uppercase">pedidos</span>
                             </div>
                         </div>`;
                 });
@@ -674,23 +683,23 @@
             let chavesMeses = Object.keys(meses).sort(sortMesAnoKeys).slice(-6);
             
             if(chavesMeses.length === 0) {
-                containerMeses.innerHTML = '<p class="text-sm text-blue-300">Não há dados temporais estruturados.</p>';
+                containerMeses.innerHTML = '<p class="text-sm text-ouro-light/50">Não há dados temporais estruturados.</p>';
             } else {
                 let htmlMeses = '';
                 chavesMeses.forEach(mesChave => {
                     const dadosMes = meses[mesChave];
-                    const alturaTotal = Math.max((dadosMes.total / maxTotalPorMes) * 140, 30); 
+                    const alturaTotal = Math.max((dadosMes.total / maxTotalPorMes) * 120, 20); 
                     const alturaConcluido = dadosMes.total > 0 ? (dadosMes.concluidos / dadosMes.total) * alturaTotal : 0;
                     
                     htmlMeses += `
-                    <div class="flex flex-col items-center gap-2 group cursor-pointer w-20" title="Total Entrou: ${dadosMes.total} | Concluídos: ${dadosMes.concluidos}">
-                        <div class="text-center opacity-0 group-hover:opacity-100 transition-opacity -translate-y-2 group-hover:translate-y-0 duration-300">
-                            <span class="text-[11px] font-black text-orange-400 block bg-blue-900 px-2 py-1 rounded-lg">${dadosMes.total}</span>
+                    <div class="flex flex-col items-center gap-2 group cursor-pointer w-16" title="Total Entrou: ${dadosMes.total} | Concluídos: ${dadosMes.concluidos}">
+                        <div class="text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-[10px] font-black text-ouro block">${dadosMes.total}</span>
                         </div>
-                        <div class="relative w-12 bg-blue-900/40 rounded-t-lg border-b-2 border-blue-900 group-hover:bg-blue-800/60 transition-colors" style="height: ${alturaTotal}px;">
-                            <div class="absolute bottom-0 w-full bg-fabrica-orange rounded-t-lg transition-all duration-700 shadow-[0_-2px_15px_rgba(255,107,0,0.6)] group-hover:brightness-110" style="height: ${alturaConcluido}px;"></div>
+                        <div class="relative w-8 bg-blue-900/50 rounded-t-sm" style="height: ${alturaTotal}px;">
+                            <div class="absolute bottom-0 w-full bg-ouro rounded-t-sm transition-all duration-700 shadow-[0_-2px_10px_rgba(212,175,55,0.5)]" style="height: ${alturaConcluido}px;"></div>
                         </div>
-                        <span class="text-xs font-bold text-blue-200 uppercase">${mesChave.split('/')[0]}</span>
+                        <span class="text-[10px] font-bold text-ouro-light/70 uppercase">${mesChave.split('/')[0]}</span>
                     </div>`;
                 });
                 containerMeses.innerHTML = htmlMeses;
@@ -719,9 +728,9 @@
             
             if(combinado.includes('cancelado')) return { bg: 'bg-red-500', icon: 'fa-ban', label: 'Cancelado', step: 5 };
             if(combinado.includes('conclu')) return { bg: 'bg-green-500', icon: 'fa-check-double', label: 'Concluído', step: 5 };
-            if(combinado.includes('andamento') || combinado.includes('edicao') || combinado.includes('gravacao')) return { bg: 'bg-[#FF6B00]', icon: 'fa-person-digging', label: 'Em Produção', step: 4 };
-            if(combinado.includes('planejamento') || combinado.includes('revisao')) return { bg: 'bg-[#FF6B00]', icon: 'fa-list-check', label: 'Em Produção', step: 2 };
-            if(combinado.includes('pausado') || combinado.includes('pendente')) return { bg: 'bg-slate-500', icon: 'fa-pause', label: 'Na Fila', step: 1 };
+            if(combinado.includes('andamento') || combinado.includes('edicao') || combinado.includes('gravacao')) return { bg: 'bg-[#FF5A00]', icon: 'fa-person-digging', label: 'Em Produção', step: 4 };
+            if(combinado.includes('planejamento') || combinado.includes('revisao')) return { bg: 'bg-[#FF5A00]', icon: 'fa-list-check', label: 'Em Produção', step: 2 };
+            if(combinado.includes('pausado') || combinado.includes('pendente')) return { bg: 'bg-slate-600', icon: 'fa-pause', label: 'Na Fila', step: 1 };
             
             return { bg: 'bg-slate-500', icon: 'fa-layer-group', label: 'Na Fila', step: 1 }; 
         }
@@ -841,11 +850,11 @@
             const sortDict = (dict) => Object.entries(dict).sort((a,b) => b[1] - a[1]);
             const totalAlvo = dadosAlvo.length || 1;
 
-            document.getElementById('raiox-titulo').innerHTML = `<i class="fa-solid fa-microscope fa-beat-fade"></i> ${tituloModal}`;
-            document.getElementById('raiox-titulo').className = `text-2xl md:text-3xl font-black text-white uppercase tracking-tight px-6 py-3 rounded-2xl shadow-md flex items-center gap-3 ${corHeaderClass}`;
+            document.getElementById('raiox-titulo').textContent = tituloModal;
+            document.getElementById('raiox-titulo').className = `text-2xl font-black text-white uppercase tracking-tight px-5 py-2 rounded-lg shadow-sm ${corHeaderClass}`;
             document.getElementById('raiox-subtitulo').textContent = `${contextoAnalise} (${dadosAlvo.length} projetos).`;
 
-            const buildListHtml = (sortedArray, maxItems, iconClass, useDynamicColor = false, fallbackColor = "bg-[#0B41CD]") => {
+            const buildListHtml = (sortedArray, maxItems, iconClass, useDynamicColor = false, fallbackColor = "bg-[#0f172a]") => {
                 if(sortedArray.length === 0) return '<p class="text-xs text-slate-400">Dados insuficientes.</p>';
                 let html = '';
                 sortedArray.slice(0, maxItems).forEach(item => {
@@ -859,33 +868,33 @@
                     if (useDynamicColor) {
                         const conf = CONFIG_FRENTES.find(c => c.nome === itemName);
                         if (conf) barColor = conf.modalColor;
-                        else if (itemName === 'Não Classificada') barColor = 'bg-red-500';
+                        else if (itemName === 'Não Classificada') barColor = 'bg-[#A855F7]';
                     }
 
                     html += `
-                    <div class="mb-5 group">
+                    <div class="mb-5">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm font-bold text-slate-700 flex items-center gap-3 group-hover:text-fabrica-blue transition-colors"><i class="${iconClass} text-slate-300 w-5 text-center text-sm group-hover:text-fabrica-orange transition-colors"></i> ${escapeHTML(itemName)}</span>
+                            <span class="text-sm font-bold text-slate-700 flex items-center gap-2"><i class="${iconClass} text-slate-300 w-4 text-center text-xs"></i> ${escapeHTML(itemName)}</span>
                             <div class="text-right leading-none">
-                                <span class="font-black text-slate-800 text-lg group-hover:text-fabrica-blue transition-colors">${itemQtd}</span>
-                                <span class="text-[10px] text-slate-400 font-bold ml-1">(${perc}%)</span>
+                                <span class="font-black text-slate-800 text-base">${itemQtd}</span>
+                                <span class="text-[10px] text-slate-400 font-medium ml-1">(${perc}%)</span>
                             </div>
                         </div>
-                        <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden shadow-inner">
-                            <div class="${barColor} h-2 rounded-full transition-all duration-1000" style="width: ${perc}%;"></div>
+                        <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                            <div class="${barColor} h-1.5 rounded-full" style="width: ${perc}%;"></div>
                         </div>
                     </div>`;
                 });
                 return html;
             };
 
-            document.getElementById('raiox-lista-membros').innerHTML = buildListHtml(sortDict(countsResp), 6, 'fa-solid fa-user-astronaut', false, 'bg-fabrica-blue'); 
-            document.getElementById('raiox-lista-frentes').innerHTML = buildListHtml(sortDict(countsFrente), 6, 'fa-solid fa-building-user', true);
+            document.getElementById('raiox-lista-membros').innerHTML = buildListHtml(sortDict(countsResp), 6, 'fa-solid fa-user', false, 'bg-[#0f172a]'); 
+            document.getElementById('raiox-lista-frentes').innerHTML = buildListHtml(sortDict(countsFrente), 6, 'fa-solid fa-building', true);
 
             let htmlBreakdown = '';
             const statusConfig = [
                 { label: 'Concluído', color: 'bg-green-500' },
-                { label: 'Em Produção', color: 'bg-[#FF6B00]' },
+                { label: 'Em Produção', color: 'bg-ouro' },
                 { label: 'Na Fila', color: 'bg-slate-500' }
             ];
             
@@ -893,14 +902,14 @@
                 const num = countStatusObj[cfg.label];
                 const perc = Math.round((num / totalAlvo) * 100);
                 htmlBreakdown += `
-                <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-3 last:border-0 last:pb-0 last:mb-0 hover:bg-slate-100/50 p-2 rounded-lg transition-colors">
+                <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-3 last:border-0 last:pb-0 last:mb-0">
                     <div class="flex items-center gap-3">
-                        <div class="w-3 h-3 rounded-full ${cfg.color} shadow-sm animate-pulse"></div>
+                        <div class="w-3 h-3 rounded-full ${cfg.color}"></div>
                         <span class="text-sm font-bold text-slate-700">${cfg.label}</span>
                     </div>
                     <div class="text-right leading-none">
-                        <span class="font-black text-slate-800 text-lg">${num}</span>
-                        <span class="text-[10px] text-slate-400 font-bold ml-1">(${perc}%)</span>
+                        <span class="font-black text-slate-800 text-base">${num}</span>
+                        <span class="text-[10px] text-slate-400 font-normal ml-1">(${perc}%)</span>
                     </div>
                 </div>`;
             });
@@ -911,7 +920,7 @@
                 alertaInf.classList.remove('hidden');
                 let htmlInf = '';
                 sortDict(infratoresClassificacao).forEach(item => {
-                    htmlInf += `<div class="flex justify-between items-center text-xs text-red-900 border-b border-red-100 pb-2 mb-2 last:border-0 last:pb-0 last:mb-0"><strong class="flex items-center gap-2"><i class="fa-solid fa-ghost opacity-50"></i> ${escapeHTML(item[0])}</strong><span class="bg-red-100 px-2 py-1 rounded font-black">${item[1]}</span></div>`;
+                    htmlInf += `<div class="flex justify-between text-xs text-red-900 border-b border-red-100 pb-1 mb-1 last:border-0 last:pb-0 last:mb-0"><strong>${escapeHTML(item[0])}</strong><span>${item[1]} projetos</span></div>`;
                 });
                 document.getElementById('raiox-lista-infratores').innerHTML = htmlInf;
             } else {
@@ -947,16 +956,16 @@
             let filtrosAtivos = false;
 
             if(filtroEquipeNome) {
-                areaLegendas.innerHTML += `<span class="bg-orange-100 text-fabrica-orange border border-orange-200 px-3 py-1 rounded-lg text-xs font-black shadow-sm flex items-center gap-1"><i class="fa-solid fa-user-astronaut"></i> ${escapeHTML(filtroEquipeNome)}</span>`;
+                areaLegendas.innerHTML += `<span class="bg-ouro-light text-ouro-dark border border-ouro/30 px-2 py-0.5 rounded text-[10px]"><i class="fa-solid fa-user mr-1"></i>${escapeHTML(filtroEquipeNome)}</span>`;
                 filtrosAtivos = true;
             }
             if(filtroFrenteNome) {
-                areaLegendas.innerHTML += `<span class="bg-blue-100 text-fabrica-blue border border-blue-200 px-3 py-1 rounded-lg text-xs font-black shadow-sm flex items-center gap-1"><i class="fa-solid fa-building-user"></i> ${escapeHTML(filtroFrenteNome)}</span>`;
+                areaLegendas.innerHTML += `<span class="bg-brisa-blue text-white px-2 py-0.5 rounded text-[10px]"><i class="fa-solid fa-building mr-1"></i>${escapeHTML(filtroFrenteNome)}</span>`;
                 filtrosAtivos = true;
             }
             if(filtroStatusNome !== 'todos') {
                 const mapStatus = {concluido: 'Concluídos', andamento: 'Em Produção', fila: 'Na Fila'};
-                areaLegendas.innerHTML += `<span class="bg-slate-200 text-slate-700 border border-slate-300 px-3 py-1 rounded-lg text-xs font-black shadow-sm flex items-center gap-1"><i class="fa-solid fa-filter"></i> ${mapStatus[filtroStatusNome]}</span>`;
+                areaLegendas.innerHTML += `<span class="bg-slate-200 text-slate-700 px-2 py-0.5 rounded text-[10px]"><i class="fa-solid fa-filter mr-1"></i>${mapStatus[filtroStatusNome]}</span>`;
                 filtrosAtivos = true;
             }
 
@@ -1018,7 +1027,7 @@
                 html += `
                 <div class="cursor-pointer group bg-white p-3 rounded-2xl transition-all border border-transparent hover:border-slate-200 hover:shadow-md mb-3" onclick="abrirRaioX('frente', '${escapeHTML(label)}', 'Raio-X da Área: ${escapeHTML(label)}', '${corBarra.replace('bg-', 'bg-')}')">
                     <div class="flex justify-between items-end mb-3">
-                        <span class="font-bold text-slate-600 text-xs md:text-sm group-hover:text-fabrica-blue transition-colors flex items-center gap-2"><i class="fa-solid fa-puzzle-piece text-slate-300 group-hover:text-fabrica-orange group-hover:fa-spin"></i> ${escapeHTML(label)}</span>
+                        <span class="font-bold text-slate-600 text-xs md:text-sm group-hover:text-ouro-dark transition-colors flex items-center gap-2"><i class="fa-solid fa-puzzle-piece text-slate-300 group-hover:text-ouro group-hover:fa-spin"></i> ${escapeHTML(label)}</span>
                         <div class="text-right leading-none">
                             <span class="font-black text-xl text-slate-700">${qtd}</span>
                             <span class="text-xs text-slate-400 font-bold ml-1">(${perc}%)</span>
@@ -1103,7 +1112,7 @@
             let botoesHtml = '';
             
             if(infosLink.jira) {
-                botoesHtml += `<a href="${escapeHTML(infosLink.jira)}" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-blue-50 text-fabrica-blue font-black rounded-2xl border-2 border-slate-200 shadow-sm flex justify-center items-center gap-3 transition-all hover:-translate-y-1 hover:border-blue-300 group"><i class="fa-brands fa-jira text-blue-600 text-xl group-hover:fa-bounce"></i> Acompanhar no Jira</a>`;
+                botoesHtml += `<a href="${escapeHTML(infosLink.jira)}" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-blue-50 text-brisa-blue font-black rounded-2xl border-2 border-slate-200 shadow-sm flex justify-center items-center gap-3 transition-all hover:-translate-y-1 hover:border-blue-300 group"><i class="fa-brands fa-jira text-blue-600 text-xl group-hover:fa-bounce"></i> Acompanhar no Jira</a>`;
             }
 
             if(statusInfo.label === 'Concluído' && infosLink.video) {
@@ -1139,20 +1148,20 @@
                 let trClassStatus = statusInfo.label === 'Concluído' ? 'tr-status-concluido' : (statusInfo.label === 'Em Produção' ? 'tr-status-andamento' : (statusInfo.label === 'Cancelado' ? 'tr-status-cancelado' : 'tr-status-fila'));
 
                 let badgeGravacao = p.dataGravacao && p.dataGravacao.toLowerCase() !== 'a combinar' && p.dataGravacao !== '-' 
-                    ? `<span class="bg-orange-50 text-fabrica-orange font-bold px-3 py-1.5 rounded-lg text-[10px] md:text-xs whitespace-nowrap shadow-sm border border-orange-100 flex items-center w-max"><i class="fa-solid fa-video mr-1.5"></i>${escapeHTML(p.dataGravacao)}</span>` 
+                    ? `<span class="bg-orange-50 text-ouro-dark font-bold px-3 py-1.5 rounded-lg text-[10px] md:text-xs whitespace-nowrap shadow-sm border border-orange-100 flex items-center w-max"><i class="fa-solid fa-video mr-1.5"></i>${escapeHTML(p.dataGravacao)}</span>` 
                     : `<span class="text-slate-400 font-bold text-[10px] md:text-xs flex items-center"><i class="fa-regular fa-clock mr-1"></i> Pendente</span>`;
                     
                 let badgePrazo = p.prazoFinal && p.prazoFinal.toLowerCase() !== 'a combinar' && p.prazoFinal !== '-' 
-                    ? `<span class="bg-blue-50 text-fabrica-blue font-bold px-3 py-1.5 rounded-lg text-[10px] md:text-xs whitespace-nowrap shadow-sm border border-blue-100 flex items-center w-max"><i class="fa-regular fa-calendar-check mr-1.5"></i>${escapeHTML(p.prazoFinal)}</span>` 
+                    ? `<span class="bg-slate-100 text-slate-600 font-bold px-3 py-1.5 rounded-lg text-[10px] md:text-xs whitespace-nowrap shadow-sm border border-slate-200 flex items-center w-max"><i class="fa-regular fa-calendar-check mr-1.5"></i>${escapeHTML(p.prazoFinal)}</span>` 
                     : `<span class="text-slate-400 font-bold text-[10px] md:text-xs flex items-center"><i class="fa-regular fa-clock mr-1"></i> Pendente</span>`;
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-blue-50/50 transition-all cursor-pointer group ${trClassStatus}" onclick="abrirDetalhes(${originalIndex})">
                         <td class="py-5 px-6 md:px-8 pl-6">
                             <div class="flex items-center">
-                                <i class="fa-solid fa-caret-right text-fabrica-orange text-sm mr-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                                <i class="fa-solid fa-caret-right text-ouro text-sm mr-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
                                 <div>
-                                    <span class="font-black text-fabrica-blue truncate max-w-[150px] sm:max-w-[250px] block text-[13px] md:text-sm group-hover:text-blue-700 transition-colors">${escapeHTML(p.demanda) || 'Sem título cadastrado'}</span>
+                                    <span class="font-black text-brisa-blue truncate max-w-[150px] sm:max-w-[250px] block text-[13px] md:text-sm group-hover:text-blue-700 transition-colors">${escapeHTML(p.demanda) || 'Sem título cadastrado'}</span>
                                     <span class="text-[10px] font-bold text-slate-400 block mt-1"><i class="fa-solid fa-user-tag mr-1 text-slate-300"></i>${escapeHTML(p.sponsor) || 'Não informado'}</span>
                                 </div>
                             </div>
@@ -1165,11 +1174,11 @@
                             </div>
                         </td>
                         <td class="py-5 px-6 hidden md:table-cell">
-                            <span class="font-black text-fabrica-blue text-xs truncate block max-w-[140px] bg-slate-100 px-3 py-1.5 rounded-lg w-max"><i class="fa-solid fa-user-astronaut mr-2 text-fabrica-orange"></i>${escapeHTML(p.responsavel) || 'Equipe'}</span>
+                            <span class="font-black text-brisa-blue text-xs truncate block max-w-[140px] bg-slate-100 px-3 py-1.5 rounded-lg w-max"><i class="fa-solid fa-user-astronaut mr-2 text-ouro"></i>${escapeHTML(p.responsavel) || 'Equipe'}</span>
                         </td>
                         <td class="py-5 px-6 hidden lg:table-cell">${badgePrazo}</td>
                         <td class="py-5 px-6 text-center">
-                            <button class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex justify-center items-center text-sm shadow-sm group-hover:bg-fabrica-blue group-hover:text-white transition-all group-hover:scale-110"><i class="fa-solid fa-arrow-right"></i></button>
+                            <button class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex justify-center items-center text-sm shadow-sm group-hover:bg-brisa-blue group-hover:text-white transition-all group-hover:scale-110"><i class="fa-solid fa-arrow-right"></i></button>
                         </td>
                     </tr>
                 `;
@@ -1190,26 +1199,36 @@
         async function carregarDemandas() {
             try {
                 const urlComBuster = `${googleAppUrl}?nocache=${new Date().getTime()}`;
-                const response = await fetch(urlComBuster, { method: 'GET', cache: 'no-store' });
+                const response = await fetch(urlComBuster, { 
+                    method: 'GET', 
+                    headers: { 'Accept': 'application/json' }
+                });
                 
-                if(!response.ok) throw new Error("Falha na rede");
+                if(!response.ok) throw new Error(`HTTP Error: ${response.status}`);
                 
-                let dadosPuros = await response.json();
+                const textoResposta = await response.text();
                 
-                // Mapeamento Robusto para evitar erros independente dos headers da planilha
-                dadosGlobais = dadosPuros.map(normalizarProjeto);
-                
-                if(dadosGlobais && dadosGlobais.length > 0) {
-                    atualizarIndicadores(dadosGlobais);
-                    limparFiltros(true);
+                try {
+                    let dadosPuros = JSON.parse(textoResposta);
+                    dadosGlobais = dadosPuros.map(normalizarProjeto);
+                    
+                    if(dadosGlobais && dadosGlobais.length > 0) {
+                        atualizarIndicadores(dadosGlobais);
+                        limparFiltros(true);
+                    }
+                    
+                    const screen = document.getElementById('loading-screen');
+                    if(screen) screen.classList.add('loader-hidden');
+
+                } catch(parseError) {
+                    console.error("O Google retornou HTML ao invés de JSON. Verifique as permissões de implantação.", textoResposta);
+                    throw new Error("O Google bloqueou a conexão. Faça a Nova Implantação como 'Qualquer Pessoa' no Apps Script.");
                 }
-                
-                const screen = document.getElementById('loading-screen');
-                if(screen) screen.classList.add('loader-hidden');
 
             } catch(e) {
+                console.error("Erro de sincronização:", e);
                 const tbody = document.getElementById('tabela-demandas');
-                if(tbody) tbody.innerHTML = `<tr><td colspan="6" class="p-12 text-center text-red-500 font-black text-lg bg-red-50 rounded-2xl"><i class="fa-solid fa-triangle-exclamation mr-3 text-3xl fa-beat"></i> Falha ao sincronizar governança. Verifique conexão.</td></tr>`;
+                if(tbody) tbody.innerHTML = `<tr><td colspan="6" class="p-12 text-center text-red-500 font-black text-lg bg-red-50 rounded-2xl border-2 border-red-200 shadow-inner"><i class="fa-solid fa-triangle-exclamation mr-3 text-3xl fa-beat"></i> Falha na Conexão com a Planilha.<br><span class="text-sm font-medium text-red-400 mt-2 block">Erro: ${e.message}</span></td></tr>`;
                 
                 const screen = document.getElementById('loading-screen');
                 if(screen) screen.classList.add('loader-hidden');
