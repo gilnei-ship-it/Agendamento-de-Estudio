@@ -7,8 +7,9 @@
     <style>
         /* Estilos Globais */
         :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
+            --primary: #FF6B00; /* Laranja Brisanet */
+            --primary-hover: #e66000;
+            --secondary: #1E3A8A; /* Azul Unibrisa */
             --bg-color: #f3f4f6;
             --card-bg: #ffffff;
             --text-main: #1f2937;
@@ -27,7 +28,7 @@
             min-height: 100vh;
         }
 
-        /* 🧭 Cabeçalho e Navegação */
+        /* Cabeçalho e Navegação */
         header {
             background-color: var(--card-bg);
             border-bottom: 1px solid var(--border);
@@ -42,25 +43,9 @@
             margin-bottom: 1rem;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .jira-badge {
-            background-color: #0052CC;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        .logos img {
+            height: 40px;
+            margin-right: 15px;
         }
 
         /* Navegação em Abas */
@@ -82,14 +67,8 @@
             font-weight: 500;
         }
 
-        .tab-btn:hover {
-            color: var(--primary);
-        }
-
-        .tab-btn.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
+        .tab-btn:hover { color: var(--primary); }
+        .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
 
         /* Área de Conteúdo principal */
         main {
@@ -101,272 +80,162 @@
             box-sizing: border-box;
         }
 
-        .tab-content {
-            display: none;
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content { display: none; background: var(--card-bg); padding: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Estilos de Formulário (Aba 1) */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-family: inherit;
-        }
-
-        .btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-hover);
-        }
-
-        /* Estilos de Tabela (Aba 2) */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        th {
-            background-color: #f8fafc;
-            font-weight: 600;
-        }
-
-        .status {
-            padding: 0.3rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
+        /* Tabelas */
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { text-align: left; padding: 1rem; border-bottom: 1px solid var(--border); }
+        th { background-color: #f8fafc; font-weight: 600; }
+        .status { padding: 0.3rem 0.6rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
         .status.doing { background-color: #fef08a; color: #854d0e; }
         .status.done { background-color: #bbf7d0; color: #166534; }
         .status.todo { background-color: #e5e7eb; color: #374151; }
+        
+        .badge-tcr { background-color: #e0e7ff; color: #3730a3; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; }
+        .badge-adm { background-color: #ffedd5; color: #9a3412; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; }
 
-        /* Grade de Cards (Aba 3 e 4) */
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .card {
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        /* 📄 Rodapé */
-        footer {
-            background-color: var(--card-bg);
-            text-align: center;
-            padding: 1.5rem;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+        /* Cards Fluxo */
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+        .card { border: 1px solid var(--border); padding: 1.5rem; border-radius: 8px; text-align: center; border-top: 4px solid var(--primary);}
     </style>
 </head>
 <body>
 
     <header>
         <div class="header-top">
-            <div class="logo">🏭 Fábrica de Conteúdo</div>
-            <div class="jira-badge">⚙️ Jira Sync Ativo</div>
+            <div class="logos">
+                <!-- Usando as logos fornecidas -->
+                <img src="https://github.com/gilnei-ship-it/Agendamento-de-Estudio/blob/main/logo%20Unibrisa%20(1).png?raw=true" alt="Unibrisa">
+                <img src="https://github.com/gilnei-ship-it/Agendamento-de-Estudio/blob/main/Logo.png?raw=true" alt="Brisanet">
+                <span style="font-size: 1.5rem; font-weight: bold; color: var(--secondary); vertical-align: middle;">| Fábrica de Conteúdo</span>
+            </div>
         </div>
         <div class="tabs">
-            <button class="tab-btn active" onclick="openTab('aba1')">🎬 Solicitar Novo Conteúdo</button>
-            <button class="tab-btn" onclick="openTab('aba2')">🔍 Acompanhar Solicitações</button>
-            <button class="tab-btn" onclick="openTab('aba3')">📝 Templates e Ajuda</button>
-            <button class="tab-btn" onclick="openTab('aba4')">📚 Treinamento e Padrões</button>
+            <button class="tab-btn active" onclick="openTab('aba-inicio')">🏠 Início</button>
+            <button class="tab-btn" onclick="openTab('aba-fluxo')">🔄 Fluxos</button>
+            <button class="tab-btn" onclick="openTab('aba-demandas')">📋 Demandas</button>
+            <button class="tab-btn" onclick="openTab('aba-relatorios')">📊 Relatórios e Impacto</button>
         </div>
     </header>
 
     <main>
-        <div id="aba1" class="tab-content active">
-            <h2>Criar Nova Solicitação de Conteúdo</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Preencha os dados abaixo. Um card será criado automaticamente no Jira.</p>
-            
-            <form onsubmit="event.preventDefault(); alert('Solicitação enviada e sincronizada com o Jira!');">
-                <div class="form-group">
-                    <label>Título do Conteúdo</label>
-                    <input type="text" placeholder="Ex: Artigo sobre Lançamento do Produto X" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Formato / Tipo</label>
-                    <select required>
-                        <option value="">Selecione...</option>
-                        <option value="blog">Artigo para Blog</option>
-                        <option value="social">Post Redes Sociais</option>
-                        <option value="email">Email Marketing / Newsletter</option>
-                        <option value="video">Roteiro de Vídeo</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Data Limite (Deadline)</label>
-                    <input type="date" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Briefing / Descrição Detalhada</label>
-                    <textarea rows="5" placeholder="Público-alvo, objetivo principal, palavras-chave..." required></textarea>
-                </div>
-
-                <button type="submit" class="btn">Enviar Solicitação</button>
-            </form>
+        <!-- TELA INICIAL -->
+        <div id="aba-inicio" class="tab-content active">
+            <h2 style="color: var(--secondary);">Um jeito mais fácil de acompanhar seus vídeos.</h2>
+            <p>Nós notamos que muitos pedidos chegam sem uma data combinada. Queremos simplificar isso para todo mundo. A ideia é criar um jeito de ajudar você a pedir o vídeo mais rápido, e ajudar nossa equipe a gravar com mais calma.</p>
+            <ul>
+                <li><strong>Fim da confusão com datas.</strong></li>
+                <li><strong>Menos mensagens perdidas.</strong></li>
+                <li><strong>Mais foco na qualidade do seu material.</strong></li>
+            </ul>
         </div>
 
-        <div id="aba2" class="tab-content">
-            <h2>Acompanhamento (Sincronizado com Jira)</h2>
+        <!-- FLUXOS -->
+        <div id="aba-fluxo" class="tab-content">
+            <h2 style="color: var(--secondary);">Passo a Passo: Como Usar</h2>
+            <div class="grid-cards">
+                <div class="card">
+                    <h3 style="color: var(--primary);">1. O Pedido</h3>
+                    <p style="font-size: 0.9rem;">Você acessa o link da nossa ferramenta e preenche o que precisa.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--primary);">2. A Data</h3>
+                    <p style="font-size: 0.9rem;">Na mesma tela, você clica no calendário e escolhe o melhor dia.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--primary);">3. Gravação</h3>
+                    <p style="font-size: 0.9rem;">Nós te recebemos no estúdio no dia marcado. Sem correria.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--primary);">4. Entrega</h3>
+                    <p style="font-size: 0.9rem;">Você recebe o vídeo pronto mais rápido e com ótima qualidade.</p>
+                </div>
+            </div>
+            <p style="margin-top: 2rem; color: var(--text-muted);"><strong>Equipe de Produção:</strong> Gilnei Laurindo, Erick Gustavo e Marcos Guilherme.</p>
+        </div>
+
+        <!-- DEMANDAS -->
+        <div id="aba-demandas" class="tab-content">
+            <h2 style="color: var(--secondary);">Verifique como está sua demanda</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>ID Jira</th>
-                        <th>Título</th>
-                        <th>Formato</th>
+                        <th>Solicitante</th>
+                        <th>Frente</th>
+                        <th>Título do Projeto</th>
                         <th>Data Limite</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><a href="#">#CON-104</a></td>
-                        <td>Campanha de Black Friday</td>
-                        <td>Redes Sociais</td>
-                        <td>25/08/2026</td>
+                        <td>Jaci Neto</td>
+                        <td><span class="badge-tcr">TCR - Comercial</span></td>
+                        <td>Vídeo Requisição Financeira</td>
+                        <td>13/08/2026</td>
                         <td><span class="status doing">Em Produção</span></td>
                     </tr>
                     <tr>
-                        <td><a href="#">#CON-103</a></td>
-                        <td>Newsletter de Agosto</td>
-                        <td>Email</td>
-                        <td>22/08/2026</td>
-                        <td><span class="status done">Finalizado</span></td>
+                        <td>Ozeias</td>
+                        <td><span class="badge-adm">Administrativo</span></td>
+                        <td>Treinamento Processos Internos</td>
+                        <td>25/09/2026</td>
+                        <td><span class="status todo">Na Fila</span></td>
                     </tr>
                     <tr>
-                        <td><a href="#">#CON-105</a></td>
-                        <td>Artigo: Futuro da IA</td>
-                        <td>Blog</td>
-                        <td>30/08/2026</td>
-                        <td><span class="status todo">Na Fila</span></td>
+                        <td>Thaynara</td>
+                        <td><span class="badge-tcr">TCR - Comercial</span></td>
+                        <td>Campanha Promocional</td>
+                        <td>10/09/2026</td>
+                        <td><span class="status done">Concluído</span></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <div id="aba3" class="tab-content">
-            <h2>Templates Oficiais</h2>
-            <p>Utilize as estruturas abaixo para facilitar a criação de materiais fora da esteira principal.</p>
+        <!-- RELATÓRIOS -->
+        <div id="aba-relatorios" class="tab-content">
+            <h2 style="color: var(--secondary);">Relatório de Projetos (Visão Mensal)</h2>
+            <p>Acompanhamento de demandas por frente estratégica para entender onde está nosso maior volume.</p>
             
-            <div class="grid-cards">
-                <div class="card">
-                    <h3>📑 Template de Artigo (SEO)</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Estrutura ideal para rankeamento no Google com H1, H2 e CTA.</p>
-                    <br>
-                    <button class="btn" style="width: 100%; font-size: 0.9rem;">Baixar Word (.docx)</button>
+            <div style="display: flex; gap: 2rem; margin-top: 2rem;">
+                <div style="flex: 1; background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
+                    <h3 style="color: #3730a3; margin-top: 0;">📈 Frente TCR - Comercial (65%)</h3>
+                    <ul style="color: var(--text-muted); font-size: 0.9rem;">
+                        <li>Jaci Neto</li>
+                        <li>Thaynara</li>
+                        <li>Vitor</li>
+                        <li>Matheus Oliveira</li>
+                        <li>Eduarda Neto</li>
+                        <li>Natália</li>
+                    </ul>
                 </div>
-                <div class="card">
-                    <h3>📱 Carrossel Instagram</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Template no Canva com as margens de segurança e identidade visual.</p>
-                    <br>
-                    <button class="btn" style="width: 100%; font-size: 0.9rem; background-color: #8b5cf6;">Abrir no Canva</button>
-                </div>
-                <div class="card">
-                    <h3>📧 E-mail Marketing</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Estrutura de copy (AIDA) para conversão em e-mails.</p>
-                    <br>
-                    <button class="btn" style="width: 100%; font-size: 0.9rem;">Ver Documento</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="aba4" class="tab-content">
-            <h2>Manual de Tom e Voz da Marca</h2>
-            <div style="margin-top: 1.5rem; line-height: 1.6;">
-                <h3>Regras de Ouro:</h3>
-                <ul>
-                    <li><strong>Clareza em primeiro lugar:</strong> Evite jargões complexos que o usuário final não entenda.</li>
-                    <li><strong>Tom empático e direto:</strong> Nossa comunicação deve soar como uma conversa entre profissionais.</li>
-                    <li><strong>Formatação:</strong> Parágrafos curtos (máximo 4 linhas) e uso de <i>bullet points</i> para escaneabilidade.</li>
-                </ul>
-                <hr style="border: 0; border-top: 1px solid var(--border); margin: 2rem 0;">
-                <h3>Vídeo de Onboarding</h3>
-                <div style="background: #e5e7eb; height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
-                    <p style="color: var(--text-muted);">▶ Player de Vídeo Aqui</p>
+                <div style="flex: 1; background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
+                    <h3 style="color: #9a3412; margin-top: 0;">📋 Frente Administrativo (35%)</h3>
+                    <ul style="color: var(--text-muted); font-size: 0.9rem;">
+                        <li>Ozeias</li>
+                        <li>Eliane</li>
+                        <li>Luisa</li>
+                        <li>Naira</li>
+                        <li>Henrique, Renato, Beatriz E., Beatriz A., Anderson</li>
+                    </ul>
                 </div>
             </div>
+            <h3 style="margin-top: 2rem;">Impacto na Organização</h3>
+            <p style="color: var(--text-muted);">Com 100% de clareza nas datas, o tempo que antes gastávamos organizando a bagunça, agora usamos para entregar os vídeos de forma mais rápida e bem feita.</p>
         </div>
     </main>
 
-    <footer>
-        <p>Fábrica de Conteúdo &copy; 2026. Desenvolvido para gestão ágil e integração via API do Jira.</p>
-    </footer>
-
     <script>
         function openTab(tabId) {
-            // Esconde todo o conteúdo
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // Remove a classe 'active' de todos os botões
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(button => {
-                button.classList.remove('active');
-            });
-
-            // Mostra o conteúdo clicado e marca o botão como ativo
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
         }
