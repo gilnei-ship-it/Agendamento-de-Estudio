@@ -99,6 +99,9 @@
         
         @keyframes spin-slow { 100% { transform: rotate(360deg); } }
         @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+        
+        .alerta-nao-classificado { animation: pulseWarning 2s infinite; }
+        @keyframes pulseWarning { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
     </style>
 </head>
 <body class="antialiased">
@@ -251,14 +254,14 @@
             <!-- PAINEL DE CONTROLE ASSERTIVO (FILTROS RÁPIDOS) -->
             <div class="bg-white p-6 md:p-8 rounded-[32px] border border-gray-100 shadow-sm mb-8 relative overflow-hidden">
                 <div class="flex justify-between items-center mb-6 border-b border-gray-100 pb-4 relative z-10">
-                    <h3 class="text-sm font-black text-fabrica-blue uppercase tracking-widest"><i class="fa-solid fa-filter text-fabrica-orange mr-2"></i> Painel de Filtros Exatos</h3>
+                    <h3 class="text-sm font-black text-fabrica-blue uppercase tracking-widest"><i class="fa-solid fa-filter text-fabrica-orange mr-2"></i> Painel de Filtros Assertivos</h3>
                     <button onclick="limparFiltros(true)" id="btn-limpar-filtros" class="hidden text-[10px] uppercase tracking-widest bg-red-50 text-red-600 px-4 py-2 rounded-full font-black hover:bg-red-500 hover:text-white transition-all shadow-sm flex items-center gap-2"><i class="fa-solid fa-eraser"></i> Limpar Filtros</button>
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
                     <!-- Filtro Equipe -->
                     <div class="col-span-1 border-r border-dashed border-gray-200 pr-0 lg:pr-6">
-                        <p class="text-[10px] font-black text-slate-400 uppercase mb-4"><i class="fa-solid fa-users-viewfinder mr-2 text-lg text-slate-300"></i> Filtrar por Membro</p>
+                        <p class="text-[10px] font-black text-slate-400 uppercase mb-4"><i class="fa-solid fa-users-viewfinder mr-2 text-lg text-slate-300"></i> Inspecionar Membro</p>
                         <div class="flex flex-col gap-3">
                             <button onclick="aplicarFiltroRapido('equipe', 'Gilnei')" data-valor="Gilnei" class="filtro-btn filtro-equipe bg-slate-50 border border-slate-200 text-slate-600 rounded-2xl px-5 py-3 flex justify-between items-center w-full text-left font-bold transition-all hover:bg-white shadow-sm">
                                 <span class="flex items-center gap-3"><i class="fa-solid fa-wand-magic-sparkles text-lg text-slate-400"></i> Gilnei Laurindo</span>
@@ -286,11 +289,12 @@
                         </div>
                         <div>
                             <p class="text-[10px] font-black text-slate-400 uppercase mb-4"><i class="fa-solid fa-city mr-2 text-lg text-slate-300"></i> Frentes Solicitantes</p>
-                            <div class="flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2" id="botoes-frentes-dinamicos">
                                 <button onclick="aplicarFiltroRapido('frente', 'TTO - Técnico')" data-valor="TTO - Técnico" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex justify-between items-center group shadow-sm">TTO - Técnico <i class="fa-solid fa-satellite-dish text-slate-300 group-hover:text-fabrica-blue"></i></button>
                                 <button onclick="aplicarFiltroRapido('frente', 'TCR - Comercial')" data-valor="TCR - Comercial" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex justify-between items-center group shadow-sm">TCR - Comercial <i class="fa-solid fa-store text-slate-300 group-hover:text-fabrica-blue"></i></button>
                                 <button onclick="aplicarFiltroRapido('frente', 'DO - Administrativo')" data-valor="DO - Administrativo" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex justify-between items-center group shadow-sm">DO - Administrativo <i class="fa-solid fa-briefcase text-slate-300 group-hover:text-fabrica-blue"></i></button>
                                 <button onclick="aplicarFiltroRapido('frente', 'Engajamento')" data-valor="Engajamento" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex justify-between items-center group shadow-sm">Engajamento <i class="fa-solid fa-heart text-slate-300 group-hover:text-fabrica-blue"></i></button>
+                                <button onclick="aplicarFiltroRapido('frente', 'Não Classificada')" data-valor="Não Classificada" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-red-200 text-red-600 bg-red-50 hover:bg-red-500 hover:text-white w-full text-left flex justify-between items-center group shadow-sm">Não Classificadas <i class="fa-solid fa-triangle-exclamation text-red-400 group-hover:text-white"></i></button>
                             </div>
                         </div>
                     </div>
@@ -300,6 +304,11 @@
             <!-- Tabela Principal -->
             <div class="bg-white rounded-[32px] shadow-sm border border-gray-200 mb-12 overflow-hidden" id="tabela-container">
                 
+                <div id="alerta-gargalo-tabela" class="hidden bg-red-50 border-b-2 border-red-500 p-6">
+                    <h3 class="text-red-700 font-black flex items-center gap-2 text-lg"><i class="fa-solid fa-triangle-exclamation fa-beat"></i> Demandas Não Classificadas</h3>
+                    <p class="text-sm text-red-800 font-medium mt-1">Estas demandas estão invisíveis nos relatórios das frentes. <strong>Para corrigir:</strong> preencha o campo <span class="bg-red-200 px-1 rounded">Informado</span> ou <span class="bg-red-200 px-1 rounded">Solicitante</span> na planilha oficial com o nome correto.</p>
+                </div>
+
                 <div class="p-6 md:p-8 border-b border-gray-100 bg-slate-50/50">
                     <div class="flex flex-col lg:flex-row justify-between items-center gap-6">
                         <h2 class="text-xl md:text-2xl font-black text-fabrica-blue w-full lg:w-auto text-left tracking-tight flex items-center gap-3 flex-wrap uppercase">
@@ -329,7 +338,7 @@
                             </tr>
                         </thead>
                         <tbody id="tabela-demandas" class="text-sm text-gray-700 divide-y divide-slate-100">
-                            <tr><td colspan="6" class="p-12 text-center text-gray-400 font-bold"><i class="fa-solid fa-cog fa-spin mr-2 text-2xl text-fabrica-orange"></i> Lendo banco de dados...</td></tr>
+                            <tr><td colspan="6" class="p-12 text-center text-gray-400 font-bold"><i class="fa-solid fa-cog fa-spin mr-2 text-2xl text-fabrica-orange"></i> Buscando na base de dados...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -416,6 +425,12 @@
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                         <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 border-b-2 border-slate-50 pb-3 flex items-center gap-2"><i class="fa-solid fa-heart-pulse text-red-500 text-lg fa-beat"></i> Termômetro de Gargalos</h4>
                         <div id="raiox-status-breakdown" class="space-y-2"></div>
+                    </div>
+
+                    <div id="raiox-alerta-n-classificado" class="hidden bg-red-50 border-2 border-red-100 rounded-2xl p-6 shadow-inner">
+                        <h4 class="text-sm font-black text-red-600 uppercase tracking-widest mb-3 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation fa-fade text-lg"></i> Atenção Gestão</h4>
+                        <p class="text-xs text-red-800 font-bold mb-5 leading-relaxed">Demandas sem identificação clara de frente solicitante (Não Classificadas).</p>
+                        <div id="raiox-lista-infratores" class="space-y-3"></div>
                     </div>
                 </div>
             </div>
@@ -507,13 +522,13 @@
             <button onclick="fecharModal('modal-config')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 font-bold hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
             <i class="fa-solid fa-database text-5xl text-fabrica-orange mb-4"></i>
             <h3 class="text-2xl font-black text-fabrica-blue uppercase">Conexão Backend</h3>
-            <p class="text-sm text-gray-500 mt-2 font-medium">Link do Apps Script configurado para conexão anônima (CORS).</p>
+            <p class="text-sm text-gray-500 mt-2 font-medium">Link da planilha ativado e comunicando via Apps Script.</p>
         </div>
     </div>
 
     <!-- STREAMING_CHUNK:Javascript Logic -->
     <script>
-        const googleAppUrl = "https://script.google.com/macros/s/AKfycbyDtx4tsT6qGfkSuFTxP5NFF-VHAN8jqnI3nHQIafSA/dev";
+        const googleAppUrl = "https://script.google.com/macros/s/AKfycbyG-H8RtauHK1g8iNI0UWLVqaOSbRUJ_rEEcCWgNdKCeyWkypJnKRILxbn-3FuklJ54KQ/exec";
 
         let dadosGlobais = [];
         let textoBuscado = '';
@@ -547,7 +562,7 @@
             return { nome: "Não Classificada", class: "frente-nao", modalColor: "bg-red-500" }; 
         }
 
-        // Função Assasina e Robusta de Extração (Ignora espaços e acentos no JSON do Google)
+        // Extrator Universal
         function getVal(obj, searchKeys) {
             const keys = Object.keys(obj);
             for (let k of keys) {
@@ -562,13 +577,13 @@
         function normalizarProjeto(p) {
             return {
                 demanda: getVal(p, ['demanda', 'projeto']),
-                sponsor: getVal(p, ['informado', 'aprovador', 'solicitante']), // Informado = Solicitante
+                sponsor: getVal(p, ['informado', 'aprovador', 'solicitante']),
                 responsavel: getVal(p, ['responsavel']),
                 colaborador: getVal(p, ['colaborador']),
                 etapaAtual: getVal(p, ['etapa atual', 'status']),
                 fase: getVal(p, ['fase']),
                 prazoFinal: getVal(p, ['prazo', 'prazo final']),
-                dataGravacao: getVal(p, ['data de gracao', 'data de gravacao']),
+                dataGravacao: getVal(p, ['data de gracao', 'data de gravacao', 'data da gravacao']),
                 dataRecebimento: getVal(p, ['data de recebimento']),
                 linkAcesso: getVal(p, ['links e obs', 'obs', 'link'])
             };
@@ -654,7 +669,6 @@
                 }
             });
 
-            // Frentes List (Dashboard)
             const containerAreas = document.getElementById('top-areas-list');
             let frentesOrdenadas = Object.entries(countsFrente).sort((a,b) => b[1] - a[1]).slice(0, 3);
             
@@ -681,7 +695,6 @@
                 containerAreas.innerHTML = htmlAreas;
             }
 
-            // Sponsors List (Dashboard)
             const containerSponsors = document.getElementById('top-sponsors-list');
             let sponsorsOrdenados = Object.entries(countsSponsor).sort((a,b) => b[1] - a[1]).slice(0, 3);
             
@@ -708,7 +721,6 @@
                 containerSponsors.innerHTML = htmlSponsors;
             }
 
-            // Gráfico de Meses
             const containerMeses = document.getElementById('container-grafico-meses');
             let chavesMeses = Object.keys(meses).sort(sortMesAnoKeys).slice(-6);
             
@@ -951,6 +963,11 @@
             const alertaInf = document.getElementById('raiox-alerta-n-classificado');
             if(Object.keys(infratoresClassificacao).length > 0) {
                 alertaInf.classList.remove('hidden');
+                let htmlInf = '';
+                sortDict(infratoresClassificacao).forEach(item => {
+                    htmlInf += `<div class="flex justify-between items-center text-xs text-red-900 border-b border-red-100 pb-2 mb-2 last:border-0 last:pb-0 last:mb-0"><strong class="flex items-center gap-2"><i class="fa-solid fa-ghost opacity-50"></i> ${escapeHTML(item[0])}</strong><span class="bg-red-100 px-2 py-1 rounded font-black">${item[1]}</span></div>`;
+                });
+                document.getElementById('raiox-lista-infratores').innerHTML = htmlInf;
             } else {
                 alertaInf.classList.add('hidden');
             }
@@ -994,6 +1011,7 @@
                 areaLegendas.innerHTML += `<span class="bg-blue-100 text-fabrica-blue border border-blue-200 px-3 py-1 rounded-lg text-xs font-black shadow-sm flex items-center gap-1"><i class="fa-solid fa-building-user"></i> ${escapeHTML(filtroFrenteNome)}</span>`;
                 filtrosAtivos = true;
                 
+                // Mostrar alerta se for "Não Classificada"
                 if(filtroFrenteNome === 'Não Classificada') alertaNaoClassificada.classList.remove('hidden');
                 else alertaNaoClassificada.classList.add('hidden');
             } else {
