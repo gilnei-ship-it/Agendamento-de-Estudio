@@ -17,7 +17,7 @@
                 extend: {
                     fontFamily: { sans: ['Montserrat', 'sans-serif'] },
                     colors: {
-                        fabrica: { blue: '#0B41CD', orange: '#FF5A00', light: '#F6F5F2' }
+                        fabrica: { blue: '#0B41CD', orange: '#FF6B00', light: '#F6F5F2' }
                     }
                 }
             }
@@ -41,10 +41,9 @@
 
         .stat-card { border-radius: 20px; color: white; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; border: 2px solid transparent; cursor: pointer; }
         .stat-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.15); }
-
         .bg-card-blue { background: linear-gradient(135deg, #0B41CD, #3B82F6); }
         .bg-card-green { background: linear-gradient(135deg, #10B981, #059669); }
-        .bg-card-orange { background: linear-gradient(135deg, #FF5A00, #EA580C); }
+        .bg-card-orange { background: linear-gradient(135deg, #FF6B00, #EA580C); }
         .bg-card-neutral { background: linear-gradient(135deg, #64748B, #475569); }
 
         .status-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
@@ -62,11 +61,11 @@
 
         .timeline-container { position: relative; display: flex; justify-content: space-between; align-items: center; margin: 30px 0 20px 0; padding: 0 10px; }
         .timeline-line { position: absolute; top: 18px; left: 10px; right: 10px; height: 4px; background: #E2E8F0; z-index: 0; border-radius: 4px;}
-        .timeline-line-fill { position: absolute; top: 18px; left: 10px; height: 4px; background: #FF5A00; z-index: 1; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 4px; box-shadow: 0 0 10px rgba(255,90,0,0.5); }
+        .timeline-line-fill { position: absolute; top: 18px; left: 10px; height: 4px; background: #FF6B00; z-index: 1; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 4px; box-shadow: 0 0 10px rgba(255,107,0,0.5); }
         .timeline-step { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 20%; }
         .timeline-circle { width: 42px; height: 42px; border-radius: 50%; background: #FFF; border: 4px solid #E2E8F0; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #CBD5E1; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .timeline-step.completed .timeline-circle { background: #FF5A00; border-color: #FF5A00; color: white; }
-        .timeline-step.active .timeline-circle { background: #FF5A00; border-color: #FF5A00; color: white; box-shadow: 0 0 0 5px rgba(255,90,0,0.2); transform: scale(1.15); animation: pulse 2s infinite; }
+        .timeline-step.completed .timeline-circle { background: #FF6B00; border-color: #FF6B00; color: white; }
+        .timeline-step.active .timeline-circle { background: #FF6B00; border-color: #FF6B00; color: white; box-shadow: 0 0 0 5px rgba(255,107,0,0.2); transform: scale(1.15); animation: pulse 2s infinite; }
         
         .badge-frente { font-size: 9px; padding: 5px 12px; border-radius: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         .frente-tcr { background-color: #E0F2FE; color: #0284C7; border: 1px solid #BAE6FD; }
@@ -77,45 +76,43 @@
         .frente-nao { background-color: #FEE2E2; color: #B91C1C; border: 1px solid #FECACA; }
 
         .tr-status-concluido { border-left: 4px solid #10B981; }
-        .tr-status-andamento { border-left: 4px solid #FF5A00; }
+        .tr-status-andamento { border-left: 4px solid #FF6B00; }
         .tr-status-fila { border-left: 4px solid #64748B; }
         .tr-status-cancelado { border-left: 4px solid #EF4444; opacity: 0.6; }
 
         .filtro-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
         .filtro-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.05); }
-        .filtro-btn.active-equipe { background-color: #FFF7ED; border-color: #FF5A00; color: #C2410C; box-shadow: 0 4px 12px rgba(255,107,0,0.15); }
-        .filtro-btn.active-equipe .badge-filtro { background-color: #FF5A00; color: white; }
+        .filtro-btn.active-equipe { background-color: #FFF7ED; border-color: #FF6B00; color: #C2410C; box-shadow: 0 4px 12px rgba(255,107,0,0.15); }
+        .filtro-btn.active-equipe .badge-filtro { background-color: #FF6B00; color: white; }
         .filtro-btn.active-status { background-color: #F1F5F9; border-color: #64748B; color: #334155; }
-        .filtro-btn.active-status.andamento { background-color: #FFF7ED; border-color: #FF5A00; color: #C2410C; }
+        .filtro-btn.active-status.andamento { background-color: #FFF7ED; border-color: #FF6B00; color: #C2410C; }
         .filtro-btn.active-status.concluido { background-color: #F0FDF4; border-color: #10B981; color: #047857; }
         .filtro-btn.active-frente { background-color: #EFF6FF; border-color: #0B41CD; color: #1D4ED8; }
 
         .fluxo-container { position: relative; width: 100%; height: 350px; background-image: radial-gradient(#E2E8F0 1px, transparent 1px); background-size: 30px 30px; border-radius: 24px; padding: 20px;}
         .fluxo-node { position: absolute; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: all 0.3s; z-index: 10; }
         .fluxo-node:hover { transform: scale(1.08) translateY(-10px); z-index: 20; }
-        .fluxo-avatar-wrapper { position: relative; padding: 4px; background: linear-gradient(135deg, #0B41CD 0%, transparent 50%, #FF5A00 100%); border-radius: 50%; animation: spin-slow 15s linear infinite; }
+        .fluxo-avatar-wrapper { position: relative; padding: 4px; background: linear-gradient(135deg, #0B41CD 0%, transparent 50%, #FF6B00 100%); border-radius: 50%; animation: spin-slow 15s linear infinite; }
         .fluxo-avatar { width: 70px; height: 70px; border-radius: 50%; background: white; border: 3px solid white; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #0B41CD; box-shadow: 0 8px 16px rgba(0,0,0,0.1); animation: spin-reverse 15s linear infinite; }
         .fluxo-label { margin-top: 12px; font-weight: 800; color: #1E293B; font-size: 13px; background: white; px-3 py-1 rounded-full; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .fluxo-cargo { margin-top: 6px; background-color: #FF5A00; color: white; padding: 4px 10px; border-radius: 6px; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(255,107,0,0.2); }
+        .fluxo-cargo { margin-top: 6px; background-color: #FF6B00; color: white; padding: 4px 10px; border-radius: 6px; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(255,107,0,0.2); }
         
         @keyframes spin-slow { 100% { transform: rotate(360deg); } }
         @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
-        
-        .alerta-nao-classificado { animation: pulseWarning 2s infinite; }
-        @keyframes pulseWarning { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
     </style>
 </head>
 <body class="antialiased">
 
+    <!-- Loading Screen -->
     <div id="loading-screen" class="fixed inset-0 bg-white flex flex-col items-center justify-center z-[9999]">
-        <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo" class="h-24 md:h-40 object-contain mb-8 animate-pulse px-4">
+        <img src="https://raw.githubusercontent.com/gilnei-ship-it/Agendamento-de-Estudio/main/Logo.png" alt="Logo Fábrica" class="h-24 md:h-40 object-contain mb-8 animate-pulse px-4">
         <div class="flex flex-col items-center gap-3">
             <i class="fa-solid fa-cog fa-spin text-fabrica-orange text-4xl"></i>
-            <span class="text-slate-500 font-black tracking-widest uppercase text-xs md:text-sm mt-2" id="loading-text">Conectando Engrenagens...</span>
+            <span class="text-slate-500 font-black tracking-widest uppercase text-xs md:text-sm mt-2" id="loading-text">Mapeando Entregas da Equipe...</span>
         </div>
     </div>
 
-    <!-- HEADER CLEAN WHITE -->
+    <!-- Header Clean White -->
     <div class="header-bg pt-6 pb-6 px-4 sm:px-8 relative">
         <div class="max-w-[1300px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-4">
@@ -124,17 +121,17 @@
                 </div>
                 <div class="border-l-2 border-slate-200 pl-4 hidden sm:block">
                     <h1 class="text-xl md:text-2xl font-black text-fabrica-blue leading-tight tracking-tight">Fábrica de <span class="text-fabrica-orange">Conteúdo</span></h1>
-                    <p class="text-slate-400 text-[9px] font-bold tracking-widest uppercase">Produção Visual DHO</p>
+                    <p class="text-slate-400 text-[9px] font-bold tracking-widest uppercase">Gestão e Governança</p>
                 </div>
             </div>
             
             <nav class="flex gap-2 bg-slate-50 border border-slate-200 p-1.5 rounded-full shadow-inner w-full md:w-auto overflow-x-auto custom-scroll">
-                <button onclick="switchView('inicio')" id="tab-inicio" class="nav-tab active font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-rocket"></i> Painel Inicial</button>
-                <button onclick="switchView('demandas')" id="tab-demandas" class="nav-tab font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-clipboard-list"></i> Gestão Completa</button>
-                <button onclick="switchView('relatorios')" id="tab-relatorios" class="nav-tab font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-chart-line"></i> Relatórios</button>
+                <button onclick="switchView('inicio')" id="tab-inicio" class="nav-tab active font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-rocket"></i> Visão Executiva</button>
+                <button onclick="switchView('demandas')" id="tab-demandas" class="nav-tab font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-clipboard-list"></i> Projetos e Gargalos</button>
+                <button onclick="switchView('relatorios')" id="tab-relatorios" class="nav-tab font-bold text-xs md:text-sm py-2.5 px-6 rounded-full whitespace-nowrap flex items-center gap-2"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
             </nav>
             
-            <button onclick="abrirModal('modal-config')" class="text-slate-400 hover:text-fabrica-blue hover:rotate-90 transition-all duration-300 text-xl" title="Configurações de Conexão"><i class="fa-solid fa-gear"></i></button>
+            <button onclick="abrirModal('modal-config')" class="text-slate-400 hover:text-fabrica-blue hover:rotate-90 transition-all duration-300 text-xl" title="Configurações"><i class="fa-solid fa-gear"></i></button>
         </div>
     </div>
 
@@ -147,13 +144,13 @@
                     
                     <div>
                         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-fabrica-blue font-black text-[10px] uppercase tracking-widest mb-6 border border-blue-100">
-                            <i class="fa-solid fa-circle-check text-green-500"></i> Sistema Conectado
+                            <i class="fa-solid fa-chart-line text-fabrica-orange"></i> BI da Produção Visual
                         </div>
                         <h2 class="text-4xl md:text-5xl font-black text-slate-800 leading-tight mb-4 tracking-tight">
-                            Governança de <br><span class="text-fabrica-blue">Produção Visual</span>
+                            Governança e <br><span class="text-fabrica-blue">Assertividade</span>
                         </h2>
                         <p class="text-slate-500 text-base font-medium mb-8 leading-relaxed max-w-lg">
-                            Bem-vindo ao hub de controle da Fábrica de Conteúdo. Acompanhe a entrega da equipe, identifique gargalos e saiba exatamente quem são seus maiores clientes internos.
+                            Supervise o progresso, localize gargalos operacionais instantaneamente e audite exatamente quem são os solicitantes que mais demandam seu time.
                         </p>
 
                         <div class="flex flex-col sm:flex-row gap-4">
@@ -161,11 +158,12 @@
                                 <i class="fa-solid fa-video group-hover:scale-110 transition-transform"></i> Nova Demanda
                             </button>
                             <button onclick="switchView('demandas')" class="bg-fabrica-blue hover:bg-blue-800 hover:shadow-lg hover:shadow-blue-600/30 text-white font-black py-4 px-8 rounded-2xl transition-all hover:-translate-y-1 flex justify-center items-center gap-3 text-[15px] group">
-                                <i class="fa-solid fa-magnifying-glass-chart group-hover:scale-110 transition-transform"></i> Rastrear Projetos
+                                <i class="fa-solid fa-list-check group-hover:scale-110 transition-transform"></i> Tabela Operacional
                             </button>
                         </div>
                     </div>
 
+                    <!-- Representação Visual Diagonal -->
                     <div class="fluxo-container bg-slate-50">
                         <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 1;">
                             <path d="M 60 250 L 180 150 L 300 50" fill="none" stroke="#CBD5E1" stroke-width="3" stroke-dasharray="8 8"/>
@@ -174,7 +172,7 @@
                         <div class="fluxo-node" style="bottom: 40px; left: 10%;" onclick="verDemandasDireto('Marcos')">
                             <div class="relative">
                                 <div class="fluxo-avatar-wrapper"><div class="fluxo-avatar"><i class="fa-solid fa-camera-retro"></i></div></div>
-                                <div class="absolute -top-1 -right-1 bg-fabrica-blue text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-sm" id="badge-home-marcos">0</div>
+                                <div class="absolute -top-1 -right-1 bg-fabrica-blue text-white text-[10px] font-black w-8 h-8 rounded-full flex items-center justify-center border-2 border-white shadow-lg shadow-blue-500/50" id="badge-home-marcos">0</div>
                             </div>
                             <span class="fluxo-label text-center px-3 py-1 bg-white rounded-full mt-2">Marcos Guilherme</span>
                             <span class="fluxo-cargo"><i class="fa-solid fa-scissors mr-1"></i> Gravação / Cortes</span>
@@ -183,7 +181,7 @@
                         <div class="fluxo-node" style="bottom: 140px; left: 40%;" onclick="verDemandasDireto('Erick')">
                             <div class="relative">
                                 <div class="fluxo-avatar-wrapper"><div class="fluxo-avatar"><i class="fa-solid fa-pen-nib"></i></div></div>
-                                <div class="absolute -top-1 -right-1 bg-fabrica-orange text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-sm" style="animation-delay: 0.2s;" id="badge-home-erick">0</div>
+                                <div class="absolute -top-1 -right-1 bg-fabrica-orange text-white text-[10px] font-black w-8 h-8 rounded-full flex items-center justify-center border-2 border-white shadow-lg shadow-orange-500/50" style="animation-delay: 0.2s;" id="badge-home-erick">0</div>
                             </div>
                             <span class="fluxo-label text-center px-3 py-1 bg-white rounded-full mt-2">Erick Gustavo</span>
                             <span class="fluxo-cargo bg-fabrica-blue"><i class="fa-solid fa-hands-holding-circle mr-1"></i> Apoio / Refinamento</span>
@@ -192,20 +190,22 @@
                         <div class="fluxo-node" style="bottom: 240px; left: 70%;" onclick="verDemandasDireto('Gilnei')">
                             <div class="relative">
                                 <div class="fluxo-avatar-wrapper"><div class="fluxo-avatar"><i class="fa-solid fa-wand-magic-sparkles"></i></div></div>
-                                <div class="absolute -top-1 -right-1 bg-fabrica-blue text-white text-[10px] font-black w-7 h-7 rounded-full flex items-center justify-center border-2 border-white shadow-sm" style="animation-delay: 0.4s;" id="badge-home-gilnei">0</div>
+                                <div class="absolute -top-1 -right-1 bg-fabrica-blue text-white text-[10px] font-black w-8 h-8 rounded-full flex items-center justify-center border-2 border-white shadow-lg shadow-blue-500/50" style="animation-delay: 0.4s;" id="badge-home-gilnei">0</div>
                             </div>
                             <span class="fluxo-label text-center px-3 py-1 bg-white rounded-full mt-2">Gilnei Laurindo</span>
                             <span class="fluxo-cargo"><i class="fa-solid fa-palette mr-1"></i> Gestão / Design</span>
                         </div>
                     </div>
+
                 </div>
             </div>
 
+            <!-- CARDS DE GESTÃO: TOP FRENTES E TOP INFORMADOS -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                 <div class="bg-blue-50/50 border border-blue-100 rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center justify-between mb-6 border-b border-blue-100 pb-3">
                         <h3 class="text-fabrica-blue font-black text-xs uppercase tracking-widest flex items-center gap-2">
-                            <i class="fa-solid fa-building-user text-blue-500 text-lg"></i> Frentes Solicitantes (Top 3)
+                            <i class="fa-solid fa-building-user text-blue-500 text-lg"></i> Frentes Solicitantes (Top)
                         </h3>
                     </div>
                     <div class="space-y-4" id="top-areas-list">
@@ -214,7 +214,7 @@
                 </div>
 
                 <div class="bg-orange-50/50 border border-orange-100 rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center justify-between mb-6 border-b border-orange-100 pb-3">
                         <h3 class="text-orange-800 font-black text-xs uppercase tracking-widest flex items-center gap-2">
                             <i class="fa-solid fa-user-tag text-fabrica-orange text-lg"></i> Quem Mais Demanda (Informados)
                         </h3>
@@ -231,45 +231,44 @@
             
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
                 <div class="stat-card bg-card-blue flex flex-col justify-between p-5 md:p-6 group" onclick="abrirRaioX('status', 'todos', 'Raio-X Global', 'bg-fabrica-blue')">
-                    <div class="flex justify-between items-start mb-4"><div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl group-hover:scale-110 group-hover:rotate-12 transition-all"><i class="fa-solid fa-globe text-white"></i></div><i class="fa-solid fa-arrow-trend-up text-white/50 text-2xl group-hover:text-white transition-colors"></i></div>
+                    <div class="flex justify-between items-start mb-4"><div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl group-hover:scale-110 transition-all"><i class="fa-solid fa-globe text-white"></i></div><i class="fa-solid fa-arrow-trend-up text-white/50 text-2xl group-hover:text-white transition-colors"></i></div>
                     <div><h3 class="text-4xl font-black" id="count-total">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Total de Projetos</p></div>
                 </div>
                 <div class="stat-card bg-card-green flex flex-col justify-between p-5 md:p-6 group" onclick="abrirRaioX('status', 'concluido', 'Raio-X: Entregas', 'bg-green-500')">
-                    <div class="flex justify-between items-start mb-4"><div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl group-hover:scale-110 group-hover:-rotate-12 transition-all"><i class="fa-solid fa-trophy text-white"></i></div><i class="fa-solid fa-arrow-trend-up text-white/50 text-2xl group-hover:text-white transition-colors"></i></div>
+                    <div class="flex justify-between items-start mb-4"><div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl group-hover:scale-110 transition-all"><i class="fa-solid fa-check-double text-white"></i></div><i class="fa-solid fa-arrow-trend-up text-white/50 text-2xl group-hover:text-white transition-colors"></i></div>
                     <div><h3 class="text-4xl font-black" id="count-concluido">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Concluídos</p></div>
                 </div>
                 <div class="stat-card bg-card-orange flex flex-col justify-between p-5 md:p-6 group" onclick="abrirRaioX('status', 'andamento', 'Raio-X: Em Produção', 'bg-fabrica-orange')">
-                    <div class="flex justify-between items-start mb-4"><div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl group-hover:scale-110 group-hover:rotate-180 transition-all duration-500"><i class="fa-solid fa-cog text-white"></i></div><i class="fa-solid fa-arrow-trend-up text-white/50 text-2xl group-hover:text-white transition-colors"></i></div>
+                    <div class="flex justify-between items-start mb-4"><div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl group-hover:rotate-180 transition-all duration-500"><i class="fa-solid fa-cog text-white"></i></div><i class="fa-solid fa-arrow-trend-up text-white/50 text-2xl group-hover:text-white transition-colors"></i></div>
                     <div><h3 class="text-4xl font-black" id="count-andamento">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 text-white uppercase tracking-wider">Em Produção</p></div>
                 </div>
                 <div class="stat-card bg-card-neutral flex flex-col justify-between p-5 md:p-6 group" onclick="abrirRaioX('status', 'fila', 'Raio-X: Retidos na Fila', 'bg-slate-500')">
-                    <div class="flex justify-between items-start mb-4"><div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl group-hover:scale-110 group-hover:-translate-y-2 transition-all"><i class="fa-solid fa-hourglass-half text-white"></i></div><i class="fa-solid fa-arrow-trend-up text-white/50 text-2xl group-hover:text-white transition-colors"></i></div>
+                    <div class="flex justify-between items-start mb-4"><div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl group-hover:-translate-y-2 transition-all"><i class="fa-solid fa-hourglass-half text-white"></i></div><i class="fa-solid fa-arrow-trend-up text-white/50 text-2xl group-hover:text-white transition-colors"></i></div>
                     <div><h3 class="text-4xl font-black" id="count-pendente">0</h3><p class="text-[10px] md:text-sm font-bold opacity-90 mt-1 uppercase tracking-wider">Na Fila</p></div>
                 </div>
             </div>
 
-            <!-- PAINEL DE CONTROLE ASSERTIVO -->
-            <div class="bg-white p-6 md:p-8 rounded-[32px] border border-gray-100 shadow-xl mb-8 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-fabrica-orange rounded-full mix-blend-multiply filter blur-3xl opacity-10 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+            <!-- PAINEL DE CONTROLE ASSERTIVO (FILTROS RÁPIDOS) -->
+            <div class="bg-white p-6 md:p-8 rounded-[32px] border border-gray-100 shadow-sm mb-8 relative overflow-hidden">
                 <div class="flex justify-between items-center mb-6 border-b border-gray-100 pb-4 relative z-10">
-                    <h3 class="text-sm font-black text-fabrica-blue uppercase tracking-widest"><i class="fa-solid fa-filter text-fabrica-orange mr-2 fa-shake"></i> Painel de Filtros Assertivos</h3>
+                    <h3 class="text-sm font-black text-fabrica-blue uppercase tracking-widest"><i class="fa-solid fa-filter text-fabrica-orange mr-2"></i> Painel de Filtros Exatos</h3>
                     <button onclick="limparFiltros(true)" id="btn-limpar-filtros" class="hidden text-[10px] uppercase tracking-widest bg-red-50 text-red-600 px-4 py-2 rounded-full font-black hover:bg-red-500 hover:text-white transition-all shadow-sm flex items-center gap-2"><i class="fa-solid fa-eraser"></i> Limpar Filtros</button>
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
                     <!-- Filtro Equipe -->
                     <div class="col-span-1 border-r border-dashed border-gray-200 pr-0 lg:pr-6">
-                        <p class="text-[10px] font-black text-slate-400 uppercase mb-4"><i class="fa-solid fa-users-viewfinder mr-2 text-lg text-slate-300"></i> Inspecionar Membro</p>
+                        <p class="text-[10px] font-black text-slate-400 uppercase mb-4"><i class="fa-solid fa-users-viewfinder mr-2 text-lg text-slate-300"></i> Filtrar por Membro</p>
                         <div class="flex flex-col gap-3">
-                            <button onclick="aplicarFiltroRapido('equipe', 'Gilnei')" data-valor="Gilnei" class="filtro-btn filtro-equipe bg-slate-50 border border-slate-200 text-slate-600 rounded-2xl px-5 py-3 flex justify-between items-center w-full text-left font-bold transition-all hover:bg-white">
+                            <button onclick="aplicarFiltroRapido('equipe', 'Gilnei')" data-valor="Gilnei" class="filtro-btn filtro-equipe bg-slate-50 border border-slate-200 text-slate-600 rounded-2xl px-5 py-3 flex justify-between items-center w-full text-left font-bold transition-all hover:bg-white shadow-sm">
                                 <span class="flex items-center gap-3"><i class="fa-solid fa-wand-magic-sparkles text-lg text-slate-400"></i> Gilnei Laurindo</span>
                                 <span class="badge-filtro bg-white border border-slate-200 text-slate-600 text-[10px] px-2.5 py-0.5 rounded-full font-black" id="badge-card-gilnei">0</span>
                             </button>
-                            <button onclick="aplicarFiltroRapido('equipe', 'Marcos')" data-valor="Marcos" class="filtro-btn filtro-equipe bg-slate-50 border border-slate-200 text-slate-600 rounded-2xl px-5 py-3 flex justify-between items-center w-full text-left font-bold transition-all hover:bg-white">
+                            <button onclick="aplicarFiltroRapido('equipe', 'Marcos')" data-valor="Marcos" class="filtro-btn filtro-equipe bg-slate-50 border border-slate-200 text-slate-600 rounded-2xl px-5 py-3 flex justify-between items-center w-full text-left font-bold transition-all hover:bg-white shadow-sm">
                                 <span class="flex items-center gap-3"><i class="fa-solid fa-camera-retro text-lg text-slate-400"></i> Marcos Guilherme</span>
                                 <span class="badge-filtro bg-white border border-slate-200 text-slate-600 text-[10px] px-2.5 py-0.5 rounded-full font-black" id="badge-card-marcos">0</span>
                             </button>
-                            <button onclick="aplicarFiltroRapido('equipe', 'Erick')" data-valor="Erick" class="filtro-btn filtro-equipe bg-slate-50 border border-slate-200 text-slate-600 rounded-2xl px-5 py-3 flex justify-between items-center w-full text-left font-bold transition-all hover:bg-white">
+                            <button onclick="aplicarFiltroRapido('equipe', 'Erick')" data-valor="Erick" class="filtro-btn filtro-equipe bg-slate-50 border border-slate-200 text-slate-600 rounded-2xl px-5 py-3 flex justify-between items-center w-full text-left font-bold transition-all hover:bg-white shadow-sm">
                                 <span class="flex items-center gap-3"><i class="fa-solid fa-pen-nib text-lg text-slate-400"></i> Erick Gustavo</span>
                                 <span class="badge-filtro bg-white border border-slate-200 text-slate-600 text-[10px] px-2.5 py-0.5 rounded-full font-black" id="badge-card-erick">0</span>
                             </button>
@@ -280,19 +279,18 @@
                         <div>
                             <p class="text-[10px] font-black text-slate-400 uppercase mb-4"><i class="fa-solid fa-traffic-light mr-2 text-lg text-slate-300"></i> Filtrar por Status</p>
                             <div class="flex flex-col gap-3">
-                                <button onclick="aplicarFiltroRapido('status', 'fila')" data-valor="fila" class="filtro-btn filtro-status px-5 py-3 rounded-2xl text-[11px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex items-center"><div class="w-2.5 h-2.5 rounded-full bg-slate-500 mr-3"></div> Na Fila / Aguardando</button>
-                                <button onclick="aplicarFiltroRapido('status', 'andamento')" data-valor="andamento" class="filtro-btn filtro-status px-5 py-3 rounded-2xl text-[11px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex items-center"><div class="w-2.5 h-2.5 rounded-full bg-fabrica-orange mr-3"></div> Em Produção / Revisão</button>
-                                <button onclick="aplicarFiltroRapido('status', 'concluido')" data-valor="concluido" class="filtro-btn filtro-status px-5 py-3 rounded-2xl text-[11px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex items-center"><div class="w-2.5 h-2.5 rounded-full bg-green-500 mr-3"></div> Projetos Concluídos</button>
+                                <button onclick="aplicarFiltroRapido('status', 'fila')" data-valor="fila" class="filtro-btn filtro-status px-5 py-3 rounded-2xl text-[11px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex items-center shadow-sm"><div class="w-2.5 h-2.5 rounded-full bg-slate-500 mr-3"></div> Na Fila / Aguardando</button>
+                                <button onclick="aplicarFiltroRapido('status', 'andamento')" data-valor="andamento" class="filtro-btn filtro-status px-5 py-3 rounded-2xl text-[11px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex items-center shadow-sm"><div class="w-2.5 h-2.5 rounded-full bg-fabrica-orange mr-3"></div> Em Produção / Revisão</button>
+                                <button onclick="aplicarFiltroRapido('status', 'concluido')" data-valor="concluido" class="filtro-btn filtro-status px-5 py-3 rounded-2xl text-[11px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex items-center shadow-sm"><div class="w-2.5 h-2.5 rounded-full bg-green-500 mr-3"></div> Projetos Concluídos</button>
                             </div>
                         </div>
                         <div>
                             <p class="text-[10px] font-black text-slate-400 uppercase mb-4"><i class="fa-solid fa-city mr-2 text-lg text-slate-300"></i> Frentes Solicitantes</p>
-                            <div class="flex flex-wrap gap-2" id="botoes-frentes-dinamicos">
-                                <button onclick="aplicarFiltroRapido('frente', 'TTO - Técnico')" data-valor="TTO - Técnico" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex justify-between items-center group">TTO - Técnico <i class="fa-solid fa-satellite-dish text-slate-300 group-hover:text-fabrica-blue"></i></button>
-                                <button onclick="aplicarFiltroRapido('frente', 'TCR - Comercial')" data-valor="TCR - Comercial" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex justify-between items-center group">TCR - Comercial <i class="fa-solid fa-store text-slate-300 group-hover:text-fabrica-blue"></i></button>
-                                <button onclick="aplicarFiltroRapido('frente', 'DO - Administrativo')" data-valor="DO - Administrativo" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex justify-between items-center group">DO - Administrativo <i class="fa-solid fa-briefcase text-slate-300 group-hover:text-fabrica-blue"></i></button>
-                                <button onclick="aplicarFiltroRapido('frente', 'Engajamento')" data-valor="Engajamento" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex justify-between items-center group">Engajamento <i class="fa-solid fa-heart text-slate-300 group-hover:text-fabrica-blue"></i></button>
-                                <button onclick="aplicarFiltroRapido('frente', 'Não Classificada')" data-valor="Não Classificada" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-red-200 text-red-600 bg-red-50 hover:bg-red-500 hover:text-white w-full text-left flex justify-between items-center group">Não Classificadas <i class="fa-solid fa-triangle-exclamation text-red-400 group-hover:text-white"></i></button>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="aplicarFiltroRapido('frente', 'TTO - Técnico')" data-valor="TTO - Técnico" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex justify-between items-center group shadow-sm">TTO - Técnico <i class="fa-solid fa-satellite-dish text-slate-300 group-hover:text-fabrica-blue"></i></button>
+                                <button onclick="aplicarFiltroRapido('frente', 'TCR - Comercial')" data-valor="TCR - Comercial" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex justify-between items-center group shadow-sm">TCR - Comercial <i class="fa-solid fa-store text-slate-300 group-hover:text-fabrica-blue"></i></button>
+                                <button onclick="aplicarFiltroRapido('frente', 'DO - Administrativo')" data-valor="DO - Administrativo" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex justify-between items-center group shadow-sm">DO - Administrativo <i class="fa-solid fa-briefcase text-slate-300 group-hover:text-fabrica-blue"></i></button>
+                                <button onclick="aplicarFiltroRapido('frente', 'Engajamento')" data-valor="Engajamento" class="filtro-btn filtro-frente px-4 py-2.5 rounded-xl text-[10px] font-bold border border-slate-200 text-slate-600 bg-slate-50 hover:bg-white w-full text-left flex justify-between items-center group shadow-sm">Engajamento <i class="fa-solid fa-heart text-slate-300 group-hover:text-fabrica-blue"></i></button>
                             </div>
                         </div>
                     </div>
@@ -302,11 +300,6 @@
             <!-- Tabela Principal -->
             <div class="bg-white rounded-[32px] shadow-sm border border-gray-200 mb-12 overflow-hidden" id="tabela-container">
                 
-                <div id="alerta-gargalo-tabela" class="hidden bg-red-50 border-b-2 border-red-500 p-6">
-                    <h3 class="text-red-700 font-black flex items-center gap-2 text-lg"><i class="fa-solid fa-triangle-exclamation fa-beat"></i> Demandas Não Classificadas</h3>
-                    <p class="text-sm text-red-800 font-medium mt-1">Estas demandas estão invisíveis nos relatórios das frentes. <strong>Para corrigir:</strong> preencha o campo <span class="bg-red-200 px-1 rounded">Informado</span> ou <span class="bg-red-200 px-1 rounded">Solicitante</span> na planilha oficial com o nome correto.</p>
-                </div>
-
                 <div class="p-6 md:p-8 border-b border-gray-100 bg-slate-50/50">
                     <div class="flex flex-col lg:flex-row justify-between items-center gap-6">
                         <h2 class="text-xl md:text-2xl font-black text-fabrica-blue w-full lg:w-auto text-left tracking-tight flex items-center gap-3 flex-wrap uppercase">
@@ -332,11 +325,11 @@
                                 <th class="py-5 px-6 font-black text-center">Status Global</th>
                                 <th class="py-5 px-6 font-black hidden md:table-cell"><i class="fa-solid fa-user-ninja mr-1"></i> Equipe (DHO)</th>
                                 <th class="py-5 px-6 font-black hidden lg:table-cell"><i class="fa-regular fa-calendar-check mr-1"></i> Previsão</th>
-                                <th class="py-5 px-6 font-black text-center">Ação</th>
+                                <th class="py-5 px-6 font-black text-center">Inspecionar</th>
                             </tr>
                         </thead>
                         <tbody id="tabela-demandas" class="text-sm text-gray-700 divide-y divide-slate-100">
-                            <tr><td colspan="6" class="p-12 text-center text-gray-400 font-bold"><i class="fa-solid fa-cog fa-spin mr-2 text-2xl text-fabrica-orange"></i> Buscando na base de dados...</td></tr>
+                            <tr><td colspan="6" class="p-12 text-center text-gray-400 font-bold"><i class="fa-solid fa-cog fa-spin mr-2 text-2xl text-fabrica-orange"></i> Lendo banco de dados...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -424,12 +417,6 @@
                         <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 border-b-2 border-slate-50 pb-3 flex items-center gap-2"><i class="fa-solid fa-heart-pulse text-red-500 text-lg fa-beat"></i> Termômetro de Gargalos</h4>
                         <div id="raiox-status-breakdown" class="space-y-2"></div>
                     </div>
-
-                    <div id="raiox-alerta-n-classificado" class="hidden bg-red-50 border-2 border-red-100 rounded-2xl p-6 shadow-inner">
-                        <h4 class="text-sm font-black text-red-600 uppercase tracking-widest mb-3 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation fa-fade text-lg"></i> Atenção Gestão</h4>
-                        <p class="text-xs text-red-800 font-bold mb-5 leading-relaxed">Demandas sem identificação clara de frente solicitante (Não Classificadas).</p>
-                        <div id="raiox-lista-infratores" class="space-y-3"></div>
-                    </div>
                 </div>
             </div>
             
@@ -467,8 +454,8 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="fecharModal('modal-detalhes'); filtrarIrParaTabela('frente', document.getElementById('modal-frente').textContent);">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2"><i class="fa-solid fa-user-tag mr-1 text-fabrica-blue"></i> Solicitante / Informado</p>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="fecharModal('modal-detalhes'); document.getElementById('inputPesquisa').value=document.getElementById('modal-sponsor').textContent; aplicarFiltrosCombinados(); switchView('demandas');">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2"><i class="fa-solid fa-user-tag mr-1 text-fabrica-blue"></i> Informado / Solicitante</p>
                         <p class="font-bold text-slate-800 text-sm truncate" id="modal-sponsor">-</p>
                     </div>
                     <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="fecharModal('modal-detalhes'); filtrarIrParaTabela('frente', document.getElementById('modal-frente').textContent);">
@@ -502,7 +489,7 @@
         </div>
     </div>
 
-    <!-- MODAL: AGENDAMENTO -->
+    <!-- MODAL: AGENDAMENTO INTEGRADO GOOGLE CALENDAR -->
     <div id="modal-novo" class="modal fixed inset-0 flex items-center justify-center bg-slate-900/80" onclick="fecharAoClicarFora(event, 'modal-novo')" style="z-index: 500;">
         <div class="modal-content bg-white rounded-[32px] w-full max-w-5xl shadow-2xl relative flex flex-col overflow-hidden m-4 h-[90vh]">
             <div class="p-6 md:p-8 border-b border-gray-100 flex justify-between items-center bg-slate-50 shrink-0">
@@ -520,13 +507,13 @@
             <button onclick="fecharModal('modal-config')" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 font-bold hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
             <i class="fa-solid fa-database text-5xl text-fabrica-orange mb-4"></i>
             <h3 class="text-2xl font-black text-fabrica-blue uppercase">Conexão Backend</h3>
-            <p class="text-sm text-gray-500 mt-2 font-medium">Link da planilha ativado e comunicando com Apps Script.</p>
+            <p class="text-sm text-gray-500 mt-2 font-medium">Link do Apps Script configurado para conexão anônima (CORS).</p>
         </div>
     </div>
 
     <!-- STREAMING_CHUNK:Javascript Logic -->
     <script>
-        const googleAppUrl = "https://script.google.com/macros/s/AKfycbz7qfzaXZZWE1090BWB2BVPwZQnE2xpi4nf8YrZhDwPQqfqr9XSUsLQcGBvqFw03AAbJg/exec";
+        const googleAppUrl = "https://script.googleusercontent.com/a/macros/grupobrisanet.com.br/echo?user_content_key=AUkAhnRqHWyuNtmua7V8bdoOs5Y0RidPBb2Tkib0v1Q_kE3PXmr4ea2XlGnfAIx5LOUWKZikW1DC3n0uGc1WajVr0cANN4pM-Yc-3dxOXO4--VNIICI0sysd2GUgwd_SEFnt73dkktWrBa0R-Xd1SeNTovKSznfZv3Zu0NiuWP4XGsTFfCcnTYw4nayVrT_52_0pwFdw-WTW5k7HE2AcFotI2hLVEluG05smJGFZIdKs6tTQaWGA6cZmdSQs7ENbL3RC1oSGulAFfj3WQ2xdtMl-hjrh1I1s22RZauF1L8uhqUcpjCNd5FfIxNqXN57BDw&lib=MEqoRhnAoePag2Ue1W0e-MF9owdXctO-2";
 
         let dadosGlobais = [];
         let textoBuscado = '';
@@ -560,19 +547,30 @@
             return { nome: "Não Classificada", class: "frente-nao", modalColor: "bg-red-500" }; 
         }
 
-        // Leitura Perfeita das Colunas Conforme a Sua Tabela
+        // Função Assasina e Robusta de Extração (Ignora espaços e acentos no JSON do Google)
+        function getVal(obj, searchKeys) {
+            const keys = Object.keys(obj);
+            for (let k of keys) {
+                const normalizedKey = k.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+                if (searchKeys.includes(normalizedKey)) {
+                    return obj[k] || '';
+                }
+            }
+            return '';
+        }
+
         function normalizarProjeto(p) {
             return {
-                demanda: p.Demanda || p.demanda || '',
-                sponsor: p.Informado || p.informado || p.Aprovador || p.aprovador || '',
-                responsavel: p['Responsável'] || p.responsavel || '',
-                colaborador: p.Colaborador || p.colaborador || '',
-                etapaAtual: p['Etapa atual'] || p.etapaAtual || p.status || '',
-                fase: p.Fase || p.fase || '',
-                prazoFinal: p.Prazo || p.prazo || p.prazoFinal || '-',
-                dataGravacao: p['Data de gração'] || p['Data de gravação'] || p.dataGravacao || '-',
-                dataRecebimento: p['Data de recebimento'] || p.dataRecebimento || '-',
-                linkAcesso: p['Links e Obs'] || p.linkAcesso || p.Obs || ''
+                demanda: getVal(p, ['demanda', 'projeto']),
+                sponsor: getVal(p, ['informado', 'aprovador', 'solicitante']), // Informado = Solicitante
+                responsavel: getVal(p, ['responsavel']),
+                colaborador: getVal(p, ['colaborador']),
+                etapaAtual: getVal(p, ['etapa atual', 'status']),
+                fase: getVal(p, ['fase']),
+                prazoFinal: getVal(p, ['prazo', 'prazo final']),
+                dataGravacao: getVal(p, ['data de gracao', 'data de gravacao']),
+                dataRecebimento: getVal(p, ['data de recebimento']),
+                linkAcesso: getVal(p, ['links e obs', 'obs', 'link'])
             };
         }
 
@@ -656,7 +654,7 @@
                 }
             });
 
-            // 1. Atualizar Frentes (Tela Inicial)
+            // Frentes List (Dashboard)
             const containerAreas = document.getElementById('top-areas-list');
             let frentesOrdenadas = Object.entries(countsFrente).sort((a,b) => b[1] - a[1]).slice(0, 3);
             
@@ -683,7 +681,7 @@
                 containerAreas.innerHTML = htmlAreas;
             }
 
-            // 2. Atualizar Sponsors / Informados (Tela Inicial)
+            // Sponsors List (Dashboard)
             const containerSponsors = document.getElementById('top-sponsors-list');
             let sponsorsOrdenados = Object.entries(countsSponsor).sort((a,b) => b[1] - a[1]).slice(0, 3);
             
@@ -710,8 +708,7 @@
                 containerSponsors.innerHTML = htmlSponsors;
             }
 
-
-            // 3. Atualizar Gráfico Mensal
+            // Gráfico de Meses
             const containerMeses = document.getElementById('container-grafico-meses');
             let chavesMeses = Object.keys(meses).sort(sortMesAnoKeys).slice(-6);
             
@@ -787,7 +784,6 @@
             aplicarFiltrosCombinados();
         }
 
-        // Navegação profunda ("Drill Down")
         function filtrarIrParaTabela(tipo, valor) {
             limparFiltros(false);
             if(tipo === 'equipe') filtroEquipeNome = valor;
@@ -826,6 +822,153 @@
             }
         }
 
+        function abrirRaioX(tipoFiltro, valor, tituloModal, corHeaderClass) {
+            let dadosAlvo = [];
+            let contextoAnalise = '';
+
+            if (tipoFiltro === 'status') {
+                if (valor === 'todos') {
+                    dadosAlvo = [...dadosGlobais];
+                    contextoAnalise = "Análise Geral da Operação";
+                } else {
+                    dadosAlvo = dadosGlobais.filter(p => {
+                        const st = obterDadosStatus(p.status, p.etapaAtual);
+                        if (valor === 'concluido') return st.label === 'Concluído';
+                        if (valor === 'andamento') return st.label === 'Em Produção';
+                        if (valor === 'fila') return st.label === 'Na Fila';
+                        return false;
+                    });
+                    contextoAnalise = `Análise do Status: ${valor.toUpperCase()}`;
+                }
+            } else if (tipoFiltro === 'frente') {
+                dadosAlvo = dadosGlobais.filter(p => classificarFrente(p.sponsor, p.demanda).nome === valor);
+                contextoAnalise = `Análise da Área: ${valor}`;
+            }
+
+            let countsResp = { 'Gilnei Laurindo': 0, 'Marcos Guilherme': 0, 'Erick Gustavo': 0, 'Time / Múltiplos': 0 };
+            let countsFrente = {};
+            let countStatusObj = { 'Concluído': 0, 'Em Produção': 0, 'Na Fila': 0 };
+            let infratoresClassificacao = {}; 
+
+            dadosAlvo.forEach(p => {
+                const st = obterDadosStatus(p.status, p.etapaAtual);
+                if(countStatusObj[st.label] !== undefined) countStatusObj[st.label]++;
+
+                const txtAlvo = normalizarTexto((p.responsavel || '') + " " + (p.colaborador || ''));
+                
+                let classifiedResp = false;
+                if ((txtAlvo.includes('gilnei') || txtAlvo.includes('jose gilnei')) && (txtAlvo.includes('marcos') || txtAlvo.includes('guilherme'))) {
+                    countsResp['Time / Múltiplos']++; classifiedResp = true;
+                } else if (txtAlvo.includes('gilnei') || txtAlvo.includes('jose gilnei')) {
+                    countsResp['Gilnei Laurindo']++; classifiedResp = true;
+                } else if (txtAlvo.includes('marcos') || txtAlvo.includes('guilherme')) {
+                    countsResp['Marcos Guilherme']++; classifiedResp = true;
+                } else if (txtAlvo.includes('erick')) {
+                    countsResp['Erick Gustavo']++; classifiedResp = true;
+                }
+
+                if (!classifiedResp && p.responsavel && p.responsavel.trim() !== '-' && !txtAlvo.includes('combinar')) {
+                    countsResp[p.responsavel.trim()] = (countsResp[p.responsavel.trim()] || 0) + 1;
+                }
+
+                const f = classificarFrente(p.sponsor, p.demanda);
+                countsFrente[f.nome] = (countsFrente[f.nome] || 0) + 1;
+
+                if(f.nome === 'Não Classificada') {
+                    const respName = p.responsavel ? p.responsavel.trim() : 'Não Atribuído';
+                    infratoresClassificacao[respName] = (infratoresClassificacao[respName] || 0) + 1;
+                }
+            });
+
+            const sortDict = (dict) => Object.entries(dict).sort((a,b) => b[1] - a[1]);
+            const totalAlvo = dadosAlvo.length || 1;
+
+            document.getElementById('raiox-titulo').innerHTML = `<i class="fa-solid fa-microscope fa-beat-fade"></i> ${tituloModal}`;
+            document.getElementById('raiox-titulo').className = `text-2xl md:text-3xl font-black text-white uppercase tracking-tight px-6 py-3 rounded-2xl shadow-md flex items-center gap-3 ${corHeaderClass}`;
+            document.getElementById('raiox-subtitulo').textContent = `${contextoAnalise} (${dadosAlvo.length} projetos).`;
+
+            const buildListHtml = (sortedArray, maxItems, iconClass, useDynamicColor = false, fallbackColor = "bg-[#0B41CD]") => {
+                if(sortedArray.length === 0) return '<p class="text-xs text-slate-400">Dados insuficientes.</p>';
+                let html = '';
+                sortedArray.slice(0, maxItems).forEach(item => {
+                    const itemName = item[0];
+                    const itemQtd = item[1];
+                    if (itemQtd === 0) return;
+
+                    const perc = Math.round((itemQtd / totalAlvo) * 100);
+                    
+                    let barColor = fallbackColor;
+                    if (useDynamicColor) {
+                        const conf = CONFIG_FRENTES.find(c => c.nome === itemName);
+                        if (conf) barColor = conf.modalColor;
+                        else if (itemName === 'Não Classificada') barColor = 'bg-red-500';
+                    }
+
+                    html += `
+                    <div class="mb-5 group">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-bold text-slate-700 flex items-center gap-3 group-hover:text-fabrica-blue transition-colors"><i class="${iconClass} text-slate-300 w-5 text-center text-sm group-hover:text-fabrica-orange transition-colors"></i> ${escapeHTML(itemName)}</span>
+                            <div class="text-right leading-none">
+                                <span class="font-black text-slate-800 text-lg group-hover:text-fabrica-blue transition-colors">${itemQtd}</span>
+                                <span class="text-[10px] text-slate-400 font-bold ml-1">(${perc}%)</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden shadow-inner">
+                            <div class="${barColor} h-2 rounded-full transition-all duration-1000" style="width: ${perc}%;"></div>
+                        </div>
+                    </div>`;
+                });
+                return html;
+            };
+
+            document.getElementById('raiox-lista-membros').innerHTML = buildListHtml(sortDict(countsResp), 6, 'fa-solid fa-user-astronaut', false, 'bg-fabrica-blue'); 
+            document.getElementById('raiox-lista-frentes').innerHTML = buildListHtml(sortDict(countsFrente), 6, 'fa-solid fa-building-user', true);
+
+            let htmlBreakdown = '';
+            const statusConfig = [
+                { label: 'Concluído', color: 'bg-green-500' },
+                { label: 'Em Produção', color: 'bg-[#FF6B00]' },
+                { label: 'Na Fila', color: 'bg-slate-500' }
+            ];
+            
+            statusConfig.forEach(cfg => {
+                const num = countStatusObj[cfg.label];
+                const perc = Math.round((num / totalAlvo) * 100);
+                htmlBreakdown += `
+                <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-3 last:border-0 last:pb-0 last:mb-0 hover:bg-slate-100/50 p-2 rounded-lg transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full ${cfg.color} shadow-sm animate-pulse"></div>
+                        <span class="text-sm font-bold text-slate-700">${cfg.label}</span>
+                    </div>
+                    <div class="text-right leading-none">
+                        <span class="font-black text-slate-800 text-lg">${num}</span>
+                        <span class="text-[10px] text-slate-400 font-bold ml-1">(${perc}%)</span>
+                    </div>
+                </div>`;
+            });
+            document.getElementById('raiox-status-breakdown').innerHTML = htmlBreakdown;
+
+            const alertaInf = document.getElementById('raiox-alerta-n-classificado');
+            if(Object.keys(infratoresClassificacao).length > 0) {
+                alertaInf.classList.remove('hidden');
+            } else {
+                alertaInf.classList.add('hidden');
+            }
+
+            document.getElementById('btn-aplicar-raiox').onclick = () => {
+                limparFiltros(false);
+                if(tipoFiltro === 'status') filtroStatusNome = valor;
+                if(tipoFiltro === 'frente') filtroFrenteNome = valor;
+                
+                atualizarBotoesFiltroRapido();
+                aplicarFiltrosCombinados();
+                fecharModal('modal-raiox');
+                switchView('demandas');
+            };
+
+            abrirModal('modal-raiox');
+        }
+
         function limparFiltros(aplicarNaTabela = true) {
             filtroEquipeNome = '';
             filtroFrenteNome = '';
@@ -851,7 +994,6 @@
                 areaLegendas.innerHTML += `<span class="bg-blue-100 text-fabrica-blue border border-blue-200 px-3 py-1 rounded-lg text-xs font-black shadow-sm flex items-center gap-1"><i class="fa-solid fa-building-user"></i> ${escapeHTML(filtroFrenteNome)}</span>`;
                 filtrosAtivos = true;
                 
-                // Mostrar alerta se for "Não Classificada"
                 if(filtroFrenteNome === 'Não Classificada') alertaNaoClassificada.classList.remove('hidden');
                 else alertaNaoClassificada.classList.add('hidden');
             } else {
