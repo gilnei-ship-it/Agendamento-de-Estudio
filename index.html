@@ -523,7 +523,6 @@
 
     <!-- STREAMING_CHUNK:Javascript Logic -->
     <script>
-        // O SEU NOVO LINK OFICIAL AQUI:
         const googleAppUrl = "https://script.google.com/macros/s/AKfycbzhaXxzGz-4-UShGgB6847BXzs_SmTs8CUrxnPpp5Rafo0zEzRA_ZUunAqS2Lv2oX3SOg/exec";
 
         let dadosGlobais = [];
@@ -558,7 +557,6 @@
             return { nome: "Não Classificada", class: "frente-nao", modalColor: "bg-red-500" }; 
         }
 
-        // Leitura Perfeita das Colunas Conforme a Sua Tabela
         function normalizarProjeto(p) {
             return {
                 demanda: p.demanda || p.Demanda || p['Demanda'] || '',
@@ -640,15 +638,30 @@
                     countsFrente[f.nome] = (countsFrente[f.nome] || 0) + 1;
                 }
 
-                // LÓGICA ATUALIZADA PARA DIVIDIR NOMES NA MESMA CÉLULA
-                const sponsorRaw = p.sponsor ? p.sponsor.trim() : '';
+                // LÓGICA ATUALIZADA PARA DIVIDIR E NORMALIZAR NOMES
+                let sponsorRaw = p.sponsor ? p.sponsor.trim() : '';
                 if(sponsorRaw && sponsorRaw !== '-' && sponsorRaw.toLowerCase() !== 'não informado') {
-                    // Divide os nomes caso o usuário tenha dado Alt+Enter, usado vírgula, barra ou " e "
+                    
+                    // 1. Unifica "Vitor" ou "Victor" solto para "Victor Morais"
+                    sponsorRaw = sponsorRaw.replace(/\bVitor\b/gi, "Victor Morais");
+                    sponsorRaw = sponsorRaw.replace(/\bVictor\b(?! Morais)/gi, "Victor Morais");
+
+                    // 2. Força uma separação (vírgula) antes de nomes que costumam vir grudados
+                    const grudados = ["Naira Freire", "Hugo Deodato", "Anderson Zacarias", "Leonara Victor"];
+                    grudados.forEach(nomeGrudado => {
+                        const regex = new RegExp(nomeGrudado, "gi");
+                        sponsorRaw = sponsorRaw.replace(regex, `, ${nomeGrudado}`);
+                    });
+
+                    // 3. Divide os nomes caso o usuário tenha dado Alt+Enter, usado vírgula, barra ou " e "
                     const listaSponsors = sponsorRaw.split(/[\n,\/]| e /i);
                     
                     listaSponsors.forEach(nomeSponsor => {
-                        const nomeLimpo = nomeSponsor.trim();
-                        if(nomeLimpo) {
+                        let nomeLimpo = nomeSponsor.trim();
+                        // Remove sujeiras como vírgulas sobrando nas pontas
+                        nomeLimpo = nomeLimpo.replace(/^,|,$/g, '').trim();
+
+                        if(nomeLimpo && nomeLimpo !== "") {
                             countsSponsor[nomeLimpo] = (countsSponsor[nomeLimpo] || 0) + 1;
                         }
                     });
@@ -725,7 +738,6 @@
                 });
                 containerSponsors.innerHTML = htmlSponsors;
             }
-
 
             // 3. Atualizar Gráfico Mensal
             const containerMeses = document.getElementById('container-grafico-meses');
@@ -815,9 +827,8 @@
         }
 
         function verDemandasSponsor(nome) {
-            limparFiltros(false); // Limpa filtros anteriores
+            limparFiltros(false); 
             
-            // Preenche o campo de busca global com o nome do solicitante
             const inputPesquisa = document.getElementById('inputPesquisa');
             if(inputPesquisa) {
                 inputPesquisa.value = nome;
@@ -825,9 +836,8 @@
             }
             
             aplicarFiltrosCombinados();
-            switchView('demandas'); // Muda para a aba de gestão principal
+            switchView('demandas'); 
             
-            // Desce a tela suavemente até a tabela
             setTimeout(() => {
                 document.getElementById('tabela-container').scrollIntoView({behavior: 'smooth', block: 'start'});
             }, 100);
