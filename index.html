@@ -439,7 +439,6 @@
         </div>
     </div>
 
-
     <!-- MODAL DETALHES COMPLETO -->
     <div id="modal-detalhes" class="modal fixed inset-0 flex items-center justify-center bg-slate-900/80" onclick="fecharAoClicarFora(event, 'modal-detalhes')" style="z-index: 300;">
         <div class="modal-content bg-white rounded-[32px] w-full max-w-4xl shadow-2xl relative flex flex-col max-h-[95vh] md:max-h-[90vh] m-4 overflow-hidden">
@@ -524,7 +523,7 @@
 
     <!-- STREAMING_CHUNK:Javascript Logic -->
     <script>
-        // O LINK FOI ATUALIZADO AQUI, TROCANDO O /DEV POR /EXEC PARA FUNCIONAR PARA TODOS!
+        // O SEU NOVO LINK OFICIAL AQUI:
         const googleAppUrl = "https://script.google.com/macros/s/AKfycbzhaXxzGz-4-UShGgB6847BXzs_SmTs8CUrxnPpp5Rafo0zEzRA_ZUunAqS2Lv2oX3SOg/exec";
 
         let dadosGlobais = [];
@@ -692,17 +691,26 @@
                 let htmlSponsors = '';
                 sponsorsOrdenados.forEach(([nome, qtd], index) => {
                     const bgBar = index === 0 ? 'bg-fabrica-orange' : (index === 1 ? 'bg-orange-400' : 'bg-orange-300');
+                    
+                    // Inteligência para descobrir a área/frente do solicitante
+                    const frenteInfo = classificarFrente(nome, ""); 
+                    
                     htmlSponsors += `
-                        <div class="flex items-center gap-4 bg-white p-3 rounded-2xl border border-slate-100 shadow-sm transition-all group">
-                            <div class="w-10 h-10 rounded-xl bg-orange-50 text-fabrica-orange flex items-center justify-center font-black text-sm shrink-0">${index + 1}º</div>
-                            <div class="flex-grow">
-                                <p class="text-xs font-bold text-slate-700 truncate">${escapeHTML(nome)}</p>
-                                <div class="w-full bg-slate-100 h-1.5 rounded-full mt-2 overflow-hidden">
+                        <div class="flex items-center gap-4 bg-white p-3 rounded-2xl border border-slate-100 shadow-sm transition-all group cursor-pointer hover:border-fabrica-orange hover:shadow-md" onclick="verDemandasSponsor('${escapeHTML(nome)}')">
+                            <div class="w-10 h-10 rounded-xl bg-orange-50 text-fabrica-orange flex items-center justify-center font-black text-sm shrink-0 group-hover:bg-fabrica-orange group-hover:text-white transition-colors">${index + 1}º</div>
+                            
+                            <div class="flex-grow overflow-hidden">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <p class="text-xs font-bold text-slate-700 truncate group-hover:text-fabrica-orange transition-colors" title="${escapeHTML(nome)}">${escapeHTML(nome)}</p>
+                                    <span class="badge-frente ${frenteInfo.class} text-[8px] py-0.5 px-1.5 shadow-sm truncate shrink-0">${frenteInfo.nome}</span>
+                                </div>
+                                <div class="w-full bg-slate-100 h-1.5 rounded-full mt-1 overflow-hidden">
                                     <div class="${bgBar} h-1.5 rounded-full transition-all" style="width: ${Math.min((qtd / sponsorsOrdenados[0][1]) * 100, 100)}%"></div>
                                 </div>
                             </div>
-                            <div class="text-right shrink-0">
-                                <span class="font-black text-slate-800 text-lg">${qtd}</span>
+                            
+                            <div class="text-right shrink-0 pl-2">
+                                <span class="font-black text-slate-800 text-lg group-hover:text-fabrica-orange transition-colors">${qtd}</span>
                             </div>
                         </div>`;
                 });
@@ -792,6 +800,25 @@
             atualizarBotoesFiltroRapido();
             aplicarFiltrosCombinados();
             switchView('demandas');
+            setTimeout(() => {
+                document.getElementById('tabela-container').scrollIntoView({behavior: 'smooth', block: 'start'});
+            }, 100);
+        }
+
+        function verDemandasSponsor(nome) {
+            limparFiltros(false); // Limpa filtros anteriores
+            
+            // Preenche o campo de busca global com o nome do solicitante
+            const inputPesquisa = document.getElementById('inputPesquisa');
+            if(inputPesquisa) {
+                inputPesquisa.value = nome;
+                textoBuscado = normalizarTexto(nome);
+            }
+            
+            aplicarFiltrosCombinados();
+            switchView('demandas'); // Muda para a aba de gestão principal
+            
+            // Desce a tela suavemente até a tabela
             setTimeout(() => {
                 document.getElementById('tabela-container').scrollIntoView({behavior: 'smooth', block: 'start'});
             }, 100);
@@ -977,6 +1004,11 @@
             filtroEquipeNome = '';
             filtroFrenteNome = '';
             filtroStatusNome = 'todos';
+            
+            const inputPesquisa = document.getElementById('inputPesquisa');
+            if(inputPesquisa) inputPesquisa.value = '';
+            textoBuscado = '';
+
             document.getElementById('btn-limpar-filtros').classList.add('hidden');
             atualizarBotoesFiltroRapido();
             if(aplicarNaTabela) aplicarFiltrosCombinados();
@@ -998,6 +1030,9 @@
             if(filtroStatusNome !== 'todos') {
                 const mapStatus = {concluido: 'Concluídos', andamento: 'Em Produção', fila: 'Na Fila'};
                 areaLegendas.innerHTML += `<span class="bg-slate-200 text-slate-700 border border-slate-300 px-3 py-1 rounded-lg text-xs font-black shadow-sm flex items-center gap-1"><i class="fa-solid fa-filter"></i> ${mapStatus[filtroStatusNome]}</span>`;
+                filtrosAtivos = true;
+            }
+            if(textoBuscado) {
                 filtrosAtivos = true;
             }
 
