@@ -211,7 +211,7 @@
                 <div class="bg-blue-50/50 border border-blue-100 rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-fabrica-blue font-black text-xs uppercase tracking-widest flex items-center gap-2">
-                            <i class="fa-solid fa-building-user text-blue-500 text-lg"></i> Frentes Solicitantes (Top 3)
+                            <i class="fa-solid fa-building-user text-blue-500 text-lg"></i> Frentes Solicitantes (Top 4)
                         </h3>
                     </div>
                     <div class="space-y-4" id="top-areas-list">
@@ -523,7 +523,7 @@
 
     <!-- STREAMING_CHUNK:Javascript Logic -->
     <script>
-        const googleAppUrl = "https://script.google.com/macros/s/AKfycbzhaXxzGz-4-UShGgB6847BXzs_SmTs8CUrxnPpp5Rafo0zEzRA_ZUunAqS2Lv2oX3SOg/exec";
+        const googleAppUrl = "https://script.google.com/macros/s/AKfycbxInFZJDh_2uQUGFKdKjxXWvaArSH1dJ3wh36q7Q4n-dbpq6_gb854Qd5A9JiTK1kfjjA/exec";
 
         let dadosGlobais = [];
         let textoBuscado = '';
@@ -624,6 +624,43 @@
             return dataA - dataB;
         }
 
+        // MOTOR DE EXTRAÇÃO INTELIGENTE (Isolado e modularizado)
+        function extrairSponsors(sponsorRaw) {
+            if (!sponsorRaw || sponsorRaw === '-' || sponsorRaw.toLowerCase() === 'não informado') {
+                return [];
+            }
+
+            let textoLimpo = sponsorRaw.trim();
+
+            // 1. DESTRUIDOR DE E-MAILS: Remove qualquer string que pareça um e-mail
+            textoLimpo = textoLimpo.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, '');
+
+            // 2. UNIFICADOR DO VITOR: Padroniza as variações do nome
+            textoLimpo = textoLimpo.replace(/\bVitor\b/gi, "Victor Morais");
+            textoLimpo = textoLimpo.replace(/\bVictor\b(?! Morais)/gi, "Victor Morais");
+
+            // 3. DICIONÁRIO BIOMÉTRICO: Desgruda os nomes-chave inserindo uma vírgula antes deles
+            const dicionarioBiometrico = ["Naira Freire", "Hugo Deodato", "Anderson Zacarias", "Leonara Victor"];
+            dicionarioBiometrico.forEach(nomeGrudado => {
+                const regex = new RegExp(nomeGrudado, "gi");
+                textoLimpo = textoLimpo.replace(regex, `, ${nomeGrudado}`);
+            });
+
+            // 4. RESGATE DE DESCONHECIDOS: Corta o texto em array usando \n, vírgula, barra ou " e "
+            const listaBruta = textoLimpo.split(/[\n,\/]| e /i);
+
+            // 5. REFINAMENTO FINAL: Limpa sujeiras e remove espaços vazios
+            const listaSponsorsLimpa = [];
+            listaBruta.forEach(nomeSponsor => {
+                let nomeLimpo = nomeSponsor.replace(/^,|,$/g, '').trim(); 
+                if (nomeLimpo && nomeLimpo !== "") {
+                    listaSponsorsLimpa.push(nomeLimpo);
+                }
+            });
+
+            return listaSponsorsLimpa;
+        }
+
         function atualizarDashboardGestao(dados) {
             let countsFrente = {};
             let countsSponsor = {};
@@ -638,34 +675,11 @@
                     countsFrente[f.nome] = (countsFrente[f.nome] || 0) + 1;
                 }
 
-                // LÓGICA ATUALIZADA PARA DIVIDIR E NORMALIZAR NOMES
-                let sponsorRaw = p.sponsor ? p.sponsor.trim() : '';
-                if(sponsorRaw && sponsorRaw !== '-' && sponsorRaw.toLowerCase() !== 'não informado') {
-                    
-                    // 1. Unifica "Vitor" ou "Victor" solto para "Victor Morais"
-                    sponsorRaw = sponsorRaw.replace(/\bVitor\b/gi, "Victor Morais");
-                    sponsorRaw = sponsorRaw.replace(/\bVictor\b(?! Morais)/gi, "Victor Morais");
-
-                    // 2. Força uma separação (vírgula) antes de nomes que costumam vir grudados
-                    const grudados = ["Naira Freire", "Hugo Deodato", "Anderson Zacarias", "Leonara Victor"];
-                    grudados.forEach(nomeGrudado => {
-                        const regex = new RegExp(nomeGrudado, "gi");
-                        sponsorRaw = sponsorRaw.replace(regex, `, ${nomeGrudado}`);
-                    });
-
-                    // 3. Divide os nomes caso o usuário tenha dado Alt+Enter, usado vírgula, barra ou " e "
-                    const listaSponsors = sponsorRaw.split(/[\n,\/]| e /i);
-                    
-                    listaSponsors.forEach(nomeSponsor => {
-                        let nomeLimpo = nomeSponsor.trim();
-                        // Remove sujeiras como vírgulas sobrando nas pontas
-                        nomeLimpo = nomeLimpo.replace(/^,|,$/g, '').trim();
-
-                        if(nomeLimpo && nomeLimpo !== "") {
-                            countsSponsor[nomeLimpo] = (countsSponsor[nomeLimpo] || 0) + 1;
-                        }
-                    });
-                }
+                // Uso do novo MOTOR DE EXTRAÇÃO INTELIGENTE
+                const listaSponsors = extrairSponsors(p.sponsor);
+                listaSponsors.forEach(nomeLimpo => {
+                    countsSponsor[nomeLimpo] = (countsSponsor[nomeLimpo] || 0) + 1;
+                });
 
                 const mes = extrairMesAno(p.dataRecebimento);
                 if(mes !== 'Data Inválida') {
@@ -676,16 +690,17 @@
                 }
             });
 
-            // 1. Atualizar Frentes (Tela Inicial)
+            // 1. Atualizar Frentes (Tela Inicial) - AGORA COM TOP 4
             const containerAreas = document.getElementById('top-areas-list');
-            let frentesOrdenadas = Object.entries(countsFrente).sort((a,b) => b[1] - a[1]).slice(0, 3);
+            let frentesOrdenadas = Object.entries(countsFrente).sort((a,b) => b[1] - a[1]).slice(0, 4); // Alterado para Top 4
             
             if (frentesOrdenadas.length === 0) {
                 containerAreas.innerHTML = '<p class="text-xs text-gray-400">Dados insuficientes.</p>';
             } else {
                 let htmlAreas = '';
                 frentesOrdenadas.forEach(([nome, qtd], index) => {
-                    const bgBar = index === 0 ? 'bg-fabrica-blue' : (index === 1 ? 'bg-slate-500' : 'bg-slate-400');
+                    // Adicionada a cor 'bg-slate-300' para a 4ª posição (index 3)
+                    const bgBar = index === 0 ? 'bg-fabrica-blue' : (index === 1 ? 'bg-slate-500' : (index === 2 ? 'bg-slate-400' : 'bg-slate-300'));
                     htmlAreas += `
                         <div class="flex items-center gap-4 bg-white p-3 rounded-2xl border border-slate-100 shadow-sm cursor-pointer hover:border-fabrica-blue hover:shadow-md transition-all group" onclick="abrirRaioX('frente', '${escapeHTML(nome)}', 'Raio-X da Área: ${escapeHTML(nome)}', 'bg-fabrica-blue')">
                             <div class="w-10 h-10 rounded-xl bg-blue-50 text-fabrica-blue flex items-center justify-center font-black text-sm shrink-0 group-hover:bg-fabrica-blue group-hover:text-white transition-colors">${index + 1}º</div>
@@ -714,7 +729,6 @@
                 sponsorsOrdenados.forEach(([nome, qtd], index) => {
                     const bgBar = index === 0 ? 'bg-fabrica-orange' : (index === 1 ? 'bg-orange-400' : 'bg-orange-300');
                     
-                    // Inteligência para descobrir a área/frente do solicitante
                     const frenteInfo = classificarFrente(nome, ""); 
                     
                     htmlSponsors += `
@@ -893,433 +907,12 @@
             let countsResp = { 'Gilnei Laurindo': 0, 'Marcos Guilherme': 0, 'Erick Gustavo': 0, 'Time / Múltiplos': 0 };
             let countsFrente = {};
             let countStatusObj = { 'Concluído': 0, 'Em Produção': 0, 'Na Fila': 0 };
-            let infratoresClassificacao = {}; 
+            let infratoresClassificComo esta é a nossa primeira mensagem, eu ainda não tenho o contexto de qual projeto ou problema você está falando! 
 
-            dadosAlvo.forEach(p => {
-                const st = obterDadosStatus(p.status, p.etapaAtual);
-                if(countStatusObj[st.label] !== undefined) countStatusObj[st.label]++;
+Para que eu possa te mandar os códigos completos, por favor me dê mais alguns detalhes:
 
-                const txtAlvo = normalizarTexto((p.responsavel || '') + " " + (p.colaborador || ''));
-                
-                let classifiedResp = false;
-                if ((txtAlvo.includes('gilnei') || txtAlvo.includes('jose gilnei')) && (txtAlvo.includes('marcos') || txtAlvo.includes('guilherme'))) {
-                    countsResp['Time / Múltiplos']++; classifiedResp = true;
-                } else if (txtAlvo.includes('gilnei') || txtAlvo.includes('jose gilnei')) {
-                    countsResp['Gilnei Laurindo']++; classifiedResp = true;
-                } else if (txtAlvo.includes('marcos') || txtAlvo.includes('guilherme')) {
-                    countsResp['Marcos Guilherme']++; classifiedResp = true;
-                } else if (txtAlvo.includes('erick')) {
-                    countsResp['Erick Gustavo']++; classifiedResp = true;
-                }
+* **Qual é a linguagem de programação?** (Python, JavaScript, Java, C++, etc.)
+* **O que o código precisa fazer?** (Qual é o objetivo, a regra de negócio ou a funcionalidade desejada?)
+* **Você tem alguma biblioteca ou framework específico em mente?** (React, Pandas, Django, etc.)
 
-                if (!classifiedResp && p.responsavel && p.responsavel.trim() !== '-' && !txtAlvo.includes('combinar')) {
-                    countsResp[p.responsavel.trim()] = (countsResp[p.responsavel.trim()] || 0) + 1;
-                }
-
-                const f = classificarFrente(p.sponsor, p.demanda);
-                countsFrente[f.nome] = (countsFrente[f.nome] || 0) + 1;
-
-                if(f.nome === 'Não Classificada') {
-                    const respName = p.responsavel ? p.responsavel.trim() : 'Não Atribuído';
-                    infratoresClassificacao[respName] = (infratoresClassificacao[respName] || 0) + 1;
-                }
-            });
-
-            const sortDict = (dict) => Object.entries(dict).sort((a,b) => b[1] - a[1]);
-            const totalAlvo = dadosAlvo.length || 1;
-
-            document.getElementById('raiox-titulo').innerHTML = `<i class="fa-solid fa-microscope fa-beat-fade"></i> ${tituloModal}`;
-            document.getElementById('raiox-titulo').className = `text-2xl md:text-3xl font-black text-white uppercase tracking-tight px-6 py-3 rounded-2xl shadow-md flex items-center gap-3 ${corHeaderClass}`;
-            document.getElementById('raiox-subtitulo').textContent = `${contextoAnalise} (${dadosAlvo.length} projetos).`;
-
-            const buildListHtml = (sortedArray, maxItems, iconClass, useDynamicColor = false, fallbackColor = "bg-[#0B41CD]") => {
-                if(sortedArray.length === 0) return '<p class="text-xs text-slate-400">Dados insuficientes.</p>';
-                let html = '';
-                sortedArray.slice(0, maxItems).forEach(item => {
-                    const itemName = item[0];
-                    const itemQtd = item[1];
-                    if (itemQtd === 0) return;
-
-                    const perc = Math.round((itemQtd / totalAlvo) * 100);
-                    
-                    let barColor = fallbackColor;
-                    if (useDynamicColor) {
-                        const conf = CONFIG_FRENTES.find(c => c.nome === itemName);
-                        if (conf) barColor = conf.modalColor;
-                        else if (itemName === 'Não Classificada') barColor = 'bg-red-500';
-                    }
-
-                    html += `
-                    <div class="mb-5 group">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm font-bold text-slate-700 flex items-center gap-3 group-hover:text-fabrica-blue transition-colors"><i class="${iconClass} text-slate-300 w-5 text-center text-sm group-hover:text-fabrica-orange transition-colors"></i> ${escapeHTML(itemName)}</span>
-                            <div class="text-right leading-none">
-                                <span class="font-black text-slate-800 text-lg group-hover:text-fabrica-blue transition-colors">${itemQtd}</span>
-                                <span class="text-[10px] text-slate-400 font-bold ml-1">(${perc}%)</span>
-                            </div>
-                        </div>
-                        <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden shadow-inner">
-                            <div class="${barColor} h-2 rounded-full transition-all duration-1000" style="width: ${perc}%;"></div>
-                        </div>
-                    </div>`;
-                });
-                return html;
-            };
-
-            document.getElementById('raiox-lista-membros').innerHTML = buildListHtml(sortDict(countsResp), 6, 'fa-solid fa-user-astronaut', false, 'bg-fabrica-blue'); 
-            document.getElementById('raiox-lista-frentes').innerHTML = buildListHtml(sortDict(countsFrente), 6, 'fa-solid fa-building-user', true);
-
-            let htmlBreakdown = '';
-            const statusConfig = [
-                { label: 'Concluído', color: 'bg-green-500' },
-                { label: 'Em Produção', color: 'bg-[#FF6B00]' },
-                { label: 'Na Fila', color: 'bg-slate-500' }
-            ];
-            
-            statusConfig.forEach(cfg => {
-                const num = countStatusObj[cfg.label];
-                const perc = Math.round((num / totalAlvo) * 100);
-                htmlBreakdown += `
-                <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-3 last:border-0 last:pb-0 last:mb-0 hover:bg-slate-100/50 p-2 rounded-lg transition-colors">
-                    <div class="flex items-center gap-3">
-                        <div class="w-3 h-3 rounded-full ${cfg.color} shadow-sm animate-pulse"></div>
-                        <span class="text-sm font-bold text-slate-700">${cfg.label}</span>
-                    </div>
-                    <div class="text-right leading-none">
-                        <span class="font-black text-slate-800 text-lg">${num}</span>
-                        <span class="text-[10px] text-slate-400 font-bold ml-1">(${perc}%)</span>
-                    </div>
-                </div>`;
-            });
-            document.getElementById('raiox-status-breakdown').innerHTML = htmlBreakdown;
-
-            const alertaInf = document.getElementById('raiox-alerta-n-classificado');
-            if(Object.keys(infratoresClassificacao).length > 0) {
-                alertaInf.classList.remove('hidden');
-                let htmlInf = '';
-                sortDict(infratoresClassificacao).forEach(item => {
-                    htmlInf += `<div class="flex justify-between items-center text-xs text-red-900 border-b border-red-100 pb-2 mb-2 last:border-0 last:pb-0 last:mb-0"><strong class="flex items-center gap-2"><i class="fa-solid fa-ghost opacity-50"></i> ${escapeHTML(item[0])}</strong><span class="bg-red-100 px-2 py-1 rounded font-black">${item[1]}</span></div>`;
-                });
-                document.getElementById('raiox-lista-infratores').innerHTML = htmlInf;
-            } else {
-                alertaInf.classList.add('hidden');
-            }
-
-            document.getElementById('btn-aplicar-raiox').onclick = () => {
-                limparFiltros(false);
-                if(tipoFiltro === 'status') filtroStatusNome = valor;
-                if(tipoFiltro === 'frente') filtroFrenteNome = valor;
-                
-                atualizarBotoesFiltroRapido();
-                aplicarFiltrosCombinados();
-                fecharModal('modal-raiox');
-                switchView('demandas');
-            };
-
-            abrirModal('modal-raiox');
-        }
-
-        function limparFiltros(aplicarNaTabela = true) {
-            filtroEquipeNome = '';
-            filtroFrenteNome = '';
-            filtroStatusNome = 'todos';
-            
-            const inputPesquisa = document.getElementById('inputPesquisa');
-            if(inputPesquisa) inputPesquisa.value = '';
-            textoBuscado = '';
-
-            document.getElementById('btn-limpar-filtros').classList.add('hidden');
-            atualizarBotoesFiltroRapido();
-            if(aplicarNaTabela) aplicarFiltrosCombinados();
-        }
-
-        function aplicarFiltrosCombinados() {
-            const areaLegendas = document.getElementById('area-legendas-filtros');
-            areaLegendas.innerHTML = '';
-            let filtrosAtivos = false;
-
-            if(filtroEquipeNome) {
-                areaLegendas.innerHTML += `<span class="bg-orange-100 text-fabrica-orange border border-orange-200 px-3 py-1 rounded-lg text-xs font-black shadow-sm flex items-center gap-1"><i class="fa-solid fa-user-astronaut"></i> ${escapeHTML(filtroEquipeNome)}</span>`;
-                filtrosAtivos = true;
-            }
-            if(filtroFrenteNome) {
-                areaLegendas.innerHTML += `<span class="bg-blue-100 text-fabrica-blue border border-blue-200 px-3 py-1 rounded-lg text-xs font-black shadow-sm flex items-center gap-1"><i class="fa-solid fa-building-user"></i> ${escapeHTML(filtroFrenteNome)}</span>`;
-                filtrosAtivos = true;
-            }
-            if(filtroStatusNome !== 'todos') {
-                const mapStatus = {concluido: 'Concluídos', andamento: 'Em Produção', fila: 'Na Fila'};
-                areaLegendas.innerHTML += `<span class="bg-slate-200 text-slate-700 border border-slate-300 px-3 py-1 rounded-lg text-xs font-black shadow-sm flex items-center gap-1"><i class="fa-solid fa-filter"></i> ${mapStatus[filtroStatusNome]}</span>`;
-                filtrosAtivos = true;
-            }
-            if(textoBuscado) {
-                filtrosAtivos = true;
-            }
-
-            const btnLimpar = document.getElementById('btn-limpar-filtros');
-            if(filtrosAtivos) btnLimpar.classList.remove('hidden');
-            else btnLimpar.classList.add('hidden');
-
-            const dadosFiltrados = dadosGlobais.filter(projeto => {
-                const frenteInfo = classificarFrente(projeto.sponsor, projeto.demanda);
-                const search = normalizarTexto(projeto.demanda) + " " + normalizarTexto(projeto.sponsor) + " " + normalizarTexto(frenteInfo.nome);
-                const matchTexto = search.includes(textoBuscado);
-
-                let matchEquipe = true;
-                if(filtroEquipeNome) {
-                    const txtAlvo = (projeto.responsavel || '') + " " + (projeto.colaborador || '');
-                    matchEquipe = normalizarTexto(txtAlvo).includes(normalizarTexto(filtroEquipeNome)) || (filtroEquipeNome === 'Marcos' && normalizarTexto(txtAlvo).includes('guilherme'));
-                }
-
-                let matchFrente = true;
-                if(filtroFrenteNome) matchFrente = (frenteInfo.nome === filtroFrenteNome);
-
-                let matchStatus = true;
-                const statusInfo = obterDadosStatus(projeto.status, projeto.etapaAtual);
-                if(filtroStatusNome === 'concluido') matchStatus = (statusInfo.label === 'Concluído');
-                else if(filtroStatusNome === 'andamento') matchStatus = (statusInfo.label === 'Em Produção');
-                else if(filtroStatusNome === 'fila') matchStatus = (statusInfo.label === 'Na Fila');
-
-                return matchTexto && matchEquipe && matchFrente && matchStatus;
-            });
-
-            renderizarTabela(dadosFiltrados);
-        }
-
-        function renderizarGraficoFrentes(dados) {
-            let counts = {};
-            let totalValido = 0;
-
-            dados.forEach(p => {
-                const f = classificarFrente(p.sponsor, p.demanda);
-                counts[f.nome] = (counts[f.nome] || 0) + 1;
-                totalValido++;
-            });
-
-            let html = '';
-            let ordenado = Object.entries(counts).sort((a,b) => b[1] - a[1]);
-
-            ordenado.forEach(item => {
-                const label = item[0];
-                const qtd = item[1];
-                if(qtd === 0) return;
-
-                const perc = totalValido > 0 ? Math.round((qtd / totalValido) * 100) : 0;
-                
-                let corBarra = "bg-slate-400";
-                const conf = CONFIG_FRENTES.find(c => c.nome === label);
-                if(conf) corBarra = conf.modalColor;
-                else if (label === 'Não Classificada') corBarra = 'bg-red-500';
-                
-                html += `
-                <div class="cursor-pointer group bg-white p-3 rounded-2xl transition-all border border-transparent hover:border-slate-200 hover:shadow-md mb-3" onclick="abrirRaioX('frente', '${escapeHTML(label)}', 'Raio-X da Área: ${escapeHTML(label)}', '${corBarra.replace('bg-', 'bg-')}')">
-                    <div class="flex justify-between items-end mb-3">
-                        <span class="font-bold text-slate-600 text-xs md:text-sm group-hover:text-fabrica-blue transition-colors flex items-center gap-2"><i class="fa-solid fa-puzzle-piece text-slate-300 group-hover:text-fabrica-orange group-hover:fa-spin"></i> ${escapeHTML(label)}</span>
-                        <div class="text-right leading-none">
-                            <span class="font-black text-xl text-slate-700">${qtd}</span>
-                            <span class="text-xs text-slate-400 font-bold ml-1">(${perc}%)</span>
-                        </div>
-                    </div>
-                    <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden shadow-inner">
-                        <div class="${corBarra} h-2 rounded-full transition-all duration-1000" style="width: ${perc}%"></div>
-                    </div>
-                </div>`;
-            });
-
-            const divGrafico = document.getElementById('grafico-frentes');
-            if (divGrafico) divGrafico.innerHTML = html;
-        }
-
-        function atualizarIndicadores(dados) {
-            let contagens = { total: dados.length, concluido: 0, andamento: 0, pendente: 0 };
-            dados.forEach((p) => {
-                const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
-                if(statusInfo.label === 'Concluído') contagens.concluido++;
-                else if(statusInfo.label === 'Em Produção') contagens.andamento++;
-                else contagens.pendente++; 
-            });
-
-            if(document.getElementById('count-total')) document.getElementById('count-total').textContent = contagens.total;
-            if(document.getElementById('count-concluido')) document.getElementById('count-concluido').textContent = contagens.concluido;
-            if(document.getElementById('count-andamento')) document.getElementById('count-andamento').textContent = contagens.andamento;
-            if(document.getElementById('count-pendente')) document.getElementById('count-pendente').textContent = contagens.pendente;
-
-            const total = contagens.total || 1; 
-            const percConcluido = Math.round((contagens.concluido / total) * 100) + '%';
-            const percAndamento = Math.round((contagens.andamento / total) * 100) + '%';
-            const percPendente = Math.round((contagens.pendente / total) * 100) + '%';
-
-            document.querySelectorAll('#chart-percent-concluido').forEach(el => el.textContent = percConcluido);
-            document.querySelectorAll('#chart-percent-andamento').forEach(el => el.textContent = percAndamento);
-            document.querySelectorAll('#chart-percent-pendente').forEach(el => el.textContent = percPendente);
-            
-            setTimeout(() => {
-                document.querySelectorAll('#chart-bar-concluido').forEach(el => el.style.width = percConcluido);
-                document.querySelectorAll('#chart-bar-andamento').forEach(el => el.style.width = percAndamento);
-                document.querySelectorAll('#chart-bar-pendente').forEach(el => el.style.width = percPendente);
-            }, 50);
-
-            renderizarGraficoFrentes(dados);
-            atualizarDashboardGestao(dados);
-            atualizarNumerosIndividuais(dados);
-        }
-
-        function abrirDetalhes(index) {
-            const p = dadosGlobais[index];
-            const infosLink = extrairLinks(p.linkAcesso);
-            const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
-            const frenteInfo = classificarFrente(p.sponsor, p.demanda);
-
-            document.getElementById('modal-titulo').textContent = escapeHTML(p.demanda) || 'Demanda sem título';
-            document.getElementById('modal-prazo').textContent = escapeHTML(p.prazoFinal) || '-';
-            document.getElementById('modal-gravacao').textContent = escapeHTML(p.dataGravacao) || '-';
-            
-            document.getElementById('modal-sponsor').textContent = escapeHTML(p.sponsor) || '-';
-            const badgeFrente = document.getElementById('modal-frente');
-            badgeFrente.textContent = frenteInfo.nome;
-            badgeFrente.className = `badge-frente ${frenteInfo.class} inline-block mt-1`;
-
-            document.getElementById('modal-responsavel').textContent = escapeHTML(p.responsavel) || 'Aguardando atribuição';
-            document.getElementById('modal-observacoes').textContent = escapeHTML(infosLink.obs);
-            document.getElementById('modal-recebimento').textContent = escapeHTML(p.dataRecebimento) || '-';
-
-            const stepIndex = statusInfo.step;
-            document.getElementById('timeline-progress').style.width = `${((stepIndex - 1) / 4) * 100}%`;
-
-            for(let i = 1; i <= 5; i++) {
-                const el = document.querySelector(`.step-${i}`);
-                if(el) {
-                    el.classList.remove('active', 'completed');
-                    if(i < stepIndex) el.classList.add('completed');
-                    if(i === stepIndex) el.classList.add('active');
-                }
-            }
-            
-            const areaEntrega = document.getElementById('modal-area-entrega');
-            let botoesHtml = '';
-            
-            if(infosLink.jira) {
-                botoesHtml += `<a href="${escapeHTML(infosLink.jira)}" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-blue-50 text-fabrica-blue font-black rounded-2xl border-2 border-slate-200 shadow-sm flex justify-center items-center gap-3 transition-all hover:-translate-y-1 hover:border-blue-300 group"><i class="fa-brands fa-jira text-blue-600 text-xl group-hover:fa-bounce"></i> Acompanhar no Jira</a>`;
-            }
-
-            if(statusInfo.label === 'Concluído' && infosLink.video) {
-                botoesHtml += `<a href="${escapeHTML(infosLink.video)}" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-black rounded-2xl shadow-lg shadow-green-500/30 flex justify-center items-center gap-3 transition-all hover:-translate-y-1 group"><i class="fa-solid fa-play-circle text-xl group-hover:fa-beat"></i> Acessar Entrega</a>`;
-            }
-
-            areaEntrega.innerHTML = botoesHtml;
-            abrirModal('modal-detalhes');
-        }
-
-        function ordernarProjetos(arrayDados) {
-            return arrayDados; 
-        }
-
-        function renderizarTabela(dadosParaRenderizar) {
-            const tbody = document.getElementById('tabela-demandas');
-            if(!tbody) return;
-            
-            tbody.innerHTML = '';
-
-            if (dadosParaRenderizar.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-12 text-center text-slate-400 font-bold"><i class="fa-solid fa-folder-open text-4xl mb-4 block text-slate-200"></i><br>Nenhum registro localizado.</td></tr>`;
-                return;
-            }
-
-            const dadosOrdenados = ordernarProjetos(dadosParaRenderizar);
-
-            dadosOrdenados.forEach((p) => {
-                const statusInfo = obterDadosStatus(p.status, p.etapaAtual);
-                const originalIndex = dadosGlobais.indexOf(p);
-                const frenteInfo = classificarFrente(p.sponsor, p.demanda);
-
-                let trClassStatus = statusInfo.label === 'Concluído' ? 'tr-status-concluido' : (statusInfo.label === 'Em Produção' ? 'tr-status-andamento' : (statusInfo.label === 'Cancelado' ? 'tr-status-cancelado' : 'tr-status-fila'));
-
-                let badgeGravacao = p.dataGravacao && p.dataGravacao.toLowerCase() !== 'a combinar' && p.dataGravacao !== '-' 
-                    ? `<span class="bg-orange-50 text-fabrica-orange font-bold px-3 py-1.5 rounded-lg text-[10px] md:text-xs whitespace-nowrap shadow-sm border border-orange-100 flex items-center w-max"><i class="fa-solid fa-video mr-1.5"></i>${escapeHTML(p.dataGravacao)}</span>` 
-                    : `<span class="text-slate-400 font-bold text-[10px] md:text-xs flex items-center"><i class="fa-regular fa-clock mr-1"></i> Pendente</span>`;
-                    
-                let badgePrazo = p.prazoFinal && p.prazoFinal.toLowerCase() !== 'a combinar' && p.prazoFinal !== '-' 
-                    ? `<span class="bg-blue-50 text-fabrica-blue font-bold px-3 py-1.5 rounded-lg text-[10px] md:text-xs whitespace-nowrap shadow-sm border border-blue-100 flex items-center w-max"><i class="fa-regular fa-calendar-check mr-1.5"></i>${escapeHTML(p.prazoFinal)}</span>` 
-                    : `<span class="text-slate-400 font-bold text-[10px] md:text-xs flex items-center"><i class="fa-regular fa-clock mr-1"></i> Pendente</span>`;
-
-                tbody.innerHTML += `
-                    <tr class="hover:bg-blue-50/50 transition-all cursor-pointer group ${trClassStatus}" onclick="abrirDetalhes(${originalIndex})">
-                        <td class="py-5 px-6 md:px-8 pl-6">
-                            <div class="flex items-center">
-                                <i class="fa-solid fa-caret-right text-fabrica-orange text-sm mr-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
-                                <div>
-                                    <span class="font-black text-fabrica-blue truncate max-w-[150px] sm:max-w-[250px] block text-[13px] md:text-sm group-hover:text-blue-700 transition-colors">${escapeHTML(p.demanda) || 'Sem título cadastrado'}</span>
-                                    <span class="text-[10px] font-bold text-slate-400 block mt-1"><i class="fa-solid fa-user-tag mr-1 text-slate-300"></i>${escapeHTML(p.sponsor) || 'Não informado'}</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="py-5 px-6"><span class="badge-frente ${frenteInfo.class}">${frenteInfo.nome}</span></td>
-                        <td class="py-5 px-6 text-center">
-                            <div class="flex justify-center flex-col items-center gap-1.5">
-                                <div class="status-dot ${statusInfo.bg} shadow-md group-hover:scale-110 transition-transform" title="${statusInfo.label}"><i class="fa-solid ${statusInfo.icon}"></i></div>
-                                <span class="text-[9px] md:text-[10px] font-black text-slate-500 uppercase tracking-widest">${statusInfo.label}</span>
-                            </div>
-                        </td>
-                        <td class="py-5 px-6 hidden md:table-cell">
-                            <span class="font-black text-fabrica-blue text-xs truncate block max-w-[140px] bg-slate-100 px-3 py-1.5 rounded-lg w-max"><i class="fa-solid fa-user-astronaut mr-2 text-fabrica-orange"></i>${escapeHTML(p.responsavel) || 'Equipe'}</span>
-                        </td>
-                        <td class="py-5 px-6 hidden lg:table-cell">${badgePrazo}</td>
-                        <td class="py-5 px-6 text-center">
-                            <button class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex justify-center items-center text-sm shadow-sm group-hover:bg-fabrica-blue group-hover:text-white transition-all group-hover:scale-110"><i class="fa-solid fa-arrow-right"></i></button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const elInput = document.getElementById('inputPesquisa');
-            if(elInput) {
-                elInput.addEventListener('input', (e) => {
-                    textoBuscado = normalizarTexto(e.target.value);
-                    aplicarFiltrosCombinados();
-                });
-            }
-            carregarDemandas();
-        });
-
-        async function carregarDemandas() {
-            try {
-                const urlComBuster = `${googleAppUrl}?nocache=${new Date().getTime()}`;
-                const response = await fetch(urlComBuster, { 
-                    method: 'GET', 
-                    headers: { 'Accept': 'application/json' }
-                });
-                
-                if(!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-                
-                const textoResposta = await response.text();
-                
-                try {
-                    let dadosPuros = JSON.parse(textoResposta);
-                    dadosGlobais = dadosPuros.map(normalizarProjeto);
-                    
-                    if(dadosGlobais && dadosGlobais.length > 0) {
-                        atualizarIndicadores(dadosGlobais);
-                        limparFiltros(true);
-                    }
-                    
-                    const screen = document.getElementById('loading-screen');
-                    if(screen) screen.classList.add('loader-hidden');
-
-                } catch(parseError) {
-                    console.error("O Google retornou HTML ao invés de JSON. Verifique as permissões de implantação.", textoResposta);
-                    throw new Error("O Google bloqueou a conexão. Faça a Nova Implantação como 'Qualquer Pessoa' no Apps Script.");
-                }
-
-            } catch(e) {
-                console.error("Erro de sincronização:", e);
-                const tbody = document.getElementById('tabela-demandas');
-                if(tbody) tbody.innerHTML = `<tr><td colspan="6" class="p-12 text-center text-red-500 font-black text-lg bg-red-50 rounded-2xl border-2 border-red-200 shadow-inner"><i class="fa-solid fa-triangle-exclamation mr-3 text-3xl fa-beat"></i> Falha na Conexão com a Planilha.<br><span class="text-sm font-medium text-red-400 mt-2 block">Erro: ${e.message}</span></td></tr>`;
-                
-                const screen = document.getElementById('loading-screen');
-                if(screen) screen.classList.add('loader-hidden');
-            }
-        }
-    </script>
-</body>
-</html>
+Assim que você me explicar o que precisa, eu escrevo e te envio o código completo e estruturado!
