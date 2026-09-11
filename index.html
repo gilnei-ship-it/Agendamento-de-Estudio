@@ -524,7 +524,7 @@
     <!-- STREAMING_CHUNK:Javascript Logic -->
     <script>
         // O SEU NOVO LINK OFICIAL AQUI:
-        const googleAppUrl = "https://script.google.com/macros/s/AKfycbzW1Rr4WjLQxBbJqEka-w3YhuFX5fiuNU3jXBRr4Lk7p99NhhLG-J21Ury3TwdkA-vNeg/exec";
+        const googleAppUrl = "https://script.google.com/macros/s/AKfycbzhaXxzGz-4-UShGgB6847BXzs_SmTs8CUrxnPpp5Rafo0zEzRA_ZUunAqS2Lv2oX3SOg/exec";
 
         let dadosGlobais = [];
         let textoBuscado = '';
@@ -542,7 +542,7 @@
         }
 
         const CONFIG_FRENTES = [
-            { termos: ['jaci', 'thaynara', 'vitor', 'matheus', 'eduarda.neto', 'natalia', 'tcr', 'comercial'], nome: "TCR - Comercial", css: "frente-tcr", modalColor: "bg-[#0B41CD]" }, 
+            { termos: ['jaci', 'thaynara', 'vitor', 'victor', 'matheus', 'eduarda.neto', 'natalia', 'tcr', 'comercial'], nome: "TCR - Comercial", css: "frente-tcr", modalColor: "bg-[#0B41CD]" }, 
             { termos: ['ozeias', 'eliane', 'emailiane', 'luisa', 'naira', 'administrativo', 'adm'], nome: "DO - Administrativo", css: "frente-adm", modalColor: "bg-[#F59E0B]" }, 
             { termos: ['vanessa', 'eduarda.souza', 'engajamento'], nome: "Engajamento", css: "frente-eng", modalColor: "bg-pink-500" },
             { termos: ['tto', 'tecnico', 'técnico', 'anderson', 'andarson', 'bia', 'beatriz', 'alencar', 'henrique', 'morais'], nome: "TTO - Técnico", css: "frente-tto", modalColor: "bg-teal-500" },
@@ -640,9 +640,18 @@
                     countsFrente[f.nome] = (countsFrente[f.nome] || 0) + 1;
                 }
 
-                const sponsor = p.sponsor ? p.sponsor.trim() : '';
-                if(sponsor && sponsor !== '-' && sponsor.toLowerCase() !== 'não informado') {
-                    countsSponsor[sponsor] = (countsSponsor[sponsor] || 0) + 1;
+                // LÓGICA ATUALIZADA PARA DIVIDIR NOMES NA MESMA CÉLULA
+                const sponsorRaw = p.sponsor ? p.sponsor.trim() : '';
+                if(sponsorRaw && sponsorRaw !== '-' && sponsorRaw.toLowerCase() !== 'não informado') {
+                    // Divide os nomes caso o usuário tenha dado Alt+Enter, usado vírgula, barra ou " e "
+                    const listaSponsors = sponsorRaw.split(/[\n,\/]| e /i);
+                    
+                    listaSponsors.forEach(nomeSponsor => {
+                        const nomeLimpo = nomeSponsor.trim();
+                        if(nomeLimpo) {
+                            countsSponsor[nomeLimpo] = (countsSponsor[nomeLimpo] || 0) + 1;
+                        }
+                    });
                 }
 
                 const mes = extrairMesAno(p.dataRecebimento);
